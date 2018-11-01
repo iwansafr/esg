@@ -1,12 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller
+class Config extends CI_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('esg_model');
 		$this->load->library('esg');
+		$this->load->library('ZEA/zea');
 		$this->esg_model->init();
 	}
 	public function index()
@@ -14,7 +15,11 @@ class Admin extends CI_Controller
 		$this->load->view('index');
 	}
 
-	public function list()
+	public function site()
+	{
+		$this->load->view('index');
+	}
+	public function logo()
 	{
 		$this->load->view('index');
 	}
