@@ -3,9 +3,8 @@
 <head>
   <?php $this->load->view('templates/'.$admin_template.'/meta') ?>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
-
   <header class="main-header">
     <!-- Logo -->
     <a href="../../index2.html" class="logo">
