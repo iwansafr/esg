@@ -1,0 +1,14 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+$form = new zea();
+$form->init('edit');
+$form->setTable('user');
+$form->addInput('username','text');
+$form->addInput('password','password');
+$form->addInput('email','text');
+$form->setType('emial','email');
+$form->addInput('image','upload');
+$form->addInput('role','dropdown');
+$form->setOptions('role',array(1=>'Admin',2=>'Editor'));
+$form->addInput('active','radio');
+$form->setRadio('active',array('Not Active','Active'));
+$form->form();

@@ -711,6 +711,7 @@ class Zea extends CI_Model
 		$data = array();
 		if($this->init == 'roll')
 		{
+			$sql = array();
 			$this->data_model->orderBy($this->orderby['index'], $this->orderby['sort']);
 			if(!empty($this->where))
 			{
@@ -721,8 +722,10 @@ class Zea extends CI_Model
 				$this->data_model->join($this->jointable['table'],$this->jointable['condition'], $this->jointable['field']);
 			}
 			$data = $this->data_model->get_data_list($this->table, $this->field, $this->getInput(), $this->limit);
+			// $data = $this->db->query('SELECT *')
 		}else if($this->init == 'edit'){
-			$data = $this->db->query('SELECT * FROM '.$this->table.' WHERE id = ?', $this->id);
+			$data = $this->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
+			$data = @$data[0];
 		}
 		return $data;
 	}
