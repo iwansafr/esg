@@ -722,7 +722,7 @@ class Zea extends CI_Model
 			}
 			$data = $this->data_model->get_data_list($this->table, $this->field, $this->getInput(), $this->limit);
 		}else if($this->init == 'edit'){
-			$data = $this->data_model->get_one_data($this->table, 'WHERE id = '.$this->id);
+			$data = $this->db->query('SELECT * FROM '.$this->table.' WHERE id = ?', $this->id);
 		}
 		return $data;
 	}

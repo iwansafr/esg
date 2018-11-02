@@ -43,14 +43,24 @@ class Esg extends CI_Model
 	public function extra_css()
 	{
 		$data = $this->config->item('esg');
-		$data = $data['extra_css'];
+		$data = @$data['extra_css'];
 		if(!empty($data))
 		{
 			foreach ($data as $key => $value) 
 			{
-				?>
-				<link rel="stylesheet" href="">
-				<?php
+				echo '<link rel="stylesheet" href="'.$value.'">'."\n";
+			}
+		}
+	}
+	public function extra_js()
+	{
+		$data = $this->config->item('esg');
+		$data = @$data['extra_js'];
+		if(!empty($data))
+		{
+			foreach ($data as $key => $value) 
+			{
+				echo '<script type="javascript" src="'.$value.'">'."\n";
 			}
 		}
 	}
