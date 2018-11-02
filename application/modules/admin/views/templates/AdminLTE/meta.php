@@ -1,9 +1,17 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+$meta = $this->esg_model->esg_data['meta'];
+?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | General Form Elements</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<title><?php echo $meta['title'] ?></title>
+<meta name="description" content="<?php echo $meta['description'] ?>">
+<meta name="keywords" content="<?php echo $meta['keyword'] ?>">
+<meta name="developer" content="esoftgreat.com">
+<meta name="author" content="esoftgreat">
+<meta name="ROBOTS" content="all, index, follow">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo $meta['icon']; ?>">
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/bootstrap/css/bootstrap.min.css">
 <!-- Font Awesome -->
@@ -16,6 +24,10 @@
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/dist/css/skins/_all-skins.min.css">
 
+<?php 
+echo $this->esg->extra_css();
+?>
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -25,3 +37,22 @@
 
 <!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
+
+<meta name="url" content="<?php echo base_url($this->esg_model->esg_data['navigation']['string']) ?>">
+<meta name="og:title" content="<?php echo $meta['title'] ?>"/>
+<meta name="og:type" content="site"/>
+<meta name="og:url" content="<?php echo base_url($this->esg_model->esg_data['navigation']['string']) ?>"/>
+<meta name="og:image" content="<?php echo $meta['icon'] ?>"/>
+<meta name="og:site_name" content="<?php echo $meta['title'] ?>"/>
+<meta name="og:description" content="<?php echo $meta['description'] ?>"/>
+
+<meta content="<?php echo $meta['icon'] ?>" property="og:image"/>
+<meta content="<?php echo $meta['title'] ?>" property="og:title"/>
+<meta content="<?php echo $meta['description'] ?>" property="og:description"/>
+<meta content="<?php echo $meta['icon'] ?>" itemprop='url'/>
+
+<link itemprop="thumbnailUrl" href="<?php echo $meta['icon'] ?>">
+<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> <link itemprop="url" href="<?php echo $meta['icon'] ?>"> </span>
+

@@ -13,6 +13,7 @@ class Esg_model extends CI_Model
 	{
 		$this->sidebar_menu();
 		$this->navigation();
+		$this->set_meta();
 		$this->templates = $this->esg->get_config('templates');
 		$this->esg->set_esg('templates',$this->templates);
 		$this->esg_data = $this->esg->get_esg();
@@ -200,6 +201,24 @@ class Esg_model extends CI_Model
 		}
 		$data['menu'] = $menu;
 		$this->esg->set_esg('sidebar_menu', $data['menu']);
+	}
+
+	public function set_meta($data = array())
+	{
+		if(empty($data) || !is_array($data))
+		{
+			$data = array(
+						'title' => 'esoftgreat',
+						'keyword' => 'software development',
+						'description' => 'software development and it consultan',
+						'developer' => 'esoftgreat',
+						'author' => 'esoftgreat',
+						'email' => 'iwan@esoftgreat.com , iwansafr@gmail.com',
+						'phone' => '6285640510460',
+						'icon' => base_url('images/icon.png')
+					);
+		}
+		$this->esg->set_esg('meta', $data);
 	}
 
 	public function navigation()

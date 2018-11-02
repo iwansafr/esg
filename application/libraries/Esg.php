@@ -27,16 +27,31 @@ class Esg extends CI_Model
 	}
 
 	public function get_config($name = '')
-  {
-    $data = array();
-    if(!empty($name))
-    {
-      $value = $this->db->query('SELECT value FROM config WHERE name = ?', $name)->row_array();
-      if(!empty($value))
-      {
-        $data = json_decode($value['value'], 1);
-      }
-    }
-    return $data;
-  }
+  	{
+		$data = array();
+		if(!empty($name))
+		{
+			$value = $this->db->query('SELECT value FROM config WHERE name = ?', $name)->row_array();
+			if(!empty($value))
+			{
+				$data = json_decode($value['value'], 1);
+			}
+		}
+		return $data;
+	}
+
+	public function extra_css()
+	{
+		$data = $this->config->item('esg');
+		$data = $data['extra_css'];
+		if(!empty($data))
+		{
+			foreach ($data as $key => $value) 
+			{
+				?>
+				<link rel="stylesheet" href="">
+				<?php
+			}
+		}
+	}
 }

@@ -255,7 +255,7 @@ function menu_link($text = '')
 function image_module($module = '', $image = '', $is_uri = false)
 {
 	$base_url = ($is_uri) ? '' : base_url();
-	$src = $base_url.'images/modules/content/none.gif';
+	$src = $base_url.'images/icon.png';
 	$check_path = FCPATH.'images/modules/';
 	if(!empty($module))
 	{

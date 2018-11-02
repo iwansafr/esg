@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php $this->load->view('meta') ?>
+  <?php $this->load->view('templates/'.$admin_template.'/meta') ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
