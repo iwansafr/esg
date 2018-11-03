@@ -236,7 +236,6 @@ class Zea extends CI_Model
 			{
 				if($value['text'] == $field)
 				{
-					// $data       = $this->get_all("SELECT `{$index}`,`{$label}` FROM `{$table}` {$ex}");
 					$this->db->select($index);
 					$this->db->select($label);
 					$this->db->from($table);
@@ -251,6 +250,7 @@ class Zea extends CI_Model
 					{
 						foreach ($data as $dkey => $dvalue)
 						{
+							$dvalue[$index] = $dvalue[$index] == 0 ? '': $dvalue[$index];
 							$options[$dvalue[$index]] = $dvalue[$label];
 						}
 						$this->options[$field] = $options;
@@ -359,11 +359,17 @@ class Zea extends CI_Model
 	{
 		if(!empty($this->input))
 		{
+			$field = $this->db->list_fields($this->table);
 			foreach ($this->input as $key => $value)
 			{
-				if($this->init == 'edit' || $this->init == 'param')
+				if($this->init == 'param')
 				{
 					$this->data[$key] = '';
+				}else if($this->init == 'edit'){
+					if(in_array($value['text'],$field))
+					{
+						$this->data[$key] = '';
+					}
 				}else if($this->init == 'roll')
 				{
 					$this->data[0][$key] = '';
@@ -705,7 +711,38 @@ class Zea extends CI_Model
 		}
 		return $input;
 	}
+	public function set_data($table = '',$id = 0, $post = array())
+  {
+    if(!empty($table))
+    {
+      $data = array();
+      foreach ($post as $key => $value)
+      {
+        $data[$key] = $value;
+      }
+      if($id > 0)
+      {
+        return $this->db->update($table, $data, 'id = '.$id);
+      }else{
+        return $this->db->insert($table, $data);
+      }
+    }
+  }
+  public function get_one($table = '', $field = '', $where = '')
+  {
+    if(!empty($table))
+    {
+      $sql   = "SELECT {$field} FROM `{$table}` {$where} LIMIT 1";
+      $binds = false;
+      if(!empty($this->statement) && !empty($this->statement_value))
+      {
+        $binds = $this->statement_value;
+      }
+      $data = $this->db->query($sql,$binds)->row_array();
 
+      return $data[$field];
+    }
+  }  
 	private function getData()
 	{
 		$data = array();
@@ -872,7 +909,7 @@ class Zea extends CI_Model
 										}
 									}
 								}else{
-									echo '<b>unknown Column '.$value['text'].' in table '.$this->table.'</b><br>';
+									echo msg('unknown Column '.$value['text'].' in table '.$this->table,'danger');
 								}
 							}
 							?>
@@ -926,7 +963,7 @@ class Zea extends CI_Model
 										}
 										if($value['type'] == 'order')
 										{
-											$max = $this->data_model->get_one($this->table, 'MAX('.$this->orderby['index'].')', 'WHERE '.$this->where);
+											$max = $this->get_one($this->table, 'MAX('.$this->orderby['index'].')', 'WHERE '.$this->where);
 										}
 										if(array_key_exists($value['text'], $data[0]))
 										{
@@ -1185,7 +1222,7 @@ class Zea extends CI_Model
 							}
 							if($this->init == 'edit')
 							{
-								if($this->data_model->set_data($this->table, $this->id, $_POST))
+								if($this->set_data($this->table, $this->id, $_POST))
 								{
 									$data['msg']   = 'Data Saved Successfully';
 									$data['alert'] = 'success';
@@ -1232,7 +1269,7 @@ class Zea extends CI_Model
 											$file_name = $_POST[$u_value].'_'.time().'.'.$ext['extension'];
 											if($this->init == 'edit')
 											{
-												$file_name_exist = $this->data_model->get_one($this->table, $u_value);
+												$file_name_exist = $this->get_one($this->table, $u_value);
 											}else if($this->init == 'param')
 											{
 												$data_image      = json_decode($data_param['value'],1);
@@ -1255,7 +1292,7 @@ class Zea extends CI_Model
 											if($this->init == 'edit')
 											{
 												$update_file = array($u_value => $file_name);
-												$this->data_model->set_data($this->table, $dir_image, $update_file);
+												$this->set_data($this->table, $dir_image, $update_file);
 											}else if($this->init == 'param'){
 												foreach ($_POST as $dp_key => $dp_value)
 												{
@@ -1338,7 +1375,7 @@ class Zea extends CI_Model
 										if($this->init == 'edit')
 										{
 											$update_file = array($u_value => $file_name);
-											$this->data_model->set_data($this->table, $dir_image, $update_file);
+											$this->set_data($this->table, $dir_image, $update_file);
 										}else if($this->init == 'param')
 										{
 											foreach ($_POST as $dp_key => $dp_value)
