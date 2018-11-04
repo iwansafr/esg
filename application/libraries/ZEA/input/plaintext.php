@@ -24,6 +24,7 @@ if(!empty($field))
 		}
 	}
 
-	echo form_label($data_value, $data_value);
+	// echo form_label($data_value, $data_value);
+	echo $data_value;
 	echo '<br>';
 }

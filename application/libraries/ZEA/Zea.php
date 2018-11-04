@@ -56,6 +56,7 @@ class Zea extends CI_Model
 	var $money         = array();
 	var $clearget      = array();
 	var $jointable     = array();
+	var $search        = FALSE;
 
 	public function init($text = '')
 	{
@@ -176,14 +177,7 @@ class Zea extends CI_Model
 
 	public function search()
 	{
-		?>
-		<form method="get" action="<?php echo !empty($this->view) ? base_url($this->view) : ''; ?>" class="form-inline pull-right">
-			<input type="text" name="keyword" class="form-control" placeholder="keyword">
-			<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
-		</form>
-		<hr>
-		<div class="clearfix"></div>
-		<?php
+		$this->search = TRUE;
 	}
 
 	public function setImage($field = '', $module = '', $src = '')
@@ -748,9 +742,14 @@ class Zea extends CI_Model
 		$data = array();
 		if($this->init == 'roll')
 		{
-			$input = array();
-			$limit = 2;
-			$page = @intval($_GET['page']);
+			$input   = array();
+			$limit   = 2;
+			$page    = @intval($_GET['page']);
+			$keyword = @$_GET['keyword'];
+			$where   = '';
+			$bind    = array();
+			$url_get = '';
+
 			foreach ($this->input as $key => $value) 
 			{
 				$input[] = $key;
@@ -760,15 +759,39 @@ class Zea extends CI_Model
 				$input = implode($input,',');
 			}
 			$sql = 'SELECT '.$input.' FROM '.$this->table;
-			$num_rows = $this->db->query($sql)->num_rows();
+			if(!empty($keyword))
+			{
+				$sql     .= ' WHERE ';
+				$url_get .= '?';
+			}
+			if(!empty($keyword))
+			{
+				if(!empty($this->field))
+				{
+					if(is_array($this->field))
+					{
+						foreach ($this->field as $key => $value) 
+						{
+							if($key > 0){
+								$where .= ' OR ';
+							}
+							// $where .= $value.' REGEXP ?';
+							$where .= $value.' LIKE ?';
+							$bind[] = '%'.$keyword.'%';
+						}
+					}
+					$sql .= $where;
+					$url_get .= 'keyword='.urlencode($keyword);
+				}
+			}
+			$num_rows = $this->db->query($sql,$bind)->num_rows();
 
-
-			$sql         .= ' LIMIT '.$page.','.$limit;
-			$data['data'] = $this->db->query($sql)->result_array();
-			$config       = pagination($num_rows,$limit,base_url($this->esg_model->esg_data['navigation']['string']));
+			$sql          .= ' LIMIT '.$page.','.$limit;
+			$data['data']  = $this->db->query($sql,$bind)->result_array();
+			$data['query'] = $this->db->last_query();
+			$config        = pagination($num_rows,$limit,base_url($this->esg_model->esg_data['navigation']['string'].$url_get));
 	    $this->pagination->initialize($config);
 	    $data['pagination'] = $this->pagination->create_links();
-
 		}else if($this->init == 'edit'){
 			$data = $this->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
 			$data = @$data[0];
@@ -953,209 +976,230 @@ class Zea extends CI_Model
 				$message    = array();
 				$page = !empty($_GET['page']) ? '?page='.$_GET['page'] : '';
 				?>
-				<h4 class="panel-title">
-					<?php echo $this->heading;?>
-				</h4>
-				<br>
-				<form method="post" action="<?php echo !empty($this->view) ? base_url($this->view).$page : ''; ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
-					<div class="table-responsive">
-						<table class="table table-bordered table-hover table-striped" table_name="<?php echo $this->table; ?>">
-							<thead>
-								<tr>
-									<?php
-									foreach ($this->input as $key => $value)
-									{
-										if(empty($data))
-										{
-											$this->setData();
-											$data = $this->data;
-										}
-										if($value['type'] == 'order')
-										{
-											$max = $this->get_one($this->table, 'MAX('.$this->orderby['index'].')', 'WHERE '.$this->where);
-										}
-										if(array_key_exists($value['text'], $data[0]))
-										{
-											$field    = !empty($value['text']) ? $value['text'] : '';
-											$label    = !empty($this->label[$field]) ? $this->label[$field] : $field;
-											if($value['type'] == 'checkbox')
-											{
-												?>
-												<th>
-													<div class="checkbox">
-														<label>
-															<input id="selectAll<?php echo $label;?>" add="<?php echo $label; ?>" class="selectAll" type="checkbox"><?php echo ucwords($label) ?>
-														</label>
-													</div>
-												</th>
-												<?php
-											}else{
-												echo '<th>'.ucwords($label).'</th>';
-											}
-										}
-									}
-									if($this->edit == true)
-									{
-										?>
-										<th>
-											EDIT
-										</th>
-										<?php
-									}
-									if($this->delete == true)
-									{
-										?>
-										<th>
-											<div class="checkbox">
-												<label>
-													<input id="selectAllDel" type="checkbox">DELETE
-												</label>
-											</div>
-										</th>
-										<?php
-									}
-								 ?>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-								if(!empty($data))
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<div class="box-header">
+								<h3 class="box-title">
+									<?php echo $this->heading;?>
+								</h3>
+								
+								<?php 
+								if($this->search == TRUE)
 								{
-									foreach ($data as $dkey => $dvalue)
-									{
-										if(!empty($dvalue['id']))
-										{
-											?>
-											<tr data-id="<?php echo $dvalue['id'] ?>">
+									?>
+			             	<div class="box-tools">
+			             		<form action="" method="get">			            
+					              <div class="input-group input-group-sm" style="width: 150px;">
+					                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>">
+					                <div class="input-group-btn">
+					                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+					                </div>
+					              </div>
+	              			</form>
+			            	</div>
+									<?php
+								}?>
+		          </div>
+							<form method="post" action="<?php echo !empty($this->view) ? base_url($this->view).$page : ''; ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
+								<div class="box-body table-responsive no-padding">
+									<table class="table table-bordered table-hover table-striped" table_name="<?php echo $this->table; ?>">
+										<tbody>
+											<tr>
 												<?php
-												foreach ($this->input as $ikey => $ivalue)
+												foreach ($this->input as $key => $value)
 												{
-													$field    = !empty($ivalue['text']) ? $ivalue['text'] : '';
-													$label    = !empty($this->label[$field]) ? $this->label[$field] : $field;
-													$required = !empty($ivalue['required']) ? $ivalue['required'] : '';
-													$image    = !empty($this->image[$field]) ? $this->image[$field] : '';
-
-
-
-													if(isset($dvalue[$ikey]))
+													if(empty($data))
 													{
-														echo '<td>';
-															switch ($ivalue['type'])
-															{
-																case 'text':
-																	include 'input/text.php';
-																	break;
-																case 'plaintext':
-																	include 'input/plaintext.php';
-																	break;
-																case 'thumbnail':
-																	include 'input/thumbnail.php';
-																	break;
-																case 'link':
-																	include 'input/link.php';
-																	break;
-																case 'textarea':
-																	include 'input/textarea.php';
-																	break;
-																case 'checkbox':
-																	include 'input/checkbox.php';
-																	break;
-																case 'dropdown':
-																	include 'input/dropdown.php';
-																	break;
-																case 'order':
-																	include 'input/order.php';
-																	break;
-																case 'upload':
-																case 'image':
-																case 'file':
-																	include 'input/upload.php';
-																	break;
-																case 'multiselect':
-																	include 'input/multiselect.php';
-																	break;
-																case 'hidden':
-																	include 'input/hidden.php';
-																	break;
-															}
-														echo '</td>'  ;
+														$this->setData();
+														$data = $this->data;
+													}
+													if($value['type'] == 'order')
+													{
+														$max = $this->get_one($this->table, 'MAX('.$this->orderby['index'].')', 'WHERE '.$this->where);
+													}
+													if(array_key_exists($value['text'], $data[0]))
+													{
+														$field    = !empty($value['text']) ? $value['text'] : '';
+														$label    = !empty($this->label[$field]) ? $this->label[$field] : $field;
+														if($value['type'] == 'checkbox')
+														{
+															?>
+															<th>
+																<div class="checkbox">
+																	<label>
+																		<input id="selectAll<?php echo $label;?>" add="<?php echo $label; ?>" class="selectAll" type="checkbox"><?php echo ucwords($label) ?>
+																	</label>
+																</div>
+															</th>
+															<?php
+														}else{
+															echo '<th>'.ucwords($label).'</th>';
+														}
 													}
 												}
 												if($this->edit == true)
 												{
 													?>
-													<td>
-														<a href="<?php echo $this->edit_link.$dvalue['id'] ?>"> <span class="fa fa-pencil"></span></a>
-													</td>
+													<th>EDIT</th>
 													<?php
 												}
 												if($this->delete == true)
 												{
 													?>
-													<td>
+													<th>
 														<div class="checkbox">
 															<label>
-																<input type="checkbox" class="del_check" name="del_row[]" value="<?php echo $dvalue['id']; ?>"> <span class="glyphicon glyphicon-trash"></span>
+																<input id="selectAllDel" type="checkbox">DELETE
 															</label>
 														</div>
-													</td>
+													</th>
 													<?php
 												}
-												?>
+											 ?>
 											</tr>
 											<?php
-										}
-									}
-									$tot_col = count($this->input);
-									foreach ($this->input as $inputkey => $inputvalue)
-									{
-										if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text')
-										{
-											$tot_col--;
-										}
-									}
-									if($this->edit == true)
-									{
-										$tot_col = $tot_col+1;
-									}
-									?>
-									<tr>
-										<td colspan="<?php echo $tot_col; ?>"><?php echo !empty($pagination) ? $pagination : ''; ?></td>
-										<?php
-										foreach ($this->input as $inputkey => $inputvalue)
-										{
-											if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text')
+											if(!empty($data))
 											{
-												$add_text = $inputvalue['type'] == 'text' ? 'Save ' : '';
+												foreach ($data as $dkey => $dvalue)
+												{
+													if(!empty($dvalue['id']))
+													{
+														?>
+														<tr data-id="<?php echo $dvalue['id'] ?>">
+															<?php
+															foreach ($this->input as $ikey => $ivalue)
+															{
+																$field    = !empty($ivalue['text']) ? $ivalue['text'] : '';
+																$label    = !empty($this->label[$field]) ? $this->label[$field] : $field;
+																$required = !empty($ivalue['required']) ? $ivalue['required'] : '';
+																$image    = !empty($this->image[$field]) ? $this->image[$field] : '';
+
+
+
+																if(isset($dvalue[$ikey]))
+																{
+																	echo '<td>';
+																		switch ($ivalue['type'])
+																		{
+																			case 'text':
+																				include 'input/text.php';
+																				break;
+																			case 'plaintext':
+																				include 'input/plaintext.php';
+																				break;
+																			case 'thumbnail':
+																				include 'input/thumbnail.php';
+																				break;
+																			case 'link':
+																				include 'input/link.php';
+																				break;
+																			case 'textarea':
+																				include 'input/textarea.php';
+																				break;
+																			case 'checkbox':
+																				include 'input/checkbox.php';
+																				break;
+																			case 'dropdown':
+																				include 'input/dropdown.php';
+																				break;
+																			case 'order':
+																				include 'input/order.php';
+																				break;
+																			case 'upload':
+																			case 'image':
+																			case 'file':
+																				include 'input/upload.php';
+																				break;
+																			case 'multiselect':
+																				include 'input/multiselect.php';
+																				break;
+																			case 'hidden':
+																				include 'input/hidden.php';
+																				break;
+																		}
+																	echo '</td>'  ;
+																}
+															}
+															if($this->edit == true)
+															{
+																?>
+																<td>
+																	<a href="<?php echo $this->edit_link.$dvalue['id'] ?>"> <span class="fa fa-pencil"></span></a>
+																</td>
+																<?php
+															}
+															if($this->delete == true)
+															{
+																?>
+																<td>
+																	<div class="checkbox">
+																		<label>
+																			<input type="checkbox" class="del_check" name="del_row[]" value="<?php echo $dvalue['id']; ?>"> <span class="glyphicon glyphicon-trash"></span>
+																		</label>
+																	</div>
+																</td>
+																<?php
+															}
+															?>
+														</tr>
+														<?php
+													}
+												}
+												$tot_col = count($this->input);
+												foreach ($this->input as $inputkey => $inputvalue)
+												{
+													if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text')
+													{
+														$tot_col--;
+													}
+												}
+												if($this->edit == true)
+												{
+													$tot_col = $tot_col+1;
+												}
 												?>
-												<td>
-													<button type="submit" name="<?php echo $inputvalue['text'] ?>" value="1" class="btn btn-info btn-sm">
-														<span class="glyphicon glyphicon-floppy-saved"></span> <?php echo $add_text.' '.$inputvalue['text'] ?>
-													</button>
-												</td>
+												<tr>
+													<td colspan="<?php echo $tot_col; ?>"><?php echo !empty($pagination) ? $pagination : ''; ?></td>
+													<?php
+													foreach ($this->input as $inputkey => $inputvalue)
+													{
+														if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text')
+														{
+															$add_text = $inputvalue['type'] == 'text' ? 'Save ' : '';
+															?>
+															<td>
+																<button type="submit" name="<?php echo $inputvalue['text'] ?>" value="1" class="btn btn-info btn-sm">
+																	<span class="glyphicon glyphicon-floppy-saved"></span> <?php echo $add_text.' '.$inputvalue['text'] ?>
+																</button>
+															</td>
+															<?php
+														}
+													}
+													if($this->delete)
+													{
+														?>
+														<td>
+															<button type="<?php echo $this->delete_type ?>" name="delete_<?php echo $this->formName?>" value="1" class="btn btn-danger btn-sm">
+																<span class="glyphicon glyphicon-trash"></span> DELETE
+															</button>
+														</td>
+														<?php
+													}
+													?>
+												</tr>
 												<?php
 											}
-										}
-										if($this->delete)
-										{
 											?>
-											<td>
-												<button type="<?php echo $this->delete_type ?>" name="delete_<?php echo $this->formName?>" value="1" class="btn btn-danger btn-sm">
-													<span class="glyphicon glyphicon-trash"></span> DELETE
-												</button>
-											</td>
-											<?php
-										}
-										?>
-									</tr>
-									<?php
-								}
-								?>
-								<!-- <button class="btn btn-default" onclick="window.history.back();" data-toggle="tooltip" title="go back"><i class="fa fa-arrow-left"></i></button> -->
-							</tbody>
-						</table>
+											<!-- <button class="btn btn-default" onclick="window.history.back();" data-toggle="tooltip" title="go back"><i class="fa fa-arrow-left"></i></button> -->
+										</tbody>
+									</table>
+								</div>
+							</form>
+						</div>
 					</div>
-				</form>
+				</div>
+
 				<?php
 			}
 		}

@@ -3,6 +3,8 @@
 $form = new zea();
 $form->init('roll');
 
+$form->search();
+$form->setField(array('username','email'));
 $form->setTable('user');
 $form->addInput('id','plaintext');
 $form->addInput('username','plaintext');
