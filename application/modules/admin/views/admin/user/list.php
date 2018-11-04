@@ -5,7 +5,7 @@ $form->init('roll');
 
 $form->setTable('user');
 $form->addInput('id','plaintext');
-$form->addInput('usernmae','plaintext');
+$form->addInput('username','plaintext');
 $form->setDelete(TRUE);
 $form->setEdit(TRUE);
 $form->form();

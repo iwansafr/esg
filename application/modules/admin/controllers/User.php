@@ -23,4 +23,8 @@ class User extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+	public function role()
+	{
+		$this->load->view('index');
+	}
 }

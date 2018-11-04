@@ -318,7 +318,6 @@ function image_src($module = 'content', $image='', $id = 0)
 
 function pagination($total_rows = 0,$limit = 0, $url_get = '')
 {
-  // $config['base_url']             = base_url('admin/content_list').$url_get;
   $config['base_url']             = $url_get;
   $config['total_rows']           = $total_rows;
   $config['per_page']             = $limit;

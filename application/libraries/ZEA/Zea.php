@@ -748,18 +748,27 @@ class Zea extends CI_Model
 		$data = array();
 		if($this->init == 'roll')
 		{
-			$sql = array();
-			$this->data_model->orderBy($this->orderby['index'], $this->orderby['sort']);
-			if(!empty($this->where))
+			$input = array();
+			$limit = 2;
+			$page = @intval($_GET['page']);
+			foreach ($this->input as $key => $value) 
 			{
-				$this->data_model->setWhere($this->where);
+				$input[] = $key;
 			}
-			if(!empty($this->jointable))
+			if(!empty($input))
 			{
-				$this->data_model->join($this->jointable['table'],$this->jointable['condition'], $this->jointable['field']);
+				$input = implode($input,',');
 			}
-			$data = $this->data_model->get_data_list($this->table, $this->field, $this->getInput(), $this->limit);
-			// $data = $this->db->query('SELECT *')
+			$sql = 'SELECT '.$input.' FROM '.$this->table;
+			$num_rows = $this->db->query($sql)->num_rows();
+
+
+			$sql         .= ' LIMIT '.$page.','.$limit;
+			$data['data'] = $this->db->query($sql)->result_array();
+			$config       = pagination($num_rows,$limit,base_url($this->esg_model->esg_data['navigation']['string']));
+	    $this->pagination->initialize($config);
+	    $data['pagination'] = $this->pagination->create_links();
+
 		}else if($this->init == 'edit'){
 			$data = $this->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
 			$data = @$data[0];
