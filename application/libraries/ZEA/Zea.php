@@ -239,7 +239,7 @@ class Zea extends CI_Model
 					}
 					$data = $this->db->get()->result_array();
 					$options    = array();
-					$options[0] = 'None';
+					$options[''] = 'None';
 					if(!empty($data))
 					{
 						foreach ($data as $dkey => $dvalue)
@@ -705,6 +705,20 @@ class Zea extends CI_Model
 		}
 		return $input;
 	}
+	public function del_data($table='',$ids = array())
+  {
+    if(!empty($ids)&&!empty($table))
+    {
+      foreach ($ids as $key => $id)
+      {
+        $this->db->delete($table, array('id'=>$id));
+        $dir = FCPATH.'images/modules/'.$table.'/'.$id.'/';
+        recursive_rmdir($dir);
+        $dir = FCPATH.'images/modules/'.$table.'/gallery'.'/'.$id.'/';
+        recursive_rmdir($dir);
+      }
+    }
+  }
 	public function set_data($table = '',$id = 0, $post = array())
   {
     if(!empty($table))
@@ -1125,7 +1139,7 @@ class Zea extends CI_Model
 															{
 																?>
 																<td>
-																	<a href="<?php echo $this->edit_link.$dvalue['id'] ?>"> <span class="fa fa-pencil"></span></a>
+																	<a href="<?php echo $this->edit_link.$dvalue['id'] ?>" class="btn btn-default" title="click to edit" data-toggle="tooltip" data-placement="top"> <span class="fa fa-pencil"></span></a>
 																</td>
 																<?php
 															}
@@ -1537,7 +1551,7 @@ class Zea extends CI_Model
 						{
 							$data['msg']   = 'Data Deleted Successfully';
 							$data['alert'] = 'success';
-							$this->data_model->del_data($this->table, $_POST['del_row']);
+							$this->del_data($this->table, $_POST['del_row']);
 						}
 					}
 				}else{

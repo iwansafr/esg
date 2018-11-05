@@ -17,4 +17,5 @@ $form->setLabel('user_role_id','Role');
 $form->tableOptions('user_role_id','user_role','id','title');
 $form->addInput('active','radio');
 $form->setRadio('active',array('Not Active','Active'));
+$form->setRequired(array('user_role_id'));
 $form->form();
