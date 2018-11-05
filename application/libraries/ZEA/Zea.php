@@ -23,7 +23,7 @@ class Zea extends CI_Model
 	var $where         = '';
 	var $encrypt       = TRUE;
 	var $file_error    = array();
-	var $edit_link     = 'edit/';
+	var $edit_link     = 'edit?id=';
 	var $limit         = 12;
 	var $id            = 0;
 	var $delete        = false;
@@ -736,7 +736,7 @@ class Zea extends CI_Model
 
       return $data[$field];
     }
-  }  
+  }
 	private function getData()
 	{
 		$data = array();
@@ -750,7 +750,7 @@ class Zea extends CI_Model
 			$bind    = array();
 			$url_get = '';
 
-			foreach ($this->input as $key => $value) 
+			foreach ($this->input as $key => $value)
 			{
 				$input[] = $key;
 			}
@@ -770,7 +770,7 @@ class Zea extends CI_Model
 				{
 					if(is_array($this->field))
 					{
-						foreach ($this->field as $key => $value) 
+						foreach ($this->field as $key => $value)
 						{
 							if($key > 0){
 								$where .= ' OR ';
@@ -794,7 +794,7 @@ class Zea extends CI_Model
 	    $data['pagination'] = $this->pagination->create_links();
 		}else if($this->init == 'edit'){
 			$data = $this->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
-			$data = @$data[0];
+			$data = @$data;
 		}
 		return $data;
 	}
@@ -983,13 +983,13 @@ class Zea extends CI_Model
 								<h3 class="box-title">
 									<?php echo $this->heading;?>
 								</h3>
-								
-								<?php 
+
+								<?php
 								if($this->search == TRUE)
 								{
 									?>
 			             	<div class="box-tools">
-			             		<form action="" method="get">			            
+			             		<form action="" method="get">
 					              <div class="input-group input-group-sm" style="width: 150px;">
 					                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>">
 					                <div class="input-group-btn">

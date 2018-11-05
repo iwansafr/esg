@@ -1,5 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $form = new zea();
+$id = @intval($_GET['id']);
+if(!empty($id))
+{
+	$form->setId($id);
+}
 $form->init('edit');
 $form->setTable('user');
 $form->addInput('username','text');

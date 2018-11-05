@@ -278,8 +278,12 @@
     </section>
     <section class="content">
       <?php
-      $content = $this->esg_model->esg_data['navigation']['string'];
-      $content = $content == 'admin' ? 'home' : $content;
+      // $content = $this->esg_model->esg_data['navigation']['string'];
+      // $content = $content == 'admin' ? 'home' : $content;
+      $mod['name'] = $this->router->fetch_class();
+      $mod['task'] = $this->router->fetch_method();
+      $content  = $mod['name'].'/'.$mod['task'];
+      $content = $content == 'admin/index' ? 'templates'.DIRECTORY_SEPARATOR.$admin_template.DIRECTORY_SEPARATOR.'home' :$content;
       $this->load->view($content);
       ?>
     </section>
