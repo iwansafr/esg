@@ -15,6 +15,16 @@ class Esg extends CI_Model
 		$this->config->set_item('esg', $output);
 	}
 
+	public function check_login()
+	{
+		if(empty($this->session->userdata(base_url().'_logged_in')))
+		{
+			$curent_url = base_url($_SERVER['PATH_INFO']);
+			$curent_url = urlencode($curent_url);
+			redirect(base_url('admin/login?redirect_to='.$curent_url));
+		}
+	}
+
 	public function get_esg($index = '')
 	{
 		$data   = $this->config->item('esg');
@@ -48,7 +58,7 @@ class Esg extends CI_Model
 		{
 			if(is_array($data))
 			{
-				foreach ($data as $key => $value) 
+				foreach ($data as $key => $value)
 				{
 					echo '<link rel="stylesheet" href="'.$value.'">'."\n";
 				}
@@ -65,7 +75,7 @@ class Esg extends CI_Model
 		{
 			if(is_array($data))
 			{
-				foreach ($data as $key => $value) 
+				foreach ($data as $key => $value)
 				{
 					echo '<script src="'.$value.'"></script>'."\n";
 				}
