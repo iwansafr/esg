@@ -25,13 +25,40 @@ class Esg extends CI_Model
 		}
 	}
 
+	public function login()
+	{
+		$data = $this->input->post();
+		if(!empty($data))
+		{
+			$user = $this->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data['username'])->row_array();
+			if(!empty($user))
+			{
+				if(decrypt($data['password'], $user['password']))
+				{
+					$url = @$_GET['redirect_to'];
+					if(!empty($url))
+					{
+						$url = urldecode($url);
+					}else{
+						$url = 'admin/index';
+					}
+					redirect(base_url($url));
+				}else{
+					$this->set_esg('msg', array('status'=>'danger','msg'=>'wrong password'));
+				}
+			}else{
+				$this->set_esg('msg', array('status'=>'danger','msg'=>'username is not valid'));
+			}
+		}
+		return false;
+	}
 	public function get_esg($index = '')
 	{
 		$data   = $this->config->item('esg');
 		$output = $data;
 		if(!empty($index))
 		{
-			$output = $data[$index];
+			$output = @$data[$index];
 		}
 		return $output;
 	}

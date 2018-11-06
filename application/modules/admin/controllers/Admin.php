@@ -20,6 +20,10 @@ class Admin extends CI_Controller
 	}
 	public function login()
 	{
+		if($this->esg->login())
+		{
+
+		}
 		$this->load->view('user/login');
 	}
 }
