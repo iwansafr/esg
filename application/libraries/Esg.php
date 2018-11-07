@@ -15,6 +15,29 @@ class Esg extends CI_Model
 		$this->config->set_item('esg', $output);
 	}
 
+	function set_tag($table = '')
+  {
+    $table = !empty($table) ? $table : 'content_tag';
+    $post['tag_ids'] = $_POST['tag_ids'];
+    $post['tag_ids'] = explode(',', $post['tag_ids']);
+    $tag_ids = array();
+    foreach ($post['tag_ids'] as $key => $value)
+    {
+      $tag_exist = $this->db->query('SELECT title FROM '.$table.' WHERE title = ? LIMIT 1',$value);
+      if(empty($tag_exist))
+      {
+        $this->db->insert($table, array('title'=>$value));
+      }
+      $tag_id = $this->db->query('SELECT id FROM '.$table.' WHERE title = ? LIMIT 1',$value);
+      if(!empty($tag_id))
+      {
+        $tag_ids[] = $tag_id;
+      }
+    }
+    $post['tag_ids'] = ','.implode($tag_ids,',').',';
+    return $post['tag_ids'];
+  }
+
 	public function check_login()
 	{
 		if(empty($this->session->userdata(base_url().'_logged_in')))

@@ -57,6 +57,7 @@ class Zea extends CI_Model
 	var $clearget      = array();
 	var $jointable     = array();
 	var $search        = FALSE;
+	var $insert_id     = 0;
 
 	public function init($text = '')
 	{
@@ -78,6 +79,19 @@ class Zea extends CI_Model
 				break;
 			}
 		}
+	}
+
+	public function set_insert_id($id = 0)
+	{
+		if(!empty($id))
+		{
+			$this->insert_id = $id;
+		}
+	}
+
+	public function get_insert_id()
+	{
+		return $this->insert_id;
 	}
 
 	public function order_by($field = '', $order = '')
@@ -1324,6 +1338,7 @@ class Zea extends CI_Model
 								}
 							}
 							$last_id = $this->db->insert_id();
+							$this->set_insert_id($last_id);
 							if(!empty($upload))
 							{
 								$i = 0;
