@@ -20,6 +20,7 @@ $form->form();
 $form = new zea();
 $form->init('roll');
 $form->search();
+$form->setHeading('User Role List');
 $form->setField(array('id','title'));
 $form->setTable('user_role');
 $form->addInput('id','hidden');
