@@ -765,7 +765,7 @@ class Zea extends CI_Model
 		if($this->init == 'roll')
 		{
 			$input   = array();
-			$limit   = 2;
+			$limit   = 12;
 			$page    = @intval($_GET['page']);
 			$keyword = @$_GET['keyword'];
 			$where   = '';
@@ -781,7 +781,7 @@ class Zea extends CI_Model
 				$input = implode($input,',');
 			}
 			$sql = 'SELECT '.$input.' FROM '.$this->table;
-			if(!empty($keyword))
+			if(!empty($keyword) || !empty($this->where))
 			{
 				$sql     .= ' WHERE ';
 				$url_get .= '?';
@@ -805,6 +805,11 @@ class Zea extends CI_Model
 					$sql .= $where;
 					$url_get .= 'keyword='.urlencode($keyword);
 				}
+			}
+			if(!empty($this->where))
+			{
+				$where .= $this->where;
+				$sql .= $where;
 			}
 			$num_rows = $this->db->query($sql,$bind)->num_rows();
 

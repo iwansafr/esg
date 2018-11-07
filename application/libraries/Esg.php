@@ -54,50 +54,30 @@ class Esg extends CI_Model
 		}
 	}
 
+	public function save_ip($user_id = 0, $status = 1)
+	{
+		$user_login = array(
+      'user_id' => $user_id,
+      'ip'      => ip(),
+      'status'  => $status
+    );
+    $this->db->insert('user_login', $user_login);
+	}
+
 	public function login()
 	{
 		$data = $this->input->post();
-		if(!empty($data))
+		$failed_login = @intval($this->session->userdata(base_url().'_failed_login'));
+		if($failed_login > 4)
 		{
-			$user = $this->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data['username'])->row_array();
-			if(!empty($user))
-			{
-				if(decrypt($data['password'], $user['password']))
-				{
-					$url = @$_GET['redirect_to'];
-					if(!empty($url))
-					{
-						$url = urldecode($url);
-					}else{
-						$url = 'admin/index';
-					}
-					if(!empty($data['remember_me']))
-					{
-						$this->set_cookie($data);
-					}
-					$role = $this->db->query('SELECT title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
-					if(!empty($role))
-					{
-						$user['role'] = @$role['title'];
-					}else{
-						$user['role'] = 'user';
-					}
-					$this->session->set_userdata(base_url().'_logged_in', $user);
-					redirect($url);
-				}else{
-					$this->set_esg('msg', array('status'=>'danger','msg'=>'wrong password'));
-				}
-			}else{
-				$this->set_esg('msg', array('status'=>'danger','msg'=>'username is not valid'));
-			}
+			$this->set_esg('msg', array('status'=>'danger','msg'=>'you have failed login 5 time, wait for 30 minute forward and try again'));
 		}else{
-			if(!empty($_COOKIE))
+			if(!empty($data))
 			{
-				$data = $_COOKIE;
-				$user = $this->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data[base_url().'_username'])->row_array();
+				$user = $this->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data['username'])->row_array();
 				if(!empty($user))
 				{
-					if(decrypt($data[base_url().'_password'], $user['password']))
+					if(decrypt($data['password'], $user['password']))
 					{
 						$url = @$_GET['redirect_to'];
 						if(!empty($url))
@@ -106,15 +86,59 @@ class Esg extends CI_Model
 						}else{
 							$url = 'admin/index';
 						}
+						if(!empty($data['remember_me']))
+						{
+							$this->set_cookie($data);
+						}
 						$role = $this->db->query('SELECT title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
 						if(!empty($role))
 						{
-							$user['role'] = @$role;
+							$user['role'] = @$role['title'];
 						}else{
 							$user['role'] = 'user';
 						}
 						$this->session->set_userdata(base_url().'_logged_in', $user);
+						$this->save_ip($user['id']);
 						redirect($url);
+					}else{
+						$this->set_esg('msg', array('status'=>'danger','msg'=>'wrong password'));
+						$failed_login++;
+						$this->save_ip(0);
+						$this->session->set_userdata(base_url().'_failed_login', $failed_login);
+					}
+				}else{
+					$this->set_esg('msg', array('status'=>'danger','msg'=>'username is not valid'));
+					$failed_login++;
+					$this->save_ip(0);
+					$this->session->set_userdata(base_url().'_failed_login', $failed_login);
+				}
+			}else{
+				if(!empty($_COOKIE))
+				{
+					$data = $_COOKIE;
+					$user = $this->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data[base_url().'_username'])->row_array();
+					if(!empty($user))
+					{
+						if(decrypt($data[base_url().'_password'], $user['password']))
+						{
+							$url = @$_GET['redirect_to'];
+							if(!empty($url))
+							{
+								$url = urldecode($url);
+							}else{
+								$url = 'admin/index';
+							}
+							$role = $this->db->query('SELECT title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
+							if(!empty($role))
+							{
+								$user['role'] = @$role;
+							}else{
+								$user['role'] = 'user';
+							}
+							$this->session->set_userdata(base_url().'_logged_in', $user);
+							$this->save_ip($user['id']);
+							redirect($url);
+						}
 					}
 				}
 			}

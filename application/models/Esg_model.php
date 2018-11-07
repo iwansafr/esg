@@ -50,7 +50,7 @@ class Esg_model extends CI_Model
 		      array(
 		        'title' => 'User Role',
 		        'icon' => 'fa-circle-o',
-		        'link' => base_url('admin/user/role')
+		        'link' => base_url('admin/user/role'),
 		      ),
 		    )
 		  ),

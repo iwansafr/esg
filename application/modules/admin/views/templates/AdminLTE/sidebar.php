@@ -46,7 +46,8 @@
         <?php
       }else{
         ?>
-        <li class="treeview">
+        <!-- <li class="treeview"> -->
+        <li>
           <a href="<?php echo $value['link'] ?>">
             <i class="fa <?php echo $value['icon'] ?>"></i> <span><?php echo $value['title'] ?></span>
           </a>
