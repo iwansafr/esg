@@ -1062,6 +1062,7 @@ class Zea extends CI_Model
 															</th>
 															<?php
 														}else{
+															$label = $value['type'] != 'hidden' ? $label : '';
 															echo '<th>'.ucwords($label).'</th>';
 														}
 													}
