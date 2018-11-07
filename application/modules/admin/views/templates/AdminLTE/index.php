@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php $this->load->view('templates/'.$admin_template.'/meta') ?>
+  <?php
+  $user = $this->session->userdata(base_url().'_logged_in');
+  $this->load->view('templates/'.$admin_template.'/meta');
+  ?>
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
@@ -9,7 +12,7 @@
     <!-- Logo -->
     <a href="../../index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">esg</span>
+      <span class="logo-mini"><img src="<?php echo base_url('images/icon.png') ?>" height="50"></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><img src="<?php echo base_url('images/logo.png') ?>" height="40"></span>
     </a>
@@ -55,7 +58,7 @@
                         <img src="<?php echo base_url('images/icon.png') ?>" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        AdminLTE Design Team
+                        esoftgreat Design Team
                         <small><i class="fa fa-clock-o"></i> 2 hours</small>
                       </h4>
                       <p>Why not buy a new awesome theme?</p>
@@ -223,7 +226,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo base_url('images/icon.png') ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?php echo $user['username'] ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -231,8 +234,8 @@
                 <img src="<?php echo base_url('images/icon.png') ?>" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <?php echo $user['username'] ?> - <?php echo $user['role'] ?>
+                  <small>Member since <?php echo content_date($user['created']) ?></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -256,7 +259,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('admin/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

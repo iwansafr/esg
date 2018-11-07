@@ -48,7 +48,7 @@
     ?>
     <form action="" method="post">
       <div class="form-group has-feedback">
-        <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo @$data['username'] ?>">
+        <input id="username" type="text" name="username" class="form-control" placeholder="Username" value="<?php echo @$data['username'] ?>">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -102,6 +102,9 @@
       increaseArea: '20%' /* optional */
     });
   });
+  window.onload = function() {
+    var input = document.getElementById("username").focus();
+  };
 </script>
 </body>
 </html>

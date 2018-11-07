@@ -43,7 +43,7 @@ class Zea extends CI_Model
 	var $accept        = array();
 	var $checkbox      = array();
 	var $radio         = array();
-	var $orderby       = array('index'=>'id','sort'=>'DESC');
+	var $orderby       = 'id DESC';
 	var $multiselect   = array();
 	var $elementid     = array();
 	var $value         = array();
@@ -77,6 +77,14 @@ class Zea extends CI_Model
 					$this->init = '';
 				break;
 			}
+		}
+	}
+
+	public function order_by($field = '', $order = '')
+	{
+		if(!empty($field) && !empty($order))
+		{
+			$this->orderby = $field.' '.$order;
 		}
 	}
 
@@ -800,6 +808,7 @@ class Zea extends CI_Model
 			}
 			$num_rows = $this->db->query($sql,$bind)->num_rows();
 
+			$sql          .= ' ORDER BY '.$this->orderby;
 			$sql          .= ' LIMIT '.$page.','.$limit;
 			$data['data']  = $this->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->db->last_query();
