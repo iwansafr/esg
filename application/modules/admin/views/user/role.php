@@ -19,6 +19,8 @@ $form->form();
 
 $form = new zea();
 $form->init('roll');
+$form->search();
+$form->setField(array('id','title'));
 $form->setTable('user_role');
 $form->addInput('id','plaintext');
 $form->addInput('title','plaintext');
@@ -27,4 +29,5 @@ $form->setType('level','plaintext');
 $form->addInput('description','plaintext');
 $form->setDelete(TRUE);
 $form->setEdit(TRUE);
+$form->setEditLink(base_url('admin/user/role/?id='));
 $form->form();
