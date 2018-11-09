@@ -463,8 +463,7 @@ class Zea extends CI_Model
 
 		if(!empty($index) && !empty($sort))
 		{
-			$this->orderby['index'] = $index;
-			$this->orderby['sort'] = $sort;
+			$this->orderby = $index.' '.$sort;
 		}
 	}
 
@@ -779,7 +778,7 @@ class Zea extends CI_Model
 		if($this->init == 'roll')
 		{
 			$input   = array();
-			$limit   = 12;
+			$limit   = 9;
 			$page    = @intval($_GET['page']);
 			$keyword = @$_GET['keyword'];
 			$where   = '';
