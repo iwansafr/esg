@@ -116,7 +116,8 @@ $form->addInput('title','plaintext');
 
 $form->addInput('id','link');
 $form->setLink('id',base_url('admin/content/list'),'id');
-$form->setPlaintext('id','<button class="btn btn-default"><i class="fa fa-search"></i>  content</button>');
+// $form->setPlaintext('id','<button class="btn btn-default"><i class="fa fa-search"></i>  content</button>');
+$form->setPlaintext('id','<i class="fa fa-search"></i>  content');
 $form->setLabel('id','Content');
 
 $form->addInput('image','thumbnail');

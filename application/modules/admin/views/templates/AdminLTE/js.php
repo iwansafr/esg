@@ -2,6 +2,7 @@
 <script src="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/jquery/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/bootstrap/js/bootstrap-tagsinput.js"></script>
 <!-- FastClick -->
 <script src="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
