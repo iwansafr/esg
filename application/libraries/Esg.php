@@ -114,10 +114,11 @@ class Esg extends CI_Model
 						{
 							$this->set_cookie($data);
 						}
-						$role = $this->db->query('SELECT title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
+						$role = $this->db->query('SELECT level,title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
 						if(!empty($role))
 						{
 							$user['role'] = @$role['title'];
+							$user['level'] = @$role['level'];
 						}else{
 							$user['role'] = 'user';
 						}
@@ -152,10 +153,11 @@ class Esg extends CI_Model
 							}else{
 								$url = 'admin/index';
 							}
-							$role = $this->db->query('SELECT title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
+							$role = $this->db->query('SELECT level,title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
 							if(!empty($role))
 							{
-								$user['role'] = @$role;
+								$user['role'] = @$role['title'];
+								$user['level'] = @$role['level'];
 							}else{
 								$user['role'] = 'user';
 							}

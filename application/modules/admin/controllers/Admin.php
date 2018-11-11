@@ -7,6 +7,7 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->model('esg_model');
 		$this->load->library('esg');
+		$this->load->library('ZEA/zea');
 		$this->esg_model->init();
 	}
 	public function index()

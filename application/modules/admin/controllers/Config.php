@@ -23,4 +23,12 @@ class Config extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+	public function templates()
+	{
+		$this->load->view('index');
+	}
+	public function widget()
+	{
+		$this->load->view('index');
+	}
 }

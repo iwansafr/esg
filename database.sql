@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 03, 2018 at 08:07 AM
--- Server version: 5.7.23-0ubuntu0.18.04.1
--- PHP Version: 7.2.11-2+ubuntu18.04.1+deb.sury.org+1
+-- Generation Time: Nov 11, 2018 at 11:40 PM
+-- Server version: 5.7.24-0ubuntu0.18.04.1
+-- PHP Version: 7.2.11-4+ubuntu18.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -93,6 +93,13 @@ CREATE TABLE `content` (
   `publish` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `content`
+--
+
+INSERT INTO `content` (`id`, `cat_ids`, `tag_ids`, `title`, `slug`, `description`, `keyword`, `intro`, `content`, `image`, `icon`, `image_link`, `images`, `author`, `hits`, `last_hits`, `rating`, `params`, `created`, `updated`, `publish`) VALUES
+(1, ',1,', ',1,2,', 'Hello World', 'hello-world', 'Hello World\r\n', 'Hello World', 'Hello World\r\n', '<p>Hello World</p>\r\n', 'image_Hello_World_1541950550.png', '', '', '[\"images_Hello_World_0_1541950550.png\",\"images_Hello_World_1_1541950550.png\"]', 'admin', 0, '0000-00-00 00:00:00', '', '', '2018-11-11 22:35:50', '2018-11-11 22:43:54', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +120,14 @@ CREATE TABLE `content_cat` (
   `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `content_cat`
+--
+
+INSERT INTO `content_cat` (`id`, `par_id`, `title`, `slug`, `image`, `icon`, `description`, `publish`, `created`, `updated`) VALUES
+(1, 0, 'Uncategorized', 'uncategorized', '', '', '', 1, '2018-11-11 22:23:38', '2018-11-11 22:23:38'),
+(2, 0, 'Profile', 'profile', '', '', '', 1, '2018-11-11 23:09:20', '2018-11-11 23:09:20');
+
 -- --------------------------------------------------------
 
 --
@@ -125,6 +140,14 @@ CREATE TABLE `content_tag` (
   `title` varchar(255) NOT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `content_tag`
+--
+
+INSERT INTO `content_tag` (`id`, `title`, `created`) VALUES
+(1, 'esoftgreat', '2018-11-11 22:27:01'),
+(2, 'hello world', '2018-11-11 22:27:01');
 
 -- --------------------------------------------------------
 
@@ -236,7 +259,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `image`, `user_role_id`, `active`, `created`, `updated`) VALUES
-(1, 'root', '$2y$10$iN3I64zsXAyy9MCEVAPe3uqv1ygazlJgKFYEc2aNCiu2VDe/ZTKjO', 'root@esoftgreat.com', '', 1, 1, '2018-11-03 07:36:32', '2018-11-03 07:36:32');
+(1, 'root', '$2y$10$iN3I64zsXAyy9MCEVAPe3uqv1ygazlJgKFYEc2aNCiu2VDe/ZTKjO', 'root@esoftgreat.com', '', 1, 1, '2018-11-03 07:36:32', '2018-11-03 07:36:32'),
+(2, 'admin', '$2y$10$jdpCJJsaAfx1hv0EXyQpjOce6kqeffl9X/cOJvJYuSnG4/aFLwb7C', 'admin@esoftgreat.com', '', 2, 1, '2018-11-04 19:27:55', '2018-11-04 19:27:55'),
+(3, 'iwan safrudin', '$2y$10$fJfo8uVYisXBw6OG4wGDr.a0O.0s47sUYxCr2Sr4kfeN.t4R6qMW6', 'iwansafr@gmail.com', '', 3, 1, '2018-11-04 19:59:44', '2018-11-04 21:17:19'),
+(4, 'iwan safrudi', '$2y$10$gUI2DwOKMIqBDaDqxKSzj.dpZTrz9BazcP1SRLDF86ibDKcoemtMq', 'iwansafrudi@gmail.com', '', 3, 1, '2018-11-04 21:18:09', '2018-11-04 21:18:09'),
+(5, 'iwan safru', '$2y$10$rOnM0ah/kjhxv418xLTyBOTpq2BCh3k.WCyxQtg0bCj39z7xlEsj6', 'iwansafru@gmail.com', '', 0, 1, '2018-11-04 21:18:54', '2018-11-04 21:18:54');
 
 -- --------------------------------------------------------
 
@@ -252,6 +279,15 @@ CREATE TABLE `user_login` (
   `status` tinyint(1) NOT NULL COMMENT '0=failed, 1=success',
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_login`
+--
+
+INSERT INTO `user_login` (`id`, `user_id`, `ip`, `status`, `created`) VALUES
+(1, 2, '::1', 1, '2018-11-07 19:49:57'),
+(2, 2, '::1', 1, '2018-11-11 22:03:50'),
+(3, 2, '::1', 1, '2018-11-11 22:54:47');
 
 -- --------------------------------------------------------
 
@@ -275,7 +311,8 @@ CREATE TABLE `user_role` (
 
 INSERT INTO `user_role` (`id`, `level`, `title`, `description`, `created`, `updated`) VALUES
 (1, 1, 'root', 'super user', '2018-11-02 22:57:22', '2018-11-02 22:57:22'),
-(2, 2, 'admin', 'the administrator', '2018-11-02 22:57:22', '2018-11-02 22:57:22');
+(2, 2, 'admin', 'the administrator', '2018-11-02 22:57:22', '2018-11-02 22:57:22'),
+(3, 5, 'Member', 'User member yang hanya berlangganan saja', '2018-11-04 12:59:26', '2018-11-04 12:59:26');
 
 -- --------------------------------------------------------
 
@@ -399,17 +436,17 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `content`
 --
 ALTER TABLE `content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `content_cat`
 --
 ALTER TABLE `content_cat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `content_tag`
 --
 ALTER TABLE `content_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `menu`
 --
@@ -439,17 +476,17 @@ ALTER TABLE `product_tag`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `visitor`
 --

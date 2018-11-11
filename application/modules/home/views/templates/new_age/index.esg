@@ -1,0 +1,18 @@
+<div class="col-md-12">
+	<div class="col-md-6">
+		<br>
+		<div class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Logo
+				</div>
+				<div class="panel-body">
+					<h3>Logo</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		{menu_top}
+	</div>
+</div>

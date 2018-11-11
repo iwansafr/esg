@@ -233,7 +233,7 @@ class Zea extends CI_Model
 	public function setView($view = '')
 	{
 		$this->view = $view;
-		$this->data_model->setView($view);
+		// $this->data_model->setView($view);
 	}
 
 	public function get_all($sql = '')

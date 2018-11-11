@@ -1,7 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-// $this->session->__set('link_js', base_url().'templates/admin/js/bootstrap-tagsinput.js');
-
 $form = new zea();
 
 $id = $this->input->get('id');
@@ -41,6 +39,7 @@ $form->setAccept('images', '.jpeg,.png');
 $form->setAttribute('images','multiple');
 $form->startCollapse('images', 'Gallery');
 $form->endCollapse('images');
+$form->setCollapse('images',TRUE);
 
 $form->addInput('icon','text');
 
@@ -55,6 +54,7 @@ $form->addInput('description','textarea');
 $form->setLabel('description','Meta Description');
 $form->startCollapse('keyword', 'meta');
 $form->endCollapse('description');
+$form->setCollapse('keyword',TRUE);
 
 $form->addInput('intro','textarea');
 
@@ -72,7 +72,6 @@ if(!empty($id))
 {
   if(empty($_POST['tag_ids']))
   {
-    // $tag_data = $this->data_model->get_one('content','tag_ids', ' WHERE id = '.$id);
     $tag_data = $this->db->query('SELECT tag_ids FROM content WHERE id = ? LIMIT 1', $id)->row_array();
     $tag_data = $tag_data['tag_ids'];
     $tag_data = explode(',',$tag_data);

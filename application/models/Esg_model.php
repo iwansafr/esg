@@ -163,7 +163,7 @@ class Esg_model extends CI_Model
 		      array(
 		        'title' => 'templates',
 		        'icon' => 'fa-cog',
-		        'link' => base_url('admin/config_templates/templates')
+		        'link' => base_url('admin/config/templates')
 		      ),
 		      array(
 		        'title' => 'template_config',
