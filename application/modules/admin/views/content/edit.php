@@ -73,12 +73,15 @@ if(!empty($id))
   if(empty($_POST['tag_ids']))
   {
     // $tag_data = $this->data_model->get_one('content','tag_ids', ' WHERE id = '.$id);
-    $tag_data = $this->db->query('SELECT tag_ids FROM content WHERE id = ? LIMIT 1', $id);
+    $tag_data = $this->db->query('SELECT tag_ids FROM content WHERE id = ? LIMIT 1', $id)->row_array();
+    $tag_data = $tag_data['tag_ids'];
     $tag_data = explode(',',$tag_data);
     $tag_name = array();
     foreach ($tag_data as $key => $value)
     {
-      $tag_name[] = $this->db->query('SELECT title FROM content_tag WHERE id = ? LIMIT 1', @intval($value));
+      $tmp = array();
+      $tmp = $this->db->query('SELECT title FROM content_tag WHERE id = ? LIMIT 1', @intval($value))->row_array();
+      $tag_name[] = @$tmp['title'];
     }
     $tag_name = implode($tag_name, ',');
   }else{
@@ -92,7 +95,7 @@ $form->addInput('publish','checkbox');
 $form->form();
 
 
-$last_id = $this->db->insert_id();
+$last_id = $form->get_insert_id();
 
 if(!empty($last_id) || !empty($id))
 {
@@ -102,15 +105,15 @@ if(!empty($last_id) || !empty($id))
     $post = array();
     if(empty($_POST['keyword']))
     {
-      $post['keyword'] = $_POST['title'];
+      $post['keyword'] = strip_tags($_POST['title']);
     }
     if(empty($_POST['description']))
     {
-      $post['description'] = $_POST['content'];
+      $post['description'] = strip_tags($_POST['content']);
     }
     if(empty($_POST['intro']))
     {
-      $post['intro'] = substr($_POST['content'], 0,200);
+      $post['intro'] = substr(strip_tags($_POST['content']), 0,200);
     }
     if(!empty($_POST['tag_ids']))
     {
@@ -119,8 +122,8 @@ if(!empty($last_id) || !empty($id))
     if(empty($_POST['slug']))
     {
       $post['slug'] = slug($this->input->post('title', TRUE));
-      $check_slug   = $this->db->query('SELECT slug FROM content WHERE slug = ? LIMIT 1',@$post['slug']);
-
+      $check_slug   = $this->db->query('SELECT slug FROM content WHERE slug = ? LIMIT 1',@$post['slug'])->row_array();
+      $check_slug = $check_slug['slug'];
       if($check_slug == $post['slug'])
       {
         $array_slug   = explode('-', $check_slug);
@@ -131,7 +134,7 @@ if(!empty($last_id) || !empty($id))
     }
     if(!empty($post))
     {
-      $this->esg_model->set_data('content', $last_id, $post);
+      $form->set_data('content', $last_id, $post);
     }
   }
 }
@@ -146,11 +149,13 @@ if(!empty($id))
       $post['tag_ids'] = $this->esg->set_tag();
     }
     $uniqe_id   = '';
-    $check_slug = $this->db->query('SELECT slug FROM content WHRERE id = ? AND slug = ? LIMIT 1', array($id,$this->input->post('slug')));
+    $check_slug = $this->db->query('SELECT slug FROM content WHERE id = ? AND slug = ? LIMIT 1', array($id,$this->input->post('slug')))->row_array();
+    $check_slug = $check_slug['slug'];
     if(empty($check_slug))
     {
       $check_slug = slug($this->input->post('title'));
-      $check_slug = $this->db->query('SELECT slug FROM content WHERE slug = ? LIMIT 1',$check_slug);
+      $check_slug = $this->db->query('SELECT slug FROM content WHERE slug = ? LIMIT 1',$check_slug)->row_array();
+      $check_slug = $check_slug['slug'];
       if(empty($check_slug))
       {
         $check_slug = slug($this->input->post('title'));
@@ -165,7 +170,7 @@ if(!empty($id))
     $post['slug'] = slug($slug);
     if(!empty($post))
     {
-      $this->esg_model->set_data('content', $id, $post);
+      $form->set_data('content', $id, $post);
     }
   }
 }

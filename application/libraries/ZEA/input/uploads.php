@@ -4,7 +4,8 @@ if(!empty($field))
 {
 	if(!empty($this->id))
 	{
-		$data_image = $this->data_model->get_one($this->table, $field, ' WHERE id = '.$this->id);
+		$data_image = $this->db->query('SELECT '.$field.' FROM '.$this->table.' WHERE id = ? ', $this->id)->row_array();
+		$data_image = $data_image[$field];
 		if(!empty($data_image))
 		{
 			$data_image = json_decode($data_image,1);
