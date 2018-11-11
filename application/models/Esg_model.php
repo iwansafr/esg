@@ -50,29 +50,29 @@ class Esg_model extends CI_Model
 		      array(
 		        'title' => 'User Role',
 		        'icon' => 'fa-circle-o',
-		        'link' => base_url('admin/user/role')
+		        'link' => base_url('admin/user/role'),
 		      ),
 		    )
 		  ),
 		  array(
 		    'title' => 'Content',
 		    'icon' => 'fa-file-text',
-		    'link' => base_url('admin/content_list'),
+		    'link' => base_url('admin/content/'),
 		    'list' => array(
 		    	array(
 		        'title' => 'Category',
 		        'icon' => 'fa-list',
-		        'link' => base_url('admin/content_category')
+		        'link' => base_url('admin/content/category')
 		      ),
 		      array(
 		        'title' => 'Add Content',
 		        'icon' => 'fa-pencil',
-		        'link' => base_url('admin/content_edit')
+		        'link' => base_url('admin/content/edit')
 		      ),
 		      array(
 		        'title' => 'Content List',
 		        'icon' => 'fa-list',
-		        'link' => base_url('admin/content_list')
+		        'link' => base_url('admin/content/list')
 		      ),
 		      array(
 		        'title' => 'Comment',

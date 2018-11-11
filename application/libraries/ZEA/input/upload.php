@@ -4,8 +4,9 @@ if(!empty($field))
 {
 	if(!empty($this->id))
 	{
-		$data_image = $this->data_model->get_one($this->table, $field,' WHERE id = '.$this->id);
-		$image    = !empty($data_image) ? $this->id.'/'.$data_image : '';
+		$data_image = $this->db->query('SELECT '.$field.' FROM '.$this->table.' WHERE id = ?',$this->id)->row_array();
+		$data_image = @$data_image[$field];
+		$image      = !empty($data_image) ? $this->id.'/'.$data_image : '';
 	}else if($this->init == 'param')
 	{
 		$image    = !empty($data[$field]) ? $name.'/'.$data[$field] : '';

@@ -23,7 +23,7 @@ class Zea extends CI_Model
 	var $where         = '';
 	var $encrypt       = TRUE;
 	var $file_error    = array();
-	var $edit_link     = 'edit/';
+	var $edit_link     = 'edit?id=';
 	var $limit         = 12;
 	var $id            = 0;
 	var $delete        = false;
@@ -43,7 +43,7 @@ class Zea extends CI_Model
 	var $accept        = array();
 	var $checkbox      = array();
 	var $radio         = array();
-	var $orderby       = array('index'=>'id','sort'=>'DESC');
+	var $orderby       = 'id DESC';
 	var $multiselect   = array();
 	var $elementid     = array();
 	var $value         = array();
@@ -57,6 +57,7 @@ class Zea extends CI_Model
 	var $clearget      = array();
 	var $jointable     = array();
 	var $search        = FALSE;
+	var $insert_id     = 0;
 
 	public function init($text = '')
 	{
@@ -77,6 +78,27 @@ class Zea extends CI_Model
 					$this->init = '';
 				break;
 			}
+		}
+	}
+
+	public function set_insert_id($id = 0)
+	{
+		if(!empty($id))
+		{
+			$this->insert_id = $id;
+		}
+	}
+
+	public function get_insert_id()
+	{
+		return $this->insert_id;
+	}
+
+	public function order_by($field = '', $order = '')
+	{
+		if(!empty($field) && !empty($order))
+		{
+			$this->orderby = $field.' '.$order;
 		}
 	}
 
@@ -239,7 +261,7 @@ class Zea extends CI_Model
 					}
 					$data = $this->db->get()->result_array();
 					$options    = array();
-					$options[0] = 'None';
+					$options[''] = 'None';
 					if(!empty($data))
 					{
 						foreach ($data as $dkey => $dvalue)
@@ -705,6 +727,20 @@ class Zea extends CI_Model
 		}
 		return $input;
 	}
+	public function del_data($table='',$ids = array())
+  {
+    if(!empty($ids)&&!empty($table))
+    {
+      foreach ($ids as $key => $id)
+      {
+        $this->db->delete($table, array('id'=>$id));
+        $dir = FCPATH.'images/modules/'.$table.'/'.$id.'/';
+        recursive_rmdir($dir);
+        $dir = FCPATH.'images/modules/'.$table.'/gallery'.'/'.$id.'/';
+        recursive_rmdir($dir);
+      }
+    }
+  }
 	public function set_data($table = '',$id = 0, $post = array())
   {
     if(!empty($table))
@@ -736,21 +772,21 @@ class Zea extends CI_Model
 
       return $data[$field];
     }
-  }  
+  }
 	private function getData()
 	{
 		$data = array();
 		if($this->init == 'roll')
 		{
 			$input   = array();
-			$limit   = 2;
+			$limit   = 12;
 			$page    = @intval($_GET['page']);
 			$keyword = @$_GET['keyword'];
 			$where   = '';
 			$bind    = array();
 			$url_get = '';
 
-			foreach ($this->input as $key => $value) 
+			foreach ($this->input as $key => $value)
 			{
 				$input[] = $key;
 			}
@@ -759,7 +795,7 @@ class Zea extends CI_Model
 				$input = implode($input,',');
 			}
 			$sql = 'SELECT '.$input.' FROM '.$this->table;
-			if(!empty($keyword))
+			if(!empty($keyword) || !empty($this->where))
 			{
 				$sql     .= ' WHERE ';
 				$url_get .= '?';
@@ -770,7 +806,7 @@ class Zea extends CI_Model
 				{
 					if(is_array($this->field))
 					{
-						foreach ($this->field as $key => $value) 
+						foreach ($this->field as $key => $value)
 						{
 							if($key > 0){
 								$where .= ' OR ';
@@ -784,8 +820,14 @@ class Zea extends CI_Model
 					$url_get .= 'keyword='.urlencode($keyword);
 				}
 			}
+			if(!empty($this->where))
+			{
+				$where .= $this->where;
+				$sql .= $where;
+			}
 			$num_rows = $this->db->query($sql,$bind)->num_rows();
 
+			$sql          .= ' ORDER BY '.$this->orderby;
 			$sql          .= ' LIMIT '.$page.','.$limit;
 			$data['data']  = $this->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->db->last_query();
@@ -794,7 +836,7 @@ class Zea extends CI_Model
 	    $data['pagination'] = $this->pagination->create_links();
 		}else if($this->init == 'edit'){
 			$data = $this->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
-			$data = @$data[0];
+			$data = @$data;
 		}
 		return $data;
 	}
@@ -983,13 +1025,13 @@ class Zea extends CI_Model
 								<h3 class="box-title">
 									<?php echo $this->heading;?>
 								</h3>
-								
-								<?php 
+
+								<?php
 								if($this->search == TRUE)
 								{
 									?>
 			             	<div class="box-tools">
-			             		<form action="" method="get">			            
+			             		<form action="" method="get">
 					              <div class="input-group input-group-sm" style="width: 150px;">
 					                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>">
 					                <div class="input-group-btn">
@@ -1034,6 +1076,7 @@ class Zea extends CI_Model
 															</th>
 															<?php
 														}else{
+															$label = $value['type'] != 'hidden' ? $label : '';
 															echo '<th>'.ucwords($label).'</th>';
 														}
 													}
@@ -1125,7 +1168,7 @@ class Zea extends CI_Model
 															{
 																?>
 																<td>
-																	<a href="<?php echo $this->edit_link.$dvalue['id'] ?>"> <span class="fa fa-pencil"></span></a>
+																	<a href="<?php echo $this->edit_link.$dvalue['id'] ?>" class="btn btn-default" title="click to edit" data-toggle="tooltip" data-placement="top"> <span class="fa fa-pencil"></span></a>
 																</td>
 																<?php
 															}
@@ -1295,6 +1338,7 @@ class Zea extends CI_Model
 								}
 							}
 							$last_id = $this->db->insert_id();
+							$this->set_insert_id($last_id);
 							if(!empty($upload))
 							{
 								$i = 0;
@@ -1537,7 +1581,7 @@ class Zea extends CI_Model
 						{
 							$data['msg']   = 'Data Deleted Successfully';
 							$data['alert'] = 'success';
-							$this->data_model->del_data($this->table, $_POST['del_row']);
+							$this->del_data($this->table, $_POST['del_row']);
 						}
 					}
 				}else{
