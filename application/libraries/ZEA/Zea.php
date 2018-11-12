@@ -772,7 +772,7 @@ class Zea extends CI_Model
       return $data[$field];
     }
   }
-	private function getData()
+	public function getData()
 	{
 		$data = array();
 		if($this->init == 'roll')
