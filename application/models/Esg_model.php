@@ -94,17 +94,17 @@ class Esg_model extends CI_Model
 		    	array(
 		        'title' => 'Add Menu',
 		        'icon' => 'fa-pencil',
-		        'link' => base_url('admin/menu_edit')
+		        'link' => base_url('admin/menu/edit')
 		      ),
 		      array(
 		        'title' => 'Menu List',
 		        'icon' => 'fa-list',
-		        'link' => base_url('admin/menu_list')
+		        'link' => base_url('admin/menu/list')
 		      ),
 		      array(
 		        'title' => 'Menu Position',
 		        'icon' => 'fa-list',
-		        'link' => base_url('admin/menu_position')
+		        'link' => base_url('admin/menu/position')
 		      ),
 		    )
 		  ),

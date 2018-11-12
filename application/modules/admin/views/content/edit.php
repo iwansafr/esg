@@ -31,8 +31,10 @@ $form->addInput('image','upload');
 $form->setAccept('image', '.jpeg,.png');
 
 $form->addInput('image_link','text');
-$form->startCollapse('image_link', 'add image link');
-$form->endCollapse('image_link');
+$form->addInput('icon','text');
+$form->startCollapse('image_link', 'Image Link');
+$form->endCollapse('icon');
+$form->setCollapse('image_link',TRUE);
 
 $form->addInput('images','gallery');
 $form->setAccept('images', '.jpeg,.png');
@@ -41,7 +43,6 @@ $form->startCollapse('images', 'Gallery');
 $form->endCollapse('images');
 $form->setCollapse('images',TRUE);
 
-$form->addInput('icon','text');
 
 $form->addInput('keyword','textarea');
 $form->setLabel('keyword','Meta Keyword');

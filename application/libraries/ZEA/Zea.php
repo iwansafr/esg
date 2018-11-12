@@ -261,7 +261,7 @@ class Zea extends CI_Model
 					}
 					$data = $this->db->get()->result_array();
 					$options    = array();
-					$options[''] = 'None';
+					$options[0] = 'None';
 					if(!empty($data))
 					{
 						foreach ($data as $dkey => $dvalue)
