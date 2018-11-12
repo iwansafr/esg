@@ -3,6 +3,8 @@
 $id    = $this->input->get('id');
 $po_id = $this->input->get('po_id');
 $p_id  = $this->input->get('p_id');
+$type  = $this->input->get('type');
+
 if(!empty($id) || (!empty($po_id) && !empty($p_id)))
 {
 	$this->zea->init('edit');
@@ -56,6 +58,15 @@ if(!empty($id) || (!empty($po_id) && !empty($p_id)))
 
 	$this->zea->addInput('title','text');
 	$this->zea->addInput('link','text');
+	if(empty($type))
+	{
+		$this->zea->addInput('is_local','hidden');
+		$this->zea->setValue('is_local',0);
+	}else{
+		$this->zea->addInput('is_local','hidden');
+		$this->zea->setValue('is_local',1);
+	}
+
 	$this->zea->addInput('publish','checkbox');
 
 	$this->zea->setRequired(array('title','link'));
