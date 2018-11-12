@@ -100,9 +100,12 @@ CREATE TABLE `menu` (
   `sort_order` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `link` mediumtext NOT NULL,
-  `is_local` tinyint(1) NOT NULL COMMENT '1=local link, 0 = external link',
+  `is_local` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1=local link, 0 = external link',
   `publish` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `menu` (`id`, `par_id`, `position_id`, `sort_order`, `title`, `link`, `is_local`, `publish`) VALUES
+(1, 0, 1, 0, 'facebook', 'https://facebook.com', 0, 1);
 
 DROP TABLE IF EXISTS `menu_position`;
 CREATE TABLE `menu_position` (
@@ -185,7 +188,8 @@ CREATE TABLE `user_login` (
 INSERT INTO `user_login` (`id`, `user_id`, `ip`, `status`, `created`) VALUES
 (1, 2, '::1', 1, '2018-11-07 19:49:57'),
 (2, 2, '::1', 1, '2018-11-11 22:03:50'),
-(3, 2, '::1', 1, '2018-11-11 22:54:47');
+(3, 2, '::1', 1, '2018-11-11 22:54:47'),
+(4, 2, '::1', 1, '2018-11-12 13:55:52');
 
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
@@ -272,7 +276,7 @@ ALTER TABLE `content_tag`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `menu_position`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
@@ -290,7 +294,7 @@ ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 ALTER TABLE `user_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
