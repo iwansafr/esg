@@ -8,6 +8,7 @@ class Content extends CI_Controller
 		$this->load->model('esg_model');
 		$this->load->library('esg');
 		$this->load->library('ZEA/zea');
+		$this->load->model('content_model');
 		$this->esg_model->init();
 	}
 	public function index()
@@ -22,7 +23,9 @@ class Content extends CI_Controller
 	}
 	public function edit()
 	{
-		$this->load->view('index');
+		$data['tag_name'] = $this->content_model->content_tag();
+		$this->load->view('index', $data);
+		$this->content_model->content_save();
 	}
 	public function role()
 	{
@@ -31,5 +34,6 @@ class Content extends CI_Controller
 	public function category()
 	{
 		$this->load->view('index');
+		$this->content_model->category_slug();
 	}
 }

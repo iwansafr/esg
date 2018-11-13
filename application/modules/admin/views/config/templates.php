@@ -21,27 +21,28 @@ if(is_admin())
 		$template_admin = end($template_dir);
 		$template_admin_names[$template_admin] = $template_admin;
 	}
+	$form = new zea();
 
-	$this->zea->init('param');
-	$this->zea->setTable('config');
-	$this->zea->setId(1);
-	$this->zea->setHeading('templates');
-	// $this->zea->setParam($config);
-	$this->zea->setParamName('templates');
-	$this->zea->addInput('public_template', 'dropdown');
-	$this->zea->setLabel('public_template', 'Public Template');
+	$form->init('param');
+	$form->setTable('config');
+	$form->setId(1);
+	$form->setHeading('templates');
+	// $form->setParam($config);
+	$form->setParamName('templates');
+	$form->addInput('public_template', 'dropdown');
+	$form->setLabel('public_template', 'Public Template');
 	if(!empty($template_names))
 	{
-		$this->zea->setOptions('public_template', $template_names);
+		$form->setOptions('public_template', $template_names);
 	}
 
-	$this->zea->addInput('admin_template', 'dropdown');
-	$this->zea->setLabel('admin_template', 'Admin Template');
+	$form->addInput('admin_template', 'dropdown');
+	$form->setLabel('admin_template', 'Admin Template');
 	if(!empty($template_admin_names))
 	{
-		$this->zea->setOptions('admin_template', $template_admin_names);
+		$form->setOptions('admin_template', $template_admin_names);
 	}
-	$this->zea->form();
+	$form->form();
 }else{
 	msg('you dont have permission to access this section', 'danger');
 }

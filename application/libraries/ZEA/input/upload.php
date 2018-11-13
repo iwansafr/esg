@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
 if(!empty($field))
 {
 	if(!empty($this->id))
@@ -61,12 +60,10 @@ if(!empty($field))
 	}
 	echo !empty($this->file_error[$field]) ? msg($this->file_error[$field],'danger') : '';
 	echo form_upload($array_input);
-
 	if(!empty($this->id) || ($this->init == 'param'))
 	{
 		echo form_hidden($field,$data[$field]);
 	}else{
 		echo form_hidden($field,'');
 	}
-	// $this->session->set_userdata('link_js', base_url().'templates/admin/');
 }

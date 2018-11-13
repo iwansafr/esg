@@ -4,7 +4,7 @@ if(!empty($field))
 {
 	$link_get = $this->link['link_get'][$field];
 	$key_get  = $link_get;
-
+	$ext_link = !empty($this->extlink[$field]) ? $this->extlink[$field] : '';
 	if($this->init == 'edit')
 	{
 		$data_value = $data[$field];
@@ -31,6 +31,6 @@ if(!empty($field))
 		$attribute = $this->attribute[$field];
 	}
 	?>
-	<a href="<?php echo $this->link[$field].$key_get.$link_get ?>" <?php echo $attribute ?>><?php echo $data_value ?></a>
+	<a href="<?php echo $this->link[$field].$key_get.$link_get.$ext_link ?>" <?php echo $attribute ?>><?php echo $data_value ?></a>
 	<?php
 }

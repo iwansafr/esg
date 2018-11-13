@@ -35,6 +35,7 @@ class Zea extends CI_Model
 	var $data          = array();
 	var $input         = array();
 	var $link          = array();
+	var $extlink       = array();
 	var $label         = array();
 	var $attribute     = array();
 	var $field         = array();
@@ -411,6 +412,20 @@ class Zea extends CI_Model
 						$this->link['link_get'][$field] = $get;
 					}
 					$this->link[$field] = $link;
+				}
+			}
+		}
+	}
+
+	public function setExtLink($field = '', $text = '')
+	{
+		if(!empty($field) && !empty($text))
+		{
+			foreach ($this->input as $key => $value)
+			{
+				if($value['text'] == $field)
+				{
+					$this->extlink[$field]  = $text;
 				}
 			}
 		}
