@@ -8,6 +8,7 @@ class Menu extends CI_Controller
 		$this->load->model('esg_model');
 		$this->load->library('esg');
 		$this->load->library('ZEA/zea');
+		$this->load->model('menu_model');
 		$this->esg_model->init();
 	}
 	public function index()
@@ -25,6 +26,8 @@ class Menu extends CI_Controller
 	}
 	public function edit()
 	{
-		$this->load->view('index');
+		$data['menu_position'] = $this->menu_model->menu_position();
+		$data['mene_parent'] = $this->menu_model->menu_parent();
+		$this->load->view('index',$data);
 	}
 }
