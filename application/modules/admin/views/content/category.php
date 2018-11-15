@@ -28,7 +28,9 @@ $this->zea->addInput('icon','text');
 $this->zea->addInput('description', 'textarea');
 
 $this->zea->addInput('publish', 'checkbox');
+echo '<div class="row">';
 ?>
+
 <div class="col-md-3">
   <?php
   if(!empty($get_id))
@@ -68,7 +70,7 @@ $form->setImage('image','content_cat');
 
 $form->addInput('slug','link');
 $form->setLabel('slug','add menu');
-$form->setLink('slug',base_url('admin/menu/edit/'),'slug');
+$form->setLink('slug',base_url('admin/menu/edit'),'slug');
 $form->setExtLink('slug', '&type=cat&t='.urlencode(encrypt(time())));
 $form->setPlaintext('slug','<i class="fa fa-plus-circle"></i>  add to menu');
 
@@ -84,3 +86,4 @@ $form->setEdit(TRUE);
   ?>
 </div>
 <?php
+echo '</div>';

@@ -5,6 +5,7 @@ $po_id = $this->input->get('po_id');
 $p_id  = $this->input->get('p_id');
 $type  = $this->input->get('type');
 
+pr($menu_parent);
 $this->zea->init('edit');
 $this->zea->setTable('menu');
 if(!empty($id))

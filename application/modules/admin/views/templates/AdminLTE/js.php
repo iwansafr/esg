@@ -8,7 +8,7 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/dist/js/demo.js"></script>
+<!-- <script src="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/dist/js/demo.js"></script> -->
 <script src="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/dist/js/script.js"></script>
 <?php 
 $this->esg->extra_js();

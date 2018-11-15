@@ -14,7 +14,7 @@ class Esg_model extends CI_Model
 		$this->sidebar_menu();
 		$this->navigation();
 		$this->set_meta();
-		$this->js();
+		// $this->js();
 		$this->templates = $this->esg->get_config('templates');
 		$this->esg->set_esg('templates',$this->templates);
 		$this->esg_data = $this->esg->get_esg();

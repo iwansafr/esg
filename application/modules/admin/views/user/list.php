@@ -1,19 +1,18 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$form = new zea();
-$form->init('roll');
+$this->zea->init('roll');
 
-$form->search();
+$this->zea->search();
 
-$form->order_by('username','ASC');
-$form->setField(array('username','email'));
-$form->setWhere('id > 0');
-$form->setTable('user');
-$form->addInput('id','plaintext');
-$form->addInput('username','plaintext');
-$form->addInput('email','plaintext');
-$form->addInput('created','plaintext');
-$form->addInput('active', 'checkbox');
-$form->setDelete(TRUE);
-$form->setEdit(TRUE);
-$form->form();
+$this->zea->order_by('username','ASC');
+$this->zea->setField(array('username','email'));
+$this->zea->setWhere('id > 0');
+$this->zea->setTable('user');
+$this->zea->addInput('id','plaintext');
+$this->zea->addInput('username','plaintext');
+$this->zea->addInput('email','plaintext');
+$this->zea->addInput('created','plaintext');
+$this->zea->addInput('active', 'checkbox');
+$this->zea->setDelete(TRUE);
+$this->zea->setEdit(TRUE);
+$this->zea->form();

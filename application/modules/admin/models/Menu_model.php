@@ -59,15 +59,27 @@ class Menu_model extends CI_Model
 		$p_id = $this->input->get('p_id');
 		$data = array();
 		$q    = 'SELECT id,title FROM menu';
-		$data = $this->db->query($q, $)
-
-		if(!empty($id))
+		if(!empty($id) || !empty($p_id))
 		{
-			$q = 'SELECT id,title  FROM menu WHERE id != ?';
+			$bind = 0;
+			if(!empty($id))
+			{
+				$q = 'SELECT id,title FROM menu WHERE id != ?';
+				$bind = $id;
+			}
+			if(!empty($p_id))
+			{
+				$q = 'SELECT id,title FROM menu WHERE id = ?';
+				$bind = $p_id;
+			}
+			$data = $this->db->query($q, $bind)->result_array();
+		}else{
+			$data = $this->db->query($q)->result_array();
 		}
-		if(!empty($p_id))
+		if(!empty($data))
 		{
-			$q = 'SELECT id,title  FROM menu WHERE id = ?';
+			$data = assoc($data);
 		}
+		return $data;
 	}
 }

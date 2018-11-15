@@ -38,6 +38,6 @@ $this->zea->setEditLink('position?id=');
 
 $this->zea->setDelete(true);
 $this->zea->setEdit(TRUE);
-$this->zea->setEditLink(base_url('admin/menu/edit?po_id='.$id.'&id='));
+$this->zea->setEditLink(base_url('admin/menu/edit?id='));
 
 $this->zea->form();

@@ -1,21 +1,21 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-$form = new zea();
-$form->init('edit');
+$this->zea->init('edit');
 $id = @intval($_GET['id']);
 if(!empty($id))
 {
-	$form->setId($id);
+	$this->zea->setId($id);
 }
-$form->setHeading('User Role');
-$form->setTable('user_role');
-$form->addInput('title','text');
-$form->addInput('level','text');
-$form->setType('level','number');
-$form->addInput('description','textarea');
-$form->setRequired('All');
-$form->form();
-
-
+$this->zea->setHeading('User Role');
+$this->zea->setTable('user_role');
+$this->zea->addInput('title','text');
+$this->zea->addInput('level','text');
+$this->zea->setType('level','number');
+$this->zea->addInput('description','textarea');
+$this->zea->setRequired('All');
+echo '<div class="row">';
+echo '<div class="col-md-3">';
+$this->zea->form();
+echo '</div>';
 
 $form = new zea();
 $form->init('roll');
@@ -30,4 +30,7 @@ $form->addInput('description','plaintext');
 $form->setDelete(TRUE);
 $form->setEdit(TRUE);
 $form->setEditLink(base_url('admin/user/role/?id='));
+echo '<div class="col-md-9">';
 $form->form();
+echo '</div>';
+echo '</div>';

@@ -18,7 +18,7 @@ class Content extends CI_Controller
 
 	public function list()
 	{
-		$this->esg->set_esg('extra_js',base_url('templates/AdminLTE/assets/jquery-slimscroll/jquery.slimscroll.min.js'));
+		// $this->esg->set_esg('extra_js',base_url('templates/AdminLTE/assets/jquery-slimscroll/jquery.slimscroll.min.js'));
 		$this->load->view('index');
 	}
 	public function edit()

@@ -27,7 +27,7 @@ class Menu extends CI_Controller
 	public function edit()
 	{
 		$data['menu_position'] = $this->menu_model->menu_position();
-		$data['mene_parent'] = $this->menu_model->menu_parent();
+		$data['menu_parent'] = $this->menu_model->menu_parent();
 		$this->load->view('index',$data);
 	}
 }
