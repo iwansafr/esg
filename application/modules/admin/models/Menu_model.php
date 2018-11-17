@@ -13,34 +13,23 @@ class Menu_model extends CI_Model
 
 	public function menu_position()
 	{
-		$id    = $this->input->get('id');
 		$po_id = $this->input->get('po_id');
-		$type  = $this->input->get('type');
-		$menu_position = array();
-		if(!empty($id))
+		$data  = array();
+		$q     = 'SELECT id,title FROM menu_position';
+
+		if(!empty($po_id))
 		{
-			$menu_position = $this->db->query('SELECT title FROM menu_position WHERE id = ?',@intval($data['position_id']))->row_array();
-			if(!empty($menu_position))
-			{
-				$menu_position = $menu_position['title'];
-			}
+			$bind = $po_id;
+			$q    = 'SELECT id,title FROM menu_position WHERE id = ?';
 		}else{
-			if(!empty($po_id))
-			{
-				$menu_position = $this->db->query('SELECT title FROM menu_position WHERE id = ?',$po_id)->row_array();
-				if(!empty($menu_position))
-				{
-					$menu_position = $menu_position['title'];
-				}
-			}else{
-				$menu_position = $this->db->query('SELECT id,title FROM menu_position')->result_array();
-				if(!empty($menu_position))
-				{
-					$menu_position = assoc($menu_position);
-				}
-			}
+			$bind = 0;
 		}
-		return $menu_position;
+		$data = $this->db->query($q,$bind)->result_array();
+		if(!empty($data))
+		{
+			$data = assoc($data);
+		}
+		return $data;
 	}
 
 	public function get_menu($id = 0)
@@ -55,31 +44,42 @@ class Menu_model extends CI_Model
 
 	public function menu_parent()
 	{
-		$id   = $this->input->get('id');
-		$p_id = $this->input->get('p_id');
-		$data = array();
-		$q    = 'SELECT id,title FROM menu';
+		$id    = $this->input->get('id');
+		$p_id  = $this->input->get('p_id');
+		$po_id = $this->input->get('po_id');
+		$data  = array('0'=>'None');
+		$q     = 'SELECT id,title FROM menu';
+		$bind  = array();
+		$ext   = '';
+
+		if(!empty($po_id))
+		{
+			$ext = ' AND position_id = ?';
+			$bind = array($po_id);
+		}
+
 		if(!empty($id) || !empty($p_id))
 		{
-			$bind = 0;
 			if(!empty($id))
 			{
-				$q = 'SELECT id,title FROM menu WHERE id != ?';
-				$bind = $id;
+				$q = 'SELECT id,title FROM menu WHERE id != ?'.$ext;
+				$bind = array_merge($id,$bind);
 			}
 			if(!empty($p_id))
 			{
-				$q = 'SELECT id,title FROM menu WHERE id = ?';
-				$bind = $p_id;
+				$q = 'SELECT id,title FROM menu WHERE id = ?'.$ext;
+				$bind = array_merge($p_id,$bind);
 			}
-			$data = $this->db->query($q, $bind)->result_array();
 		}else{
-			$data = $this->db->query($q)->result_array();
+			$q = 'SELECT id,title FROM menu WHERE position_id = ?';
 		}
-		if(!empty($data))
+		$tmp_data = $this->db->query($q, $bind)->result_array();
+		if(!empty($tmp_data))
 		{
-			$data = assoc($data);
+			$tmp_data = assoc($tmp_data);
+			$data = array_merge($data, $tmp_data);
 		}
+
 		return $data;
 	}
 }
