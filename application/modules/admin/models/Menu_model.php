@@ -63,14 +63,16 @@ class Menu_model extends CI_Model
 			if(!empty($id))
 			{
 				$q = 'SELECT id,title FROM menu WHERE id != ?'.$ext;
+				$id = array($id);
 				$bind = array_merge($id,$bind);
 			}
 			if(!empty($p_id))
 			{
 				$q = 'SELECT id,title FROM menu WHERE id = ?'.$ext;
+				$p_id = array($p_id);
 				$bind = array_merge($p_id,$bind);
 			}
-		}else{
+		}else if(!empty($po_id)){
 			$q = 'SELECT id,title FROM menu WHERE position_id = ?';
 		}
 		$tmp_data = $this->db->query($q, $bind)->result_array();
