@@ -14,6 +14,9 @@ $this->zea->addInput('description','textarea');
 $this->zea->setRequired('All');
 echo '<div class="row">';
 echo '<div class="col-md-3">';
+?>
+<a href="<?php echo base_url('admin/user/role/') ?>"><button class="pull-right btn btn-default"><span><i class="fa fa-plus-circle"></i></span> New Role</button></a>
+<?php
 $this->zea->form();
 echo '</div>';
 
