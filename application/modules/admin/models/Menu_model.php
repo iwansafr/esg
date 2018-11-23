@@ -84,4 +84,34 @@ class Menu_model extends CI_Model
 
 		return $data;
 	}
+
+	public function get_parent()
+	{
+		$data = array('status'=>FALSE,'msg'=>'error');
+
+		$tmp = $this->db->get('menu')->result_array();
+
+		if(!empty($tmp))
+		{
+			$p_tmp = $this->db->get('menu_position')->result_array();
+			if(!empty($p_tmp))
+			{
+				$tmp_data = array();
+				foreach ($p_tmp as $key => $value)
+				{
+					foreach ($tmp as $tkey => $tvalue)
+					{
+						if($value['id'] == $tvalue['position_id'])
+						{
+							$tmp_data[$value['id']][] = $tvalue;
+						}
+					}
+				}
+				$data = array('status'=>TRUE,'msg'=>'success','data'=>$tmp_data);
+			}
+		}
+
+		$data = json_encode($data);
+		return $data;
+	}
 }

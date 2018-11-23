@@ -225,7 +225,7 @@ class Esg_model extends CI_Model
 						'author' => 'esoftgreat',
 						'email' => 'iwan@esoftgreat.com , iwansafr@gmail.com',
 						'phone' => '6285640510460',
-						'icon' => base_url('images/icon.png')
+						'icon' => base_url('images/icon.png'),
 					);
 		}
 		$this->esg->set_esg('meta', $data);

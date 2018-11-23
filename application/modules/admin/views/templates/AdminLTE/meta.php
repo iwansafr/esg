@@ -25,9 +25,12 @@ $meta = $this->esg_model->esg_data['meta'];
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/dist/css/skins/_all-skins.min.css">
 <script src="<?php echo base_url().'templates/AdminLTE/assets/ckeditor/'; ?>ckeditor.js"></script>
-<?php 
+<?php
 echo $this->esg->extra_css();
 ?>
+<script type="text/javascript">
+	var _URL = '<?php echo base_url() ?>';
+</script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
