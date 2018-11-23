@@ -27,6 +27,14 @@ $meta = $this->esg_model->esg_data['meta'];
 <script src="<?php echo base_url().'templates/AdminLTE/assets/ckeditor/'; ?>ckeditor.js"></script>
 <?php
 echo $this->esg->extra_css();
+if(!empty($_GET['id']))
+{
+	?>
+	<script type="text/javascript">
+		var _ID = <?php echo @intval($_GET['id'])?>;
+	</script>
+	<?php
+}
 ?>
 <script type="text/javascript">
 	var _URL = '<?php echo base_url() ?>';

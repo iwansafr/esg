@@ -10,7 +10,7 @@ $this->zea->setTable('menu');
 if(!empty($id))
 {
 	$this->zea->setId($id);
-	$data = $this->zea->getData();
+	// $data = $this->zea->getData();
 }
 echo '<a href="'.base_url('admin/menu/list?id='.$po_id.'&p_id='.@intval($p_id)).'" class="btn btn-default pull-right"><i class="fa fa-list"></i> menu list</a>';
 $this->zea->setHeading('Menu');

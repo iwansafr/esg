@@ -71,6 +71,7 @@ class Menu_model extends CI_Model
 				$q = 'SELECT id,title FROM menu WHERE id = ?'.$ext;
 				$p_id = array($p_id);
 				$bind = array_merge($p_id,$bind);
+				$data = array();
 			}
 		}else if(!empty($po_id)){
 			$q = 'SELECT id,title FROM menu WHERE position_id = ?';
@@ -88,8 +89,13 @@ class Menu_model extends CI_Model
 	public function get_parent()
 	{
 		$data = array('status'=>FALSE,'msg'=>'error');
-
-		$tmp = $this->db->get('menu')->result_array();
+		$id = @intval($_POST['id']);
+		if(empty($id))
+		{
+			$tmp = $this->db->get('menu')->result_array();
+		}else{
+			$tmp = $this->db->get_where('menu','id != '.$id)->result_array();
+		}
 
 		if(!empty($tmp))
 		{

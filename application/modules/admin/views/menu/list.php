@@ -26,10 +26,15 @@ $this->zea->setLabel('par_id','parent');
 $this->zea->tableOptions('par_id','menu','id','title');
 $this->zea->setAttribute('par_id','disabled');
 
+$this->zea->addInput('position_id','dropdown');
+$this->zea->setLabel('position_id','Menu Position');
+$this->zea->tableOptions('position_id','menu_position','id','title');
+$this->zea->setAttribute('position_id','disabled');
+
 $this->zea->addInput('title','plaintext');
 
 $this->zea->addInput('link','link');
-$this->zea->setLink('link',base_url('admin/menu/'),'id');
+$this->zea->setLink('link',base_url('admin/menu'),'id');
 // $this->zea->setPlaintext('id','<button class="btn btn-default"><i class="fa fa-search"></i>  content</button>');
 $this->zea->setPlaintext('link','<i class="fa fa-search"></i>  menu');
 $this->zea->setLabel('link','menu');
