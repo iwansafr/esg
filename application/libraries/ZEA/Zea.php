@@ -793,13 +793,13 @@ class Zea extends CI_Model
 		if($this->init == 'roll')
 		{
 			$input   = array();
-			$limit   = 9;
-			$page    = @intval($_GET['page']);
+			$limit   = 5;
+			$page    = (@intval($_GET['page']) > 0 ) ? $_GET['page']-1 : @intval($_GET['page']);
 			$keyword = @$_GET['keyword'];
 			$where   = '';
 			$bind    = array();
 			$url_get = '';
-
+			pr($this->view);
 			foreach ($this->input as $key => $value)
 			{
 				$input[] = $key;
@@ -842,7 +842,8 @@ class Zea extends CI_Model
 			$num_rows = $this->db->query($sql,$bind)->num_rows();
 
 			$sql          .= ' ORDER BY '.$this->orderby;
-			$sql          .= ' LIMIT '.$page.','.$limit;
+			$sql          .= ' LIMIT '.$page*$limit.','.$limit;
+			pr($sql);
 			$data['data']  = $this->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->db->last_query();
 			$config        = pagination($num_rows,$limit,base_url($this->esg_model->esg_data['navigation']['string'].$url_get));
