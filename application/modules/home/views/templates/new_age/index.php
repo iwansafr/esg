@@ -53,7 +53,12 @@
         </div>
       </div>
     </nav>
-
+    <style type="text/css">
+      header.masthead{
+        background:linear-gradient(to left,#7b4397,#dc2430);
+        /*background: linear-gradient(to left,blue,black);*/
+      }
+    </style>
     <header class="masthead">
       <div class="container h-100">
         <div class="row h-100">
