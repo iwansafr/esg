@@ -28,7 +28,10 @@ class Menu extends CI_Controller
 	{
 		$data['menu_position'] = $this->menu_model->menu_position();
 		$data['menu_parent'] = $this->menu_model->menu_parent();
-		$this->esg->set_esg('extra_js', base_url('templates/AdminLTE/assets/dist/js/modules/menu/script.js'));
+		if(empty(@intval($_GET['p_id'])))
+		{
+			$this->esg->set_esg('extra_js', base_url('templates/AdminLTE/assets/dist/js/modules/menu/script.js'));
+		}
 		$this->load->view('index',$data);
 	}
 	public function parent()

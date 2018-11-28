@@ -80,7 +80,12 @@ class Menu_model extends CI_Model
 		if(!empty($tmp_data))
 		{
 			$tmp_data = assoc($tmp_data);
-			$data = array_merge($data, $tmp_data);
+			if(!empty($data))
+			{
+				$data = array_merge($data, $tmp_data);
+			}else{
+				$data = $tmp_data;
+			}
 		}
 
 		return $data;

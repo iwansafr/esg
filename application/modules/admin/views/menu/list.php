@@ -13,7 +13,7 @@ if(!empty($p_id))
 	$id = $this->input->get('id');
 	if(!empty($id))
 	{
-		$this->zea->setWhere('position_id = '.$id);
+		$this->zea->setWhere('position_id = '.$id.' AND par_id = 0');
 	}
 }
 $this->zea->setHeading('<a href="'.base_url('admin/menu/edit?po_id='.$id.$ext).'"><button class="btn btn-sm btn-default"><i class="fa fa-plus-circle"></i> new menu</button></a>');
@@ -24,7 +24,7 @@ $this->zea->addInput('id','plaintext');
 $this->zea->addInput('par_id','dropdown');
 $this->zea->setLabel('par_id','parent');
 $this->zea->tableOptions('par_id','menu','id','title');
-$this->zea->setAttribute('par_id','disabled');
+// $this->zea->setAttribute('par_id','disabled');
 
 $this->zea->addInput('position_id','dropdown');
 $this->zea->setLabel('position_id','Menu Position');

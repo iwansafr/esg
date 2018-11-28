@@ -2,6 +2,7 @@
 
 if(!empty($field))
 {
+	$field_name = '';
 	if($this->init == 'edit' || $this->init == 'param')
 	{
 		if(!empty($data[$field]))
@@ -16,10 +17,14 @@ if(!empty($field))
 		echo form_label(ucfirst($label), $label);
 	}else{
 		$data_value = $dvalue[$ikey];
+		$field_name = '_row['.$dvalue['id'].']';
 	}
-
+	if($this->init == 'roll')
+	{
+		unset($this->options[$field][$dvalue['id']]);
+	}
 	$input_array = array(
-			'name'     => $field,
+			'name'     => $field.''.$field_name,
 			'class'    => 'form-control',
 			'options'  => @$this->options[$field],
 			$required  => $required,

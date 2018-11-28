@@ -809,7 +809,7 @@ class Zea extends CI_Model
 				$input = implode($input,',');
 			}
 			$sql = 'SELECT '.$input.' FROM '.$this->table;
-			if(!empty($keyword) || !empty($this->where) || !empty($get))
+			if(!empty($keyword) || !empty($this->where))
 			{
 				$sql     .= ' WHERE ';
 				$url_get .= '?';
@@ -1148,8 +1148,6 @@ class Zea extends CI_Model
 																$required = !empty($ivalue['required']) ? $ivalue['required'] : '';
 																$image    = !empty($this->image[$field]) ? $this->image[$field] : '';
 
-
-
 																if(isset($dvalue[$ikey]))
 																{
 																	echo '<td>';
@@ -1222,7 +1220,7 @@ class Zea extends CI_Model
 												$tot_col = count($this->input);
 												foreach ($this->input as $inputkey => $inputvalue)
 												{
-													if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text')
+													if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
 													{
 														$tot_col--;
 													}
@@ -1237,16 +1235,20 @@ class Zea extends CI_Model
 													<?php
 													foreach ($this->input as $inputkey => $inputvalue)
 													{
-														if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text')
+														if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
 														{
-															$add_text = $inputvalue['type'] == 'text' ? 'Save ' : '';
-															?>
-															<td>
-																<button type="submit" name="<?php echo $inputvalue['text'] ?>" value="1" class="btn btn-info btn-sm">
-																	<span class="glyphicon glyphicon-floppy-saved"></span> <?php echo $add_text.' '.$inputvalue['text'] ?>
-																</button>
-															</td>
-															<?php
+															if(empty($this->attribute[$inputvalue['text']]))
+															{
+															// $add_text = $inputvalue['type'] == 'text' ? 'Save ' : '';
+																$add_text = 'Save ';
+																?>
+																<td>
+																	<button type="submit" name="<?php echo $inputvalue['text'] ?>" value="1" class="btn btn-info btn-sm">
+																		<span class="glyphicon glyphicon-floppy-saved"></span> <?php echo $add_text.' '.$inputvalue['text'] ?>
+																	</button>
+																</td>
+																<?php
+															}
 														}
 													}
 													if($this->delete)
@@ -1575,6 +1577,34 @@ class Zea extends CI_Model
 							}
 						}
 						if($inputvalue['type'] == 'text')
+						{
+							if(!empty($_POST[$inputvalue['text']]))
+							{
+								$data_text = array();
+								$currentdatai = 0;
+								foreach ($current_data as $currnetdatakey => $currentdatavalue)
+								{
+									$data_text[$currentdatai] = $currentdatavalue['id'];
+									$currentdatai++;
+								}
+								if(!empty($data_text))
+								{
+									$data['msg']   = 'No Data Selected to '.$inputvalue['text'];
+									$data['alert'] = 'success';
+									foreach ($data_text as $dt_key => $dt_id)
+									{
+										$data['msg']   = 'Data '.ucfirst($inputvalue['text']).' Successfully';
+										$data['alert'] = 'success';
+
+										if(!empty($_POST[$inputvalue['text'].'_row']))
+										{
+											$this->db->update($this->table, array($inputvalue['text']=>$_POST[$inputvalue['text'].'_row'][$dt_id]), 'id = '.$dt_id);
+										}
+									}
+								}
+							}
+						}
+						if($inputvalue['type'] == 'dropdown')
 						{
 							if(!empty($_POST[$inputvalue['text']]))
 							{
