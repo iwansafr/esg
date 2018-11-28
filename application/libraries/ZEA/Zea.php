@@ -799,7 +799,7 @@ class Zea extends CI_Model
 			$where   = '';
 			$bind    = array();
 			$url_get = '';
-			pr($this->view);
+			$get = @$_GET;
 			foreach ($this->input as $key => $value)
 			{
 				$input[] = $key;
@@ -809,10 +809,26 @@ class Zea extends CI_Model
 				$input = implode($input,',');
 			}
 			$sql = 'SELECT '.$input.' FROM '.$this->table;
-			if(!empty($keyword) || !empty($this->where))
+			if(!empty($keyword) || !empty($this->where) || !empty($get))
 			{
 				$sql     .= ' WHERE ';
 				$url_get .= '?';
+			}
+			if(!empty($get))
+			{
+				$i = 0;
+				foreach ($get as $key => $value)
+				{
+					if($key != 'page')
+					{
+						if($i > 0)
+						{
+							$url_get .= '&';
+						}
+						$url_get .= $key.'='.$value;
+					}
+					$i++;
+				}
 			}
 			if(!empty($keyword))
 			{
@@ -843,7 +859,6 @@ class Zea extends CI_Model
 
 			$sql          .= ' ORDER BY '.$this->orderby;
 			$sql          .= ' LIMIT '.$page*$limit.','.$limit;
-			pr($sql);
 			$data['data']  = $this->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->db->last_query();
 			$config        = pagination($num_rows,$limit,base_url($this->esg_model->esg_data['navigation']['string'].$url_get));
