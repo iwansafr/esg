@@ -1222,7 +1222,10 @@ class Zea extends CI_Model
 												{
 													if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
 													{
-														$tot_col--;
+														if(empty($this->attribute[$inputvalue['text']]))
+														{
+															$tot_col--;
+														}
 													}
 												}
 												if($this->edit == true)
