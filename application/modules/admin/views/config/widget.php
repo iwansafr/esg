@@ -1,10 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $active_template = $this->esg->get_config('templates');
+echo '<a href="'.base_url($this->esg_model->esg_data['navigation']['string']).'" class="btn btn-default pull-right"><i class="fa fa-refresh"></i></a>';
 if(!empty($active_template))
 {
 	$active_template = @$active_template['public_template'];
 	foreach(glob(FCPATH.'application/modules/home/views/templates/'.$active_template.'/index.esg') as $file)
 	{
+		echo '<div class="panel panel-default">';
+		echo '<div class="panel panel-heading">';
+		echo '<h3 class="panel-title">Manage Widget</h3>';
+		echo '</div>';
+		echo '<div class="panel panel-body">';
 		if(!empty($_POST))
 		{
 			$config       = $_POST;
@@ -23,12 +29,19 @@ if(!empty($active_template))
 		$data = $this->esg->get_config($config_name);
 		$view = file_get_contents($file);
 		preg_match_all('~{.*?}~', $view, $blocks);
+		preg_match_all('~#.*?#~', $view, $links);
 		$block = array();
+		$link = array();
 		foreach ($blocks as $key => $value)
 		{
 			$block = $value;
 		}
+		foreach ($links as $key => $value)
+		{
+			$link = $value;
+		}
 		$blocks = array();
+		$links = array();
 		$this->db->select('id,title');
 		$cat = $this->db->get_where('content_cat', 'publish = 1')->result_array();
 		$cat[] = array('id'=>0, 'title'=>'Latest');
@@ -60,6 +73,7 @@ if(!empty($active_template))
 			$block_title = str_replace('}','', $block_title);
 
 			ob_start();
+			$this->zea->setCollapse($block_title,TRUE);
 			$this->zea->open_collapse($block_title, str_replace('_',' ',$block_title),'default');
 			echo '<h3>'.str_replace('_',' ',$block_title).'</h3>';
 			echo '<label>content</label>';
@@ -95,10 +109,19 @@ if(!empty($active_template))
 			ob_end_clean();
 			$view = preg_replace('~'.$blockvalue.'~', $options, $view);
 		}
-		// $view = preg_replace('~{top}~', $array, $view);
+		foreach ($link as $linkkey => $linkvalue) 
+		{
+			$link_value = str_replace('#','', $linkvalue);
+			$link_value = str_replace('#','', $link_value);
+			$link_value = base_url($link_value);
+			$view = preg_replace('~'.$linkvalue.'~', $link_value, $view);
+		}
 		echo $view;
-		echo '<hr>';
+		echo '</div>';
+		echo '<div class="panel panel-footer">';
 		echo '<button class="btn btn-success" name="config_widget" value="submit"><span><i class="fa fa-floppy-o"></i></span> SAVE</button>';
+		echo '</div>';
+		echo '</div>';
 		echo '</form>';
 	}
 }

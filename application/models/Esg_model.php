@@ -79,17 +79,12 @@ class Esg_model extends CI_Model
 		        'icon' => 'fa-list',
 		        'link' => base_url('admin/comment_list')
 		      ),
-		      array(
-		        'title' => 'Content Config',
-		        'icon' => 'fa-cog',
-		        'link' => base_url('admin/content_config')
-		      ),
 		    )
 		  ),
 		  array(
 		    'title' => 'Menu',
 		    'icon' => 'fa-list',
-		    'link' => base_url('admin/menu_list'),
+		    'link' => base_url('admin/menu/list'),
 		    'list' => array(
 		    	array(
 		        'title' => 'Add Menu',
@@ -109,42 +104,10 @@ class Esg_model extends CI_Model
 		    )
 		  ),
 		  array(
-		  	'title' => 'Visitor',
-		  	'icon' => 'fa-line-chart',
-		  	'link' => base_url('admin/visitor_list'),
-		  	'list' => array(
-		  		array(
-		  			'title' => 'All Visited',
-		  			'icon' => 'fa-line-chart',
-		  			'link' => base_url('admin/visitor_list'),
-		  		),
-		  		array(
-		  			'title' => 'Vistor',
-		  			'icon' => 'fa-line-chart',
-		  			'link' => base_url('admin/visitor_ip'),
-		  		)
-		  	)
-		  ),
-		  array(
-		  	'title' => 'Media',
-		  	'icon' => 'fa-picture-o',
-		  	'link' => base_url('admin/media_gallery/gallery')
-		  ),
-		  array(
 		    'title' => 'Configuration',
 		    'icon' => 'fa-cog',
 		    'link' => base_url('admin/config/'),
 		    'list' => array(
-		    	array(
-		        'title' => 'Header',
-		        'icon' => 'fa-cog',
-		        'link' => base_url('admin/config_header/header')
-		      ),
-					array(
-		        'title' => 'header_bottom',
-		        'icon' => 'fa-cog',
-		        'link' => base_url('admin/config_header_bottom/header_bottom')
-		      ),
 		      array(
 		        'title' => 'logo',
 		        'icon' => 'fa-cog',
@@ -156,59 +119,13 @@ class Esg_model extends CI_Model
 		        'link' => base_url('admin/config/site')
 		      ),
 		      array(
-		      	'title' => 'Add Js',
-		      	'icon' => 'fa-cog',
-		      	'link' => base_url('admin/config_js_extra/js_extra')
-		      ),
-		      array(
 		        'title' => 'templates',
 		        'icon' => 'fa-cog',
 		        'link' => base_url('admin/config/templates')
 		      ),
-		      array(
-		        'title' => 'template_config',
-		        'icon' => 'fa-cog',
-		        'link' => base_url('admin/config_template_config/template_config')
-		      ),
-		      array(
-		        'title' => 'alert',
-		        'icon' => 'fa-cog',
-		        'link' => base_url('admin/config_alert/alert')
-		      ),
-		      array(
-		        'title' => 'web type',
-		        'icon' => 'fa-cog',
-		        'link' => base_url('admin/config_web_type/web_type')
-		      ),
 		    )
 		  ),
 		);
-		$web_type = $this->esg->get_config('web_type');
-		if(!empty($web_type['type']))
-		{
-			$menu[] = array(
-		    'title' => 'Product',
-		    'icon' => 'fa-file-text',
-		    'link' => base_url('admin/product_list'),
-		    'list' => array(
-		    	array(
-		        'title' => 'Category',
-		        'icon' => 'fa-list',
-		        'link' => base_url('admin/product_category')
-		      ),
-		      array(
-		        'title' => 'Add Product',
-		        'icon' => 'fa-pencil',
-		        'link' => base_url('admin/product_edit')
-		      ),
-		      array(
-		        'title' => 'Product List',
-		        'icon' => 'fa-list',
-		        'link' => base_url('admin/product_list')
-		      ),
-		    )
-		  );
-		}
 		$data['menu'] = $menu;
 		$this->esg->set_esg('sidebar_menu', $data['menu']);
 	}
@@ -220,7 +137,7 @@ class Esg_model extends CI_Model
 			$data = array(
 						'title' => 'esoftgreat',
 						'keyword' => 'software development',
-						'description' => 'software development and it consultan',
+						'description' => 'software development and it consultant',
 						'developer' => 'esoftgreat',
 						'author' => 'esoftgreat',
 						'email' => 'iwan@esoftgreat.com , iwansafr@gmail.com',

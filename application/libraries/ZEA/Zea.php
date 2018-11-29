@@ -527,15 +527,20 @@ class Zea extends CI_Model
 
 	public function setCollapse($field = '', $collapse = FALSE)
 	{
-		$title = $this->startCollapse['title'];
+		$title = !empty($this->startCollapse['title']) ? $this->startCollapse['title'] : $field;
 		if(!empty($title))
 		{
-			foreach ($title as $key => $value)
+			if(is_array($title))
 			{
-				if($key == $field)
+				foreach ($title as $key => $value)
 				{
-					$this->collapse[$field] = $collapse;
+					if($key == $field)
+					{
+						$this->collapse[$field] = $collapse;
+					}
 				}
+			}else{
+				$this->collapse[$field] = $collapse;
 			}
 		}
 	}
