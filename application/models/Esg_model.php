@@ -155,4 +155,10 @@ class Esg_model extends CI_Model
 		$uri['array'] = explode('/',$uri['string']);
 		$this->esg->set_esg('navigation',$uri);
 	}
+
+	public function home()
+	{
+		$template = $this->esg_data['templates']['public_template'];
+		$config = $this->esg->get_config($template.'_widget');
+	}
 }
