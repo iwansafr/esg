@@ -50,7 +50,7 @@ if(!empty($active_template))
 		$cat[] = array('id'=>0, 'title'=>'Latest');
 		foreach ($cat as $catkey => &$catvalue)
 		{
-			$catvalue['id'] = 'cat_'.$catvalue['id'];
+			$catvalue['id'] = $catvalue['id'];
 		}
 
 		$this->db->select('id,title');
@@ -58,14 +58,14 @@ if(!empty($active_template))
 		$prodcat[] = array('id'=>0, 'title'=>'Latest');
 		foreach ($prodcat as $prodcatkey => &$prodcatvalue)
 		{
-			$prodcatvalue['id'] = 'prodcat_'.$prodcatvalue['id'];
+			$prodcatvalue['id'] = $prodcatvalue['id'];
 		}
 
 		$this->db->select('id,title');
 		$menu = $this->db->get_where('menu_position')->result_array();
 		foreach ($menu as $menukey => &$menuvalue)
 		{
-			$menuvalue['id'] = 'menu_'.$menuvalue['id'];
+			$menuvalue['id'] = $menuvalue['id'];
 		}
 		// $option_block = array_merge($cat, $menu);
 		echo '<input type="hidden" name="template" value="'.$active_template.'">';

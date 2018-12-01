@@ -112,6 +112,11 @@ class Admin_model extends CI_Model
 		        'icon' => 'fa-cog',
 		        'link' => base_url('admin/config/templates')
 		      ),
+		      array(
+		        'title' => 'contact',
+		        'icon' => 'fa-cog',
+		        'link' => base_url('admin/config/contact')
+		      ),
 		    )
 		  ),
 		);
