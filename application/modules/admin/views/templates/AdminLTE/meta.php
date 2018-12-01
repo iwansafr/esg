@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-$meta = $this->esg_model->esg_data['meta'];
+$meta = $this->esg->get_esg('meta');
+$template = $this->esg->get_esg('templates')['admin_template'];
 ?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,17 +14,17 @@ $meta = $this->esg_model->esg_data['meta'];
 <meta name="ROBOTS" content="all, index, follow">
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo $meta['icon']; ?>">
 <!-- Bootstrap 3.3.7 -->
-<link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/bootstrap/css/bootstrap-tagsinput.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/bootstrap/css/bootstrap-tagsinput.css">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet" href="<?php echo base_url('templates/'.$this->esg_model->templates['admin_template']); ?>/assets/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/dist/css/skins/_all-skins.min.css">
 <script src="<?php echo base_url().'templates/AdminLTE/assets/ckeditor/'; ?>ckeditor.js"></script>
 <?php
 echo $this->esg->extra_css();
@@ -47,10 +48,10 @@ echo $this->esg->extra_css();
 
 
 
-<meta name="url" content="<?php echo base_url($this->esg_model->esg_data['navigation']['string']) ?>">
+<meta name="url" content="<?php echo base_url($this->esg->get_esg('navigation')['string']) ?>">
 <meta name="og:title" content="<?php echo $meta['title'] ?>"/>
 <meta name="og:type" content="site"/>
-<meta name="og:url" content="<?php echo base_url($this->esg_model->esg_data['navigation']['string']) ?>"/>
+<meta name="og:url" content="<?php echo base_url($this->esg->get_esg('navigation')['string']) ?>"/>
 <meta name="og:image" content="<?php echo $meta['icon'] ?>"/>
 <meta name="og:site_name" content="<?php echo $meta['title'] ?>"/>
 <meta name="og:description" content="<?php echo $meta['description'] ?>"/>

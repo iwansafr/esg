@@ -1,6 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $active_template = $this->esg->get_config('templates');
-echo '<a href="'.base_url($this->esg_model->esg_data['navigation']['string']).'" class="btn btn-default pull-right"><i class="fa fa-refresh"></i></a>';
+echo '<a href="'.base_url($this->esg->get_esg('navigation')['string']).'" class="btn btn-warning pull-right" title="refresh"><i class="fa fa-refresh"></i></a>';
+echo '<a href="'.base_url().'" target="_blank" class="btn btn-info pull-right" title="display"><i class="fa fa-eye"></i></a>';
+echo '<form method="post" action="">';
+echo '<button class="btn btn-success pull-right" title="save" name="config_widget" value="submit"><span><i class="fa fa-floppy-o"></i></span></button>';
 if(!empty($active_template))
 {
 	$active_template = @$active_template['public_template'];
@@ -65,7 +68,6 @@ if(!empty($active_template))
 			$menuvalue['id'] = 'menu_'.$menuvalue['id'];
 		}
 		// $option_block = array_merge($cat, $menu);
-		echo '<form method="post" action="">';
 		echo '<input type="hidden" name="template" value="'.$active_template.'">';
 		foreach ($block as $blockkey => $blockvalue)
 		{
@@ -119,10 +121,10 @@ if(!empty($active_template))
 		echo $view;
 		echo '</div>';
 		echo '<div class="panel panel-footer">';
-		echo '<button class="btn btn-success" name="config_widget" value="submit"><span><i class="fa fa-floppy-o"></i></span> SAVE</button>';
+		
 		echo '</div>';
 		echo '</div>';
-		echo '</form>';
 	}
 }
+echo '</form>';
 

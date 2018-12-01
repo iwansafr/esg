@@ -6,9 +6,10 @@ class Content extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('esg_model');
+		$this->load->model('admin_model');
+		$this->load->model('content_model');
 		$this->load->library('esg');
 		$this->load->library('ZEA/zea');
-		$this->load->model('content_model');
 		$this->esg_model->init();
 	}
 	public function index()

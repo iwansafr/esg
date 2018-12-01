@@ -15,7 +15,7 @@ class Home_model extends CI_Model
 	}
 	public function init()
 	{
-		$this->navigation();
+		$this->esg_model->navigation();
 		$this->esg_model->set_meta();
 		// $this->js();
 		$this->templates = $this->esg->get_config('templates');
@@ -25,14 +25,6 @@ class Home_model extends CI_Model
 	public function js()
 	{
 		$this->esg->set_esg('extra_js',base_url('templates/'.$this->templates['public_template'].'/assets/dist/js/script.js'));
-	}
-
-	public function navigation()
-	{
-		$uri = array();
-		$uri['string'] = $this->uri->uri_string();
-		$uri['array'] = explode('/',$uri['string']);
-		$this->esg->set_esg('navigation',$uri);
 	}
 
 	public function home()

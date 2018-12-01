@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-$navigation = $this->esg_model->esg_data['navigation'];
+$navigation = $this->esg->get_esg('navigation');
 $title = end($navigation['array']);
 $title = $title == 'admin' ? 'home' : $title;
 ?>

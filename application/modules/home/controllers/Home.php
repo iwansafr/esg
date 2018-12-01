@@ -10,6 +10,7 @@ class Home extends CI_Controller
 	}
 	public function index()
 	{
+		pr($this->esg->get_esg());die();
 		$this->load->view('index');
 	}
 

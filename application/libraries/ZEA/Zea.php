@@ -5,7 +5,6 @@ class Zea extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('esg_model');
 		$this->load->helper('url');
 		$this->load->helper('html');
 		$this->load->helper('form');
@@ -866,7 +865,7 @@ class Zea extends CI_Model
 			$sql          .= ' LIMIT '.$page*$limit.','.$limit;
 			$data['data']  = $this->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->db->last_query();
-			$config        = pagination($num_rows,$limit,base_url($this->esg_model->esg_data['navigation']['string'].$url_get));
+			$config        = pagination($num_rows,$limit,base_url($this->esg->get_esg('navigation')['string'].$url_get));
 	    $this->pagination->initialize($config);
 	    $data['pagination'] = $this->pagination->create_links();
 		}else if($this->init == 'edit'){
