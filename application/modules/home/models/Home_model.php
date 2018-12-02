@@ -88,25 +88,57 @@ class Home_model extends CI_Model
 			$tmp_data = $this->db->query('SELECT * FROM menu WHERE position_id = ? AND publish = 1', @intval($data['content']))->result_array();
 			if(!empty($tmp_data))
 			{
+				$output = array();
 				$data = array();
-				foreach ($tmp_data as $key => $value) 
+				foreach ($tmp_data as $tkey => $tvalue) 
 				{
-					if($value['par_id'] == 0)
+					if($tvalue['par_id'] == 0)
 					{
-						$data[$value['id']] = $value;
-					}else if($value['par_id'] > 0)
+						$data[$tvalue['id']] = $tvalue;
+					}else if($tvalue['par_id'] > 0)
 					{
-						$data[$value['par_id']]['child'][$value['id']]  = $value;
+						$data[$tvalue['par_id']]['child'][$tvalue['id']]  = $tvalue;
 					}
 				}
-				$this->esg->set_esg('')
+				$output[$key] = $data;
+				$home = $this->esg->get_esg('home');
+				if(!empty($home))
+				{
+					$home = array_merge($home, $output);
+				}else{
+					$home = $output;
+				}
+				$this->esg->set_esg('home', $home);
 			}
 		}
 	}
 
 	public function content($key = '', $data = array())
 	{
-		// pr($data);
+		if(!empty($data['content']))
+		{
+			$id = $data['content'];
+			$limit = 'LIMIT '.@intval($data['limit']);
+			$q = "SELECT * FROM content WHERE cat_ids LIKE '%,{$id},%' AND publish = 1 ORDER BY id DESC {$limit}";
+			if(!is_numeric($data['content']))
+			{
+				$q = 'SELECT * FROM content WHERE publish = 1 ORDER BY id DESC '.$limit;
+			}
+			$tmp_data = $this->db->query($q)->result_array();
+			if(!empty($tmp_data))
+			{
+				$output = array();
+				$output[$key] = $tmp_data;
+				$home = $this->esg->get_esg('home');
+				if(!empty($home))
+				{
+					$home = array_merge($home, $output);
+				}else{
+					$home = $output;
+				}
+				$this->esg->set_esg('home', $home);
+			}
+		}
 	}
 
 	public function logo()

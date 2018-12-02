@@ -47,7 +47,7 @@ if(!empty($active_template))
 		$links = array();
 		$this->db->select('id,title');
 		$cat = $this->db->get_where('content_cat', 'publish = 1')->result_array();
-		$cat[] = array('id'=>0, 'title'=>'Latest');
+		$cat[] = array('id'=>'latest', 'title'=>'Latest');
 		foreach ($cat as $catkey => &$catvalue)
 		{
 			$catvalue['id'] = $catvalue['id'];
@@ -55,7 +55,7 @@ if(!empty($active_template))
 
 		$this->db->select('id,title');
 		$prodcat = $this->db->get_where('product_cat', 'publish = 1')->result_array();
-		$prodcat[] = array('id'=>0, 'title'=>'Latest');
+		$prodcat[] = array('id'=>'latest', 'title'=>'Latest');
 		foreach ($prodcat as $prodcatkey => &$prodcatvalue)
 		{
 			$prodcatvalue['id'] = $prodcatvalue['id'];
