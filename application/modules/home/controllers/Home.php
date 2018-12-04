@@ -6,6 +6,7 @@ class Home extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('home_model');
+		$this->load->helper('content');
 		$this->load->library('esg');
 	}
 	public function index()
