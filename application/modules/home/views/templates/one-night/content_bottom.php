@@ -1,14 +1,13 @@
 <?php
 if(!empty($home['content_bottom']))
 {
-	pr($home['content_bottom']);
 	?>
 	<ul class="nav nav-pills">
 	  <li class="nav-item">
-	    <a class="nav-link active" href="#">Hot News</a>
+	    <a class="nav-link active" href="">category</a>
 	  </li>
 	  <li class="nav-item">
-	  	<marquee><a class="nav-link" href="#">This place is for hot news</a></marquee>
+	  	<marquee><a class="nav-link" href=""><?php echo @$home['content_bottom'][0]['cat_title'] ?></a></marquee>
 	  </li>
 	</ul>
 	<hr>

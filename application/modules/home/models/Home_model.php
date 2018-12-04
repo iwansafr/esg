@@ -135,11 +135,8 @@ class Home_model extends CI_Model
 				}else{
 					$cat_title['title'] = 'LATEST';
 				}
-				foreach ($tmp_data as $key => $value)
-				{
-					// $tmp_data[$key][$value]['cat_title'] = $cat_title['title'];
-				}
 				$output = array();
+				$tmp_data[0]['cat_title'] = $cat_title['title'];
 				$output[$key] = $tmp_data;
 				$home = $this->esg->get_esg('home');
 				if(!empty($home))
