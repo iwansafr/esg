@@ -75,6 +75,8 @@ class Home_model extends CI_Model
 					}else if(preg_match('~content_~', $key))
 					{
 						$this->content($key, $value);
+					}else{
+						$this->content($key, $value);
 					}
 				}
 			}
@@ -120,13 +122,23 @@ class Home_model extends CI_Model
 			$id = $data['content'];
 			$limit = 'LIMIT '.@intval($data['limit']);
 			$q = "SELECT * FROM content WHERE cat_ids LIKE '%,{$id},%' AND publish = 1 ORDER BY id DESC {$limit}";
-			if(!is_numeric($data['content']))
+			if(!is_numeric($id))
 			{
 				$q = 'SELECT * FROM content WHERE publish = 1 ORDER BY id DESC '.$limit;
 			}
 			$tmp_data = $this->db->query($q)->result_array();
 			if(!empty($tmp_data))
 			{
+				if(is_numeric($id))
+				{
+					$cat_title = $this->db->query('SELECT title FROM content_cat WHERE id = '.$id)->row_array();
+				}else{
+					$cat_title['title'] = 'LATEST';
+				}
+				foreach ($tmp_data as $key => $value)
+				{
+					// $tmp_data[$key][$value]['cat_title'] = $cat_title['title'];
+				}
 				$output = array();
 				$output[$key] = $tmp_data;
 				$home = $this->esg->get_esg('home');
