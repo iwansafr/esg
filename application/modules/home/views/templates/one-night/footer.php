@@ -64,6 +64,6 @@
 </footer>
 
 <button id="toTop" style="position: fixed;bottom: 10%;right: 5%;" class="btn btn-default"><i class="fa fa-arrow-up"></i></button>
-<script src="<?php echo @base_url('templates').'/'.$this->home_model->esg_data['templates']['public_template'];?>/vendor/jquery/jquery.min.js"></script>
-<script src="<?php echo @base_url('templates').'/'.$this->home_model->esg_data['templates']['public_template'];?>/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo @base_url('templates').'/'.$this->home_model->esg_data['templates']['public_template'];?>/assets/js/script.js"></script>
+<script src="<?php echo @base_url('templates').'/'.$templates['public_template'];?>/vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo @base_url('templates').'/'.$templates['public_template'];?>/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo @base_url('templates').'/'.$templates['public_template'];?>/assets/js/script.js"></script>

@@ -1,7 +1,6 @@
 <?php
-$link = $this->home_model->esg_data['navigation']['string'];
-$meta = $this->home_model->esg_data['meta'];
-$public_tempplate = $this->home_model->templates['public_template'];
+$link = $this->esg->get_esg('navigation')['string'];
+$meta = $this->esg->get_esg('meta');
 $image = image_module('config/site', $meta['icon']);
 ?>
 <meta charset="utf-8">
@@ -27,10 +26,10 @@ $image = image_module('config/site', $meta['icon']);
 <meta content="<?php echo $meta['description'] ?>" property="og:description"/>
 <meta content="<?php echo $image ?>" itemprop='url'/>
 <!-- Bootstrap core CSS -->
-<link href="<?php echo base_url();?>templates/<?php echo $public_tempplate;?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url();?>templates/<?php echo $templates['public_template'];?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom fonts for this template -->
-<link href="<?php echo base_url();?>templates/<?php echo $public_tempplate;?>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>templates/<?php echo $public_tempplate;?>/assets/css/style.css">
+<link href="<?php echo base_url();?>templates/<?php echo $templates['public_template'];?>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>templates/<?php echo $templates['public_template'];?>/assets/css/style.css">
 
 
 

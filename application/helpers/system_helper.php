@@ -8,6 +8,36 @@ function msg($msg = 'alert', $alert = 'default')
 	<?php
 }
 
+function menu($data = array(), $li_class = '')
+{
+	if(!empty($data) && is_array($data))
+	{
+		foreach ($data as $key => $value)
+		{
+			if(empty($value['child']))
+			{
+				?>
+				<li class="<?php echo $li_class ?>"><a href="<?php echo $value['link'] ?>"><?php echo $value['title'] ?></a></li>
+				<?php
+			}else{
+				?>
+				<li class="<?php echo $li_class; ?> dropdown">
+		      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $value['title'] ?> <span class="caret"></span></a>
+		      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            MenuS
+          </a>
+		      <ul class="dropdown-menu" role="menu">
+		      	<?php
+		      	call_user_func(__FUNCTION__, $value['child']);
+		      	?>
+		      </ul>
+		  	</li>
+		  	<?php
+			}
+		}
+	}
+}
+
 function array_to_string($data = array())
 {
 	if(!empty($data) && is_array($data))
