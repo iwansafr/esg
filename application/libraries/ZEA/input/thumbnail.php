@@ -10,6 +10,10 @@ if(!empty($field))
 	}else{
 		$data_value = $dvalue[$ikey];
 	}
+	if(empty($this->image[$field]))
+	{
+		$this->image[$field]['module'] = 'content';
+	}
 	$image_src = image_module($this->image[$field]['module'], $dvalue['id'].'/'.$data_value);
 	if(!empty($data_value))
 	{

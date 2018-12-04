@@ -18,7 +18,7 @@ class Home_model extends CI_Model
 		$this->site();
 		$this->meta();
 		$this->template();
-		$this->home();
+		// $this->home();
 		// $this->js();
 	}
 
@@ -42,7 +42,7 @@ class Home_model extends CI_Model
 		$c_data = $this->esg->get_esg('meta');
 		if(!empty($data))
 		{
-			foreach ($data as $key => $value) 
+			foreach ($data as $key => $value)
 			{
 				if(!empty($c_data[$key]))
 				{
@@ -65,7 +65,7 @@ class Home_model extends CI_Model
 		$block = $this->esg->get_esg('block');
 		if(!empty($block))
 		{
-			foreach ($block as $key => $value) 
+			foreach ($block as $key => $value)
 			{
 				if(is_array($value))
 				{
@@ -90,7 +90,7 @@ class Home_model extends CI_Model
 			{
 				$output = array();
 				$data = array();
-				foreach ($tmp_data as $tkey => $tvalue) 
+				foreach ($tmp_data as $tkey => $tvalue)
 				{
 					if($tvalue['par_id'] == 0)
 					{

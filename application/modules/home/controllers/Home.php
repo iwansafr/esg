@@ -10,6 +10,7 @@ class Home extends CI_Controller
 	}
 	public function index()
 	{
+		$this->home_model->home();
 		$this->load->view('index');
 	}
 

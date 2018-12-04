@@ -9,38 +9,38 @@
     {
       ?>
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            MenuS
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="list.php">List</a>
-            <a class="dropdown-item" href="list-grid.php">List Grid</a>
-            <a class="dropdown-item" href="single.php">Single</a>
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
-              </li>
-            </ul>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="">Disabled</a>
-        </li>
-      </ul>
-      <!-- <ul class="navbar-nav mr-auto"> -->
         <?php
-        // menu($home['menu_top'], 'nav-item')
+        foreach ($home['menu_top'] as $key => $value)
+        {
+          if(empty($value['child']))
+          {
+            ?>
+            <li class="nav-item">
+              <a href="<?php echo menu_link($value['link']) ?>" class="nav-link"><?php echo $value['title'] ?></a>
+            </li>
+            <?php
+          }else{
+            ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdown_<?php echo $value['id'];?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo $value['title'] ?>
+              </a>
+              <div class="dropdown-menu" aria-laveledby="navbarDropdown_<?php echo $value['id'];?>">
+                <?php
+                foreach ($value['child'] as $ckey => $cvalue)
+                {
+                  ?>
+                  <a href="<?php echo menu_link($cvalue['link']) ?>" class="dropdown-item"><?php echo $cvalue['title'] ?></a>
+                  <?php
+                }
+                ?>
+              </div>
+            </li>
+            <?php
+          }
+        }
         ?>
-      <!-- </ul> -->
+      </ul>
       <?php
     }
     ?>

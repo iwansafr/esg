@@ -11,6 +11,7 @@ if(!empty($id))
 }
 $form->setField(array('title'));
 $form->addInput('id','plaintext');
+$form->addInput('image','thumbnail');
 $form->addInput('title','plaintext');
 $form->addInput('publish','checkbox');
 $form->setDelete(TRUE);
