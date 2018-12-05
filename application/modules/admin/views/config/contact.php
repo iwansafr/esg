@@ -5,6 +5,7 @@ $form->setTable('config');
 $form->setParamName('contact');
 $form->addInput('title', 'text');
 $form->addInput('description', 'textarea');
+$form->addInput('address', 'textarea');
 $form->addInput('phone', 'text');
 $form->addInput('wa', 'text');
 $form->setType('wa','number');
