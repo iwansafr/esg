@@ -98,7 +98,7 @@ class Content_model extends CI_Model{
 	public function content_save()
 	{
 		$last_id = $this->zea->get_insert_id();
-
+		$id = $this->input->get('id');
 		if(!empty($last_id) || !empty($id))
 		{
 		  $last_id = !empty($id) ? $id : $last_id;
@@ -120,6 +120,7 @@ class Content_model extends CI_Model{
 		    if(!empty($_POST['tag_ids']))
 		    {
 		      $post['tag_ids'] = $this->esg->set_tag();
+		      pr($post);
 		    }
 		    if(empty($_POST['slug']))
 		    {

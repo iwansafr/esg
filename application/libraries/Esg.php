@@ -16,28 +16,36 @@ class Esg extends CI_Model
 	}
 
 	function set_tag($table = 'content_tag')
-  	{
-	    $post['tag_ids'] = $_POST['tag_ids'];
-	    $post['tag_ids'] = explode(',', $post['tag_ids']);
-	    $tag_ids = array();
-	    foreach ($post['tag_ids'] as $key => $value)
-	    {
-	      $tag_exist = $this->db->query('SELECT title FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
-	      $tag_exist = $tag_exist['title'];
-	      if(empty($tag_exist))
-	      {
-	        $this->db->insert($table, array('title'=>$value));
-	      }
-	      $tag_id = $this->db->query('SELECT id FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
-	      $tag_id = $tag_id['id'];
-	      if(!empty($tag_id))
-	      {
-	        $tag_ids[] = $tag_id;
-	      }
-	    }
-	    $post['tag_ids'] = ','.implode($tag_ids,',').',';
-	    return $post['tag_ids'];
-	 }
+	{
+    $post['tag_ids'] = $_POST['tag_ids'];
+    $post['tag_ids'] = explode(',', $post['tag_ids']);
+    $tag_ids = array();
+    foreach ($post['tag_ids'] as $key => $value)
+    {
+      $tag_exist = $this->db->query('SELECT title FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
+      $tag_exist = $tag_exist['title'];
+      if(empty($tag_exist))
+      {
+        $this->db->insert($table, array('title'=>$value));
+      }
+      $tag_id = $this->db->query('SELECT id FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
+      $tag_id = $tag_id['id'];
+      if(!empty($tag_id))
+      {
+      	$total = $this->db->query("SELECT count(id) AS total FROM content WHERE tag_ids LIKE '%,{$tag_id},%'")->row_array();
+      	if(!empty($total))
+      	{
+      		$total = $total['total'];
+      	}else{
+      		$total = 1;
+      	}
+      	$this->db->update($table, array('total'=>$total), 'id = '.$tag_id);
+        $tag_ids[] = $tag_id;
+      }
+    }
+    $post['tag_ids'] = ','.implode($tag_ids,',').',';
+    return $post['tag_ids'];
+  }
 
 	public function check_login()
 	{

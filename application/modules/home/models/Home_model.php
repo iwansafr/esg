@@ -7,7 +7,7 @@ class Home_model extends CI_Model
 		parent::__construct();
 		$this->load->library('esg');
 		$this->load->model('esg_model');
-		$this->esg_model->set_meta();
+		// $this->esg_model->set_meta();
 		$this->init();
 	}
 	public function init()
