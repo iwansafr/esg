@@ -836,6 +836,13 @@ class Zea extends CI_Model
 			}
 			if(!empty($keyword))
 			{
+				if(empty($this->field))
+				{
+					foreach ($this->input as $key => $value) 
+					{
+						$this->field[] = $value['text'];
+					}
+				}
 				if(!empty($this->field))
 				{
 					if(is_array($this->field))
@@ -1232,10 +1239,6 @@ class Zea extends CI_Model
 														}
 													}
 												}
-												if($this->edit == true)
-												{
-													$tot_col = $tot_col+1;
-												}
 												?>
 												<tr>
 													<td colspan="<?php echo $tot_col; ?>"><?php echo !empty($pagination) ? $pagination : ''; ?></td>
@@ -1257,6 +1260,11 @@ class Zea extends CI_Model
 																<?php
 															}
 														}
+													}
+													if($this->edit == true)
+													{
+														// $tot_col = $tot_col+1;
+														echo '<td></td>';
 													}
 													if($this->delete)
 													{

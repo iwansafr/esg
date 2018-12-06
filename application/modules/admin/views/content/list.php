@@ -1,19 +1,25 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$form = new zea();
+// $form = new zea();
 $id = $this->input->get('id');
-$form->init('roll');
-$form->setTable('content');
-$form->search();
+$is_tag = $this->input->get('is_tag');
+$this->zea->init('roll');
+$this->zea->setTable('content');
+$this->zea->search();
 if(!empty($id))
 {
-	$form->setWhere("cat_ids LIKE '%,{$id},%'");
+	$this->zea->setWhere("cat_ids LIKE '%,{$id},%'");
 }
-$form->setField(array('title'));
-$form->addInput('id','plaintext');
-$form->addInput('image','thumbnail');
-$form->addInput('title','plaintext');
-$form->addInput('publish','checkbox');
-$form->setDelete(TRUE);
-$form->setEdit(TRUE);
-$form->form();
+
+if(!empty($is_tag))
+{
+	$this->zea->setWhere("tag_ids LIKE '%,{$id},%'");
+}
+$this->zea->setField(array('title'));
+$this->zea->addInput('id','plaintext');
+$this->zea->addInput('image','thumbnail');
+$this->zea->addInput('title','plaintext');
+$this->zea->addInput('publish','checkbox');
+$this->zea->setDelete(TRUE);
+$this->zea->setEdit(TRUE);
+$this->zea->form();

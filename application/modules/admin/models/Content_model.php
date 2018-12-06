@@ -120,7 +120,6 @@ class Content_model extends CI_Model{
 		    if(!empty($_POST['tag_ids']))
 		    {
 		      $post['tag_ids'] = $this->esg->set_tag();
-		      pr($post);
 		    }
 		    if(empty($_POST['slug']))
 		    {

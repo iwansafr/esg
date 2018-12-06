@@ -39,7 +39,7 @@ $this->zea->setLink('link',base_url('admin/menu'),'id');
 $this->zea->setPlaintext('link','<i class="fa fa-search"></i>  menu');
 $this->zea->setLabel('link','menu');
 
-$this->zea->setEditLink('position?id=');
+// $this->zea->setEditLink('position?id=');
 
 $this->zea->setDelete(true);
 $this->zea->setEdit(TRUE);

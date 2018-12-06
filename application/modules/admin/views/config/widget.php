@@ -88,8 +88,27 @@ if(!empty($active_template))
 				$option_block = $menu;
 			}else if(preg_match('~product_~', $block_title)){
 				$option_block = $prodcat;
-			}else{
+			}else if(preg_match('~content~', $block_title)){
 				$option_block = $cat;
+			}else{
+				$option_block = array(
+					array(
+						'id'=>'1',
+						'title' => 'Category'
+					),
+					array(
+						'id'=>'2',
+						'title' => 'Tag'
+					),
+					array(
+						'id'=>'3',
+						'title' => 'Content'
+					),
+					array(
+						'id'=>'4',
+						'title' => 'Image'
+					)
+				);
 			}
 			echo '<option value="0">None</option>';
 			foreach ($option_block as $keys => $values)

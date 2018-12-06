@@ -37,4 +37,8 @@ class Content extends CI_Controller
 		$this->load->view('index');
 		$this->content_model->category_slug();
 	}
+	public function tag()
+	{
+		$this->load->view('index');
+	}
 }

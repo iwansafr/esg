@@ -72,11 +72,11 @@ class Home_model extends CI_Model
 					if(preg_match('~menu_~', $key))
 					{
 						$this->menu($key, $value);
-					}else if(preg_match('~content_~', $key))
+					}else if(preg_match('~content~', $key))
 					{
 						$this->content($key, $value);
 					}else{
-						$this->content($key, $value);
+						$this->custom($key, $value);
 					}
 				}
 			}
@@ -137,6 +137,33 @@ class Home_model extends CI_Model
 				}
 				$output = array();
 				$tmp_data[0]['cat_title'] = $cat_title['title'];
+				$output[$key] = $tmp_data;
+				$home = $this->esg->get_esg('home');
+				if(!empty($home))
+				{
+					$home = array_merge($home, $output);
+				}else{
+					$home = $output;
+				}
+				$this->esg->set_esg('home', $home);
+			}
+		}
+	}
+
+	public function custom($key = '', $data = array())
+	{
+		if(!empty($data['content']))
+		{
+			$id    = $data['content'];
+			$limit = 'LIMIT '.@intval($data['limit']);
+			$table = array('content_cat','content_tag','content','content');
+			$table = array_start_one($table);
+			$table = $table[$id];
+			
+			$tmp_data = $this->db->query('SELECT * FROM '.$table.' ORDER BY id DESC '.$limit)->result_array();
+			if(!empty($tmp_data))
+			{
+				$output = array();
 				$output[$key] = $tmp_data;
 				$home = $this->esg->get_esg('home');
 				if(!empty($home))

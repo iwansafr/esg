@@ -22,28 +22,6 @@ class Admin_model extends CI_Model
 		    'link' => base_url('admin')
 		  ),
 		  array(
-		    'title' => 'User',
-		    'icon' => 'fa-user',
-		    'link' => base_url('admin/user/list'),
-		    'list' => array(
-		      array(
-		        'title' => 'User List',
-		        'icon' => 'fa-circle-o',
-		        'link' => base_url('admin/user/list')
-		      ),
-		      array(
-		        'title' => 'User Add',
-		        'icon' => 'fa-circle-o',
-		        'link' => base_url('admin/user/edit')
-		      ),
-		      array(
-		        'title' => 'User Role',
-		        'icon' => 'fa-circle-o',
-		        'link' => base_url('admin/user/role'),
-		      ),
-		    )
-		  ),
-		  array(
 		    'title' => 'Content',
 		    'icon' => 'fa-file-text',
 		    'link' => base_url('admin/content/'),
@@ -64,9 +42,31 @@ class Admin_model extends CI_Model
 		        'link' => base_url('admin/content/list')
 		      ),
 		      array(
-		        'title' => 'Comment',
+		        'title' => 'Tag',
 		        'icon' => 'fa-list',
-		        'link' => base_url('admin/comment_list')
+		        'link' => base_url('admin/content/tag')
+		      ),
+		    )
+		  ),
+		  array(
+		    'title' => 'User',
+		    'icon' => 'fa-user',
+		    'link' => base_url('admin/user/list'),
+		    'list' => array(
+		      array(
+		        'title' => 'User List',
+		        'icon' => 'fa-circle-o',
+		        'link' => base_url('admin/user/list')
+		      ),
+		      array(
+		        'title' => 'User Add',
+		        'icon' => 'fa-circle-o',
+		        'link' => base_url('admin/user/edit')
+		      ),
+		      array(
+		        'title' => 'User Role',
+		        'icon' => 'fa-circle-o',
+		        'link' => base_url('admin/user/role'),
 		      ),
 		    )
 		  ),
