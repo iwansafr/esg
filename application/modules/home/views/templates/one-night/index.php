@@ -44,6 +44,10 @@
 										}
 									}
 						    }
+						    if(!empty($content['title']))
+						    {
+						    	echo '<li class="breadcrumb-item active" aria-current="page">'.$content['title'].'</li>';
+						    }
 						    ?>
 						  </ol>
 						</nav>
