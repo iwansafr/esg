@@ -18,8 +18,17 @@ class Home_model extends CI_Model
 		$this->site();
 		$this->meta();
 		$this->template();
+		$this->mod();
 		// $this->home();
 		// $this->js();
+	}
+
+	public function mod()
+	{
+		$mod['name'] = $this->router->fetch_class();
+		$mod['task'] = $this->router->fetch_method();
+		$mod['content'] = $mod['name'].'/'.@$mod['task'];
+		$this->esg->set_esg('mod', $mod);
 	}
 
 	public function template()

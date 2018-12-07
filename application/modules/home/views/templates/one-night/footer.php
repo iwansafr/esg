@@ -58,10 +58,19 @@
 		</ul>
 		<p class="text-center">Copyright @2017 <?php echo !empty($this->esg->get_esg('site')['link']) ? '<a href="'.$this->esg->get_esg('site')['link'].'">'.$this->esg->get_esg('site')['title'].'</a>' : ''; ?> | Powered by <a href="#">esoftgreat</a></p>
 		<ul class="social_footer_ul">
-			<li><a href="http://kalarikendramdelhi.com"><i class="fa fa-facebook-f"></i></a></li>
-			<li><a href="http://kalarikendramdelhi.com"><i class="fa fa-twitter"></i></a></li>
-			<li><a href="http://kalarikendramdelhi.com"><i class="fa fa-linkedin"></i></a></li>
-			<li><a href="http://kalarikendramdelhi.com"><i class="fa fa-instagram"></i></a></li>
+			<?php 
+			$contact = $this->esg->get_esg('meta')['contact'];
+			if(!empty($contact))
+			{
+				foreach ($contact as $key => $value) 
+				{
+					if(isLink($value))
+					{
+						echo '<li><a href="'.$value.'"><i class="fa fa-'.$key.'"></i></a></li>';
+					}
+				}
+			}
+			?>
 		</ul>
 	</div>
 </footer>

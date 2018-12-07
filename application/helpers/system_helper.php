@@ -252,6 +252,19 @@ function menu_link($text = '')
 	return $link;
 }
 
+function isLink($link = '')
+{
+	$is_link = FALSE;
+	if(!empty($link))
+	{
+		if(filter_var($link, FILTER_VALIDATE_URL) !== FALSE)
+		{
+			$is_link = TRUE;
+		}
+	}
+	return $is_link;
+}
+
 function image_module($module = '', $image = '', $is_uri = false)
 {
 	$base_url = ($is_uri) ? '' : base_url();

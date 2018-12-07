@@ -25,8 +25,8 @@ $this->zea->addInput('linkedin', 'text');
 $this->zea->setAttribute('linkedin', array('placeholder'=>'insert your linkedin link'));
 $this->zea->addInput('wordpress', 'text');
 $this->zea->setAttribute('wordpress', array('placeholder'=>'insert your wordpress link'));
-$this->zea->addInput('blogspot', 'text');
-$this->zea->setAttribute('blogspot', array('placeholder'=>'insert your blogspot link'));
+$this->zea->addInput('yahoo', 'text');
+$this->zea->setAttribute('yahoo', array('placeholder'=>'insert your yahoo link'));
 $this->zea->addInput('youtube', 'text');
 $this->zea->setAttribute('youtube', array('placeholder'=>'insert your youtube link'));
 
