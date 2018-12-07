@@ -1,6 +1,13 @@
 <?php
+if($mod['content'] == 'home/index')
+{
+  $style = '';
+}else{
+  $style = 'id="slider"';
+}
+
 ?>
-<ul class="nav nav-pills">
+<ul <?php echo $style; ?> class="nav nav-pills">
   <li class="nav-item">
     <a class="nav-link active" href="#">Hot News</a>
   </li>

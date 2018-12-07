@@ -6,6 +6,7 @@ class Content extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('home_model');
+		$this->load->model('content_model');
 		$this->load->helper('content');
 		$this->load->library('esg');
 	}
@@ -23,6 +24,7 @@ class Content extends CI_Controller
 	public function detail()
 	{
 		$this->home_model->home();
+		$this->content_model->detail();
 		$this->load->view('index');
 	}
 
