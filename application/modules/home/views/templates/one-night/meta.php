@@ -1,5 +1,5 @@
 <?php
-$link = $this->esg->get_esg('navigation')['string'];
+$link = base_url($this->esg->get_esg('navigation')['string']);
 $meta = $this->esg->get_esg('meta');
 $image = image_module('config/site', $meta['icon']);
 ?>

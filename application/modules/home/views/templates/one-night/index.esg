@@ -55,3 +55,6 @@
 		{menu_bottom_3}
 	</div>
 </div>
+<div class="col-md-12">
+	{menu_footer}
+</div>

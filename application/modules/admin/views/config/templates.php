@@ -42,6 +42,7 @@ if(is_admin())
 	{
 		$form->setOptions('admin_template', $template_admin_names);
 	}
+	$form->setFormName('templates');
 	$form->form();
 }else{
 	msg('you dont have permission to access this section', 'danger');

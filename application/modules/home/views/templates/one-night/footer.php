@@ -46,14 +46,17 @@
 	</div>
 	<div class="container">
 		<ul class="foote_bottom_ul_amrc">
-			<li><a href="http://kalarikendramdelhi.com">Home</a></li>
-			<li><a href="http://kalarikendramdelhi.com">About</a></li>
-			<li><a href="http://kalarikendramdelhi.com">Services</a></li>
-			<li><a href="http://kalarikendramdelhi.com">Pricing</a></li>
-			<li><a href="http://kalarikendramdelhi.com">Blog</a></li>
-			<li><a href="http://kalarikendramdelhi.com">Contact</a></li>
+			<?php
+			if(!empty($home['menu_footer']))
+			{
+				foreach ($home['menu_footer'] as $mfkey => $mfvalue)
+				{
+					echo '<li><a href="'.menu_link($mfvalue['link']).'">'.$mfvalue['title'].'</a></li>';
+				}
+			}
+			?>
 		</ul>
-		<p class="text-center">Copyright @2017 | Designed With by <a href="#">esoftgreat</a></p>
+		<p class="text-center">Copyright @2017 <?php echo !empty($this->esg->get_esg('site')['link']) ? '<a href="'.$this->esg->get_esg('site')['link'].'">'.$this->esg->get_esg('site')['title'].'</a>' : ''; ?> | Powered by <a href="#">esoftgreat</a></p>
 		<ul class="social_footer_ul">
 			<li><a href="http://kalarikendramdelhi.com"><i class="fa fa-facebook-f"></i></a></li>
 			<li><a href="http://kalarikendramdelhi.com"><i class="fa fa-twitter"></i></a></li>
