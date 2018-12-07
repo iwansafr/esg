@@ -42,13 +42,7 @@ class Home_model extends CI_Model
 		$c_data = $this->esg->get_esg('meta');
 		if(!empty($data))
 		{
-			foreach ($data as $key => $value)
-			{
-				if(!empty($c_data[$key]))
-				{
-					$c_data[$key] = $value;
-				}
-			}
+			$c_data['contact'] = $data;
 			$this->esg->set_esg('meta', $c_data);
 		}
 	}
@@ -159,7 +153,7 @@ class Home_model extends CI_Model
 			$table = array('content_cat','content_tag','content','content');
 			$table = array_start_one($table);
 			$table = $table[$id];
-			
+
 			$tmp_data = $this->db->query('SELECT * FROM '.$table.' ORDER BY id DESC '.$limit)->result_array();
 			if(!empty($tmp_data))
 			{
