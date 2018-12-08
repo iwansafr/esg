@@ -52,7 +52,18 @@
 						  </ol>
 						</nav>
 						<div class="col">
-							<h5>Category <a href=""><span class="badge badge-secondary">Furniture</span></a></h5>
+							<h5>Category 
+								<?php 
+								if(!empty($content['cat']))
+								{
+									foreach ($content['cat'] as $ckey => $cvalue) 
+									{
+										echo '<a href="'.content_cat_link($cvalue['slug']).'"><span class="badge badge-secondary">'.$cvalue['title'].'</span></a>';
+										echo ' ';
+									}
+								}
+								?>
+							</h5>
 						</div>
 						<hr>
 						<?php

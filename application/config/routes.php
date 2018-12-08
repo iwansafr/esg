@@ -58,4 +58,5 @@ $route['admin/content/category/list/edit'] = 'admin/content/edit';
 $route['404_override']                     = 'home/e';
 $route['(:any).html']                      = 'home/content/detail';
 $route['category/(:any).html']             = 'home/content/list';
+$route['tag/(:any).html']                  = 'home/content/list';
 $route['translate_uri_dashes']             = FALSE;

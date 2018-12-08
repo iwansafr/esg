@@ -46,4 +46,15 @@ if(!empty($content))
 	</center>
 	<?php
 	echo $content['content'];
+	?>
+	<p>tag : </p>
+	<?php
+	if(!empty($content['tag']))
+	{
+		foreach ($content['tag'] as $tkey => $tvalue) 
+		{
+			echo '<a href="'.content_tag_link($tvalue['title']).'"><span class="badge badge-primary">'.$tvalue['title'].'</span></a>';
+			echo ' ';
+		}
+	}
 }
