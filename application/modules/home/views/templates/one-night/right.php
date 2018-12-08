@@ -10,7 +10,7 @@ if(!empty($home['right']))
 	  	<?php 
 	  	foreach ($home['right'] as $key => $value) 
 	  	{
-	  		echo '<li class="list-group-item">'.$value['title'].'</li>';
+	  		echo '<li class="list-group-item"><a href="'.content_cat_link($value['slug']).'">'.$value['title'].'</a></li>';
 	  	}
 	  	?>
 	  </ul>

@@ -334,20 +334,38 @@ function pagination($total_rows = 0,$limit = 0, $url_get = '')
   $config['base_url']             = $url_get;
   $config['total_rows']           = $total_rows;
   $config['per_page']             = $limit;
-  $config['full_tag_open']        = '<ul class="pagination" style="margin-top: 0;margin-bottom: 0;">';
-  $config['num_tag_open']         = '<li>';
+  // $config['full_tag_open']        = '<ul class="pagination" style="margin-top: 0;margin-bottom: 0;">';
+  // $config['num_tag_open']         = '<li>';
+  // $config['num_tag_close']        = '</li>';
+  // $config['first_tag_open']       = '<li>';
+  // $config['first_tag_close']      = '</li>';
+  // $config['last_tag_open']        = '<li>';
+  // $config['last_tag_close']       = '</li>';
+  // $config['cur_tag_open']         = '<li class="active"><a href="#">';
+  // $config['cur_tag_close']        = '</a></li>';
+  // $config['next_tag_open']        = '<li>';
+  // $config['next_tag_close']       = '</li>';
+  // $config['prev_tag_open']        = '<li>';
+  // $config['prev_tag_close']       = '</li>';
+  // $config['full_tag_close']       = '</ul>';
+
+
+  $config['full_tag_open']        = '<nav aria-label="Page navigation example"><ul class="pagination justify-content-center">';
+  $config['num_tag_open']         = '<li class="page-item">';
   $config['num_tag_close']        = '</li>';
-  $config['first_tag_open']       = '<li>';
+  $config['first_tag_open']       = '<li class="page-item">';
   $config['first_tag_close']      = '</li>';
-  $config['last_tag_open']        = '<li>';
+  $config['last_tag_open']        = '<li class="page-item">';
   $config['last_tag_close']       = '</li>';
-  $config['cur_tag_open']         = '<li class="active"><a href="#">';
+  $config['cur_tag_open']         = '<li class="page-item active"><a href="#" class="page-link">';
   $config['cur_tag_close']        = '</a></li>';
-  $config['next_tag_open']        = '<li>';
+  $config['next_tag_open']        = '<li class="page-item">';
   $config['next_tag_close']       = '</li>';
-  $config['prev_tag_open']        = '<li>';
+  $config['prev_tag_open']        = '<li class="page-item">';
   $config['prev_tag_close']       = '</li>';
-  $config['full_tag_close']       = '</ul>';
+  $config['full_tag_close']       = '</ul></nav>';
+  $config['attributes'] 					= array('class' => 'page-link');
+
   $config['enable_query_strings'] = TRUE;
   $config['page_query_string']    = TRUE;
   $config['query_string_segment'] = 'page';

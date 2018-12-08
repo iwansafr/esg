@@ -18,6 +18,8 @@ class Content extends CI_Controller
 
 	public function list()
 	{
+		$this->home_model->home();
+		$this->content_model->list();
 		$this->load->view('index');
 	}
 

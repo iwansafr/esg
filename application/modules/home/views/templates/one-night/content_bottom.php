@@ -21,7 +21,7 @@ if(!empty($home['content_bottom']))
 			  <div class="card">
 			    <img class="img-grid card-img-top" src="<?php echo image_module('content', $value['id'].'/'.$value['image']) ?>" alt="<?php echo $value['title'] ?>">
 			    <div class="card-body">
-			      <h5 class="card-title"><?php echo $value['title'] ?></h5>
+			    	<h5 class="card-title"><a href="<?php echo content_link($value['slug']) ?>"><?php echo $value['title'] ?></a></h5>
 			      <p style="font-size: 12px;"><?php echo $value['intro'] ?></p>
 			    </div>
 					<div class="card-footer">
