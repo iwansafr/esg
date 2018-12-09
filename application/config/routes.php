@@ -55,6 +55,7 @@ $route['admin/user']                       = 'admin/user/list';
 $route['admin/content/list/edit']          = 'admin/content/edit';
 $route['admin/content/category/list']      = 'admin/content/list';
 $route['admin/content/category/list/edit'] = 'admin/content/edit';
+$route['search']                           = 'home/content/list';
 $route['404_override']                     = 'home/e';
 $route['(:any).html']                      = 'home/content/detail';
 $route['category/(:any).html']             = 'home/content/list';

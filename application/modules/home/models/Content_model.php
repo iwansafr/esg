@@ -20,6 +20,7 @@ class Content_model extends CI_Model
 		$data = $this->db->query('SELECT * FROM content WHERE slug = ? AND publish = 1', $slug)->row_array();
 		if(!empty($data))
 		{
+			$this->zea->set_data('content', $data['id'], array('hits'=>$data['hits']+1));
 			$tag_ids = $data['tag_ids'];
 			$cat_ids = $data['cat_ids'];
 			if(!empty($tag_ids))
@@ -44,23 +45,35 @@ class Content_model extends CI_Model
 	public function list()
 	{
 		$module = @$this->esg->get_esg('navigation')['array'][0];
-		$table  = $module == 'category' ? 'content_cat' : 'content_tag';
-		$where  = $module == 'category' ? 'WHERE slug = ? AND publish = 1 ' : 'WHERE title = ? ';
-		$zea_t  = $module == 'category' ? 'cat_ids' : 'tag_ids';
-		$slug   = end($this->esg->get_esg('navigation')['array']);
+		if($module != 'search')
+		{
+			$table  = $module == 'category' ? 'content_cat' : 'content_tag';
+			$where  = $module == 'category' ? 'WHERE slug = ? AND publish = 1 ' : 'WHERE title = ? ';
+			$zea_t  = $module == 'category' ? 'cat_ids' : 'tag_ids';
+			$slug   = end($this->esg->get_esg('navigation')['array']);
+		}else{
+			$zea_t  = 'title';
+		}
 		$data   = array();
-
 		if(!empty($slug))
 		{
 			$slug = preg_replace('~.html~', '', $slug);
 		}
-		$id = $this->db->query('SELECT id FROM '.$table.' '.$where, $slug)->row_array();
+		if($module != 'search')
+		{
+			$id = $this->db->query('SELECT id FROM '.$table.' '.$where, $slug)->row_array();
+		}else{
+			$id = TRUE;
+		}
 		if(!empty($id))
 		{
-			$id = $id['id'];
 			$this->zea->init('roll');
+			if($module != 'search')
+			{
+				$id = $id['id'];
+				$this->zea->setWhere("{$zea_t} LIKE '%,{$id},%' AND publish = 1 ");
+			}
 			$this->zea->setTable('content');
-			$this->zea->setWhere("{$zea_t} LIKE '%,{$id},%'");
 			$this->zea->addInput('id','plaintext');
 			$this->zea->addInput('title','plaintext');
 			$this->zea->addInput('image','plaintext');

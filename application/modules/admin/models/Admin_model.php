@@ -10,6 +10,7 @@ class Admin_model extends CI_Model
 		$this->load->library('esg');
 		// $this->load->library('ZEA/zea');
 		$this->sidebar_menu();
+		$this->site();
 	}
 
 	public function sidebar_menu()
@@ -122,6 +123,27 @@ class Admin_model extends CI_Model
 		);
 		$data['menu'] = $menu;
 		$this->esg->set_esg('sidebar_menu', $data['menu']);
+	}
+
+	public function site()
+	{
+		$data = array();
+		$data['logo'] = $this->esg->get_config('logo');
+		$data['site'] = $this->esg->get_config('site');
+		$this->esg->set_esg('site', $data);
+	}
+
+	public function home()
+	{
+		$data = array();
+		$data['content'] = $this->db->query('SELECT id FROM content')->num_rows();
+		$data['category'] = $this->db->query('SELECT id FROM content_cat')->num_rows();
+		$data['tag'] = $this->db->query('SELECT id FROM content_tag')->num_rows();
+		$data['menu'] = $this->db->query('SELECT id FROM menu')->num_rows();
+		$data['menu_position'] = $this->db->query('SELECT id FROM menu_position')->num_rows();
+		$data['user'] = $this->db->query('SELECT id FROM user')->num_rows();
+		$data['user_role'] = $this->db->query('SELECT id FROM user_role')->num_rows();
+		$this->esg->set_esg('home', $data);
 	}
 
 }

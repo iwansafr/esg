@@ -44,7 +44,7 @@
       <?php
     }
     ?>
-    <form action="" method="get">
+    <form action="<?php echo base_url('search') ?>" method="get">
       <div class="input-group input-group-sm">
         <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="">
         <div class="input-group-btn">

@@ -1,15 +1,23 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+$form = new zea();
 
-$this->zea->init('roll');
-$this->zea->search();
-$this->zea->setTable('content_tag');
-$this->zea->order_by('total','DESC');
-$this->zea->addInput('title','plaintext');
-$this->zea->addInput('id','link');
-$this->zea->setLink('id',base_url('admin/content/list'),'id');
-$this->zea->setExtLink('id','&is_tag=1');
-// $this->zea->setPlaintext('id','<button class="btn btn-default"><i class="fa fa-search"></i>  content</button>');
-$this->zea->setPlaintext('id','<i class="fa fa-search"></i>  content');
-$this->zea->setLabel('id','Content');
-$this->zea->addInput('total','plaintext');
-$this->zea->form();
+$form->init('roll');
+$form->search();
+$form->setTable('content_tag');
+$form->order_by('total','DESC');
+$form->addInput('title','plaintext');
+$form->addInput('id','link');
+$form->setLink('id',base_url('admin/content/list'),'id');
+$form->setExtLink('id','&is_tag=1');
+// $form->setPlaintext('id','<button class="btn btn-default"><i class="fa fa-search"></i>  content</button>');
+$form->setPlaintext('id','<i class="fa fa-search"></i>  content');
+$form->setLabel('id','Content');
+$form->addInput('total','plaintext');
+$form->setFormName('tag');
+$form->setFormName('tag');
+if(!empty($form->getData()['data']))
+{
+	$form->form();
+}else{
+	echo 'no data found';
+}

@@ -13,6 +13,7 @@ class Admin extends CI_Controller
 	}
 	public function index()
 	{
+		$this->admin_model->home();
 		$this->load->view('index');
 	}
 
@@ -28,5 +29,9 @@ class Admin extends CI_Controller
 	public function logout()
 	{
 		$this->esg->logout();
+	}
+	public function search()
+	{
+		$this->load->view('index');
 	}
 }

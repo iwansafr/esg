@@ -19,7 +19,14 @@ $this->zea->setField(array('title'));
 $this->zea->addInput('id','plaintext');
 $this->zea->addInput('image','thumbnail');
 $this->zea->addInput('title','plaintext');
+$this->zea->addInput('hits','plaintext');
 $this->zea->addInput('publish','checkbox');
 $this->zea->setDelete(TRUE);
 $this->zea->setEdit(TRUE);
-$this->zea->form();
+$this->zea->setFormName('content_list');
+if(!empty($this->zea->getData()['data']))
+{
+	$this->zea->form();
+}else{
+	echo 'no data found';
+}

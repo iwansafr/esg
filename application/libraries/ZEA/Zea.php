@@ -797,8 +797,9 @@ class Zea extends CI_Model
 		if($this->init == 'roll')
 		{
 			$input   = array();
-			$limit   = 5;
+			$limit   = 12;
 			$page    = (@intval($_GET['page']) > 0 ) ? $_GET['page']-1 : @intval($_GET['page']);
+			$sort_by = @$_GET['sort_by'];
 			$keyword = @$_GET['keyword'];
 			$where   = '';
 			$bind    = array();
@@ -816,6 +817,9 @@ class Zea extends CI_Model
 			if(!empty($keyword) || !empty($this->where))
 			{
 				$sql     .= ' WHERE ';
+				$url_get .= '?';
+			}else if(!empty($sort_by))
+			{
 				$url_get .= '?';
 			}
 			if(!empty($get))
@@ -858,7 +862,7 @@ class Zea extends CI_Model
 						}
 					}
 					$sql .= $where;
-					$url_get .= 'keyword='.urlencode($keyword);
+					// $url_get .= 'keyword='.urlencode($keyword);
 				}
 			}
 			if(!empty($this->where))
@@ -868,7 +872,11 @@ class Zea extends CI_Model
 			}
 			$num_rows = $this->db->query($sql,$bind)->num_rows();
 
-			$sql          .= ' ORDER BY '.$this->orderby;
+			if(!empty($sort_by))
+			{
+				$this->order_by($sort_by, @$_GET['type']);
+			}
+			$sql .= ' ORDER BY '.$this->orderby;
 			$sql          .= ' LIMIT '.$page*$limit.','.$limit;
 			$data['data']  = $this->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->db->last_query();
@@ -1074,7 +1082,7 @@ class Zea extends CI_Model
 			             	<div class="box-tools">
 			             		<form action="" method="get">
 					              <div class="input-group input-group-sm" style="width: 150px;">
-					                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>">
+					                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>" required>
 					                <div class="input-group-btn">
 					                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
 					                </div>
@@ -1118,7 +1126,14 @@ class Zea extends CI_Model
 															<?php
 														}else{
 															$label = $value['type'] != 'hidden' ? $label : '';
-															echo '<th>'.ucwords($label).'</th>';
+															$type = empty($_GET['type']) || (@$_GET['type'] == 'desc') ? 'asc' : 'desc';
+															$arrow = '';
+															if(@$_GET['sort_by'] == $label)
+															{
+																$arrow = (@$_GET['type'] == 'asc') ? '<i class="fa fa-arrow-up"></i>' : '<i class="fa fa-arrow-down"></i>';
+																
+															}
+															echo '<th><a href="?sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
 														}
 													}
 												}
