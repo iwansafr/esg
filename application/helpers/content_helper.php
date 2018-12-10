@@ -35,3 +35,20 @@ function content_tag_link($id = '', $title = '')
   }
   return $output;
 }
+
+function content_type_link($table = 'content', $value = array())
+{
+  switch($table)
+  {
+    case 'content_cat':
+      $link = content_cat_link($value['slug']);
+    break;
+    case 'content_tag':
+      $link = content_tag_link($value['title']);
+    break;
+    default:
+      $link = content_link($value['slug']);
+    break;
+  }
+  return $link;
+}

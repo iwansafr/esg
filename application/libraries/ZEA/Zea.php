@@ -1128,10 +1128,9 @@ class Zea extends CI_Model
 															$label = $value['type'] != 'hidden' ? $label : '';
 															$type = empty($_GET['type']) || (@$_GET['type'] == 'desc') ? 'asc' : 'desc';
 															$arrow = '';
-															if(@$_GET['sort_by'] == $label)
+															if(@$_GET['sort_by'] == $field)
 															{
-																$arrow = (@$_GET['type'] == 'asc') ? '<i class="fa fa-arrow-up"></i>' : '<i class="fa fa-arrow-down"></i>';
-																
+																$arrow = (@$_GET['type'] == 'asc') ? '<i class="fa fa-sort-alpha-asc"></i> ' : '<i class="fa fa-sort-alpha-desc"></i> ';
 															}
 															echo '<th><a href="?sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
 														}

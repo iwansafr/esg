@@ -167,7 +167,8 @@ class Home_model extends CI_Model
 			if(!empty($tmp_data))
 			{
 				$output = array();
-				$output[$key] = $tmp_data;
+				$output[$key]['data'] = $tmp_data;
+				$output[$key]['table'] = $table;
 				$home = $this->esg->get_esg('home');
 				if(!empty($home))
 				{

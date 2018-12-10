@@ -28,7 +28,7 @@ $form->setField(array('id','title'));
 $form->setTable('user_role');
 $form->addInput('id','hidden');
 $form->addInput('title','plaintext');
-$form->addInput('level','hidden');
+// $form->addInput('level','hidden');
 $form->addInput('description','plaintext');
 $form->setDelete(TRUE);
 $form->setEdit(TRUE);

@@ -15,7 +15,7 @@ class Content_model extends CI_Model
 		$slug = end($this->esg->get_esg('navigation')['array']);
 		if(!empty($slug))
 		{
-			$slug = preg_replace('~.html~', '', $slug);
+			$slug = str_replace('.html', '', $slug);
 		}
 		$data = $this->db->query('SELECT * FROM content WHERE slug = ? AND publish = 1', $slug)->row_array();
 		if(!empty($data))
@@ -57,7 +57,7 @@ class Content_model extends CI_Model
 		$data   = array();
 		if(!empty($slug))
 		{
-			$slug = preg_replace('~.html~', '', $slug);
+			$slug = str_replace('.html', '', $slug);
 		}
 		if($module != 'search')
 		{
