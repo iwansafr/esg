@@ -15,7 +15,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 # application/config/config.php
 application/config/database.php
 sftp-config.json
-.htaccess
+/.htaccess
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
