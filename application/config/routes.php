@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller']               = 'home';
 $route['admin/content']                    = 'admin/content/list';
 $route['admin/user']                       = 'admin/user/list';
+$route['admin/config']                     = 'admin/config/templates';
 $route['admin/content/list/edit']          = 'admin/content/edit';
 $route['admin/content/category/list']      = 'admin/content/list';
 $route['admin/content/category/list/edit'] = 'admin/content/edit';

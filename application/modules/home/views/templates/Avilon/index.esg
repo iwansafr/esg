@@ -1,0 +1,29 @@
+<style type="text/css">
+	.default{
+		margin-top: 5%;
+		height: 40px;
+	}
+</style>
+<div class="col-md-12">
+	<div class="col-md-3">
+		<div class="panel-group">
+			<a href="#admin/config/logo#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Logo</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		{menu_top}
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-12">
+		<div class="panel-group">
+			<a href="#admin/config/header#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Header</h5>
+			</div>
+		</div>
+	</div>
+</div>
