@@ -201,7 +201,21 @@ function is_admin()
 	$role   = @$_SESSION[base_url().'_logged_in']['level'];
 	if(!empty($role))
 	{
-		if($role<=2)
+		if($role==2)
+		{
+			$return = true;
+		}
+	}
+	return $return;
+}
+
+function is_root()
+{
+	$return = false;
+	$role   = @$_SESSION[base_url().'_logged_in']['level'];
+	if(!empty($role))
+	{
+		if($role==1)
 		{
 			$return = true;
 		}

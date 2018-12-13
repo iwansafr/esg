@@ -1,9 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $template_names = array();
+
 ?>
 <a href="<?php echo base_url().'admin/config/widget' ?>" class="btn btn-default pull-right" ><i class=" fa fa-cog"></i> Manage Widget</a>
 <?php
-if(is_admin())
+if(is_admin() || is_root())
 {
 	$template_names = array();
 	$template_admin = array();
@@ -12,14 +13,24 @@ if(is_admin())
 		$template_dir = explode('/', $file);
 		array_pop($template_dir);
 		$template_name = end($template_dir);
-		$template_names[$template_name] = $template_name;
+		if(is_admin())
+		{
+			$template_names[$public_template] = $public_template;
+		}else{
+			$template_names[$template_name] = $template_name;
+		}
 	}
 	foreach(glob(FCPATH.'application/modules/admin/views/templates/*/index.esg') as $file)
 	{
 		$template_dir = explode('/', $file);
 		array_pop($template_dir);
 		$template_admin = end($template_dir);
-		$template_admin_names[$template_admin] = $template_admin;
+		if(is_admin())
+		{
+			$template_admin_names[$admin_template] = $admin_template;
+		}else{
+			$template_admin_names[$template_admin] = $template_admin;
+		}
 	}
 	$form = new zea();
 
