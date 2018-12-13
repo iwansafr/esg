@@ -95,14 +95,26 @@ class Home_model extends CI_Model
 			{
 				$output = array();
 				$data = array();
-				foreach ($tmp_data as $tkey => $tvalue)
+				$b_data = array();
+				foreach ($tmp_data as $tmkey => $tmvalue) 
+				{
+					$b_data[$tmvalue['id']] = $tmvalue;
+				}
+				foreach ($b_data as $tkey => $tvalue)
 				{
 					if($tvalue['par_id'] == 0)
 					{
 						$data[$tvalue['id']] = $tvalue;
 					}else if($tvalue['par_id'] > 0)
 					{
-						$data[$tvalue['par_id']]['child'][$tvalue['id']]  = $tvalue;
+						if(!empty($data[$tvalue['par_id']]))
+						{
+							$data[$tvalue['par_id']]['child'][$tvalue['id']]  = $tvalue;
+						}else if(!empty($b_data[$tvalue['par_id']]))
+						{
+							$id = $b_data[$tvalue['par_id']]['par_id'];
+							$data[$id]['child'][$tvalue['par_id']]['child'][$tvalue['id']]  = $tvalue;
+						}
 					}
 				}
 				$output[$key] = $data;

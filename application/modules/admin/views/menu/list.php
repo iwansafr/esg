@@ -46,7 +46,7 @@ $form->setDelete(true);
 $form->setEdit(TRUE);
 $form->setEditLink(base_url('admin/menu/edit?id='));
 $form->setFormName('menu');
-if(!empty($form->getData()['data']))
+if(!empty($form->getData()['data']) || empty($_GET['keyword']))
 {
 	$form->form();
 }else{

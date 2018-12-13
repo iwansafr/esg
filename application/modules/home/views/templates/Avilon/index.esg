@@ -7,7 +7,7 @@
 <div class="col-md-12">
 	<div class="col-md-3">
 		<div class="panel-group">
-			<a href="#admin/config/logo#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/widget/logo#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Logo</h5>
 			</div>
@@ -20,10 +20,74 @@
 <div class="col-md-12">
 	<div class="col-md-12">
 		<div class="panel-group">
-			<a href="#admin/config/header#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/widget/header#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Header</h5>
 			</div>
 		</div>
+	</div>
+	<div class="col-md-12">
+		{content_thumbnail}
+	</div>
+</div>
+<div class="col-md-12">
+	{content_hot}
+</div>
+<div class="col-md-12">
+	{content_top}
+</div>
+<div class="col-md-12">
+	{content}
+</div>
+<div class="col-md-12">
+	{content_banner}
+</div>
+<div class="col-md-12">
+	{content_bottom}
+</div>
+<div class="col-md-12">
+	{content_brand}
+</div>
+<div class="col-md-12">
+	{content_pricing}
+</div>
+<div class="col-md-12">
+	{content_question}
+</div>
+<div class="col-md-12">
+	{content_team}
+</div>
+<div class="col-md-12">
+	{content_gallery}
+</div>
+<div class="col-md-12">
+	<div class="col-md-6">
+		<div class="panel-group">
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Contact</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel-group">
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Touch</h5>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-6">
+		<div class="panel-group">
+			<a href="#admin/config/widget/site#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Site</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		{menu_bottom}
 	</div>
 </div>

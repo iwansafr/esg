@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 // $form = new zea();
 $this->zea->init('param');
 $this->zea->setTable('config');
@@ -29,5 +29,5 @@ $this->zea->addInput('yahoo', 'text');
 $this->zea->setAttribute('yahoo', array('placeholder'=>'insert your yahoo link'));
 $this->zea->addInput('youtube', 'text');
 $this->zea->setAttribute('youtube', array('placeholder'=>'insert your youtube link'));
-
+$this->zea->setFormName('contact');
 $this->zea->form();
