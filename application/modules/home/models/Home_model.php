@@ -47,8 +47,22 @@ class Home_model extends CI_Model
 
 	public function meta()
 	{
-		$data = $this->esg->get_config('contact');
+		$data = $this->esg->get_config('site');
 		$c_data = $this->esg->get_esg('meta');
+		if(!empty($data))
+		{
+			foreach ($data as $key => $value)
+			{
+				$c_data[$key] = $data[$key];
+			}
+			if(!empty($data['image']))
+			{
+				$c_data['icon'] = $data['image'];
+			}
+			$this->esg->set_esg('meta', $c_data);
+		}
+
+		$data = $this->esg->get_config('contact');
 		if(!empty($data))
 		{
 			$c_data['contact'] = $data;
@@ -96,7 +110,7 @@ class Home_model extends CI_Model
 				$output = array();
 				$data = array();
 				$b_data = array();
-				foreach ($tmp_data as $tmkey => $tmvalue) 
+				foreach ($tmp_data as $tmkey => $tmvalue)
 				{
 					$b_data[$tmvalue['id']] = $tmvalue;
 				}

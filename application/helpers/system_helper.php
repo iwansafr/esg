@@ -279,24 +279,29 @@ function isLink($link = '')
 	return $is_link;
 }
 
-function image_module($module = '', $image = '', $is_uri = false)
+function image_module($module = '', $image = '', $is_uri = '')
 {
-	$base_url = ($is_uri) ? '' : base_url();
+	$base_url = base_url();
 	$src = $base_url.'images/icon.png';
-	$check_path = FCPATH.'images/modules/';
-	if(!empty($module))
+	if(empty($is_uri) || !isLink($is_uri))
 	{
-		$url = $base_url.'images/modules/'.$module.'/';
-		$check_path = $check_path.$module.'/';
-		if(!empty($image))
+		$check_path = FCPATH.'images/modules/';
+		if(!empty($module))
 		{
-			$url = $url.$image;
-			$check_path = $check_path.$image;
-			if(file_exists($check_path))
+			$url = $base_url.'images/modules/'.$module.'/';
+			$check_path = $check_path.$module.'/';
+			if(!empty($image))
 			{
-				$src = $url;
+				$url = $url.$image;
+				$check_path = $check_path.$image;
+				if(file_exists($check_path))
+				{
+					$src = $url;
+				}
 			}
 		}
+	}else{
+		$src = $is_uri;
 	}
 	return $src;
 }
