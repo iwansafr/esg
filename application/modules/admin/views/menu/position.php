@@ -9,4 +9,3 @@
   $this->load->view('pos_list');
   ?>
 </div>
-<?php
