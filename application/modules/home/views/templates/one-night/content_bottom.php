@@ -17,7 +17,7 @@ if(!empty($home['content_bottom']))
 			foreach ($home['content_bottom'] as $key => $value)
 			{
 				?>
-				<div class="col-6 col-md-3">
+				<div class="col-6 col-md-4">
 				  <div class="card">
 				    <img class="img-grid card-img-top" src="<?php echo image_module('content', $value['id'].'/'.$value['image']) ?>" alt="<?php echo $value['title'] ?>">
 				    <div class="card-body">
