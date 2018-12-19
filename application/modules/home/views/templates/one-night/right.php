@@ -1,10 +1,11 @@
 <?php
+$table = array('content_cat'=>'category','content_tag'=>'tag','content'=>'article','content'=>'article');
 if(!empty($home['right']))
 {
 	?>
 	<div class="card">
 	  <div class="card-header">
-	    <?php echo $home['right']['table'] ?>
+	    <?php echo $table[$home['right']['table']] ?>
 	  </div>
 	  <ul class="list-group list-group-flush">
 	  	<?php 
@@ -25,7 +26,7 @@ if(!empty($home['menu_right']))
 	<br>
 	<div class="card">
 	  <div class="card-header">
-	    menu
+	    <?php echo $table[$home['menu_right']['table']] ?>
 	  </div>
 	  <ul class="list-group list-group-flush">
 	  	<?php 
@@ -45,7 +46,7 @@ if(!empty($home['right_extra']))
 	<br>
 	<div class="card">
 	  <div class="card-header">
-	    <?php echo $home['right_extra']['table'] ?>
+	    <?php echo $table[$home['right_extra']['table']] ?>
 	  </div>
 	  <ul class="list-group list-group-flush">
 	  	<?php 
