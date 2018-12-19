@@ -24,13 +24,14 @@ $this->zea->setOptions('par_id',$menu_parent);
 
 $this->zea->addInput('title','text');
 $this->zea->addInput('link','text');
-if(empty($type))
+if(!empty($type))
 {
-	$this->zea->addInput('is_local','hidden');
-	$this->zea->setValue('is_local',0);
-}else{
-	$this->zea->addInput('is_local','hidden');
-	$this->zea->setValue('is_local',1);
+	$this->zea->setValue('link',$type.'/'.@$_GET['slug'].'.html');
+	$this->zea->setAttribute('link', 'readonly');
+}else if(!empty($_GET['slug']))
+{
+	$this->zea->setValue('link',@$_GET['slug'].'.html');
+	$this->zea->setAttribute('link', 'readonly');
 }
 
 $this->zea->addInput('publish','checkbox');

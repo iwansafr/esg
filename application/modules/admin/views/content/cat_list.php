@@ -27,7 +27,7 @@ $form->setImage('image','content_cat');
 $form->addInput('slug','link');
 $form->setLabel('slug','add menu');
 $form->setLink('slug',base_url('admin/menu/edit'),'slug');
-$form->setExtLink('slug', '&type=cat&t='.urlencode(encrypt(time())));
+$form->setExtLink('slug', '&type=category&t='.urlencode(encrypt(time())));
 $form->setPlaintext('slug','<i class="fa fa-plus-circle"></i>  add to menu');
 
 $form->setEditLink('category?id=');

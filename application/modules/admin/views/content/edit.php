@@ -2,12 +2,6 @@
 
 $id = $this->input->get('id');
 
-if(!empty($id))
-{
-  ?>
-  <a href="<?php echo base_url('admin/content_add_menu/'.$id) ?>"><button class="pull-right btn btn-sm btn-success"><span><i class="fa fa-plus-circle"></i></span> add to menu</button></a>
-  <?php
-}
 $this->zea->init('edit');
 $this->zea->setTable('content');
 
