@@ -26,7 +26,7 @@ $this->zea->addInput('author','hidden');
 $this->zea->setValue('author',$this->session->userdata[base_url().'_logged_in']['username']);
 
 $this->zea->addInput('image','upload');
-$this->zea->setAccept('image', '.jpeg,.png');
+$this->zea->setAccept('image', '.jpg,.jpeg,.png');
 
 $this->zea->addInput('image_link','text');
 $this->zea->addInput('icon','text');
@@ -35,7 +35,7 @@ $this->zea->endCollapse('icon');
 $this->zea->setCollapse('image_link',TRUE);
 
 $this->zea->addInput('images','gallery');
-$this->zea->setAccept('images', '.jpeg,.png');
+$this->zea->setAccept('images', '.jpg,.jpeg,.png');
 $this->zea->setAttribute('images','multiple');
 $this->zea->startCollapse('images', 'Gallery');
 $this->zea->endCollapse('images');
