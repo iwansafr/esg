@@ -26,7 +26,7 @@ if(!empty($home['menu_right']))
 	<br>
 	<div class="card">
 	  <div class="card-header">
-	    <?php echo $table[$home['menu_right']['table']] ?>
+	    Menu
 	  </div>
 	  <ul class="list-group list-group-flush">
 	  	<?php 
