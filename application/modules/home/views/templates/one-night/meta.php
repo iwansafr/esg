@@ -2,6 +2,12 @@
 $link = base_url($this->esg->get_esg('navigation')['string']);
 $meta = $this->esg->get_esg('meta');
 $image = image_module('config/site', $meta['icon']);
+if(@$_SERVER['SERVER_NAME'] == 'localhost')
+{
+	$templates['public_template'] = $templates['public_template'];
+}else{
+	$templates['public_template'] = 'https://templates.esoftgreat.com/'.$templates['public_template'];
+}
 ?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
