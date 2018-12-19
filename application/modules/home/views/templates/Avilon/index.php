@@ -575,20 +575,28 @@
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
   <!-- JavaScript Libraries -->
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/jquery/jquery.min.js"></script>
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/jquery/jquery-migrate.min.js"></script>
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/easing/easing.min.js"></script>
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/wow/wow.min.js"></script>
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/superfish/hoverIntent.js"></script>
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/superfish/superfish.min.js"></script>
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/magnific-popup/magnific-popup.min.js"></script>
+  <?php 
+  if(@$_SERVER['SERVER_NAME'] == 'localhost')
+  {
+    $link_template = base_url().'templates/'.$templates['public_template'];
+  }else{
+    $link_template = 'https://templates.esoftgreat.com/'.$templates['public_template'];
+  }
+  ?>
+  <script src="<?php echo $link_template.'/';?>lib/jquery/jquery.min.js"></script>
+  <script src="<?php echo $link_template.'/';?>lib/jquery/jquery-migrate.min.js"></script>
+  <script src="<?php echo $link_template.'/';?>lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo $link_template.'/';?>lib/easing/easing.min.js"></script>
+  <script src="<?php echo $link_template.'/';?>lib/wow/wow.min.js"></script>
+  <script src="<?php echo $link_template.'/';?>lib/superfish/hoverIntent.js"></script>
+  <script src="<?php echo $link_template.'/';?>lib/superfish/superfish.min.js"></script>
+  <script src="<?php echo $link_template.'/';?>lib/magnific-popup/magnific-popup.min.js"></script>
 
   <!-- Contact Form JavaScript File -->
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>contactform/contactform.js"></script>
+  <script src="<?php echo $link_template.'/';?>contactform/contactform.js"></script>
 
   <!-- Template Main Javascript File -->
-  <script src="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>js/main.js"></script>
+  <script src="<?php echo $link_template.'/';?>js/main.js"></script>
 
 </body>
 </html>

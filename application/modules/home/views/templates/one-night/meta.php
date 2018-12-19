@@ -35,7 +35,7 @@ if(@$_SERVER['SERVER_NAME'] == 'localhost')
 <link href="<?php echo $link_template;?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom fonts for this template -->
 <link href="<?php echo $link_template;?>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>templates/<?php echo $templates['public_template'];?>/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $link_template;?>/assets/css/style.css">
 
 
 
