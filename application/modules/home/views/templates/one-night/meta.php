@@ -4,9 +4,9 @@ $meta = $this->esg->get_esg('meta');
 $image = image_module('config/site', $meta['icon']);
 if(@$_SERVER['SERVER_NAME'] == 'localhost')
 {
-	$templates['public_template'] = $templates['public_template'];
+	$link_template = base_url().'templates/'.$templates['public_template'];
 }else{
-	$templates['public_template'] = 'https://templates.esoftgreat.com/'.$templates['public_template'];
+	$link_template = 'https://templates.esoftgreat.com/'.$templates['public_template'];
 }
 ?>
 <meta charset="utf-8">
@@ -32,9 +32,9 @@ if(@$_SERVER['SERVER_NAME'] == 'localhost')
 <meta content="<?php echo $meta['description'] ?>" property="og:description"/>
 <meta content="<?php echo $image ?>" itemprop='url'/>
 <!-- Bootstrap core CSS -->
-<link href="<?php echo base_url();?>templates/<?php echo $templates['public_template'];?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo $link_template;?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom fonts for this template -->
-<link href="<?php echo base_url();?>templates/<?php echo $templates['public_template'];?>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="<?php echo $link_template;?>/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>templates/<?php echo $templates['public_template'];?>/assets/css/style.css">
 
 
