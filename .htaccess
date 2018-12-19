@@ -3,8 +3,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
 
-RewriteCond %{HTTPS} !on
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+# RewriteCond %{HTTPS} !on
+# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
 
 # Allow access from all domains for webfonts.
@@ -15,3 +15,16 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
+
+
+
+# Force https, if not in localhost
+RewriteCond %{HTTP_HOST} !=localhost    
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Force www, if not in localhost
+RewriteCond %{HTTP_HOST} !=localhost
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]{3}$
