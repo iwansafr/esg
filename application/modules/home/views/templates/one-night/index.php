@@ -48,14 +48,10 @@
 						<div class="col">
 							<h5>
 								<?php 
-								$type = '';
-								if(!empty($navigation['array'][0]))
-								{
-									$type = $navigation['array'][0];
-									echo $type.' of ';
-								}
 								if(!empty($navigation['array'][1]))
 						    {
+									$type = $navigation['array'][0];
+									echo $type.' of ';
 					    		$slug  = str_replace('.html','', $navigation['array'][1]);
 					    		$title = str_replace('-', ' ', $slug);
 				    			$link  = '';

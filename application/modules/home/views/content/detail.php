@@ -20,6 +20,7 @@ if(!empty($content))
 					$i = 1;
 					foreach ($data as $key => $value) 
 					{
+						$title = 'image for '.$content['title'];
 						?>
 						<img src="<?php echo image_module('content', 'gallery'.'/'.$content['id'].'/'.$value);?>"  data-toggle="modal" data-target="#img-<?php echo $i;?>" class="img-responsive" style="object-fit: cover;height: 50px;">
 						<!-- Modal -->
@@ -27,7 +28,7 @@ if(!empty($content))
 						  <div class="modal-dialog modal-lg" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title" id="img-<?php echo $i;?>">Modal title</h5>
+						        <h5 class="modal-title" id="img-<?php echo $i;?>"><?php echo $title; ?></h5>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
@@ -55,10 +56,10 @@ if(!empty($content))
 	<div class="row">
 		<div class="col">
 			<p>
-				tag : 
 				<?php
 				if(!empty($content['tag']))
 				{
+					echo 'tag : ';
 					foreach ($content['tag'] as $tkey => $tvalue) 
 					{
 						echo '<a href="'.content_tag_link($tvalue['title']).'"><span class="badge badge-primary">'.$tvalue['title'].'</span></a>';
@@ -66,6 +67,13 @@ if(!empty($content))
 					}
 				}
 				?>
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<p>
+				<span class="badge">author : <?php echo $content['author']; ?></span>
 			</p>
 		</div>
 		<div class="col">
