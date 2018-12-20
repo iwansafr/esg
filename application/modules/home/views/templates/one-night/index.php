@@ -46,16 +46,33 @@
 						  </ol>
 						</nav>
 						<div class="col">
-							<h5>Category 
+							<h5>
 								<?php 
-								if(!empty($content['cat']))
+								$type = '';
+								if(!empty($navigation['array'][0]))
 								{
-									foreach ($content['cat'] as $ckey => $cvalue) 
-									{
-										echo '<a href="'.content_cat_link($cvalue['slug']).'"><span class="badge badge-secondary">'.$cvalue['title'].'</span></a>';
-										echo ' ';
-									}
+									$type = $navigation['array'][0];
+									echo $type.' of ';
 								}
+								if(!empty($navigation['array'][1]))
+						    {
+					    		$slug  = str_replace('.html','', $navigation['array'][1]);
+					    		$title = str_replace('-', ' ', $slug);
+				    			$link  = '';
+				    			switch ($type) {
+				    				case 'category':
+				    					$link = content_cat_link($slug);
+				    					break;
+				    				case 'tag':
+				    					$link = content_tag_link($slug);
+				    					break;
+				    				default:
+				    					$link = '';
+				    					break;
+				    			}
+				    			echo '<a href="'.$link.'"><span class="badge badge-secondary">'.$title.'</span></a>';
+									echo ' ';		
+						    }
 								?>
 							</h5>
 						</div>
