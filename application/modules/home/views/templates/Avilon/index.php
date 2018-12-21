@@ -27,11 +27,7 @@
     </section>
     <section id="features">
       <?php $this->load->view('content_top') ?>
-    </section><!-- #features -->
-
-    <!--==========================
-      Product Advanced Featuress Section
-    ============================-->
+    </section>
     <section id="advanced-features">
 
       <div class="features-row section-bg">

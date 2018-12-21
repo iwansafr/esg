@@ -3,6 +3,23 @@
 if(!empty($content))
 {
 	?>
+	<div class="row">
+		<div class="col">
+			<p>
+				<?php
+				if(!empty($content['cat']))
+				{
+					echo 'category : ';
+					foreach ($content['cat'] as $tkey => $tvalue) 
+					{
+						echo '<a href="'.content_cat_link($tvalue['slug']).'"><span class="badge badge-primary">'.$tvalue['slug'].'</span></a>';
+						echo ' ';
+					}
+				}
+				?>
+			</p>
+		</div>
+	</div>
 	<center>
 		<h3><?php echo $content['title'] ?></h3>
 		<figure class="figure">

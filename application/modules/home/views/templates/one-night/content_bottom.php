@@ -7,7 +7,7 @@ if(!empty($home['content_bottom']))
 	    <a class="nav-link active" href="">category</a>
 	  </li>
 	  <li class="nav-item">
-	  	<marquee><a class="nav-link" href=""><?php echo @$home['content_bottom'][0]['cat_title'] ?></a></marquee>
+	  	<marquee><a class="nav-link" href=""><?php echo @$home['content_bottom'][0]['category']['title'] ?></a></marquee>
 	  </li>
 	</ul>
 	<hr>

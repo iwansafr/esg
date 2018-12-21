@@ -911,10 +911,6 @@ class Zea extends CI_Model
 				$message    = $this->action();
 				$data       = $this->getData();
 			}
-			if(!empty($message))
-			{
-				msg($message['msg'],$message['alert']);
-			}
 			if($this->init == 'edit' || $this->init == 'param')
 			{
 				if($this->init == 'param')
@@ -951,6 +947,11 @@ class Zea extends CI_Model
 						</div>
 						<div class="panel panel-body">
 							<?php
+							if(!empty($message))
+							{
+								msg($message['msg'],$message['alert']);
+							}
+
 							if(empty($data))
 							{
 								$this->setData();
@@ -1061,6 +1062,10 @@ class Zea extends CI_Model
 				<?php
 			}else if($this->init == 'roll')
 			{
+				if(!empty($message))
+				{
+					msg($message['msg'],$message['alert']);
+				}
 				$pagination = $data['pagination'];
 				$data       = $data['data'];
 				$pagination = !empty($data) ? $pagination : '';

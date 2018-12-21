@@ -2,6 +2,7 @@
 
 if(!empty($home['content_hot']))
 {
+	pr($home['content_hot']);
 	foreach ($home['content_hot'] as $key => $value)
 	{
 		?>

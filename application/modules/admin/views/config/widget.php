@@ -17,7 +17,7 @@ if(!empty($active_template))
 		if(!empty($_POST))
 		{
 			$config       = $_POST;
-			$config_title = $config['template'].'_widget';
+			$config_title = @$config['template'].'_widget';
 			$this->zea->init('param');
 			$this->zea->setTable('config');
 			$this->zea->setParamName($config_title);

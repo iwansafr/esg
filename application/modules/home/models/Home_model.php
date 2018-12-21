@@ -160,12 +160,12 @@ class Home_model extends CI_Model
 			{
 				if(is_numeric($id))
 				{
-					$cat_title = $this->db->query('SELECT title FROM content_cat WHERE id = '.$id)->row_array();
+					$category = $this->db->query('SELECT * FROM content_cat WHERE id = '.$id)->row_array();
 				}else{
-					$cat_title['title'] = 'LATEST';
+					$category = array('title'=>'LATEST');
 				}
 				$output = array();
-				$tmp_data[0]['cat_title'] = $cat_title['title'];
+				$tmp_data[0]['category'] = $category;
 				$output[$key] = $tmp_data;
 				$home = $this->esg->get_esg('home');
 				if(!empty($home))
