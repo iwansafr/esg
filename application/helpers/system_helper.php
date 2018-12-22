@@ -292,11 +292,27 @@ function image_module($module = '', $image = '', $is_uri = '')
 			$check_path = $check_path.$module.'/';
 			if(!empty($image))
 			{
-				$url = $url.$image;
-				$check_path = $check_path.$image;
-				if(file_exists($check_path))
+				if(is_array($image))
 				{
-					$src = $url;
+					if(!empty($image['image_link']) && isLink($image['image_link']))
+					{
+						$url = $image['image_link'];
+						$src = $url;
+					}else{
+						$url = $url.$image['id'].'/'.$image['image'];
+						$check_path = $check_path.$image['id'].'/'.$image['image'];
+						if(file_exists($check_path))
+						{
+							$src = $url;
+						}
+					}
+				}else{
+					$url = $url.$image;
+					$check_path = $check_path.$image;
+					if(file_exists($check_path))
+					{
+						$src = $url;
+					}
 				}
 			}
 		}

@@ -2,29 +2,42 @@
 
 if(!empty($home['content_hot']))
 {
-	pr($home['content_hot']);
-	foreach ($home['content_hot'] as $key => $value)
-	{
-		?>
-		<div class="container-fluid">
-	    <div class="section-header">
-	    	<a href="<?php echo content_link($value['slug']) ?>"><h3 class="section-title"><?php echo $value['title'] ?></h3></a>
+	$category = @$home['content_hot'][0]['category'];
+	?>
+	<div class="container-fluid">
+    <div class="section-header">
+    	<?php 
+    	if(!empty($category))
+    	{
+	    	?>
+	    	<a href="<?php echo content_cat_link(@$category['slug']) ?>"><h3 class="section-title"><?php echo $category['title'] ?></h3></a>
 	      <span class="section-divider"></span>
 	      <p class="section-description">
-	        <?php echo $value['description'] ?>
+	        <?php echo @$category['description'] ?>
 	      </p>
-	    </div>
-
+    		<?php
+    	}
+    	?>
+    </div>
+    <?php 
+    foreach ($home['content_hot'] as $key => $value) 
+    {
+	    ?>
 	    <div class="row">
 	      <div class="col-lg-6 about-img wow fadeInLeft">
 	        <img src="<?php echo image_module('content', $value['id'].'/'.$value['image'])?>" alt="">
 	      </div>
 
 	      <div class="col-lg-6 content wow fadeInRight">
+	      	<a href="<?php echo content_link($value['slug']) ?>"><h2><?php echo $value['title'] ?></h2></a>
 	        <?php echo $value['content'] ?>
 	      </div>
 	    </div>
-	  </div>
-		<?php
-	}
+	    <br>
+	    <br>
+    	<?php
+    }
+    ?>
+  </div>
+	<?php
 }
