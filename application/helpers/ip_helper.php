@@ -23,7 +23,7 @@ function ip()
 
 function ip_detail($IPaddress) 
 {
-  $json       = file_get_contents("http://ipinfo.io/{$IPaddress}");
+  $json       = @file_get_contents("http://ipinfo.io/{$IPaddress}");
   $details    = json_decode($json, 1);
   return $details;
 }

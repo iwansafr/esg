@@ -12,4 +12,3 @@
 <script src="<?php echo base_url('templates/'.$this->esg->get_esg('templates')['admin_template']); ?>/assets/dist/js/script.js"></script>
 <?php 
 $this->esg->extra_js();
-?>

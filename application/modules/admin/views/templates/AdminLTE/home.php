@@ -84,3 +84,4 @@ if(is_root())
 {
 	pr(ip_detail(ip()));
 }
+?>

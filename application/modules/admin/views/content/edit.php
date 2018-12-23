@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
 $id = $this->input->get('id');
 
 $this->zea->init('edit');
