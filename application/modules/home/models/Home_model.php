@@ -234,9 +234,9 @@ class Home_model extends CI_Model
 			'browser' => @$_SERVER['HTTP_USER_AGENT'],
 			'visited' => base_url($this->esg->get_esg('navigation')['string']),
 			'ip'      => $ip,
-			'city'    => @$detail['city'],
-			'region'  => @$detail['region'],
-			'country' => @$detail['country']
+			'city'    => ''.@$detail['city'].'',
+			'region'  => ''.@$detail['region'].'',
+			'country' => ''.@$detail['country'].''
 		);
 		$this->db->insert('visitor', $visitor);
 	}
