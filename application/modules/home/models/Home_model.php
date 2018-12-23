@@ -21,6 +21,7 @@ class Home_model extends CI_Model
 		$this->mod();
 		// $this->home();
 		// $this->js();
+		$this->get_visitor();
 	}
 
 	public function mod()
@@ -223,5 +224,15 @@ class Home_model extends CI_Model
 		{
 			$this->esg->set_esg('site', $data);
 		}
+	}
+
+	public function get_visitor()
+	{
+		$visitor = array(
+			'browser' => @$_SERVER['HTTP_USER_AGENT'],
+			'visited' => base_url($this->esg->get_esg('navigation')['string']),
+			'ip'      => ip()
+		);
+		$this->db->insert('visitor', $visitor);
 	}
 }

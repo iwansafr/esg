@@ -91,6 +91,7 @@ class Esg extends CI_Model
 		$user_login = array(
       'user_id' => $user_id,
       'ip'      => ip(),
+      'browser' => @$_SERVER['HTTP_USER_AGENT'],
       'status'  => $status
     );
     $this->db->insert('user_login', $user_login);
