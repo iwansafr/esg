@@ -137,13 +137,13 @@ class Esg extends CI_Model
 					}else{
 						$this->set_esg('msg', array('status'=>'danger','msg'=>'wrong password'));
 						$failed_login++;
-						$this->save_ip(0);
+						$this->save_ip(0,0);
 						$this->session->set_userdata(base_url().'_failed_login', $failed_login);
 					}
 				}else{
 					$this->set_esg('msg', array('status'=>'danger','msg'=>'username is not valid'));
 					$failed_login++;
-					$this->save_ip(0);
+					$this->save_ip(0,0);
 					$this->session->set_userdata(base_url().'_failed_login', $failed_login);
 				}
 			}else{
