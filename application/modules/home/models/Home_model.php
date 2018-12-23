@@ -228,10 +228,15 @@ class Home_model extends CI_Model
 
 	public function get_visitor()
 	{
+		$ip = ip();
+		$detail = ip_detail($ip);
 		$visitor = array(
 			'browser' => @$_SERVER['HTTP_USER_AGENT'],
 			'visited' => base_url($this->esg->get_esg('navigation')['string']),
-			'ip'      => ip()
+			'ip'      => $ip,
+			'city'    => @$detail['city'],
+			'region'  => @$detail['region'],
+			'country' => @$detail['country']
 		);
 		$this->db->insert('visitor', $visitor);
 	}
