@@ -1,3 +1,8 @@
+<style type="text/css">
+  #header{
+    background: linear-gradient(45deg, rgba(29, 224, 153, 0.8), rgba(29, 200, 205, 0.8));
+  }
+</style>
 <div id="logo" class="pull-left">
   <a href="<?php echo base_url() ?>"><img src="<?php echo image_module('config/logo', @$logo['image']) ?>" class="img-responsive" width="<?php echo $logo['width'] ?>"></a>
 </div>

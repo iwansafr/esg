@@ -5,20 +5,14 @@ class Message extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('home_model');
-		$this->load->model('message_model');
-		$this->load->helper('content');
+		$this->load->model('esg_model');
+		$this->load->model('admin_model');
 		$this->load->library('esg');
+		$this->load->library('ZEA/zea');
+		$this->esg_model->init();
 	}
 	public function index()
 	{
-		$this->home_model->home();
 		$this->load->view('index');
-	}
-
-	public function send()
-	{
-		$data['msg'] = $this->message_model->send();
-		$this->load->view('message/send', $data);
 	}
 }

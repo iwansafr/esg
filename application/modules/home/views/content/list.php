@@ -16,13 +16,20 @@ if(!empty($content['data']))
         if(!empty($value['image']))
         {
           ?>
-          <a href="<?php echo $link; ?>"><img class="thumb mr-3" src="<?php echo image_module('content', $value['id'].'/'.$value['image']);?>" alt="<?php echo $value['title'] ?>"></a>
+          <a href="<?php echo $link; ?>"><img class="thumb mr-3" src="<?php echo image_module('content', $value['id'].'/'.$value['image']);?>" alt="<?php echo $value['title'] ?>" width="200"></a>
           <?php
         }
         ?>
         <div class="media-body">
           <a href="<?php echo $link; ?>"><h5 class="mt-0 mb-1"><?php echo $value['title'] ?></h5></a>
           <?php echo $value['intro'] ?>
+          <div class="row">
+            <div class="col">
+              <p class="pull-right">
+                <span class="badge">created : <?php echo content_date($value['created']); ?></span>
+              </p>
+            </div>
+          </div>
         </div>
       </li>
       <?php

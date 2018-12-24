@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <?php $this->load->view('meta') ?>
+ <?php $this->load->view('meta')?>
 </head>
 <body>
   <header id="header">
@@ -9,55 +9,123 @@
       <?php $this->load->view('menu_top') ?>
     </div>
   </header>
-  <section id="intro">
-    <div class="intro-text">
-      <?php
-      $this->load->view('header');
-      ?>
+  <?php 
+  if($mod['content'] == 'home/index')
+  {
+    ?>
+    <section id="intro">
+      <div class="intro-text">
+        <?php
+        $this->load->view('header');
+        ?>
+      </div>
+      <div class="product-screens">
+        <?php
+        $this->load->view("content_thumbnail");
+        ?>
+      </div>
+    </section>
+    <main id="main">
+      <section id="about" class="section-bg">
+        <?php $this->load->view('content_hot') ?>
+      </section>
+      <section id="features">
+        <?php $this->load->view('content_top') ?>
+      </section>
+      <section id="advanced-features">
+        <?php $this->load->view('content') ?>
+      </section>
+      <section id="call-to-action">
+        <?php $this->load->view('content_banner') ?>
+      </section>
+      <section id="more-features" class="section-bg">
+        <?php $this->load->view('content_bottom') ?>
+      </section>
+      <section id="clients">
+        <?php $this->load->view('content_brand') ?>
+      </section>
+      <section id="pricing" class="section-bg">
+        <?php $this->load->view('content_pricing') ?>
+      </section>
+      <section id="faq">
+        <?php $this->load->view('content_question') ?>
+      </section>
+      <section id="team" class="section-bg">
+        <?php $this->load->view('content_team') ?>
+      </section>
+      <section id="gallery">
+        <?php $this->load->view('content_gallery') ?>
+      </section>
+      <section id="contact">
+        <?php $this->load->view('contact') ?>
+      </section>
+    </main>
+    <?php 
+  }else{
+    $title = end($navigation['array']);
+    ?>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="margin-top:100px;">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="<?php echo base_url() ?>">Home</a></li>
+              <?php 
+              if(count($navigation['array'])>1)
+              {
+                $value = end($navigation['array']);
+                $url = '/'.$value;
+                echo '<li class="breadcrumb-item active" aria-current="page">'.$value.'</li>';
+              }
+              if(!empty($content['title']))
+              {
+                echo '<li class="breadcrumb-item active" aria-current="page">'.$content['title'].'</li>';
+              }
+              ?>
+            </ol>
+          </nav>
+          <div class="col">
+            <h5>
+              <?php 
+              if(!empty($navigation['array'][1]))
+              {
+                $type = $navigation['array'][0];
+                echo $type.' of ';
+                $slug  = str_replace('.html','', $navigation['array'][1]);
+                $title = str_replace('-', ' ', $slug);
+                $link  = '';
+                switch ($type) {
+                  case 'category':
+                    $link = content_cat_link($slug);
+                    break;
+                  case 'tag':
+                    $link = content_tag_link($slug);
+                    break;
+                  default:
+                    $link = '';
+                    break;
+                }
+                echo '<a href="'.$link.'"><span class="badge badge-secondary">'.$title.'</span></a>';
+                echo ' ';   
+              }
+              ?>
+            </h5>
+          </div>
+          <hr>
+          <?php
+          $this->load->view($mod['content']);
+          ?>
+        </div>
+      </div>
     </div>
-    <div class="product-screens">
-      <?php
-      $this->load->view("content_thumbnail");
-      ?>
-    </div>
-  </section>
-  <main id="main">
-    <section id="about" class="section-bg">
-      <?php $this->load->view('content_hot') ?>
-    </section>
-    <section id="features">
-      <?php $this->load->view('content_top') ?>
-    </section>
-    <section id="advanced-features">
-      <?php $this->load->view('content') ?>
-    </section>
-    <section id="call-to-action">
-      <?php $this->load->view('content_banner') ?>
-    </section>
-    <section id="more-features" class="section-bg">
-      <?php $this->load->view('content_bottom') ?>
-    </section>
-    <section id="clients">
-      <?php $this->load->view('content_brand') ?>
-    </section>
-    <section id="pricing" class="section-bg">
-      <?php $this->load->view('content_pricing') ?>
-    </section>
-    <section id="faq">
-      <?php $this->load->view('content_question') ?>
-    </section>
-    <section id="team" class="section-bg">
-      <?php $this->load->view('content_team') ?>
-    </section>
-    <section id="gallery">
-      <?php $this->load->view('content_gallery') ?>
-    </section>
-    <section id="contact">
-      <?php $this->load->view('contact') ?>
-    </section>
-
-  </main>
-
+    <main id="main">
+      <section id="contact">
+        <?php $this->load->view('contact') ?>
+      </section>
+    </main>
+    <?php
+  }
+  ?>
   <!--==========================
     Footer
   ============================-->
