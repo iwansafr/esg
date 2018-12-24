@@ -5,6 +5,7 @@ $this->zea->setTable('config');
 $this->zea->setHeading('Contact');
 $this->zea->setParamName('contact');
 $this->zea->addInput('name', 'text');
+$this->zea->addInput('description', 'textarea');
 $this->zea->addInput('address', 'textarea');
 $this->zea->addInput('phone', 'text');
 $this->zea->addInput('wa', 'text');
