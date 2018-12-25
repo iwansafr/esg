@@ -55,7 +55,12 @@ if(!empty($this->esg->get_esg('home')))
 				$attr['bg'] = 'bg-maroon';
 				$attr['icon'] = 'book';
 				$attr['link'] = base_url('admin/user/role');
-				break;			
+				break;	
+			case 'message':
+				$attr['bg'] = 'bg-aqua';
+				$attr['icon'] = 'envelope';
+				$attr['link'] = base_url('admin/message');
+				break;				
 			default:
 				$attr['bg'] = 'bg-light-blue';
 				$attr['icon'] = 'circle-o';
