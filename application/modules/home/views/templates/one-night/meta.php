@@ -8,11 +8,33 @@ if(@$_SERVER['SERVER_NAME'] == 'localhost')
 }else{
 	$link_template = 'https://templates.esoftgreat.com/'.$templates['public_template'];
 }
+
+$module = '';
+$description = @$meta['description'];
+if(!empty($navigation['array'][1]))
+{
+	if($navigation['array'][0] == 'tag')
+	{
+		$module = 'content_tag';
+	}else{
+		$module = 'content_cat';
+	}
+}else{
+	$module = 'content';
+}
+if($mod['content'] == 'home/index')
+{
+	$image = image_module('config/site', $meta['icon']);
+}else{
+	$image = image_module($module, $meta);
+	$description = @$this->esg->get_esg('site')['title'];
+}
+
 ?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><?php echo @$meta['title'] ?> | <?php echo @$meta['description'] ?></title>
+<title><?php echo @$meta['title'] ?> | <?php echo @$description ?></title>
 <meta name="description" content="<?php echo @$meta['description'] ?>">
 <meta name="keywords" content="<?php echo @$meta['keyword'] ?> | esoftgreat">
 <meta name="developer" content="esoftgreat">
