@@ -1,7 +1,6 @@
 <?php
 $link = base_url($this->esg->get_esg('navigation')['string']);
 $meta = $this->esg->get_esg('meta');
-$image = image_module('config/site', $meta['icon']);
 if(@$_SERVER['SERVER_NAME'] == 'localhost')
 {
 	$link_template = base_url().'templates/'.$templates['public_template'];
