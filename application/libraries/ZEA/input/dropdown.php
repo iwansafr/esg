@@ -19,10 +19,6 @@ if(!empty($field))
 		$data_value = $dvalue[$ikey];
 		$field_name = '_row['.$dvalue['id'].']';
 	}
-	if($this->init == 'roll')
-	{
-		unset($this->options[$field][$dvalue['id']]);
-	}
 	$input_array = array(
 			'name'     => $field.''.$field_name,
 			'class'    => 'form-control',
@@ -31,6 +27,10 @@ if(!empty($field))
 			'selected' => $data_value
 		);
 
+	if($this->init == 'roll')
+	{
+		unset($this->options[$field][$dvalue['id']]);
+	}
 
 	if(!empty($this->attribute[$field]))
 	{

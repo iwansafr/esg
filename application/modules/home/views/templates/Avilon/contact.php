@@ -29,7 +29,7 @@
       <div class="info">
         <div>
           <i class="ion-ios-location-outline"></i>
-          <?php echo @$contact['address'] ?>
+          <p>?php echo @$contact['address'] ?></p>
         </div>
 
         <div>
@@ -39,7 +39,7 @@
 
         <div>
           <i class="ion-ios-telephone-outline"></i>
-          <p><?php echo $contact['phone'] ?></p>
+          <p><?php echo @$contact['phone'] ?></p>
         </div>
 
       </div>

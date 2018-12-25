@@ -1,3 +1,6 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+$new_message = @intval($this->esg->get_esg('home')['message']);
+?>
 <header class="main-header">
   <a href="<?php echo base_url('admin') ?>" class="logo">
     <span class="logo-mini"><img src="<?php echo image_module('config', 'site/'.@$this->esg->get_esg('site')['site']['image']); ?>" height="50"></span>
@@ -16,10 +19,11 @@
         <li class="dropdown messages-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-envelope-o"></i>
+            <span class="label label-success"><?php echo $new_message ?></span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header">You dont have messages</li>
-            <li class="footer"><a href="#">See All Messages</a></li>
+            <li class="header"><?php echo (!empty($new_message)) ? 'you have '.$new_message.' new message' : 'you dont have new message';?></li>
+            <li class="footer"><a href="<?php echo base_url('admin/message') ?>">See All Messages</a></li>
           </ul>
         </li>
         <li class="dropdown notifications-menu">

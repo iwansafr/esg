@@ -153,6 +153,7 @@ class Admin_model extends CI_Model
 		$data['menu_position'] = $this->db->query('SELECT id FROM menu_position')->num_rows();
 		$data['user'] = $this->db->query('SELECT id FROM user')->num_rows();
 		$data['user_role'] = $this->db->query('SELECT id FROM user_role')->num_rows();
+		$data['message'] = $this->db->query('SELECT id FROM message WHERE status = 1')->num_rows();
 		$this->esg->set_esg('home', $data);
 	}
 
