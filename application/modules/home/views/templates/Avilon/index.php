@@ -183,6 +183,7 @@
 
   <!-- Template Main Javascript File -->
   <script src="<?php echo $link_template.'/';?>js/main.js"></script>
+  <?php $this->load->view('script') ?>
 
 </body>
 </html>

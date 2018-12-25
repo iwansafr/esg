@@ -59,6 +59,7 @@ if($mod['content'] == 'home/index')
 <script type="text/javascript">
   var _URL = '<?php echo base_url() ?>';
 </script>
+<?php $this->load->view('style') ?>
 
 <link itemprop="thumbnailUrl" href="<?php echo $image ?>">
 <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> <link itemprop="url" href="<?php echo $image ?>"> </span>

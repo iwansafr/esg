@@ -82,3 +82,5 @@
 <script src="<?php echo @base_url('templates').'/'.$templates['public_template'];?>/vendor/jquery/jquery.min.js"></script>
 <script src="<?php echo @base_url('templates').'/'.$templates['public_template'];?>/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo @base_url('templates').'/'.$templates['public_template'];?>/assets/js/script.js"></script>
+
+<?php $this->load->view('script') ?>

@@ -4,7 +4,13 @@ if(!empty($field))
 {
 	if($this->init == 'edit' || $this->init == 'param')
 	{
-		$data_value =  $data[$field];
+		if(!empty($data[$field]))
+		{
+			$data_value =  $data[$field];
+		}elseif(!empty($this->value[$field]))
+		{
+			$data_value = $this->value[$field];
+		}
 		echo form_label(ucfirst($label), $label);
 	}else{
 		$data_value = $dvalue[$ikey];
@@ -13,7 +19,7 @@ if(!empty($field))
 	$array_input = array(
 		'name'  => $field,
 		'class' => 'form-control',
-		'rows'  => 2,
+		'rows'  => 4,
 		'value' => $data_value);
 	if(!empty($this->elementid[$field]))
 	{

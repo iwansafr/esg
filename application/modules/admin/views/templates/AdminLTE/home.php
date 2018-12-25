@@ -82,6 +82,6 @@ if(!empty($this->esg->get_esg('home')))
 echo '</div>';
 if(is_root())
 {
-	pr(ip_detail(ip()));
+	// pr(ip_detail(ip()));
 }
 ?>
