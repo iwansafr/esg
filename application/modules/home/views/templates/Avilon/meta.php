@@ -2,6 +2,7 @@
 $link = base_url($this->esg->get_esg('navigation')['string']);
 $meta = $this->esg->get_esg('meta');
 $module = '';
+$description = @$meta['description'];
 if(!empty($navigation['array'][1]))
 {
 	if($navigation['array'][0] == 'tag')
@@ -18,10 +19,11 @@ if($mod['content'] == 'home/index')
 	$image = image_module('config/site', $meta['icon']);
 }else{
 	$image = image_module($module, $meta);
+	$description = @$this->esg->get_esg('site')['title'];
 }
 ?>
 <meta charset="utf-8">
-<title><?php echo @$meta['title'] ?> | <?php echo @$meta['description'] ?></title>
+<title><?php echo @$meta['title'] ?> | <?php echo @$description ?></title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="<?php echo @$meta['description'] ?>">
