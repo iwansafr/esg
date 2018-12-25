@@ -1,7 +1,24 @@
 <?php
 $link = base_url($this->esg->get_esg('navigation')['string']);
 $meta = $this->esg->get_esg('meta');
-$image = image_module('config/site', $meta['icon']);
+$module = '';
+if(!empty($navigation['array'][1]))
+{
+	if($navigation['array'][0] == 'tag')
+	{
+		$module = 'content_tag';
+	}else{
+		$module = 'content_cat';
+	}
+}else{
+	$module = 'content';
+}
+if($mod['content'] == 'home/index')
+{
+	$image = image_module('config/site', $meta['icon']);
+}else{
+	$image = image_module($module, $meta);
+}
 ?>
 <meta charset="utf-8">
 <title><?php echo @$meta['title'] ?> | <?php echo @$meta['description'] ?></title>

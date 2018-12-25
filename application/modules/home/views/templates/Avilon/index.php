@@ -134,7 +134,7 @@
       <div class="row">
         <div class="col-lg-6 text-lg-left text-center">
           <div class="copyright">
-            &copy; Copyright <strong>Avilon</strong>. All Rights Reserved
+            &copy; Copyright <strong><?php echo @$site['title'] ?></strong>. All Rights Reserved
           </div>
           <div class="credits">
             <!--
@@ -143,7 +143,7 @@
               Licensing information: https://bootstrapmade.com/license/
               Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Avilon
             -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by <a href="<?php echo @$site['link'] ?>"><?php echo @$site['title'] ?></a>
           </div>
         </div>
         <div class="col-lg-6">

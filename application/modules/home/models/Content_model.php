@@ -38,9 +38,27 @@ class Content_model extends CI_Model
 				$data['cat'] = $cat;
 			}
 		}
+		$this->meta($data);
 		$this->esg->set_esg('content', $data);
 	}
 
+
+	public function meta($data = array())
+	{
+		$c_data = $this->esg->get_esg('meta');
+		if(!empty($c_data))
+		{
+			$data = !empty($data['taxonomy']) ? $data['taxonomy'] : $data;
+			foreach ($data as $key => $value) 
+			{
+				if(!is_array($value))
+				{
+					$c_data[$key] = $value;
+				}
+			}
+		}
+		$this->esg->set_esg('meta', $c_data);
+	}
 
 	public function list()
 	{
@@ -61,16 +79,16 @@ class Content_model extends CI_Model
 		}
 		if($module != 'search')
 		{
-			$id = $this->db->query('SELECT id FROM '.$table.' '.$where, $slug)->row_array();
+			$taxonomy = $this->db->query('SELECT * FROM '.$table.' '.$where, $slug)->row_array();
 		}else{
-			$id = TRUE;
+			$taxonomy = TRUE;
 		}
-		if(!empty($id))
+		if(!empty($taxonomy))
 		{
 			$this->zea->init('roll');
 			if($module != 'search')
 			{
-				$id = $id['id'];
+				$id = $taxonomy['id'];
 				$this->zea->setWhere("{$zea_t} LIKE '%,{$id},%' AND publish = 1 ");
 			}
 			$this->zea->setTable('content');
@@ -81,7 +99,9 @@ class Content_model extends CI_Model
 			$this->zea->addInput('slug','plaintext');
 			$this->zea->addInput('created','plaintext');
 			$data = $this->zea->getData();
+			$data['taxonomy'] = @$taxonomy;
 		}
+		$this->meta($data);
 		$this->esg->set_esg('content', $data);
 	}
 
