@@ -56,7 +56,7 @@
 			}
 			?>
 		</ul>
-		<p class="text-center">Copyright @2017 <?php echo !empty($this->esg->get_esg('site')['link']) ? '<a href="'.$this->esg->get_esg('site')['link'].'">'.$this->esg->get_esg('site')['title'].'</a>' : ''; ?> | Powered by <a href="#">esoftgreat</a></p>
+		<p class="text-center">Copyright @<?php echo @$this->esg->get_esg('site')['year']; ?> <?php echo !empty($this->esg->get_esg('site')['link']) ? '<a href="'.$this->esg->get_esg('site')['link'].'">'.$this->esg->get_esg('site')['title'].'</a>' : ''; ?> | Powered by <a href="https://www.esoftgreat.com">esoftgreat</a></p>
 		<ul class="social_footer_ul">
 			<?php 
 			$contact = @$this->esg->get_esg('meta')['contact'];
