@@ -11,7 +11,7 @@ if($mod['content'] != 'home/index')
 }?>
 
 <div id="logo" class="pull-left">
-  <a href="<?php echo base_url() ?>"><img src="<?php echo image_module('config/logo', @$logo['image']) ?>" class="img-responsive" width="<?php echo $logo['width'] ?>"></a>
+  <a href="<?php echo base_url() ?>"><img src="<?php echo image_module('config/logo', @$logo['image']) ?>" class="img-responsive" style="max-width: <?php echo $logo['width'] ?>px;"></a>
 </div>
 <nav id="nav-menu-container">
   <?php
