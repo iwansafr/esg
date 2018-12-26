@@ -7,7 +7,7 @@ if(!empty($home['content_thumbnail']))
 	{
 		?>
 	  <div class="product-screen-<?php echo $i;?> wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.6s">
-      <img src="<?php echo image_module('content', $value['id'].'/'.$value['image'], $value['image_link'])?>" alt="" width="500">
+      <img src="<?php echo image_module('content', $value['id'].'/'.$value['image'], $value['image_link'])?>" alt="" width="300">
     </div>
 		<?php
 		$i++;
