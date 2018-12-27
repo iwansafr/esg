@@ -2,6 +2,7 @@
 
 if(!empty($field))
 {
+	$image_src = array();
 	if(!empty($this->id))
 	{
 		$data_image = $this->db->query('SELECT '.$field.' FROM '.$this->table.' WHERE id = ? ', $this->id)->row_array();
@@ -9,16 +10,13 @@ if(!empty($field))
 		if(!empty($data_image))
 		{
 			$data_image = json_decode($data_image,1);
-			$image_src = array();
 			foreach ($data_image as $di_key => $di_value)
 			{
 				$image_src[$di_key] = !empty($di_value) ? 'gallery'.'/'.$this->id.'/'.$di_value : '';;
 			}
 		}
-
 	}else if($this->init == 'param')
 	{
-		$image_src = array();
 		if(!empty($data[$field]))
 		{
 			foreach ($data[$field] as $di_key => $di_value)
