@@ -18,6 +18,7 @@ $template = $this->esg->get_esg('templates')['admin_template'];
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/bootstrap/css/bootstrap-tagsinput.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/font-awesome-5/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->

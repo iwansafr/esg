@@ -74,12 +74,12 @@ class Admin_model extends CI_Model
 		$menu = array(
 		  array(
 		    'title' => 'Dashboard',
-		    'icon' => 'fa-dashboard',
+		    'icon' => 'fa-tachometer-alt',
 		    'link' => base_url('admin')
 		  ),
 		  array(
 		    'title' => 'Content',
-		    'icon' => 'fa-file-text',
+		    'icon' => 'fa-file-alt',
 		    'link' => base_url('admin/content/'),
 		    'list' => array(
 		    	array(
@@ -89,7 +89,7 @@ class Admin_model extends CI_Model
 		      ),
 		      array(
 		        'title' => 'Add Content',
-		        'icon' => 'fa-pencil',
+		        'icon' => 'fa-pencil-alt',
 		        'link' => base_url('admin/content/edit')
 		      ),
 		      array(
@@ -111,17 +111,17 @@ class Admin_model extends CI_Model
 		    'list' => array(
 		      array(
 		        'title' => 'User List',
-		        'icon' => 'fa-circle-o',
+		        'icon' => 'fa-dot-circle',
 		        'link' => base_url('admin/user/list')
 		      ),
 		      array(
 		        'title' => 'User Add',
-		        'icon' => 'fa-circle-o',
+		        'icon' => 'fa-dot-circle',
 		        'link' => base_url('admin/user/edit')
 		      ),
 		      array(
 		        'title' => 'User Role',
-		        'icon' => 'fa-circle-o',
+		        'icon' => 'fa-dot-circle',
 		        'link' => base_url('admin/user/role'),
 		      ),
 		    )
@@ -146,6 +146,18 @@ class Admin_model extends CI_Model
 		        'icon' => 'fa-list',
 		        'link' => base_url('admin/menu/position')
 		      ),
+		    )
+		  ),
+		  array(
+		    'title' => 'data',
+		    'icon' => 'fa-database',
+		    'link' => base_url('admin/visitor'),
+		    'list' => array(
+		    	array(
+		        'title' => 'Visitor',
+		        'icon' => 'fa-chart-bar',
+		        'link' => base_url('admin/visitor')
+		      )
 		    )
 		  ),
 		  array(

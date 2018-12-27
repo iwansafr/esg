@@ -7,7 +7,7 @@
 <div class="col-md-12">
 	<div class="col-md-4">
 		<div class="panel-group">
-			<a href="#admin/config/logo#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/logo#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Logo</h5>
 			</div>
@@ -41,7 +41,7 @@
 <div class="col-md-12">
 	<div class="col-md-3">
 		<div class="panel-group">
-			<a href="#admin/config/contact#" target="_blank" rel="noopener noreferrer" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/contact#" target="_blank" rel="noopener noreferrer" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Contact</h5>
 			</div>

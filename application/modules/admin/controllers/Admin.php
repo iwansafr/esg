@@ -14,7 +14,7 @@ class Admin extends CI_Controller
 	public function index()
 	{
 		$this->admin_model->home();
-		$this->admin_model->visitor();
+		// $this->admin_model->visitor();
 		$this->load->view('index');
 	}
 

@@ -8,7 +8,7 @@ $title = $title == 'admin' ? 'home' : $title;
 </h1>
 <ol class="breadcrumb">
 	<?php
-	echo '<li><a href="'.base_url('admin').'"> <i class="fa fa-dashboard"></i> Home</a></li>';
+	echo '<li><a href="'.base_url('admin').'"> <i class="fa fa-home"></i> Home</a></li>';
 	if(count($navigation['array']) > 1)
 	{
 		$url = '';

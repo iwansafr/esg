@@ -1226,7 +1226,7 @@ class Zea extends CI_Model
 															{
 																?>
 																<td>
-																	<a href="<?php echo $this->edit_link.$dvalue['id'] ?>" class="btn btn-default" title="click to edit" data-toggle="tooltip" data-placement="top"> <span class="fa fa-pencil"></span></a>
+																	<a href="<?php echo $this->edit_link.$dvalue['id'] ?>" class="btn btn-default" title="click to edit" data-toggle="tooltip" data-placement="top"> <span class="fa fa-pencil-alt"></span></a>
 																</td>
 																<?php
 															}

@@ -18,7 +18,7 @@ $new_message = @intval($this->esg->get_esg('home')['message']);
       <ul class="nav navbar-nav">
         <li class="dropdown messages-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-envelope-o"></i>
+            <i class="fa fa-envelope"></i>
             <span class="label label-success"><?php echo $new_message ?></span>
           </a>
           <ul class="dropdown-menu">
@@ -28,7 +28,7 @@ $new_message = @intval($this->esg->get_esg('home')['message']);
         </li>
         <li class="dropdown notifications-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-bell-o"></i>
+            <i class="fa fa-bell"></i>
           </a>
           <ul class="dropdown-menu">
             <li class="header">You dont have notifications</li>
@@ -39,7 +39,7 @@ $new_message = @intval($this->esg->get_esg('home')['message']);
         </li>
         <li class="dropdown tasks-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-flag-o"></i>
+            <i class="fa fa-flag"></i>
           </a>
           <ul class="dropdown-menu">
             <li class="header">you dont have task</li>
@@ -93,7 +93,7 @@ $new_message = @intval($this->esg->get_esg('home')['message']);
         </li>
         <!-- Control Sidebar Toggle Button -->
         <li>
-          <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          <a href="#" data-toggle="control-sidebar"><i class="fa fa-cogs"></i></a>
         </li>
       </ul>
     </div>

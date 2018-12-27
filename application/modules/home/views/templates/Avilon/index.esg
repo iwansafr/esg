@@ -7,7 +7,7 @@
 <div class="col-md-12">
 	<div class="col-md-3">
 		<div class="panel-group">
-			<a href="#admin/config/widget/logo#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/widget/logo#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Logo</h5>
 			</div>
@@ -20,7 +20,7 @@
 <div class="col-md-12">
 	<div class="col-md-12">
 		<div class="panel-group">
-			<a href="#admin/config/widget/header#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/widget/header#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Header</h5>
 			</div>
@@ -63,7 +63,7 @@
 <div class="col-md-12">
 	<div class="col-md-6">
 		<div class="panel-group">
-			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Contact</h5>
 			</div>
@@ -71,7 +71,7 @@
 	</div>
 	<div class="col-md-6">
 		<div class="panel-group">
-			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Touch</h5>
 			</div>
@@ -81,7 +81,7 @@
 <div class="col-md-12">
 	<div class="col-md-6">
 		<div class="panel-group">
-			<a href="#admin/config/widget/site#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil"></i></a>
+			<a href="#admin/config/widget/site#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
 			<div class="panel panel-default default text-center">
 				<h5>Site</h5>
 			</div>
