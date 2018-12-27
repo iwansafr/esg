@@ -801,6 +801,7 @@ class Zea extends CI_Model
 			$page    = (@intval($_GET['page']) > 0 ) ? $_GET['page']-1 : @intval($_GET['page']);
 			$sort_by = @$_GET['sort_by'];
 			$keyword = @$_GET['keyword'];
+			$id      = @intval($_GET['id']);
 			$where   = '';
 			$bind    = array();
 			$url_get = '';
@@ -818,7 +819,7 @@ class Zea extends CI_Model
 			{
 				$sql     .= ' WHERE ';
 				$url_get .= '?';
-			}else if(!empty($sort_by))
+			}else if(!empty($sort_by) || !empty($id))
 			{
 				$url_get .= '?';
 			}

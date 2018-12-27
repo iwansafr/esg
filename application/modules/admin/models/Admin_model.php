@@ -133,7 +133,7 @@ class Admin_model extends CI_Model
 		    'list' => array(
 		    	array(
 		        'title' => 'Add Menu',
-		        'icon' => 'fa-pencil',
+		        'icon' => 'fa-pencil-alt',
 		        'link' => base_url('admin/menu/edit')
 		      ),
 		      array(
