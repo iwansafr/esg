@@ -56,8 +56,10 @@ if(!empty($field))
 		pr($this->elementid);
 	}
 	echo form_input($array_input);
-	if(!empty($this->image[$field]))
+	if(!empty($this->image[$field]) && !empty(@intval($_GET['id'])))
 	{
+		echo '<div id="thumbnail-'.str_replace(' ','',$this->image[$field]['src']).'">';
 		include 'thumbnail.php';
+		echo '</div>';
 	}
 }

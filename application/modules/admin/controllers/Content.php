@@ -25,6 +25,7 @@ class Content extends CI_Controller
 	public function edit()
 	{
 		$data['tag_name'] = $this->content_model->content_tag();
+		$this->esg->set_esg('extra_js', base_url('templates/AdminLTE/assets/dist/js/modules/content/script.js'));
 		$this->load->view('index', $data);
 		$this->content_model->content_save();
 	}
