@@ -1,0 +1,7 @@
+User-agent: *
+Disallow:
+disallow: /search
+disallow: /admin
+disallow: /images
+disallow: /images/uploads
+allow: /
