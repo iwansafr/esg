@@ -14,6 +14,7 @@
 // .bg-purple,
 // .bg-maroon,
 // .bg-black,
+pr($this->esg->get_esg('visitor'));
 echo '<div class="row">';
 if(!empty($this->esg->get_esg('home')))
 {

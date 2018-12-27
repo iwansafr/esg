@@ -13,6 +13,61 @@ class Admin_model extends CI_Model
 		$this->site();
 	}
 
+	public function visitor()
+	{
+		$data = array();
+		// $data['browser']['chrome'] = $this->db->query("SELECT id FROM visitor WHERE browser LIKE '%Chrome%'")->num_rows();
+		// $data['browser']['firefox'] = $this->db->query("SELECT id FROM visitor WHERE browser LIKE '%Firefox%'")->num_rows();
+		$city = $this->db->query('SELECT city FROM visitor WHERE 1 GROUP BY city')->result_array();
+		$region = $this->db->query('SELECT region FROM visitor WHERE 1 GROUP BY region')->result_array();
+		$country = $this->db->query('SELECT country FROM visitor WHERE 1 GROUP BY country')->result_array();
+		$browser = $this->db->query('SELECT browser FROM visitor WHERE 1 GROUP BY browser')->result_array();
+		if(!empty($city))
+		{
+			foreach ($city as $key => $value) 
+			{
+				if(!empty($value['city']))
+				{
+					$data['city'][$value['city']] = $this->db->query('SELECT id FROM visitor WHERE city = ?', $value['city'])->num_rows();
+				}
+			}
+		}
+		if(!empty($region))
+		{
+			foreach ($region as $key => $value) 
+			{
+				if(!empty($value['region']))
+				{
+					$data['region'][$value['region']] = $this->db->query('SELECT id FROM visitor WHERE region = ?', $value['region'])->num_rows();
+				}
+			}
+		}
+		if(!empty($country))
+		{
+			foreach ($country as $key => $value) 
+			{
+				if(!empty($value['country']))
+				{
+					$data['country'][$value['country']] = $this->db->query('SELECT id FROM visitor WHERE country = ?', $value['country'])->num_rows();
+				}
+			}
+		}
+		if(!empty($browser))
+		{
+			foreach ($browser as $key => $value) 
+			{
+				if(!empty($value['browser']))
+				{
+					$data['browser'][$value['browser']] = $this->db->query('SELECT id FROM visitor WHERE browser = ?', $value['browser'])->num_rows();
+				}
+			}
+		}
+		if(!empty($data))
+		{
+			$this->esg->set_esg('visitor', $data);
+		}
+	}
+
 	public function sidebar_menu()
 	{
 		$data = array();
