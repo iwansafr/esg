@@ -24,7 +24,7 @@ if(!empty($content))
 		<h3><?php echo $content['title'] ?></h3>
 		<figure class="figure">
 			<?php 
-			if(!empty($content['image']))
+			if(!empty($content['image']) || !empty($content['image_link']))
 			{
 				?>
 				<img class="img-responsive image" src="<?php echo image_module('content', $content)?>" style="max-width: 100%; height: auto;">
