@@ -12,5 +12,6 @@ $form->addInput('city','plaintext');
 $form->addInput('region','plaintext');
 $form->addInput('country','plaintext');
 $form->addInput('browser','plaintext');
+$form->addInput('created','plaintext');
 
 $form->form();
