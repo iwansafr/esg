@@ -27,7 +27,7 @@ if(!empty($content))
 			if(!empty($content['image']))
 			{
 				?>
-				<img class="img-responsive image" src="<?php echo image_module('content', $content['id'].'/'.$content['image'])?>">
+				<img class="img-responsive image" src="<?php echo image_module('content', $content)?>">
 				<figcaption class="figure-caption text-center"><?php echo $content['title'] ?></figcaption>
 				<?php 
 				$data = $content['images'];
