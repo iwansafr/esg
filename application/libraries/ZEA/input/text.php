@@ -56,4 +56,8 @@ if(!empty($field))
 		pr($this->elementid);
 	}
 	echo form_input($array_input);
+	if(!empty($this->image[$field]))
+	{
+		include 'thumbnail.php';
+	}
 }

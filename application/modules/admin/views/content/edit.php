@@ -22,6 +22,7 @@ $this->zea->addInput('image','upload');
 $this->zea->setAccept('image', '.jpg,.jpeg,.png');
 
 $this->zea->addInput('image_link','text');
+$this->zea->setImage('image_link', 'content',' image_link');
 $this->zea->addInput('icon','text');
 $this->zea->startCollapse('image_link', 'Image Link');
 $this->zea->endCollapse('icon');

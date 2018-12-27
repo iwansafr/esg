@@ -14,14 +14,15 @@ if(!empty($field))
 	{
 		$this->image[$field]['module'] = 'content';
 	}
-	if(isLink($this->image[$field]['src']))
+	if(!empty($this->image[$field]['src']))
 	{
-		$image_src = $this->image[$field]['src'];
+		$image_src = $data[$field];
 	}else{
 		$image_src = image_module($this->image[$field]['module'], $dvalue['id'].'/'.$data_value);
 	}
 	if(!empty($data_value))
 	{
+		$dvalue['id'] = !empty($dvalue['id']) ? $dvalue['id'] : time();
 		?>
 		<div class="image">
 			<a href="#">
