@@ -20,7 +20,7 @@ if(!empty($home['content_team']))
             <div class="pic">
               <!-- <img src="<?php echo $image_src;?>" alt="" style="object-fit: cover; width: 255px;height: 255px;"> -->
               <div class="image">
-                <a href="#">
+                <a href="#team">
                   <img src="<?php echo $image_src; ?>" class="img-responsive image-thumbnail image" style="object-fit: cover; width: 255px;height: 255px;" data-toggle="modal" data-target="#img_<?php echo $value['id']?>">
                 </a>
               </div>
@@ -30,7 +30,7 @@ if(!empty($home['content_team']))
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="img_title_<?php echo $value['id']?>"><?php echo $value['id'];?></h4>
+                      <h4 class="modal-title" id="img_title_<?php echo $value['id']?>"><?php echo $value['title'];?></h4>
                     </div>
                     <div class="modal-body" style="text-align: center;">
                       <img src="<?php echo $image_src; ?>" class="img-thumbnail img-responsive">
