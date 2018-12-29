@@ -8,7 +8,7 @@ if(!empty($home['content_brand']))
       foreach ($home['content_brand'] as $key => $value) 
       {
         ?>
-        <div class="col-md-2">
+        <div class="col">
           <!-- <img src="<?php echo image_module('content', $value['id'].'/'.$value['image'], $value['image_link']) ?>" alt=""> -->
           <img src="<?php echo image_module('content', $value) ?>" alt="">
         </div>
