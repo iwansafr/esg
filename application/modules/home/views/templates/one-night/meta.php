@@ -25,10 +25,9 @@ if($mod['content'] == 'home/index')
 {
 	$image = image_module('config/site', $meta['icon']);
 }else{
-	$image = image_module($module, $meta);
+	$image = image_module($module,$meta['image'], 1);
 	$description = @$this->esg->get_esg('site')['title'];
 }
-
 ?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
