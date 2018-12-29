@@ -13,10 +13,34 @@ if(!empty($home['content_team']))
       <?php
       foreach($home['content_team'] AS $key => $value)
       {
+        $image_src = image_module('content', $value);
         ?>
         <div class="col-lg-3 col-md-6">
           <div class="member">
-            <div class="pic"><img src="<?php echo image_module('content', $value);?>" alt="" style="object-fit: cover; width: 255px;height: 255px;"></div>
+            <div class="pic">
+              <img src="<?php echo $image_src;?>" alt="" style="object-fit: cover; width: 255px;height: 255px;">
+              <div class="image">
+                <a href="#">
+                  <img src="<?php echo $image_src; ?>" class="img-responsive image-thumbnail image" style="object-fit: cover;width: 50px;height: 50px;" data-toggle="modal" data-target="#img_<?php echo $value['id']?>">
+                </a>
+              </div>
+
+              <div class="modal fade" id="img_<?php echo $value['id']?>" tabindex="-1" role="dialog" aria-labelledby="img_<?php echo $value['id']?>">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="img_title_<?php echo $value['id']?>"><?php echo $value['id'];?></h4>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                      <img src="<?php echo $image_src; ?>" class="img-thumbnail img-responsive">
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <h4><?php echo $value['title'] ?></h4>
             <?php 
             echo html_entity_decode($value['content']);
