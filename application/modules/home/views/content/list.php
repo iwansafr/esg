@@ -16,7 +16,7 @@ if(!empty($content['data']))
         if(!empty($value['image']))
         {
           ?>
-          <a href="<?php echo $link; ?>"><img class="thumb mr-3" src="<?php echo image_module('content', $value['id'].'/'.$value['image']);?>" alt="<?php echo $value['title'] ?>" width="200"></a>
+          <a href="<?php echo $link; ?>"><img class="thumb mr-3" src="<?php echo image_module('content', $value);?>" alt="<?php echo $value['title'] ?>" width="200"></a>
           <?php
         }
         ?>
