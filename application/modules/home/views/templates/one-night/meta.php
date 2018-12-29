@@ -25,7 +25,12 @@ if($mod['content'] == 'home/index')
 {
 	$image = image_module('config/site', $meta['icon']);
 }else{
-	$image = image_module($module,$meta['image'], 1);
+	if($module == 'content_tag')
+	{
+		$image = image_module($module,$meta['image'], 1);
+	}else{
+		$image = image_module($module,$meta);
+	}
 	$description = @$this->esg->get_esg('site')['title'];
 }
 ?>
