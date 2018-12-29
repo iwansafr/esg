@@ -16,7 +16,7 @@ if(!empty($home['content_team']))
         ?>
         <div class="col-lg-3 col-md-6">
           <div class="member">
-            <div class="pic"><img src="<?php echo image_module('content', $value);?>" alt=""></div>
+            <div class="pic"><img src="<?php echo image_module('content', $value);?>" alt="" style="object-fit: cover; width: 255px;height: 255px;"></div>
             <h4><?php echo $value['title'] ?></h4>
             <?php 
             echo html_entity_decode($value['content']);
