@@ -18,10 +18,10 @@ if(!empty($home['content_team']))
         <div class="col-lg-3 col-md-6">
           <div class="member">
             <div class="pic">
-              <img src="<?php echo $image_src;?>" alt="" style="object-fit: cover; width: 255px;height: 255px;">
+              <!-- <img src="<?php echo $image_src;?>" alt="" style="object-fit: cover; width: 255px;height: 255px;"> -->
               <div class="image">
                 <a href="#">
-                  <img src="<?php echo $image_src; ?>" class="img-responsive image-thumbnail image" style="object-fit: cover;width: 50px;height: 50px;" data-toggle="modal" data-target="#img_<?php echo $value['id']?>">
+                  <img src="<?php echo $image_src; ?>" class="img-responsive image-thumbnail image" style="object-fit: cover; width: 255px;height: 255px;" data-toggle="modal" data-target="#img_<?php echo $value['id']?>">
                 </a>
               </div>
 
