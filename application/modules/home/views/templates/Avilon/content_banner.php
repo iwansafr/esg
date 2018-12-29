@@ -12,7 +12,7 @@ if(!empty($home['content_banner']))
         <style type="text/css">
           #call-to-action {
             overflow: hidden;
-            background: linear-gradient(rgba(29, 200, 205, 0.65), rgba(29, 205, 89, 0.2)), url(<?php echo image_module('content', $value['id'].'/'.$value['image'], $value['image_link']) ?>) fixed center center;
+            background: linear-gradient(rgba(29, 200, 205, 0.65), rgba(29, 205, 89, 0.2)), url(<?php echo image_module('content', $value) ?>) fixed center center;
             background-size: cover;
             padding: 80px 0;
           }
