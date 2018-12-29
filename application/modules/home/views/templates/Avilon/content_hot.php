@@ -25,7 +25,7 @@ if(!empty($home['content_hot']))
 	    ?>
 	    <div class="row">
 	      <div class="col-lg-6 about-img wow fadeInLeft">
-	        <img src="<?php echo image_module('content', $value['id'].'/'.$value['image'])?>" alt="">
+	        <img src="<?php echo image_module('content', $value)?>" alt="">
 	      </div>
 
 	      <div class="col-lg-6 content wow fadeInRight">
