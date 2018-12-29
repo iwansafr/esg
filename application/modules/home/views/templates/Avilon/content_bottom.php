@@ -12,7 +12,7 @@ if(!empty($home['content_bottom']))
     <div class="row">
       <?php
       $i = 1;
-      foreach ($home['content'] as $key => $value) 
+      foreach ($home['content_bottom'] as $key => $value) 
       {
         $fade = ($i%2==0) ? 'Right':'Left';
         ?>
