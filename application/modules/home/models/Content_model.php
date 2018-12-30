@@ -49,11 +49,14 @@ class Content_model extends CI_Model
 		if(!empty($c_data))
 		{
 			$data = !empty($data['taxonomy']) ? $data['taxonomy'] : $data;
-			foreach ($data as $key => $value) 
+			if(!empty($data))
 			{
-				if(!is_array($value))
+				foreach ($data as $key => $value) 
 				{
-					$c_data[$key] = $value;
+					if(!is_array($value))
+					{
+						$c_data[$key] = $value;
+					}
 				}
 			}
 		}

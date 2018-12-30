@@ -299,8 +299,8 @@ function image_module($module = '', $image = '', $is_uri = '')
 						$url = $image['image_link'];
 						$src = $url;
 					}else{
-						$url = $url.$image['id'].'/'.$image['image'];
-						$check_path = $check_path.$image['id'].'/'.$image['image'];
+						$url = $url.@intval($image['id']).'/'.@$image['image'];
+						$check_path = $check_path.@intval($image['id']).'/'.@$image['image'];
 						if(file_exists($check_path))
 						{
 							$src = $url;
