@@ -29,7 +29,6 @@ if(!empty($field))
 			$data_value = $this->money[$field].'. '.number_format($data_value,2,',','.');
 		}
 	}
-
 	$type = !empty($this->type[$field]) ? $this->type[$field] : 'text';
 	$array_input = array(
 		'name'    => $field.''.$field_name,

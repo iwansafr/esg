@@ -56,7 +56,10 @@ class Zea extends CI_Model
 	var $money         = array();
 	var $clearget      = array();
 	var $jointable     = array();
+	var $unique        = array();
+	var $msg           = array();
 	var $search        = FALSE;
+	var $success       = FALSE;
 	var $insert_id     = 0;
 
 	public function init($text = '')
@@ -241,6 +244,31 @@ class Zea extends CI_Model
 		if(!empty($sql))
 		{
 			return $this->db->query($sql)->result_array();
+		}
+	}
+
+	public function setUnique($input = array())
+	{
+		if(!empty($input) && is_array($input))
+		{
+			foreach ($input as $key => $value)
+			{
+				foreach ($this->input as $ikey => $ivalue)
+				{
+					if($ivalue['text'] == $value)
+					{
+						$this->unique[] = $value;
+					}
+				}
+			}
+		}else{
+			if($input == 'All')
+			{
+				foreach ($this->input as $ikey => $ivalue)
+				{
+					$this->unique[] = $ivalue;
+				}
+			}
 		}
 	}
 
@@ -950,7 +978,10 @@ class Zea extends CI_Model
 							<?php
 							if(!empty($message))
 							{
-								msg($message['msg'],$message['alert']);
+								foreach ($message as $key => $value) 
+								{
+									msg($value['msg'], $value['alert']);
+								}
 							}
 
 							if(empty($data))
@@ -981,6 +1012,12 @@ class Zea extends CI_Model
 											$this->open_collapse($value['text'], @$collapse_title);
 										}
 									}
+									$class = '';
+									if(in_array($field, $this->unique))
+									{
+										$class = 'has-error';
+									}
+									echo '<div class="form-group '.$class.'">';
 									switch($value['type'])
 									{
 										case 'text':
@@ -1026,6 +1063,7 @@ class Zea extends CI_Model
 											include 'input/hidden.php';
 											break;
 									}
+									echo '</div>';
 									if(!empty($this->endCollapse))
 									{
 										if(@$this->endCollapse[$value['text']] == $value['text'])
@@ -1065,7 +1103,10 @@ class Zea extends CI_Model
 			{
 				if(!empty($message))
 				{
-					msg($message['msg'],$message['alert']);
+					foreach ($message as $key => $value) 
+					{
+						msg($value['msg'], $value['alert']);
+					}
 				}
 				$pagination = $data['pagination'];
 				$data       = $data['data'];
@@ -1319,6 +1360,7 @@ class Zea extends CI_Model
 	{
 		if(!empty($_POST))
 		{
+			$this->success = TRUE;
 			if($this->init == 'edit' || $this->init == 'param')
 			{
 				$data    = array();
@@ -1383,190 +1425,212 @@ class Zea extends CI_Model
 									break;
 								}
 							}
-							if($this->init == 'edit')
+							if(!empty($this->unique))
 							{
-								if($this->set_data($this->table, $this->id, $_POST))
+								foreach ($this->unique as $key => $value) 
 								{
-									$data['msg']   = 'Data Saved Successfully';
-									$data['alert'] = 'success';
-								}
-							}else if($this->init == 'param')
-							{
-								$data_param = array();
-								if(!empty($_POST))
-								{
-									$data_param['name'] = $this->paramname;
-									$data_param['value'] = json_encode($_POST);
-								}
-								if($this->set_param($this->table, $this->paramname, $data_param))
-								{
-									$data['msg']   = 'Data Saved Successfully';
-									$data['alert'] = 'success';
+									$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$_POST[$value])->row_array();
+									if(!empty($data))
+									{
+										$this->success = FALSE;
+										$this->msg[] = array('msg'=>$value.' '.@$_POST[$value].' was exist in table '.$this->table, 'alert' => 'danger');
+									}
 								}
 							}
-							$last_id = $this->db->insert_id();
-							$this->set_insert_id($last_id);
-							if(!empty($upload))
+							if($this->success)
 							{
-								$i = 0;
-								$dir_image = '';
 								if($this->init == 'edit')
 								{
-									$dir_image = !empty($this->id) ? $this->id : $last_id;
-								}else if($this->init == 'param'){
-									$dir_image = $this->paramname;
-								}
-								foreach ($upload as $u_key => $u_value)
-								{
-									$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : $u_value.'_image';
-									if(!empty($_FILES[$upload[$i]]['name']) && empty($_FILES[$upload[$i]]['error']))
+									if($this->set_data($this->table, $this->id, $_POST))
 									{
-										$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
-										$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
-										if(!is_dir($dir))
-										{
-											mkdir($dir, 0777,1);
-										}
-										$ext = pathinfo($_FILES[$upload[$i]]['name']);
-										if($this->check_type($ext['extension'],$u_value))
-										{
-											$file_name = $_POST[$u_value].'_'.time().'.'.$ext['extension'];
-											if($this->init == 'edit')
-											{
-												$file_name_exist = $this->get_one($this->table, $u_value);
-											}else if($this->init == 'param')
-											{
-												$data_image      = json_decode($data_param['value'],1);
-												$file_name_exist = $data_image[$u_value];
-											}
-											if(empty($_POST[$u_value]))
-											{
-												foreach(glob($dir.'/'.$u_value.'_*') as $file)
-												{
-													unlink($file);
-												}
-											}else if(empty($file_name_exist))
-											{
-												foreach(glob($dir.'/'.$u_value.'_*') as $file)
-												{
-													unlink($file);
-												}
-											}
-											copy($_FILES[$upload[$i]]['tmp_name'], $dir.$file_name);
-											if($this->init == 'edit')
-											{
-												$update_file = array($u_value => $file_name);
-												$this->set_data($this->table, $dir_image, $update_file);
-											}else if($this->init == 'param'){
-												foreach ($_POST as $dp_key => $dp_value)
-												{
-													if($dp_key=='image' || preg_match('~_image~', $dp_key))
-													{
-														$_POST[$u_value] = $file_name;
-													}
-												}
-												$data_param['value'] = json_encode($_POST);
-												$data_param['name']  = $dir_image;
-												$this->set_param($this->table, $dir_image, $data_param);
-											}
-										}
+										$data['msg']   = 'Data Saved Successfully';
+										$data['alert'] = 'success';
 									}
-									$i++;
-								}
-							}
-							if(!empty($uploads))
-							{
-								$i = 0;
-								$dir_image = '';
-								if($this->init == 'edit')
+								}else if($this->init == 'param')
 								{
-									$dir_image = !empty($this->id) ? $this->id : $last_id;
-								}else if($this->init == 'param'){
-									$dir_image = $this->paramname;
-								}
-								foreach ($uploads as $u_key => $u_value)
-								{
-									$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : 'image';
-									$files_ready     = true;
-
-									foreach ($_FILES[$uploads[$i]]['error'] as $err_key => $err_value )
+									$data_param = array();
+									if(!empty($_POST))
 									{
-										if(!empty($err_value))
-										{
-											$files_ready = false;
-										}
+										$data_param['name'] = $this->paramname;
+										$data_param['value'] = json_encode($_POST);
 									}
-									if($files_ready)
+									if($this->set_param($this->table, $this->paramname, $data_param))
 									{
-										$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
-										$dir = FCPATH.'images/'.$module.'/gallery'.'/'.$dir_image.'/';
-										if(!is_dir($dir))
-										{
-											mkdir($dir, 0777,1);
-										}
-										$exts = array();
-										$files_name = array();
-										foreach ($_FILES[$uploads[$i]]['name'] as $n_key => $n_value)
-										{
-											$exts[$n_key]       = pathinfo($n_value);
-											$files_name[$n_key] = $_POST[$u_value].'_'.$n_key.'_'.time().'.'.$exts[$n_key]['extension'];
-										}
-										$files_upload = array();
-										$j = 0;
-										foreach ($_FILES[$uploads[$i]]['tmp_name'] as $n_key => $n_value)
-										{
-											$files_upload[$j]['tmp'] = $n_value;
-											$j++;
-										}
-										$j = 0;
-										foreach ($files_name as $f_key => $f_value)
-										{
-											$files_upload[$j]['name'] = $f_value;
-											$j++;
-										}
-										if(!empty($files_upload))
-										{
-											foreach(glob($dir.'/'.$u_value.'_*') as $file)
-											{
-												unlink($file);
-											}
-										}
-										foreach ($files_upload as $fu_key => $fu_value)
-										{
-											copy($fu_value['tmp'], $dir.$fu_value['name']);
-										}
-										$file_name = json_encode($files_name);
+										$data['msg']   = 'Data Saved Successfully';
+										$data['alert'] = 'success';
+									}
+								}
+								$last_id = $this->db->insert_id();
+								$this->set_insert_id($last_id);
+								if(!empty($last_id) || !empty($this->id))
+								{
+									if(!empty($upload))
+									{
+										$i = 0;
+										$dir_image = '';
 										if($this->init == 'edit')
 										{
-											$update_file = array($u_value => $file_name);
-											$this->set_data($this->table, $dir_image, $update_file);
-										}else if($this->init == 'param')
+											$dir_image = !empty($this->id) ? $this->id : $last_id;
+										}else if($this->init == 'param'){
+											$dir_image = $this->paramname;
+										}
+										foreach ($upload as $u_key => $u_value)
 										{
-											foreach ($_POST as $dp_key => $dp_value)
+											$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : $u_value.'_image';
+											if(!empty($_FILES[$upload[$i]]['name']) && empty($_FILES[$upload[$i]]['error']))
 											{
-												if($dp_key=='image')
+												$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
+												$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
+												if(!is_dir($dir))
 												{
-													$_POST[$dp_key] = $file_name;
+													mkdir($dir, 0777,1);
+												}
+												$ext = pathinfo($_FILES[$upload[$i]]['name']);
+												if($this->check_type($ext['extension'],$u_value))
+												{
+													$file_name = $_POST[$u_value].'_'.time().'.'.$ext['extension'];
+													if($this->init == 'edit')
+													{
+														$file_name_exist = $this->get_one($this->table, $u_value);
+													}else if($this->init == 'param')
+													{
+														$data_image      = json_decode($data_param['value'],1);
+														$file_name_exist = $data_image[$u_value];
+													}
+													if(empty($_POST[$u_value]))
+													{
+														foreach(glob($dir.'/'.$u_value.'_*') as $file)
+														{
+															unlink($file);
+														}
+													}else if(empty($file_name_exist))
+													{
+														foreach(glob($dir.'/'.$u_value.'_*') as $file)
+														{
+															unlink($file);
+														}
+													}
+													copy($_FILES[$upload[$i]]['tmp_name'], $dir.$file_name);
+													if($this->init == 'edit')
+													{
+														$update_file = array($u_value => $file_name);
+														$this->set_data($this->table, $dir_image, $update_file);
+													}else if($this->init == 'param'){
+														foreach ($_POST as $dp_key => $dp_value)
+														{
+															if($dp_key=='image' || preg_match('~_image~', $dp_key))
+															{
+																$_POST[$u_value] = $file_name;
+															}
+														}
+														$data_param['value'] = json_encode($_POST);
+														$data_param['name']  = $dir_image;
+														$this->set_param($this->table, $dir_image, $data_param);
+													}
 												}
 											}
-											$data_param['value'] = json_encode($_POST);
-											$data_param['name']  = $dir_image;
-											$this->set_param($this->table, $dir_image, $data_param);
+											$i++;
 										}
 									}
-									$i++;
+									if(!empty($uploads))
+									{
+										$i = 0;
+										$dir_image = '';
+										if($this->init == 'edit')
+										{
+											$dir_image = !empty($this->id) ? $this->id : $last_id;
+										}else if($this->init == 'param'){
+											$dir_image = $this->paramname;
+										}
+										foreach ($uploads as $u_key => $u_value)
+										{
+											$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : 'image';
+											$files_ready     = true;
+
+											foreach ($_FILES[$uploads[$i]]['error'] as $err_key => $err_value )
+											{
+												if(!empty($err_value))
+												{
+													$files_ready = false;
+												}
+											}
+											if($files_ready)
+											{
+												$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
+												$dir = FCPATH.'images/'.$module.'/gallery'.'/'.$dir_image.'/';
+												if(!is_dir($dir))
+												{
+													mkdir($dir, 0777,1);
+												}
+												$exts = array();
+												$files_name = array();
+												foreach ($_FILES[$uploads[$i]]['name'] as $n_key => $n_value)
+												{
+													$exts[$n_key]       = pathinfo($n_value);
+													$files_name[$n_key] = $_POST[$u_value].'_'.$n_key.'_'.time().'.'.$exts[$n_key]['extension'];
+												}
+												$files_upload = array();
+												$j = 0;
+												foreach ($_FILES[$uploads[$i]]['tmp_name'] as $n_key => $n_value)
+												{
+													$files_upload[$j]['tmp'] = $n_value;
+													$j++;
+												}
+												$j = 0;
+												foreach ($files_name as $f_key => $f_value)
+												{
+													$files_upload[$j]['name'] = $f_value;
+													$j++;
+												}
+												if(!empty($files_upload))
+												{
+													foreach(glob($dir.'/'.$u_value.'_*') as $file)
+													{
+														unlink($file);
+													}
+												}
+												foreach ($files_upload as $fu_key => $fu_value)
+												{
+													copy($fu_value['tmp'], $dir.$fu_value['name']);
+												}
+												$file_name = json_encode($files_name);
+												if($this->init == 'edit')
+												{
+													$update_file = array($u_value => $file_name);
+													$this->set_data($this->table, $dir_image, $update_file);
+												}else if($this->init == 'param')
+												{
+													foreach ($_POST as $dp_key => $dp_value)
+													{
+														if($dp_key=='image')
+														{
+															$_POST[$dp_key] = $file_name;
+														}
+													}
+													$data_param['value'] = json_encode($_POST);
+													$data_param['name']  = $dir_image;
+													$this->set_param($this->table, $dir_image, $data_param);
+												}
+											}
+											$i++;
+										}
+									}
 								}
+							}else{
+								return $this->msg;
 							}
 						}else{
 							$data['msg']   = 'Table Undefined';
 							$data['alert'] = 'danger';
+							$this->msg[] = $data;
 						}
 					}else{
 						// $data['msg']   = 'Please Press Submit Button to Save';
 						// $data['alert'] = 'warning';
 					}
 				}
-				return $data;
+				$this->msg[] = $data;
+				return $this->msg;
 			}else if($this->init == 'roll')
 			{
 				$current_data = $this->getdata();
@@ -1683,7 +1747,8 @@ class Zea extends CI_Model
 					$data['msg'] = 'Table Undefined';
 					$data['alert'] = 'danger';
 				}
-				return $data;
+				$this->msg[] = $data;
+				return $this->msg;
 			}
 		}
 	}

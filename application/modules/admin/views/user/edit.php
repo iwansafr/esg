@@ -27,6 +27,7 @@ if(is_admin() || is_root())
 	$this->zea->addInput('active','radio');
 	$this->zea->setRadio('active',array('Not Active','Active'));
 	$this->zea->setRequired(array('user_role_id'));
+	$this->zea->setUnique(array('username','email'));
 	$this->zea->form();
 }else{
 	echo msg('Forbiden and dangerous menu', 'danger');
