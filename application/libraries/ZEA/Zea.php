@@ -1013,7 +1013,7 @@ class Zea extends CI_Model
 										}
 									}
 									$class = '';
-									if(in_array($field, $this->unique) && !empty($_POST))
+									if(in_array($field, $this->unique) && !empty($_POST) && ($this->success == FALSE))
 									{
 										$class = 'has-error';
 									}
