@@ -1013,7 +1013,7 @@ class Zea extends CI_Model
 										}
 									}
 									$class = '';
-									if(in_array($field, $this->unique) && !empty($_POST) && ($this->success == FALSE))
+									if(in_array($field, $this->unique) && !empty($_POST) && ($this->success == FALSE) && array_key_exists($field, $this->msg))
 									{
 										$class = 'has-error';
 									}
@@ -1433,7 +1433,7 @@ class Zea extends CI_Model
 									if(!empty($data))
 									{
 										$this->success = FALSE;
-										$this->msg[] = array('msg'=>$value.' '.@$_POST[$value].' was exist in table '.$this->table, 'alert' => 'danger');
+										$this->msg[$value] = array('msg'=>$value.' '.@$_POST[$value].' was exist in table '.$this->table, 'alert' => 'danger',$value=>'has-error');
 									}
 								}
 							}
