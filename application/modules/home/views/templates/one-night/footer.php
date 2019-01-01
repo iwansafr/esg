@@ -71,7 +71,7 @@
 				}
 				if(!empty($contact['wa']))
 				{
-					echo '<a href="https://wa.me/'.$contact['wa'].'?text=hai+'.@$contact['name'].'"><img src="https://esoftgreat.com/images/uploads/wa.png" style="height: 75px; position: fixed;bottom: 5%; right: 0.5%;z-index: 9999;"></a>';
+					echo '<a href="https://wa.me/'.$contact['wa'].'?text=hai+'.@$contact['name'].'"><img src="https://www.esoftgreat.com/images/wa.png" style="height: 75px; position: fixed;bottom: 5%; right: 0.5%;z-index: 9999;"></a>';
 				}
 			}
 			?>
