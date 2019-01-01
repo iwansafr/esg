@@ -56,6 +56,9 @@
       <section id="gallery">
         <?php $this->load->view('content_gallery') ?>
       </section>
+      <section>
+        <?php $this->load->view('content_team') ?>
+      </section>
       <section id="contact">
         <?php $this->load->view('contact') ?>
       </section>

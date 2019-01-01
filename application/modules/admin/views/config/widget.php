@@ -25,7 +25,13 @@ if(!empty($active_template))
 			$message = $this->zea->action();
 			if(!empty($message))
 			{
-				msg($message['msg'], $message['alert']);
+				foreach ($message as $key => $value) 
+				{
+					if(!empty($value['msg']) && !empty($value['alert']))
+					{
+						msg($value['msg'], $value['alert']);
+					}
+				}
 			}
 		}
 		$config_name = $active_template.'_widget';
