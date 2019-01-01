@@ -56,7 +56,7 @@
       <section id="gallery">
         <?php $this->load->view('content_gallery') ?>
       </section>
-      <section>
+      <section id="payment" class="section-bg">
         <?php $this->load->view('content_team', array('block'=>'content_payment')) ?>
       </section>
       <section id="contact">
