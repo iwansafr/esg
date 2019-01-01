@@ -980,7 +980,10 @@ class Zea extends CI_Model
 							{
 								foreach ($message as $key => $value) 
 								{
-									msg($value['msg'], $value['alert']);
+									if(!empty($value['msg']) && !empty($value['alert']))
+									{
+										msg(@$value['msg'], @$value['alert']);
+									}
 								}
 							}
 
@@ -1105,7 +1108,10 @@ class Zea extends CI_Model
 				{
 					foreach ($message as $key => $value) 
 					{
-						msg($value['msg'], $value['alert']);
+						if(!empty($value['msg']) && !empty($value['alert']))
+						{
+							msg($value['msg'], $value['alert']);
+						}
 					}
 				}
 				$pagination = $data['pagination'];
@@ -1764,7 +1770,7 @@ class Zea extends CI_Model
 		$output = array();
 		foreach((array)$data AS $dt)
 		{
-			if($dt['par_id'] == $par_id)
+			if(@$dt['par_id'] == $par_id)
 			{
 				if(empty($load_parent))
 				{
