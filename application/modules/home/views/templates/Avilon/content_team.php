@@ -1,7 +1,7 @@
 <?php 
 if(!empty($home[$block]))
 {
-  $style = $block == 'content_team' ? 'object-fit: cover; width: 255px;height: 255px;' : 'object-fit: cover; width: 50px;height: 50px;';
+  $style = $block == 'content_team' ? 'object-fit: cover; width: 255px;height: 255px;' : 'object-fit: cover; width: 150px;height: 150px;';
   $category = @$home[$block][0]['category'];
   ?>
   <div class="container">
