@@ -26,7 +26,8 @@ if(!empty($content['data']))
           <div class="row">
             <div class="col">
               <p class="pull-right">
-                <span class="badge">created : <?php echo content_date($value['created']); ?></span>
+                <i class="fa fa-calendar"></i>
+        <span class="font-italic" style="font-family: 'Crete Round', serif;font-size: 14px;">created : <?php echo content_date($value['created']); ?></span>
               </p>
             </div>
           </div>

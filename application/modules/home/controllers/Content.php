@@ -30,6 +30,15 @@ class Content extends CI_Controller
 		$this->load->view('index');
 	}
 
+	public function pdf($slug = '')
+	{
+		if(!empty($slug))
+		{
+			$data['slug'] = $slug;
+			$this->load->view('content/pdf');
+		}
+	}
+
 	public function e()
 	{
 		$this->load->view('error');

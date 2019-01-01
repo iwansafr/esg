@@ -65,4 +65,5 @@ $route['(:any).html']                      = 'home/content/detail';
 $route['category/(:any).html']             = 'home/content/list';
 $route['tag/(:any).html']                  = 'home/content/list';
 $route['message/send']                     = 'home/message/send';
+$route['content/pdf/(:any)']               = 'home/content/pdf';
 $route['translate_uri_dashes']             = FALSE;
