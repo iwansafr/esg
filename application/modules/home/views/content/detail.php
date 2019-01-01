@@ -102,8 +102,6 @@ if(!empty($content))
 	</div>
 	<div class="row">
 		<div class="col">
-			<a class="btn btn-primary btn-sm" target="_blank" style="font-size: 11px;" href="https://web.facebook.com/sharer.php?u=<?php echo urlencode(base_url($navigation['string'])) ?>"><i class="fa fa-facebook"></i> facebook</a>
-			<a class="btn btn-primary btn-sm" target="_blank" style="font-size: 11px;" href="https://twitter.com/intent/tweet?text=<?php echo urlencode($content['title']) ?>&url=<?php echo urlencode(base_url($navigation['string'])) ?>"><i class="fa fa-twitter"></i> twitter</a>
 		</div>
 		<div class="col no-left text-right">
 			<div class="btn-group">
