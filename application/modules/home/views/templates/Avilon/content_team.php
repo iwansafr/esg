@@ -1,6 +1,7 @@
 <?php 
 if(!empty($home[$block]))
 {
+  $style = $block == 'content_team' ? 'object-fit: cover; width: 255px;height: 255px;' : 'object-fit: cover; width: 50px;height: 50px;';
   $category = @$home[$block][0]['category'];
   ?>
   <div class="container">
@@ -21,7 +22,7 @@ if(!empty($home[$block]))
               <!-- <img src="<?php echo $image_src;?>" alt="" style="object-fit: cover; width: 255px;height: 255px;"> -->
               <div class="image">
                 <a href="#team">
-                  <img src="<?php echo $image_src; ?>" class="img-responsive image-thumbnail image" style="object-fit: cover; width: 255px;height: 255px;" data-toggle="modal" data-target="#img_<?php echo $value['id']?>">
+                  <img src="<?php echo $image_src; ?>" class="img-responsive image-thumbnail image" style="<?php echo $style ?>" data-toggle="modal" data-target="#img_<?php echo $value['id']?>">
                 </a>
               </div>
 
