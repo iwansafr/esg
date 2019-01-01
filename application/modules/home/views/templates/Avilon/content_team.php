@@ -1,7 +1,7 @@
 <?php 
-if(!empty($home['content_team']))
+if(!empty($home[$block]))
 {
-  $category = @$home['content_team'][0]['category'];
+  $category = @$home[$block][0]['category'];
   ?>
   <div class="container">
     <div class="section-header">
@@ -11,7 +11,7 @@ if(!empty($home['content_team']))
     </div>
     <div class="row wow fadeInUp">
       <?php
-      foreach($home['content_team'] AS $key => $value)
+      foreach($home[$block] AS $key => $value)
       {
         $image_src = image_module('content', $value);
         ?>
