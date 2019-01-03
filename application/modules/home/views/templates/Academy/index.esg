@@ -1,0 +1,130 @@
+<style type="text/css">
+	.default{
+		margin-top: 5%;
+		height: 40px;
+	}
+</style>
+<div class="col-md-12">
+	<div class="col-md-6">
+		<div class="panel-group">
+			<a href="#admin/config/widget/logo#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Logo</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="panel-group">
+			<div class="panel panel-default default text-center">
+				<h5>Login/register</h5>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<div class="col-md-8">
+		{menu_top}
+	</div>
+	<div class="col-md-4">
+		<div class="panel-group">
+			<a href="#admin/config/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Phone number</h5>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	{content_slider}
+</div>
+<div class="col-md-12">
+	<div class="col-md-3">
+		
+	</div>
+	<div class="col-md-6">
+		{content_top_feature}
+	</div>
+	<div class="col-md-3">
+		
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-3">
+		
+	</div>
+	<div class="col-md-6">
+		{content_course}
+	</div>
+	<div class="col-md-3">
+		
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-3">
+		
+	</div>
+	<div class="col-md-6">
+		{content_testimonials}
+	</div>
+	<div class="col-md-3">
+		
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-3">
+		
+	</div>
+	<div class="col-md-6">
+		{content_popular_course}
+	</div>
+	<div class="col-md-3">
+		
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-3">
+		
+	</div>
+	<div class="col-md-6">
+		{content_partner}
+	</div>
+	<div class="col-md-3">
+		
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-3">
+		
+	</div>
+	<div class="col-md-6">
+		{content_touch}
+	</div>
+	<div class="col-md-3">
+		
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-3">
+		<div class="panel-group">
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Contact</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		{menu_bottom}
+	</div>
+	<div class="col-md-3">
+		{content_gallery}
+	</div>
+	<div class="col-md-3">
+		<div class="panel-group">
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Contact</h5>
+			</div>
+		</div>
+	</div>
+</div>
