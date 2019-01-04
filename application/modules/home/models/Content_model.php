@@ -49,7 +49,7 @@ class Content_model extends CI_Model
 		if(!empty($c_data))
 		{
 			$data = !empty($data['taxonomy']) ? $data['taxonomy'] : $data;
-			if(!empty($data))
+			if(!empty($data) && is_array($data))
 			{
 				foreach ($data as $key => $value) 
 				{
@@ -99,6 +99,7 @@ class Content_model extends CI_Model
 			$this->zea->addInput('title','plaintext');
 			$this->zea->addInput('image','plaintext');
 			$this->zea->addInput('intro','plaintext');
+			$this->zea->addInput('author','plaintext');
 			$this->zea->addInput('slug','plaintext');
 			$this->zea->addInput('created','plaintext');
 			$data = $this->zea->getData();

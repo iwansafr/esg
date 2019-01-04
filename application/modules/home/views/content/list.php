@@ -1,5 +1,4 @@
 <?php
-
 if(!empty($content['data']))
 {
   ?>
@@ -27,7 +26,7 @@ if(!empty($content['data']))
             <div class="col">
               <p class="pull-right">
                 <i class="fa fa-calendar"></i>
-        <span class="font-italic" style="font-family: 'Crete Round', serif;font-size: 14px;">created : <?php echo content_date($value['created']); ?></span>
+                <span class="font-italic" style="font-family: 'Crete Round', serif;font-size: 14px;">created : <?php echo content_date($value['created']); ?></span>
               </p>
             </div>
           </div>
