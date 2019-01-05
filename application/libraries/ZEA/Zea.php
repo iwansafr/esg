@@ -1468,7 +1468,7 @@ class Zea extends CI_Model
 								}
 								$last_id = $this->db->insert_id();
 								$this->set_insert_id($last_id);
-								if(!empty($last_id) || !empty($this->id))
+								if(!empty($last_id) || !empty($this->id) || !empty($this->paramname))
 								{
 									if(!empty($upload))
 									{
