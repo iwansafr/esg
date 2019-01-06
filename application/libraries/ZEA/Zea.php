@@ -1435,7 +1435,12 @@ class Zea extends CI_Model
 							{
 								foreach ($this->unique as $key => $value) 
 								{
-									$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$_POST[$value])->row_array();
+									if(empty($this->id))
+									{
+										$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$_POST[$value])->row_array();
+									}else{
+										$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$_POST[$value], $this->id))->row_array();
+									}
 									if(!empty($data))
 									{
 										$this->success = FALSE;
