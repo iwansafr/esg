@@ -8,5 +8,7 @@ $form->addInput('title', 'text');
 $form->addInput('image', 'upload');
 $form->setAccept('image', 'image/jpeg,image/png');
 $form->addInput('width', 'text');
+$form->setAttribute('width',array('type'=>'number'));
 $form->addInput('height', 'text');
+$form->setAttribute('height',array('type'=>'number'));
 $form->form();
