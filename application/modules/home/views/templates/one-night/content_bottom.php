@@ -2,7 +2,7 @@
 if(!empty($home['content_bottom']))
 {
 	?>
-	<ul class="nav nav-pills">
+	<ul class="nav nav-pills breadcrumb" style="background-color: #263238;">
 	  <li class="nav-item">
 	    <a class="nav-link active" href="">category</a>
 	  </li>

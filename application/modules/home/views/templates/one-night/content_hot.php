@@ -7,7 +7,7 @@ if($mod['content'] == 'home/index')
 }
 
 ?>
-<ul <?php echo $style; ?> class="nav nav-pills">
+<ul <?php echo $style; ?> class="breadcrumb nav nav-pills" style="background-color: #263238;">
   <li class="nav-item">
     <a class="nav-link active" href="#">Hot News</a>
   </li>
