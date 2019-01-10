@@ -23,6 +23,7 @@ $template = $this->esg->get_esg('templates')['admin_template'];
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/bower_components/select2/dist/css/select2.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/dist/css/skins/_all-skins.min.css">

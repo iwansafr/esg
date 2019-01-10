@@ -21,10 +21,11 @@ if(!empty($field))
 	}
 	$input_array = array(
 			'name'     => $field.''.$field_name,
-			'class'    => 'form-control',
+			'class'    => 'form-control select2',
 			'options'  => @$this->options[$field],
 			$required  => $required,
-			'selected' => $data_value
+			'selected' => $data_value,
+			'style'    => 'width: 100%;'
 		);
 
 	if($this->init == 'roll')
