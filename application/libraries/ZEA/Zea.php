@@ -1298,7 +1298,7 @@ class Zea extends CI_Model
 												$tot_col = count($this->input);
 												foreach ($this->input as $inputkey => $inputvalue)
 												{
-													if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
+													if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'number' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
 													{
 														if(empty($this->attribute[$inputvalue['text']]))
 														{
