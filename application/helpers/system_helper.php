@@ -294,7 +294,7 @@ function image_module($module = '', $image = '', $is_uri = '')
 			{
 				if(is_array($image))
 				{
-					if(!empty($image['image_link']) && isLink($image['image_link']))
+					if(!empty($image['image_link']) && isLink($image['image_link']) && getimagesize($image['image_link']))
 					{
 						$url = $image['image_link'];
 						$src = $url;
