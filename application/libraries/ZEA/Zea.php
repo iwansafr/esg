@@ -1314,7 +1314,7 @@ class Zea extends CI_Model
 													{
 														if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
 														{
-															if(empty($this->attribute[$inputvalue['text']]))
+															if(empty($this->attribute[$inputvalue['text']]) || is_array($this->attribute[$inputvalue['text']]))
 															{
 															// $add_text = $inputvalue['type'] == 'text' ? 'Save ' : '';
 																$add_text = 'Save ';
