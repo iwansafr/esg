@@ -19,7 +19,7 @@ if(!empty($p_id))
 }
 $form->setHeading('<a href="'.base_url('admin/menu/edit?po_id='.$id.$ext).'"><button class="btn btn-sm btn-default"><i class="fa fa-plus-circle"></i> new menu</button></a>');
 $form->search();
-
+$form->order_by('sort_order', 'ASC');
 $form->setField(array('title'));
 $form->addInput('id','plaintext');
 $form->addInput('par_id','dropdown');
@@ -33,6 +33,13 @@ $form->tableOptions('position_id','menu_position','id','title');
 $form->setAttribute('position_id','disabled');
 
 $form->addInput('title','plaintext');
+
+if(!empty($id) || !empty($p_id))
+{
+	$form->addInput('sort_order','text');
+	$form->setAttribute('sort_order',array('type'=>'number'));
+	$form->setLabel('sort_order', 'sort');
+}
 
 $form->addInput('link','link');
 $form->setLink('link',base_url('admin/menu'),'id');
