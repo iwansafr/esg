@@ -68,9 +68,14 @@ $(document).ready(function(){
 	});
 
 	$('.del_image').on('click', function(){
-		var a = $(this).parent().parent().attr('class');
+		var a = $(this).parent().parent().attr('data');
 		$(this).closest('.image').remove();
 		$('input[type="hidden"][name="'+a+'"]').val('');
+	});
+	$('.del_images').on('click', function(){
+		var a = $(this).parent().parent().attr('data');
+		$(this).closest('.image').remove();
+		$('input[type="hidden"][value="'+a+'"]').remove();
 	});
 
 });

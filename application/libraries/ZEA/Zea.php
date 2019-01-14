@@ -1404,7 +1404,6 @@ class Zea extends CI_Model
 							$upload  = array();
 							$uploads = array();
 							$title   = '';
-
 							foreach ($this->input as $key => $value)
 							{
 								$upload_type = array('upload','image','file');
@@ -1475,6 +1474,7 @@ class Zea extends CI_Model
 								$this->set_insert_id($last_id);
 								if(!empty($last_id) || !empty($this->id) || !empty($this->paramname))
 								{
+									$post_ori = $_POST;
 									if(!empty($upload))
 									{
 										$i = 0;
@@ -1565,10 +1565,10 @@ class Zea extends CI_Model
 													$files_ready = false;
 												}
 											}
+											$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
+											$dir = FCPATH.'images/'.$module.'/gallery'.'/'.$dir_image.'/';
 											if($files_ready)
 											{
-												$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
-												$dir = FCPATH.'images/'.$module.'/gallery'.'/'.$dir_image.'/';
 												if(!is_dir($dir))
 												{
 													mkdir($dir, 0777,1);
@@ -1595,16 +1595,50 @@ class Zea extends CI_Model
 												}
 												if(!empty($files_upload))
 												{
-													foreach(glob($dir.'/'.$u_value.'_*') as $file)
+													$tmp_file_name = array();
+													$file_name = string_to_array($post_ori[$u_value]);
+													if(is_array($file_name))
 													{
-														unlink($file);
+														foreach ($file_name as $flkey => $flvalue) {
+															$tmp_file_name[] = $flvalue;
+														}
+														$file_name = json_encode($tmp_file_name);
+														foreach(glob($dir.'/'.$u_value.'_*') as $file)
+														{
+															$current_file = explode('/',$file);
+															$current_file = end($current_file);
+															if(!in_array($current_file, $tmp_file_name))
+															{
+																unlink($file);
+															}
+														}
 													}
 												}
 												foreach ($files_upload as $fu_key => $fu_value)
 												{
 													copy($fu_value['tmp'], $dir.$fu_value['name']);
 												}
-												$file_name = json_encode($files_name);
+												if(is_array($files_name))
+												{
+													$file_name = json_encode($files_name);
+												}else{
+													$file_name = string_to_array($files_name);
+													$file_name = json_encode($file_name);
+												}
+												if(!empty($tmp_file_name))
+												{
+													$new_file_name = array_merge($files_name, $tmp_file_name);
+												}
+												if(!empty($new_file_name))
+												{
+													if(is_array($new_file_name))
+													{
+														$file_name = json_encode($new_file_name);
+													}else{
+														$file_name = string_to_array($new_file_name);
+														$file_name = json_encode($file_name);
+													}
+												}
 												if($this->init == 'edit')
 												{
 													$update_file = array($u_value => $file_name);
@@ -1620,7 +1654,48 @@ class Zea extends CI_Model
 													}
 													$data_param['value'] = json_encode($_POST);
 													$data_param['name']  = $dir_image;
-													$this->set_param($this->table, $dir_image, $data_param);
+													// $this->set_param($this->table, $dir_image, $data_param);
+												}
+											}else{
+												$tmp_file_name = array();
+												$file_name = string_to_array($post_ori[$u_value]);
+												if(is_array($file_name))
+												{
+													foreach ($file_name as $flkey => $flvalue) {
+														$tmp_file_name[] = $flvalue;
+													}
+													$file_name = json_encode($tmp_file_name);
+													if($this->init == 'edit')
+													{
+														$update_file = array($u_value => $file_name);
+														$this->set_data($this->table, $dir_image, $update_file);
+													}else if($this->init == 'param')
+													{
+														foreach ($_POST as $dp_key => $dp_value)
+														{
+															if($dp_key=='images')
+															{
+																$_POST[$dp_key] = $file_name;
+															}
+														}
+														$data_param['value'] = json_encode($_POST);
+														$data_param['name']  = $dir_image;
+														$this->set_param($this->table, $dir_image, $data_param);
+													}
+													foreach(glob($dir.'/'.$u_value.'_*') as $file)
+													{
+														$current_file = explode('/',$file);
+														$current_file = end($current_file);
+														if(!in_array($current_file, $tmp_file_name))
+														{
+															unlink($file);
+														}
+													}
+												}else{
+													foreach(glob($dir.'/'.$u_value.'_*') as $file)
+													{
+														unlink($file);
+													}
 												}
 											}
 											$i++;

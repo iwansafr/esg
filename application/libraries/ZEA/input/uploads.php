@@ -9,6 +9,10 @@ if(!empty($field))
 		$data_image = $data_image[$field];
 		if(!empty($data_image))
 		{
+			if(empty(json_decode($data_image)))
+			{
+				$data_image = string_to_array($data_image);
+			}
 			$data_image = json_decode($data_image,1);
 			foreach ($data_image as $di_key => $di_value)
 			{
@@ -32,12 +36,12 @@ if(!empty($field))
 		foreach ($image_src as $im_key => $im_value)
 		{
 			?>
-			<div class="col-md-3">
-				<div class="image">
+			<div class="col-md-2">
+				<div class="image" data="<?php echo $data_image[$im_key] ?>">
 					<a href="#">
 						<img src="<?php echo image_module($this->table, $im_value) ?>" class="img-responsive image-thumbnail image" style="object-fit: cover;width: 200px;height: 140px;" data-toggle="modal" data-target="#img_<?php echo $field.$im_key?>">
 					</a>
-					<!-- <span><a href="#del_image" class="del_image"><i class="fa fa-close" style="position: relative;top: -135px;right: -180px;color: red;"></i></a></span> -->
+					<span><a href="#del_image" class="del_images"><i class="fa fa-close" style="position: relative;top: -135px;right: -180px;color: red;"></i></a></span>
 				</div>
 
 				<div class="modal fade" id="img_<?php echo $field.$im_key?>" tabindex="-1" role="dialog" aria-labelledby="img_<?php echo $field.$im_key?>">
@@ -65,7 +69,7 @@ if(!empty($field))
 		'class'  => 'form-control',
 		'accept' => @$this->accept[$field],
 		$required => $required,
-		'value'  => $value_input
+		// 'value'  => $value_input
 		);
 	if(!empty($this->attribute[$field]))
 	{
@@ -85,18 +89,20 @@ if(!empty($field))
 	if(!empty($this->id) || ($this->init == 'param'))
 	{
 		$data_loop = ($this->init == 'param') ? $data[$field] : $data_image;
-		if(is_array($data_loop))
-		{
-			$data_loop = json_encode($data_loop);
-		}
-		echo form_hidden($field, $data_loop);
-		// if(!empty($data_loop) && is_array($data_loop))
+		// if(is_array($data_loop))
 		// {
-		// 	foreach ($data_loop as $di_key => $di_value)
-		// 	{
-		// 		echo form_hidden($field.'[]',$di_value);
-		// 	}
+		// 	$data_loop = json_encode($data_loop);
 		// }
+		// echo form_hidden($field, $data_loop);
+		if(!empty($data_loop) && is_array($data_loop))
+		{
+			// pr($data_loop);
+			foreach ($data_loop as $di_key => $di_value)
+			{
+				// echo form_hidden($field.'[]',$di_value);
+				echo form_hidden($field.'[]',$di_value);
+			}
+		}
 	}else{
 		echo form_hidden($field,'');
 	}
