@@ -56,9 +56,11 @@
       <section id="gallery">
         <?php $this->load->view('content_gallery') ?>
       </section>
-      <section id="payment" class="section-bg">
-        <?php $this->load->view('content_team', array('block'=>'content_payment')) ?>
-      </section>
+      <?php if (!empty($home['content_payment'])): ?>
+        <section id="payment" class="section-bg">
+          <?php $this->load->view('content_team', array('block'=>'content_payment')) ?>
+        </section>
+      <?php endif ?>
       <section id="contact">
         <?php $this->load->view('contact') ?>
       </section>
