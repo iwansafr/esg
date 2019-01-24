@@ -2,7 +2,7 @@
 	.badge_tag{
     text-transform: none!important;
     display: inline!important;
-    letter-spacing: 2px;
+    color: white!important;
 	}
 </style>
 <div class="container">
