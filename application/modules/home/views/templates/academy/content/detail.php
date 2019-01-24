@@ -1,3 +1,10 @@
+<style type="text/css">
+	.badge_tag{
+    text-transform: none;
+    display: inline;
+    letter-spacing: 2px;
+	}
+</style>
 <div class="container">
 	<div class="row">
 		<div class="col-12">
@@ -73,7 +80,7 @@
 								echo 'tag : ';
 								foreach ($content['tag'] as $tkey => $tvalue) 
 								{
-									echo '<a href="'.content_tag_link($tvalue['title']).'"><span class="badge badge-primary">'.$tvalue['title'].'</span></a>';
+									echo '<a href="'.content_tag_link($tvalue['title']).'"><span class="badge badge-primary badge_tag">'.$tvalue['title'].'</span></a>';
 									echo ' ';
 								}
 							}
