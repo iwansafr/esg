@@ -1,7 +1,7 @@
 <style type="text/css">
 	.badge_tag{
-    text-transform: none;
-    display: inline;
+    text-transform: none!important;
+    display: inline!important;
     letter-spacing: 2px;
 	}
 </style>
