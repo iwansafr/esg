@@ -22,6 +22,7 @@ class Esg extends CI_Model
     $tag_ids = array();
     foreach ($post['tag_ids'] as $key => $value)
     {
+    	$value = url_title($value);
       $tag_exist = $this->db->query('SELECT title FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
       $tag_exist = $tag_exist['title'];
       if(empty($tag_exist))
@@ -43,6 +44,7 @@ class Esg extends CI_Model
         $tag_ids[] = $tag_id;
       }
     }
+    $tag_ids = array_unique($tag_ids);
     $post['tag_ids'] = ','.implode($tag_ids,',').',';
     return $post['tag_ids'];
   }

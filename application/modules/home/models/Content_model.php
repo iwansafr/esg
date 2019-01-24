@@ -83,6 +83,7 @@ class Content_model extends CI_Model
 		if($module != 'search')
 		{
 			$taxonomy = $this->db->query('SELECT * FROM '.$table.' '.$where, $slug)->row_array();
+			pr($this->db->last_query());
 		}else{
 			$taxonomy = TRUE;
 		}

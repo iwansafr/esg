@@ -4,6 +4,9 @@
     display: inline!important;
     color: white!important;
 	}
+	.modal-backdrop{
+		z-index: unset!important;
+	}
 </style>
 <div class="container">
 	<div class="row">
@@ -43,7 +46,7 @@
 									<img src="<?php echo image_module('content', 'gallery'.'/'.$content['id'].'/'.$value);?>"  data-toggle="modal" data-target="#img-<?php echo $i;?>" class="img-responsive" style="object-fit: cover;height: 50px;">
 									<!-- Modal -->
 									<div class="modal fade" id="img-<?php echo $i;?>" tabindex="-1" role="dialog" aria-labelledby="img-<?php echo $i;?>" aria-hidden="true">
-									  <div class="modal-dialog modal-lg" role="document">
+									  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 									    <div class="modal-content">
 									      <div class="modal-header">
 									        <h5 class="modal-title" id="img-<?php echo $i;?>"><?php echo $title; ?></h5>
