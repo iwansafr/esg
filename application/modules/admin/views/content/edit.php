@@ -35,6 +35,12 @@ $this->zea->startCollapse('images', 'Gallery');
 $this->zea->endCollapse('images');
 $this->zea->setCollapse('images',TRUE);
 
+$this->zea->addInput('files','uploads');
+$this->zea->setAccept('files', '.doc,.docx,.xls,.xlsx,.pdf,.ppt,.pptx');
+$this->zea->setAttribute('files','multiple');
+$this->zea->startCollapse('files', 'Files');
+$this->zea->endCollapse('files');
+$this->zea->setCollapse('files',TRUE);
 
 $this->zea->addInput('keyword','textarea');
 $this->zea->setLabel('keyword','Meta Keyword');
