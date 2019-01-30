@@ -742,7 +742,7 @@ class Zea extends CI_Model
 			$types = array_unique($types);
 			foreach ($types as $key => $value)
 			{
-				if(strtolower($value) == '.'.$type)
+				if(strtolower($value) == '.'.strtolower($type))
 				{
 					$result = TRUE;
 					$this->file_error[$title] = '';
