@@ -1557,12 +1557,14 @@ class Zea extends CI_Model
 										{
 											$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : 'image';
 											$files_ready     = true;
-
-											foreach ($_FILES[$uploads[$i]]['error'] as $err_key => $err_value )
+											if(!empty($_FILES[$uploads[$i]]['error']))
 											{
-												if(!empty($err_value))
+												foreach ($_FILES[$uploads[$i]]['error'] as $err_key => $err_value )
 												{
-													$files_ready = false;
+													if(!empty($err_value))
+													{
+														$files_ready = false;
+													}
 												}
 											}
 											$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
