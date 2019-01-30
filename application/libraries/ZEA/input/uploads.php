@@ -7,7 +7,7 @@ if(!empty($field))
 	{
 		$data_image = $this->db->query('SELECT '.$field.' FROM '.$this->table.' WHERE id = ? ', $this->id)->row_array();
 		$data_image = $data_image[$field];
-		if(!empty($data_image))
+		if(!empty($data_image) || $data_image != '[]')
 		{
 			if(empty(json_decode($data_image)))
 			{
