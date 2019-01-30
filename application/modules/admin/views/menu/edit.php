@@ -34,6 +34,13 @@ if(!empty($type))
 	$this->zea->setAttribute('link', 'readonly');
 }
 
+if(is_root() || is_admin())
+{
+	$this->zea->addInput('tpl','dropdown');
+	$this->zea->setLabel('tpl','template');
+	$this->zea->setOptions('tpl', $template);
+}
+
 $this->zea->addInput('publish','checkbox');
 
 $this->zea->setRequired(array('title','link'));

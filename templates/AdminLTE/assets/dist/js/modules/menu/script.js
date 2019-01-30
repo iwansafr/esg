@@ -5,6 +5,22 @@ $(document).ready(function(){
 	// {
 	// 	var _ID=0;
 	// }
+
+	start();
+
+	function start(){
+		var a = $('input[name="link"]').val();
+		set_tpl(a);
+	}
+
+	function set_tpl(a){
+		if(a.includes('/'))
+		{
+			$('select[name="tpl"').closest('.form-group').removeClass('hidden');
+		}else{
+			$('select[name="tpl"').closest('.form-group').addClass('hidden');
+		}
+	}
 	function set_option(select,data)
 	{
 		while (select[0].options.length) {
@@ -15,8 +31,11 @@ $(document).ready(function(){
 		  var option = data[i];
 		  select[0].options.add( new Option(option.text, option.value, option.selected) );
 		}
-
 	}
+	$('input[name="link"]').on('change', function(){
+		var a = $(this).val();
+		set_tpl(a);
+	});
 
 	$('select[name="position_id"]').on('change', function(){
 		var a = $(this).val();

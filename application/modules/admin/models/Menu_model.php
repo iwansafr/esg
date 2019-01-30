@@ -125,4 +125,23 @@ class Menu_model extends CI_Model
 		$data = json_encode($data);
 		return $data;
 	}
+
+	public function template()
+	{
+		$q = $this->db->field_exists('tpl','menu');
+		if(!$q){
+			$this->db->query('ALTER TABLE `menu` CHANGE `is_local` `tpl` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL');
+		}
+		$public_template = $this->esg->get_esg('templates')['public_template'];
+		$template = array(''=>'None');
+		foreach(glob(FCPATH.'application/modules/home/views/templates/'.$public_template.'/content_*.php') as $file)
+		{
+			$template_dir = explode('/', $file);
+			$template_name = end($template_dir);
+			$template_name = str_replace('.php', '', $template_name);
+			$template[$template_name] = $template_name;
+		}
+		// pr($template);
+		return $template;
+	}
 }
