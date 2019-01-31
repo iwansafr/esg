@@ -24,7 +24,7 @@ if(!empty($home['content_top']))
             {
               ?>
               <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.<?php echo $i; ?>s">
-                <div class="icon"><i class="fa <?php echo $value['icon'] ?>"></i></div>
+                <div class="icon"><i class="fa <?php echo @$value['icon'] ?>"></i></div>
                 <h4 class="title"><a href="<?php echo content_link($value['slug']) ?>"><?php echo $value['title'];?></a></h4>
                 <p class="description"><?php echo $value['description'] ?></p>
               </div>

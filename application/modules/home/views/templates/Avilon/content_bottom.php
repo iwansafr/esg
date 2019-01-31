@@ -19,7 +19,7 @@ if(!empty($home['content_bottom']))
           ?>
           <div class="col-lg-6">
             <div class="box wow fadeIn<?php echo $fade;?>">
-              <div class="icon"><i class="fa <?php echo $value['icon'] ?>"></i></div>
+              <div class="icon"><i class="fa <?php echo @$value['icon'] ?>"></i></div>
               <h4 class="title"><a href="<?php echo content_link($value['slug']) ?>"><?php echo $value['title'] ?></a></h4>
               <p class="description"><?php echo $value['description'] ?></p>
             </div>
