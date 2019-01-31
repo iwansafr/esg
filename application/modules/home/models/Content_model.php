@@ -111,6 +111,7 @@ class Content_model extends CI_Model
 			$this->zea->addInput('image_link','plaintext');
 			$this->zea->addInput('intro','plaintext');
 			$this->zea->addInput('content','plaintext');
+			$this->zea->addInput('description','plaintext');
 			$this->zea->addInput('author','plaintext');
 			$this->zea->addInput('slug','plaintext');
 			$this->zea->addInput('created','plaintext');
