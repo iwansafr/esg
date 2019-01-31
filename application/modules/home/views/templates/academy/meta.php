@@ -35,7 +35,7 @@ if($mod['content'] == 'home/index')
 <link rel="icon" href="<?php echo $image ?>">
 
 <!-- Core Stylesheet -->
-<link rel="stylesheet" href="<?php echo base_url('templates/academy')?>/style.css">
+<link rel="stylesheet" href="<?php echo $link_template?>/style.css">
 
 <meta name="description" content="<?php echo @$meta['description'] ?>">
 <meta name="keywords" content="<?php echo @$meta['keyword'] ?> | esoftgreat">

@@ -42,18 +42,18 @@ if(!empty($field))
 			<div class="col-md-3 col-lg-2 col-xl-3">
 				<div class="image" data="<?php echo $data_image[$im_key] ?>">
 					<?php if (in_array(strtolower($multi_file['extension']), $image_type)): ?>
-						<span><a href="#del_image" class="del_images"><i class="fa fa-close pull-right" style="color: red;"></i></a></span>
+						<span><a href="#del_image" class="del_images"><i class="fa fa-close" style="color: red;"></i></a></span>
 						<a href="#">
 							<img src="<?php echo image_module($this->table, $im_value) ?>" class="img-responsive image-thumbnail image" style="object-fit: cover;width: 200px;height: 140px;" data-toggle="modal" data-target="#img_<?php echo $field.$im_key?>">
 						</a>
 					<?php else: ?>
-						<span><a href="#del_image" class="del_images"><i class="fa fa-close pull-right" style="color: red;"></i></a></span>
+						<span><a href="#del_image" class="del_images"><i class="fa fa-close" style="color: red;"></i></a></span><br>
 						<a href="<?php echo image_module($this->table, $im_value); ?>">
 							<i class="fa fa-file-alt" style="font-size: 140px;" title="<?php echo $multi_file['basename'] ?>"></i>
 						</a>
 					<?php endif ?>
 				</div>
-
+				<br>
 				<div class="modal fade" id="img_<?php echo $field.$im_key?>" tabindex="-1" role="dialog" aria-labelledby="img_<?php echo $field.$im_key?>">
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">

@@ -66,40 +66,50 @@ class Content_model extends CI_Model
 	public function list()
 	{
 		$module = @$this->esg->get_esg('navigation')['array'][0];
+		$zea_t  = 'title';
+		$taxonomy = TRUE;
 		if($module != 'search')
 		{
-			$table  = $module == 'category' ? 'content_cat' : 'content_tag';
-			$where  = $module == 'category' ? 'WHERE slug = ? AND publish = 1 ' : 'WHERE title = ? ';
-			$zea_t  = $module == 'category' ? 'cat_ids' : 'tag_ids';
-			$slug   = end($this->esg->get_esg('navigation')['array']);
-		}else{
-			$zea_t  = 'title';
-		}
-		$data   = array();
-		if(!empty($slug))
-		{
-			$slug = str_replace('.html', '', $slug);
-		}
-		if($module != 'search')
-		{
+			if($module=='category')
+			{
+				$table  = 'content_cat';
+				$where  = 'WHERE slug = ? AND publish = 1 ';
+				$zea_t  = 'cat_ids';
+			}else{
+				$table  = 'content_tag';
+				$where  = 'WHERE title = ? ';
+				$zea_t  = 'tag_ids';
+			}
+			$slug = end($this->esg->get_esg('navigation')['array']);
+			$link = @$this->esg->get_esg('navigation')['string'];
+			if(!empty($link))
+			{
+				$tpl = $this->db->query('SELECT tpl FROM menu WHERE link = ?', $link)->row_array();
+				if(!empty($tpl))
+				{
+					$tpl = $tpl['tpl'];
+					$this->esg->set_esg('tpl', $tpl);
+				}
+			}
+			if(!empty($slug))
+			{
+				$slug = str_replace('.html', '', $slug);
+			}
 			$taxonomy = $this->db->query('SELECT * FROM '.$table.' '.$where, $slug)->row_array();
-		}else{
-			$taxonomy = TRUE;
+			$id       = $taxonomy['id'];
 		}
+		$this->zea->setWhere("{$zea_t} LIKE '%,{$id},%' AND publish = 1 ");
+		$data = array();
 		if(!empty($taxonomy))
 		{
 			$this->zea->init('roll');
-			if($module != 'search')
-			{
-				$id = $taxonomy['id'];
-				$this->zea->setWhere("{$zea_t} LIKE '%,{$id},%' AND publish = 1 ");
-			}
 			$this->zea->setTable('content');
 			$this->zea->addInput('id','plaintext');
 			$this->zea->addInput('title','plaintext');
 			$this->zea->addInput('image','plaintext');
 			$this->zea->addInput('image_link','plaintext');
 			$this->zea->addInput('intro','plaintext');
+			$this->zea->addInput('content','plaintext');
 			$this->zea->addInput('author','plaintext');
 			$this->zea->addInput('slug','plaintext');
 			$this->zea->addInput('created','plaintext');

@@ -38,6 +38,13 @@ class Home_model extends CI_Model
 		if(!empty($data))
 		{
 			$this->esg->set_esg('templates', $data);
+		 	if(@$_SERVER['SERVER_NAME'] == 'localhost')
+		  {
+		    $link_template = base_url().'templates/'.$data['public_template'];
+		  }else{
+		    $link_template = 'https://templates.esoftgreat.com/'.$data['public_template'];
+		  }
+			$this->esg->set_esg('link_template', $link_template);
 		}
 	}
 

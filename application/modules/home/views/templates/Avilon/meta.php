@@ -21,12 +21,6 @@ if($mod['content'] == 'home/index')
 	$image = image_module($module, $meta);
 	$description = @$this->esg->get_esg('site')['title'];
 }
-if(@$_SERVER['SERVER_NAME'] == 'localhost')
-{
-  $link_template = base_url().'templates/'.$templates['public_template'];
-}else{
-  $link_template = 'https://templates.esoftgreat.com/'.$templates['public_template'];
-}
 ?>
 <meta charset="utf-8">
 <title><?php echo @$meta['title'] ?> | <?php echo @$description ?></title>

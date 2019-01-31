@@ -1,8 +1,7 @@
-<?php 
-if(!empty($home[$block]))
+<?php
+if(!empty($home['content_team']))
 {
-  $style = $block == 'content_team' ? 'object-fit: cover; width: 255px;height: 255px;' : 'object-fit: cover; width: 150px;height: 150px;';
-  $category = @$home[$block][0]['category'];
+  $category = @$home['content_team'][0]['category'];
   ?>
   <div class="container">
     <div class="section-header">
@@ -12,7 +11,7 @@ if(!empty($home[$block]))
     </div>
     <div class="row wow fadeInUp">
       <?php
-      foreach($home[$block] AS $key => $value)
+      foreach($home['content_team'] AS $key => $value)
       {
         $image_src = image_module('content', $value);
         ?>
@@ -22,7 +21,7 @@ if(!empty($home[$block]))
               <!-- <img src="<?php echo $image_src;?>" alt="" style="object-fit: cover; width: 255px;height: 255px;"> -->
               <div class="image">
                 <a href="#team">
-                  <img src="<?php echo $image_src; ?>" class="img-responsive image-thumbnail image" style="<?php echo $style ?>" data-toggle="modal" data-target="#img_<?php echo $value['id']?>">
+                  <img src="<?php echo $image_src; ?>" class="img-responsive image-thumbnail image" style="object-fit: cover; width: 255px;height: 255px;" data-toggle="modal" data-target="#img_<?php echo $value['id']?>">
                 </a>
               </div>
 

@@ -26,9 +26,7 @@
       </div>
     </section>
     <main id="main">
-      <section id="about" class="section-bg">
-        <?php $this->load->view('content_hot') ?>
-      </section>
+      <?php $this->load->view('content_hot') ?>
       <section id="features">
         <?php $this->load->view('content_top') ?>
       </section>
@@ -41,9 +39,7 @@
       <section id="more-features" class="section-bg">
         <?php $this->load->view('content_bottom') ?>
       </section>
-      <section id="clients">
-        <?php $this->load->view('content_brand') ?>
-      </section>
+      <?php $this->load->view('content_brand') ?>
       <section id="pricing" class="section-bg">
         <?php $this->load->view('content_pricing') ?>
       </section>
@@ -51,16 +47,11 @@
         <?php $this->load->view('content_question') ?>
       </section>
       <section id="team" class="section-bg">
-        <?php $this->load->view('content_team', array('block'=>'content_team')) ?>
+        <?php $this->load->view('content_team') ?>
       </section>
       <section id="gallery">
         <?php $this->load->view('content_gallery') ?>
       </section>
-      <?php if (!empty($home['content_payment'])): ?>
-        <section id="payment" class="section-bg">
-          <?php $this->load->view('content_team', array('block'=>'content_payment')) ?>
-        </section>
-      <?php endif ?>
       <section id="contact">
         <?php $this->load->view('contact') ?>
       </section>
@@ -161,14 +152,6 @@
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
   <!-- JavaScript Libraries -->
-  <?php 
-  if(@$_SERVER['SERVER_NAME'] == 'localhost')
-  {
-    $link_template = base_url().'templates/'.$templates['public_template'];
-  }else{
-    $link_template = 'https://templates.esoftgreat.com/'.$templates['public_template'];
-  }
-  ?>
   <script src="<?php echo $link_template.'/';?>lib/jquery/jquery.min.js"></script>
   <script src="<?php echo $link_template.'/';?>lib/jquery/jquery-migrate.min.js"></script>
   <script src="<?php echo $link_template.'/';?>lib/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -1,12 +1,6 @@
 <?php
 $link = base_url($this->esg->get_esg('navigation')['string']);
 $meta = $this->esg->get_esg('meta');
-if(@$_SERVER['SERVER_NAME'] == 'localhost')
-{
-	$link_template = base_url().'templates/'.$templates['public_template'];
-}else{
-	$link_template = 'https://templates.esoftgreat.com/'.$templates['public_template'];
-}
 
 $module = '';
 $description = @$meta['description'];
