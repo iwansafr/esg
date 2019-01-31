@@ -27,34 +27,29 @@
     </section>
     <main id="main">
       <?php $this->load->view('content_hot') ?>
-      <section id="features">
-        <?php $this->load->view('content_top') ?>
-      </section>
-      <section id="advanced-features">
-        <?php $this->load->view('content') ?>
-      </section>
-      <section id="call-to-action">
-        <?php $this->load->view('content_banner') ?>
-      </section>
-      <section id="more-features" class="section-bg">
-        <?php $this->load->view('content_bottom') ?>
-      </section>
+      
+      <?php $this->load->view('content_top') ?>
+
+      <?php $this->load->view('content') ?>
+      
+      <?php $this->load->view('content_banner') ?>
+      
+      <?php $this->load->view('content_bottom') ?>
+      
       <?php $this->load->view('content_brand') ?>
-      <section id="pricing" class="section-bg">
-        <?php $this->load->view('content_pricing') ?>
-      </section>
-      <section id="faq">
-        <?php $this->load->view('content_question') ?>
-      </section>
-      <section id="team" class="section-bg">
-        <?php $this->load->view('content_team') ?>
-      </section>
-      <section id="gallery">
-        <?php $this->load->view('content_gallery') ?>
-      </section>
+      
+      <?php $this->load->view('content_pricing') ?>
+      
+      <?php $this->load->view('content_question') ?>
+      
+      <?php $this->load->view('content_team') ?>
+      
+      <?php $this->load->view('content_gallery') ?>
+      
       <section id="contact">
         <?php $this->load->view('contact') ?>
       </section>
+      
     </main>
     <?php 
   }else{
