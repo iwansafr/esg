@@ -57,6 +57,7 @@ $route['admin/config/widget/logo']         = 'admin/config/logo';
 $route['admin/config/widget/contact']      = 'admin/config/contact';
 $route['admin/config/widget/header']       = 'admin/config/header';
 $route['admin/content/list/edit']          = 'admin/content/edit';
+$route['admin/category']                   = 'admin/content/category';
 $route['admin/content/category/list']      = 'admin/content/list';
 $route['admin/content/category/list/edit'] = 'admin/content/edit';
 $route['search']                           = 'home/content/list';

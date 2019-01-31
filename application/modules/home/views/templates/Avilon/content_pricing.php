@@ -18,8 +18,8 @@ if(!empty($home['content_pricing']))
           <div class="col-lg-4 col-md-6">
             <div class="box wow fadeInUp">
               <h3><?php echo $value['title'] ?></h3>
-              <?php echo $value['content'] ?>
-              <a href="#" class="get-started-btn">Get Started</a>
+              <?php echo $value['source'] ?>
+              <a href="https://wa.me/<?php echo @$meta['contact']['wa'] ?>?text=saya ingin konsultasi tentang paket web <?php echo $value['title'] ?> di <?php echo @$meta['contact']['name'] ?>" class="get-started-btn">Get Started</a>
             </div>
           </div>
           <?php

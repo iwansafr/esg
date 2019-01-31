@@ -24,23 +24,20 @@ $this->zea->setAccept('image', '.jpg,.jpeg,.png');
 $this->zea->addInput('image_link','text');
 $this->zea->setImage('image_link', 'content',' image_link');
 $this->zea->addInput('icon','text');
-$this->zea->startCollapse('image_link', 'Image Link');
+$this->zea->startCollapse('image', 'Image Properties');
 $this->zea->endCollapse('icon');
-$this->zea->setCollapse('image_link',TRUE);
+$this->zea->setCollapse('image',TRUE);
 
 $this->zea->addInput('images','gallery');
 $this->zea->setAccept('images', '.jpg,.jpeg,.png');
 $this->zea->setAttribute('images','multiple');
-$this->zea->startCollapse('images', 'Gallery');
-$this->zea->endCollapse('images');
-$this->zea->setCollapse('images',TRUE);
-
 $this->zea->addInput('files','uploads');
 $this->zea->setAccept('files', '.doc,.docx,.xls,.xlsx,.pdf,.ppt,.pptx');
 $this->zea->setAttribute('files','multiple');
-$this->zea->startCollapse('files', 'Files');
+$this->zea->startCollapse('images', 'Gallery');
 $this->zea->endCollapse('files');
-$this->zea->setCollapse('files',TRUE);
+$this->zea->setCollapse('images',TRUE);
+
 
 $this->zea->addInput('keyword','textarea');
 $this->zea->setLabel('keyword','Meta Keyword');
@@ -51,11 +48,12 @@ $this->zea->addInput('slug', $slug_type);
 
 $this->zea->addInput('description','textarea');
 $this->zea->setLabel('description','Meta Description');
+$this->zea->addInput('intro','textarea');
+$this->zea->addInput('source','textarea');
 $this->zea->startCollapse('keyword', 'meta');
-$this->zea->endCollapse('description');
+$this->zea->endCollapse('source');
 $this->zea->setCollapse('keyword',TRUE);
 
-$this->zea->addInput('intro','textarea');
 
 $this->zea->addInput('content','textarea');
 $this->zea->setElementId('content','textckeditor');
@@ -67,11 +65,13 @@ $this->zea->setLabel('tag_ids', 'Tag : ');
 $this->zea->setAttribute('tag_ids', array('data-role'=>'tagsinput','placeholder'=>'separate with coma'));
 $this->zea->startCollapse('tag_ids', 'Tag');
 $this->zea->endCollapse('tag_ids');
+$this->zea->setCollapse('tag_ids', TRUE);
 if(!empty($id))
 {
   $this->zea->setValue('tag_ids', $tag_name);
 }
 
 $this->zea->addInput('publish','checkbox');
+
 
 $this->zea->form();

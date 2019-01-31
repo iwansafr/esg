@@ -10,6 +10,14 @@ class Content_model extends CI_Model{
 		$this->load->library('ZEA/zea');
 	}
 
+	public function load()
+	{
+		$q = $this->db->field_exists('source','content');
+		if(!$q){
+			$this->db->query('ALTER TABLE `content` ADD `source` TEXT NOT NULL AFTER `content`');
+		}
+	}
+
 	public function category_slug()
 	{
 		$last_id = $this->zea->get_insert_id();
