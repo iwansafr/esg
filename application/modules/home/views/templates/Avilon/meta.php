@@ -21,6 +21,12 @@ if($mod['content'] == 'home/index')
 	$image = image_module($module, $meta);
 	$description = @$this->esg->get_esg('site')['title'];
 }
+if(@$_SERVER['SERVER_NAME'] == 'localhost')
+{
+  $link_template = base_url().'templates/'.$templates['public_template'];
+}else{
+  $link_template = 'https://templates.esoftgreat.com/'.$templates['public_template'];
+}
 ?>
 <meta charset="utf-8">
 <title><?php echo @$meta['title'] ?> | <?php echo @$description ?></title>
@@ -47,14 +53,14 @@ if($mod['content'] == 'home/index')
 <link href="<?php echo $image; ?>" rel="icon">
 <link href="<?php echo $image; ?>" rel="apple-touch-icon">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
-<link href="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo $link_template.'/';?>lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<link href="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/animate/animate.min.css" rel="stylesheet">
-<link href="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-<link href="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>lib/magnific-popup/magnific-popup.css" rel="stylesheet">
+<link href="<?php echo $link_template.'/';?>lib/animate/animate.min.css" rel="stylesheet">
+<link href="<?php echo $link_template.'/';?>lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="<?php echo $link_template.'/';?>lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+<link href="<?php echo $link_template.'/';?>lib/magnific-popup/magnific-popup.css" rel="stylesheet">
 
-<link href="<?php echo base_url('templates').'/'.$templates['public_template'].'/';?>css/style.css" rel="stylesheet">
+<link href="<?php echo $link_template.'/';?>css/style.css" rel="stylesheet">
 
 <script type="text/javascript">
   var _URL = '<?php echo base_url() ?>';

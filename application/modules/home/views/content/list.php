@@ -1,4 +1,5 @@
 <?php
+pr($this->esg->get_esg());
 if(!empty($content['data']))
 {
   ?>
