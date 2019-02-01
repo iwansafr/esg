@@ -26,6 +26,8 @@ if(!empty($content))
 			if(!empty($content['image']) || !empty($content['image_link']))
 			{
 				?>
+				<input type="hidden" l="<?php echo $content['image_link'] ?>">
+				<input type="hidden" i="<?php echo $content['image'] ?>">
 				<img class="img-responsive image" src="<?php echo image_module('content', $content)?>" style="max-width: 100%; height: auto;">
 				<figcaption class="figure-caption text-center"><?php echo $content['title'] ?></figcaption>
 				<?php 
