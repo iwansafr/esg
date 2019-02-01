@@ -5,7 +5,29 @@
 	</head>
 	<body>
 		<div class="container">
-			
+			<?php $this->load->view('menu_top') ?>
+			<div class="clearfix"></div>
+			<hr>
+			<div class="row">
+				<div class="col-lg-9">
+					<?php
+					$this->load->view('content_slider');
+					$this->load->view('content_top');
+					$data_tmp['home'] = $home;
+					$data_tmp['home']['content_top'] = $home['content'];
+					$this->load->view('content_top', $data_tmp);
+					$data_tmp['home']['content_top'] = $home['content_bottom'];
+					$this->load->view('content_top', $data_tmp);
+					?>
+				</div>
+				<div class="col-lg-3">
+					<div class="form-group top-20">
+						<input type="text" name="" class="form-control" placeholder="Search...">
+					</div>
+					<?php $this->load->view('content_latest') ?>
+					<?php $this->load->view('widget_right') ?>
+				</div>
+			</div>
 		</div>
 		<hr>
 		<?php $this->load->view('footer'); ?>
