@@ -16,9 +16,9 @@
 						$this->load->view('content_slider');
 						$this->load->view('content_top');
 						$data_tmp['home'] = $home;
-						$data_tmp['home']['content_top'] = $home['content'];
+						$data_tmp['home']['content_top'] = @$home['content'];
 						$this->load->view('content_top', $data_tmp);
-						$data_tmp['home']['content_top'] = $home['content_bottom'];
+						$data_tmp['home']['content_top'] = @$home['content_bottom'];
 						$this->load->view('content_top', $data_tmp);
 					}else{
 						$title = end($navigation['array']);
@@ -78,12 +78,12 @@
 						<input type="text" name="" class="form-control" placeholder="Search...">
 					</div>
 					<?php $this->load->view('content_latest') ?>
-					<?php $data_tmp['home']['content_latest'] = $home['content_popular']; ?>
+					<?php $data_tmp['home']['content_latest'] = @$home['content_popular']; ?>
 					<?php 
 					$this->load->view('content_latest', $data_tmp);
-					$data_tmp['home']['widget_right'] = $home['category'];
+					$data_tmp['home']['widget_right'] = @$home['category'];
 					$this->load->view('widget_right', $data_tmp);
-					$data_tmp['home']['widget_right'] = $home['tag'];
+					$data_tmp['home']['widget_right'] = @$home['tag'];
 					$this->load->view('widget_right', $data_tmp);
 					?>
 				</div>
