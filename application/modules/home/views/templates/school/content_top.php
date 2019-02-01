@@ -2,6 +2,7 @@
 if(!empty($home['content_top']))
 {
 	$category = @$home['content_top'][0]['category'];
+	$spc = ($category['title'] == 'Most Popular') ? 'popular' : '';
 	$content_top_data = array();
 	foreach($home['content_top'] AS $key => $value)
 	{
@@ -13,7 +14,7 @@ if(!empty($home['content_top']))
 	?>
 	<div class="card top-border mt-3">
 	  <div class="card-header">
-	    <a href="<?php echo content_cat_link($category['slug']) ?>"><?php echo @$category['title'] ?></a>
+	    <a href="<?php echo content_cat_link(@$category['slug'], $spc, $spc) ?>"><?php echo @$category['title'] ?></a>
 	  </div>
 	  <ul class="list-group list-group-flush">
 	  	<div class="container-fluid">

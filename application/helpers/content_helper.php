@@ -12,7 +12,7 @@ function content_link($id = '', $title = '')
   return $output;
 }
 
-function content_cat_link($id = '', $title = '')
+function content_cat_link($id = '', $title = '', $spc = '')
 {
 	$output = base_url();
   if(!empty($id) && is_numeric($id))
@@ -20,6 +20,8 @@ function content_cat_link($id = '', $title = '')
     $output = base_url('content/category/'.$id.'/').url_title($title).'.html';
   }else if(!empty($id) && !is_numeric($id)){
     $output = base_url('category/'.$id).'.html';
+  }else{
+    $output = base_url('content').'/'.$spc;
   }
   return $output;
 }

@@ -22,7 +22,7 @@ if(!empty($home['content_slider']))
         <div class="carousel-item <?php echo $class ?>">
           <img class="slider d-block w-100" src="<?php echo image_module('content', $value['id'].'/'.$value['image']) ?>" alt="Slide" >
           <div class="carousel-caption">
-            <h4><?php echo strtoupper('sample post ke ').$value['title'] ?></h4>
+            <a href="<?php echo content_link($value['slug']) ?>" class="white"><h4><?php echo $value['title'] ?></h4></a>
             <p class="sm-title white d-none d-md-block">posted by <?php echo $value['author'] ?> | <?php echo content_date($value['created']) ?> | <?php echo @$category['title'] ?></p>
           </div>
         </div>

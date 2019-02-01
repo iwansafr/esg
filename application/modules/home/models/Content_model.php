@@ -66,6 +66,7 @@ class Content_model extends CI_Model
 	public function list()
 	{
 		$module = @$this->esg->get_esg('navigation')['array'][0];
+		$task = @$this->esg->get_esg('navigation')['array'][1];
 		$zea_t  = 'title';
 		$taxonomy = TRUE;
 		if($module != 'search')
@@ -75,6 +76,14 @@ class Content_model extends CI_Model
 				$table  = 'content_cat';
 				$where  = 'WHERE slug = ? AND publish = 1 ';
 				$zea_t  = 'cat_ids';
+			}else if($module == 'content'){
+				if(empty($task))
+				{
+					$table = 'latest';
+				}else if($task == 'popular'){
+					$table = 'popular';
+				}
+				$zea_t = '';
 			}else{
 				$table  = 'content_tag';
 				$where  = 'WHERE title = ? ';
@@ -95,10 +104,25 @@ class Content_model extends CI_Model
 			{
 				$slug = str_replace('.html', '', $slug);
 			}
-			$taxonomy = $this->db->query('SELECT * FROM '.$table.' '.$where, $slug)->row_array();
-			$id       = $taxonomy['id'];
+			if($table == 'latest')
+			{
+				$taxonomy = array('title'=>'LATEST CONTENT');
+			}else if($table == 'popular'){
+				$taxonomy = array('title'=>'MOST POPULAR');
+			}else{
+				$taxonomy = $this->db->query('SELECT * FROM '.$table.' '.$where, $slug)->row_array();
+				$id       = $taxonomy['id'];
+			}
 		}
-		$this->zea->setWhere("{$zea_t} LIKE '%,{$id},%' AND publish = 1 ");
+		if(!empty($zea_t))
+		{
+			$this->zea->setWhere("{$zea_t} LIKE '%,{$id},%' AND publish = 1 ");
+		}else if($table == 'latest'){
+			$this->zea->setWhere(" publish = 1 ");
+		}else if($table == 'popular'){
+			$this->zea->setWhere(" publish = 1 ");
+			$this->zea->order_by('hits', 'DESC');
+		}
 		$data = array();
 		if(!empty($taxonomy))
 		{
