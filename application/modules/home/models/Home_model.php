@@ -105,6 +105,7 @@ class Home_model extends CI_Model
 					}
 				}
 			}
+			// $this->archived();
 		}
 	}
 
@@ -161,7 +162,13 @@ class Home_model extends CI_Model
 			$q = "SELECT * FROM content WHERE cat_ids LIKE '%,{$id},%' AND publish = 1 ORDER BY id DESC {$limit}";
 			if(!is_numeric($id))
 			{
-				$q = 'SELECT * FROM content WHERE publish = 1 ORDER BY id DESC '.$limit;
+				if($id == 'latest')
+				{
+					$q = 'SELECT * FROM content WHERE publish = 1 ORDER BY id DESC '.$limit;
+				}else if($id == 'popular')
+				{
+					$q = 'SELECT * FROM content WHERE publish = 1 ORDER BY hits DESC '.$limit;
+				}
 			}
 			$tmp_data = $this->db->query($q)->result_array();
 			if(!empty($tmp_data))
@@ -170,7 +177,13 @@ class Home_model extends CI_Model
 				{
 					$category = $this->db->query('SELECT * FROM content_cat WHERE id = '.$id)->row_array();
 				}else{
-					$category = array('title'=>'LATEST');
+					if($id == 'latest')
+					{
+						$category = array('title'=>'Latest Content');
+					}else if($id == 'popular')
+					{
+						$category = array('title'=>'Most Popular');
+					}
 				}
 				$output = array();
 				$tmp_data[0]['category'] = $category;
@@ -231,6 +244,22 @@ class Home_model extends CI_Model
 		{
 			$this->esg->set_esg('site', $data);
 		}
+	}
+
+	public function archived()
+	{
+		// $start_y = $this->db->query('SELECT created FROM content ORDER BY created ASC LIMIT 1')->row_array();
+		// if(!empty($start_y))
+		// {
+		// 	$start_y = substr($start_y['created'],0,4);
+		// }
+		// $end_y = $this->db->query('SELECT created FROM content ORDER BY created DESC LIMIT 1')->row_array();
+		// if(!empty($end_y))
+		// {
+		// 	$end_y = substr($end_y['created'],0,4);
+		// }
+		// pr($start_y);
+		// pr($end_y);
 	}
 
 	public function get_visitor()

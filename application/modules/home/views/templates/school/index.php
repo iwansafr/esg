@@ -25,7 +25,14 @@
 						<input type="text" name="" class="form-control" placeholder="Search...">
 					</div>
 					<?php $this->load->view('content_latest') ?>
-					<?php $this->load->view('widget_right') ?>
+					<?php $data_tmp['home']['content_latest'] = $home['content_popular']; ?>
+					<?php 
+					$this->load->view('content_latest', $data_tmp);
+					$data_tmp['home']['widget_right'] = $home['category'];
+					$this->load->view('widget_right', $data_tmp);
+					$data_tmp['home']['widget_right'] = $home['tag'];
+					$this->load->view('widget_right', $data_tmp);
+					?>
 				</div>
 			</div>
 		</div>
