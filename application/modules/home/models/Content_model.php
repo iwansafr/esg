@@ -65,10 +65,12 @@ class Content_model extends CI_Model
 
 	public function list()
 	{
-		$module = @$this->esg->get_esg('navigation')['array'][0];
-		$task = @$this->esg->get_esg('navigation')['array'][1];
-		$zea_t  = 'title';
+		$module   = @$this->esg->get_esg('navigation')['array'][0];
+		$task     = @$this->esg->get_esg('navigation')['array'][1];
+		$zea_t    = 'title';
 		$taxonomy = TRUE;
+		$table    = 'content';
+
 		if($module != 'search')
 		{
 			if($module=='category')
@@ -114,7 +116,9 @@ class Content_model extends CI_Model
 				$id       = $taxonomy['id'];
 			}
 		}
-		if(!empty($zea_t))
+
+
+		if(!empty($zea_t) && $module != 'search')
 		{
 			$this->zea->setWhere("{$zea_t} LIKE '%,{$id},%' AND publish = 1 ");
 		}else if($table == 'latest'){
