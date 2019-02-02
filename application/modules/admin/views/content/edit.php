@@ -38,7 +38,6 @@ $this->zea->startCollapse('images', 'Gallery');
 $this->zea->endCollapse('files');
 $this->zea->setCollapse('images',TRUE);
 
-
 $this->zea->addInput('keyword','textarea');
 $this->zea->setLabel('keyword','Meta Keyword');
 
