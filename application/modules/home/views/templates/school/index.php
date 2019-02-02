@@ -73,9 +73,11 @@
 					}
 					?>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-3 pt-3">
 					<div class="form-group">
-						<input type="text" name="" class="form-control" placeholder="Search...">
+						<form action="<?php echo base_url('search') ?>" method="get">
+							<input type="text" name="keyword" class="form-control" placeholder="Search...">
+						</form>
 					</div>
 					<?php $this->load->view('content_latest') ?>
 					<?php $data_tmp['home']['content_latest'] = @$home['content_popular']; ?>
