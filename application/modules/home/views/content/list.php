@@ -1,4 +1,8 @@
 <?php
+if(!empty(@$_GET['keyword']))
+{
+  echo '<p class="badge">Search Result for : '.@$_GET['keyword'].'</p>';
+}
 if(!empty($content['data']))
 {
   if(!empty($tpl))
