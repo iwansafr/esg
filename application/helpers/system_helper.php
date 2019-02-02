@@ -292,21 +292,27 @@ function image_module_debug($module = '', $image = '', $is_uri = '')
 			$check_path = $check_path.$module.'/';
 			if(!empty($image))
 			{
+				pr('image not empty');
 				if(is_array($image))
 				{
+					pr('image is array');	
 					if(!empty($image['image_link']) && isLink($image['image_link']) && @getimagesize($image['image_link']))
 					{
+						pr('image is link');
 						$url = $image['image_link'];
 						$src = $url;
 					}else{
+						pr('image is not link');
 						$url = $url.@intval($image['id']).'/'.@$image['image'];
 						$check_path = $check_path.@intval($image['id']).'/'.@$image['image'];
 						if(file_exists($check_path))
 						{
 							$src = $url;
+							pr('image is not exist');
 						}
 					}
 				}else{
+							pr('image is not array');
 					$url = $url.$image;
 					$check_path = $check_path.$image;
 					if(file_exists($check_path))
