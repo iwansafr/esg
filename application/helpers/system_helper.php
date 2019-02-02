@@ -298,7 +298,7 @@ function image_module_debug($module = '', $image = '', $is_uri = '')
 					pr('image is array');
 					pr($image['image_link']);
 					pr(isLink($image['image_link']));
-					pr(@getimagesize($image['image_link']));
+					pr(getimagesize($image['image_link']));
 					if(!empty($image['image_link']) && isLink($image['image_link']) && @getimagesize($image['image_link']))
 					{
 						pr('image is link');
