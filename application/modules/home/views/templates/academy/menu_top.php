@@ -1,3 +1,8 @@
+<style type="text/css">
+	.header-area .academy-main-menu .classy-navbar .classynav ul li a {
+    height: 100%;
+	}
+</style>
 <div class="classy-menu">
 	<div class="classycloseIcon">
 		<div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
