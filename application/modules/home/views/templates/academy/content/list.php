@@ -6,6 +6,16 @@
 	}
 	if(!empty($content['data']))
 	{
+		?>
+    <div class="row">
+			<div class="col-12">
+				<div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
+					<span><?php echo @$content['taxonomy']['description'] ?></span>
+					<h3><?php echo @$content['taxonomy']['title'] ?></h3>
+				</div>
+			</div>
+		</div>
+		<?php
 	  if(!empty(@$tpl) && file_exists(APPPATH.'modules/home/views/templates/'.@$templates['public_template'].'/'.@$tpl.'.php'))
 	  {
 	    $data['home'][$tpl]                = $content['data'];
@@ -14,14 +24,6 @@
 	    $this->load->view('templates/'.$templates['public_template'].'/'.$tpl, $data);
 	  }else{
 	    ?>
-	    <div class="row">
-				<div class="col-12">
-					<div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
-						<span><?php echo @$content['taxonomy']['description'] ?></span>
-						<h3><?php echo @$content['taxonomy']['title'] ?></h3>
-					</div>
-				</div>
-			</div>
 			<div class="row">
 				<?php $i = 400; ?>
 				<?php if (!empty($content['data'])): ?>
