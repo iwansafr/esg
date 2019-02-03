@@ -31,29 +31,19 @@
 	<?php
 	if($mod['content'] == 'home/index')
 	{
-		?>
-		<section class="hero-area">
-			<?php $this->load->view('content_slider') ?>
-		</section>
-		<div class="top-features-area wow fadeInUp" data-wow-delay="300ms">
-			<?php $this->load->view('content_top_feature') ?>
-		</div>
-		<div class="academy-courses-area section-padding-100-0">
-			<div class="container">
-				<?php $this->load->view('content_course') ?>
-			</div>
-		</div>
-		<div class="testimonials-area section-padding-100 bg-img bg-overlay" style="background-image: url(<?php echo image_module();?>);">
-			<?php $this->load->view('content_testimonials') ?>
-		</div>
-		<div class="top-popular-courses-area section-padding-100-70">
-			<?php $this->load->view('content_popular_course') ?>
-		</div>
-		<div class="partner-area section-padding-0-100">
-			<?php $this->load->view('content_partner') ?>
-		</div>
-		<?php $this->load->view('content_touch') ?>
-		<?php
+		$this->load->view('content_slider');
+		
+		$this->load->view('content_top_feature');
+		
+		$this->load->view('content_course');
+		
+		$this->load->view('content_testimonials');
+		
+		$this->load->view('content_popular_course');
+		
+		$this->load->view('content_partner');
+		
+		$this->load->view('content_touch');
 	}else{
 		?>
 		<div class="top-popular-courses-area mt-50 section-padding-100-70">
