@@ -5,7 +5,7 @@ if(!empty(@$_GET['keyword']))
 }
 if(!empty($content['data']))
 {
-  if(!empty(@$tpl) && file_exists(APPPATH.'/modules/home/templates/'.@$templates['public_template'].'/'.@$tpl.'.php'))
+  if(!empty(@$tpl) && file_exists(APPPATH.'/modules/home/views/templates/'.@$templates['public_template'].'/'.@$tpl.'.php'))
   {
     $data['home'][$tpl]                = $content['data'];
     $data['home'][$tpl][0]['category'] = $content['taxonomy'];
