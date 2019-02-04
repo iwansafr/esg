@@ -28,10 +28,10 @@ if(!empty($field))
 			'style'    => 'width: 100%;'
 		);
 
-	if($this->init == 'roll')
-	{
-		unset($this->options[$field][$dvalue['id']]);
-	}
+	// if($this->init == 'roll')
+	// {
+		// unset($this->options[$field][$dvalue['id']]);
+	// }
 
 	if(!empty($this->attribute[$field]))
 	{
