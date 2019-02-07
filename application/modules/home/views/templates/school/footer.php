@@ -20,9 +20,10 @@
 			$data_count = array(1,2,3);
 			foreach ($data_count as $key => $value)
 			{
+				$first = reset($home['menu_bottom_'.$value]);
 				?>
 				<div class=" col-sm-4 col-md  col-6 col">
-					<h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+					<h5 class="headin5_amrc col_white_amrc pt2"><?php echo @$first['position_name'] ?></h5>
 					<!--headin5_amrc-->
 					<ul class="footer_ul_amrc">
 						<?php

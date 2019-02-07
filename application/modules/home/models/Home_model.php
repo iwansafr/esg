@@ -114,8 +114,11 @@ class Home_model extends CI_Model
 		if(!empty($data['content']))
 		{
 			$tmp_data = $this->db->query('SELECT * FROM menu WHERE position_id = ? AND publish = 1 ORDER BY sort_order', @intval($data['content']))->result_array();
+			$position_name = $this->db->query('SELECT title FROM menu_position WHERE id = ?', @intval($data['content']))->row_array();
+			$position_name = @$position_name['title'];
 			if(!empty($tmp_data))
 			{
+				$tmp_data[0]['position_name'] = $position_name;
 				$output = array();
 				$data = array();
 				$b_data = array();
