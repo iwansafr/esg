@@ -1499,7 +1499,7 @@ class Zea extends CI_Model
 												$ext = pathinfo($_FILES[$upload[$i]]['name']);
 												if($this->check_type($ext['extension'],$u_value))
 												{
-													$file_name = $_POST[$u_value].'_'.time().'.'.$ext['extension'];
+													$file_name = $_POST[$u_value].'.'.$ext['extension'];
 													if($this->init == 'edit')
 													{
 														$file_name_exist = $this->get_one($this->table, $u_value);
