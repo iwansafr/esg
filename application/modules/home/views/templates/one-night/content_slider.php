@@ -19,7 +19,7 @@ if(!empty($home['content_slider']))
         $class = ($i == 1) ? 'active' : '';
         ?>
         <div class="carousel-item <?php echo $class ?>">
-          <img class="slider d-block w-100" src="<?php echo image_module('content', $value['id'].'/'.$value['image']) ?>" alt="Slide" >
+          <img class="slider d-block w-100" src="<?php echo image_module('content', $value) ?>" alt="Slide" >
         </div>
         <?php
         $i++;
