@@ -843,6 +843,10 @@ class Zea extends CI_Model
 				$input = implode($input,',');
 			}
 			$sql = 'SELECT '.$input.' FROM '.$this->table;
+			if(!empty($this->jointable))
+			{
+				$sql = 'SELECT '.$this->jointable['field'].' FROM '.$this->table.' LEFT JOIN '.$this->jointable['table'].' '.$this->jointable['condition'];
+			}
 			if(!empty($keyword) || !empty($this->where))
 			{
 				$sql     .= ' WHERE ';
@@ -880,14 +884,28 @@ class Zea extends CI_Model
 				{
 					if(is_array($this->field))
 					{
-						foreach ($this->field as $key => $value)
+						if(!empty($this->jointable))
 						{
-							if($key > 0){
-								$where .= ' OR ';
+							$jointable_field = explode(',',$this->jointable['field']);
+							foreach ($jointable_field as $key => $value)
+							{
+								if($key > 0){
+									$where .= ' OR ';
+								}
+								// $where .= $value.' REGEXP ?';
+								$where .= $value.' LIKE ?';
+								$bind[] = '%'.$keyword.'%';
 							}
-							// $where .= $value.' REGEXP ?';
-							$where .= $value.' LIKE ?';
-							$bind[] = '%'.$keyword.'%';
+						}else{
+							foreach ($this->field as $key => $value)
+							{
+								if($key > 0){
+									$where .= ' OR ';
+								}
+								// $where .= $value.' REGEXP ?';
+								$where .= $value.' LIKE ?';
+								$bind[] = '%'.$keyword.'%';
+							}
 						}
 					}
 					$sql .= $where;
