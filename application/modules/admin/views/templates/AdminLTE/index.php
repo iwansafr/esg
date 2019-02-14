@@ -8,9 +8,9 @@
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
-  <?php $this->load->view('header', compact('user',$user)); ?>
+  <?php $this->load->view('header', array('user'=>$user)); ?>
   <aside class="main-sidebar">
-    <?php $this->load->view('sidebar', compact('user',$user));?>
+    <?php $this->load->view('sidebar', array('user'=>$user));?>
   </aside>
   <div class="content-wrapper">
     <section class="content-header">
