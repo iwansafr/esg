@@ -23,6 +23,13 @@ class Menu extends CI_Controller
 	}
 	public function list()
 	{
+		if(!empty($_POST['del_row']))
+		{
+			foreach ($_POST['del_row'] as $key => $value) 
+			{
+				$this->menu_model->del_menu($value);
+			}
+		}
 		$this->load->view('index');
 	}
 	public function edit()

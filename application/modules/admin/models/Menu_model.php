@@ -126,6 +126,44 @@ class Menu_model extends CI_Model
 		return $data;
 	}
 
+	public function del_menu($id = 0)
+	{
+		if(!empty($id))
+		{
+			$this->db->select('id');
+			$data = $this->db->get_where('menu','pra_id = '.$id)->row_array();
+			if(!empty($data))
+			{
+				$this->zea->del_data('menu', $data);
+				foreach ($data as $key => $value) 
+				{
+					call_user_func(array('menu_model', __FUNCTION__), $value);
+				}
+			}	
+		}
+	}
+
+	public function del_anggaran($id = 0)
+	{
+		if(!empty($id))
+		{
+			$data = $this->db->get_where('apbdes','id = '.$id)->row_array();
+			if(!empty($data))
+			{
+				$parent   = $this->db->get_where('apbdes','id = '.$data['par_id'])->row_array();
+				if(!empty($parent))
+				{
+					if(!empty($data['par_id']))
+					{
+						$anggaran = $parent['anggaran']-@intval($_SESSION['delete_anggaran']);
+						$this->data_model->set_data('apbdes',$data['par_id'],array('anggaran'=>$anggaran));
+						call_user_func(array('apbdes_model',__FUNCTION__), $data['par_id']);
+					}
+				}
+			}
+		}
+	}
+
 	public function template()
 	{
 		$q = $this->db->field_exists('tpl','menu');
