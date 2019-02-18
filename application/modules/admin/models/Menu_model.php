@@ -131,14 +131,16 @@ class Menu_model extends CI_Model
 		if(!empty($id))
 		{
 			$this->db->select('id');
-			$data = $this->db->get_where('menu','pra_id = '.$id)->row_array();
+			$data = $this->db->get_where('menu','par_id = '.$id)->result_array();
 			if(!empty($data))
 			{
-				$this->zea->del_data('menu', $data);
+				$ids = array();
 				foreach ($data as $key => $value) 
 				{
-					call_user_func(array('menu_model', __FUNCTION__), $value);
+					call_user_func(array('menu_model', __FUNCTION__), $value['id']);
+					$ids[] = $value['id'];
 				}
+				$this->zea->del_data('menu', $ids);
 			}	
 		}
 	}
