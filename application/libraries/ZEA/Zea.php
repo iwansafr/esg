@@ -1461,6 +1461,13 @@ class Zea extends CI_Model
 								{
 									$_POST[$value['text']] = @$_POST[$value['text']];
 								}
+								if($value['type'] == 'checkbox')
+								{
+									if(empty($_POST[$value['text']]))
+									{
+										$_POST[$value['text']] = 0;
+									}
+								}
 							}
 
 							foreach ($this->input as $key => $value)
