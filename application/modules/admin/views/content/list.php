@@ -15,6 +15,7 @@ if(!empty($is_tag))
 {
 	$this->zea->setWhere("tag_ids LIKE '%,{$id},%'");
 }
+$this->zea->setNumbering(TRUE);
 $this->zea->setField(array('title'));
 $this->zea->addInput('id','plaintext');
 $this->zea->addInput('image','thumbnail');
