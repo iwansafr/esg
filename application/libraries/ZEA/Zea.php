@@ -1243,7 +1243,9 @@ class Zea extends CI_Model
 											<?php
 											if(!empty($data))
 											{
-												$i = 1;
+												$numbering_page = @intval($_GET['page']) < 1 ? 1 : @intval($_GET['page']);
+												$i = ($this->limit*$numbering_page)-$this->limit+1;
+
 												foreach ($data as $dkey => $dvalue)
 												{
 													if(!empty($dvalue['id']))
