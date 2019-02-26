@@ -118,20 +118,25 @@ class Home_model extends CI_Model
 			$position_name = @$position_name['title'];
 			if(!empty($tmp_data))
 			{
-				$tmp_data[0]['position_name'] = $position_name;
+				// $tmp_data[0]['position_name'] = $position_name;
 				$output = array();
 				$data = array();
 				$b_data = array();
 				foreach ($tmp_data as $tmkey => $tmvalue)
 				{
 					$b_data[$tmvalue['id']] = $tmvalue;
+					$b_data[$tmvalue['id']]['position_name'] = $position_name;
 				}
 				foreach ($b_data as $tkey => $tvalue)
 				{
 					if($tvalue['par_id'] == 0)
 					{
 						$data[$tvalue['id']] = $tvalue;
-					}else if($tvalue['par_id'] > 0)
+					}
+				}
+				foreach ($b_data as $tkey => $tvalue)
+				{
+					if($tvalue['par_id'] > 0)
 					{
 						if(!empty($data[$tvalue['par_id']]))
 						{
@@ -139,7 +144,7 @@ class Home_model extends CI_Model
 						}else if(!empty($b_data[$tvalue['par_id']]))
 						{
 							$id = $b_data[$tvalue['par_id']]['par_id'];
-							$data[$id]['child'][$tvalue['par_id']]['child'][$tvalue['id']]  = $tvalue;
+							$data[$id]['child'][$tvalue['id']]  = $tvalue;
 						}
 					}
 				}
