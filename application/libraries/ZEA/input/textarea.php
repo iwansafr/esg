@@ -25,6 +25,21 @@ if(!empty($field))
 	{
 		$array_input['id'] = $this->elementid[$field];
 	}
+
+	if(!empty($this->attribute[$field]))
+	{
+		$attr = $this->attribute[$field];
+		if(is_array($attr))
+		{
+			foreach ($attr as $attr_key => $attr_value)
+			{
+				$array_input[$attr_key] = $attr_value;
+			}
+		}else{
+			$array_input[$attr] = $attr;
+		}
+	}
+
 	if(!empty($required))
 	{
 		$array_input[$required] = $required;
