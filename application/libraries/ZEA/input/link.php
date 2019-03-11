@@ -31,6 +31,6 @@ if(!empty($field))
 		$attribute = $this->attribute[$field];
 	}
 	?>
-	<a href="<?php echo $this->link[$field].$key_get.$link_get.$ext_link ?>" <?php echo $attribute ?>><?php echo $data_value ?></a>
+	<a href="<?php echo str_replace('//','/',$this->link[$field].$key_get.$link_get.$ext_link); ?>" <?php echo $attribute ?>><?php echo $data_value ?></a>
 	<?php
 }
