@@ -126,6 +126,20 @@ class Menu_model extends CI_Model
 		return $data;
 	}
 
+	public function selected_parent()
+	{
+		$data = array('status'=>FALSE,'msg'=>'error');
+		$id = @intval($_POST['id']);
+		if(!empty($id))
+		{
+			$menu = $this->db->get_where('menu','id = '.$id)->row_array();
+			$data = array('status'=>TRUE,'msg'=>'success','data'=>$menu);
+		}
+
+		$data = json_encode($data);
+		return $data;
+	}
+
 	public function del_menu($id = 0)
 	{
 		if(!empty($id))

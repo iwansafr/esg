@@ -47,4 +47,8 @@ class Menu extends CI_Controller
 	{
 		echo $this->menu_model->get_parent();
 	}
+	public function selected_parent()
+	{
+		echo $this->menu_model->selected_parent();
+	}
 }
