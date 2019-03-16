@@ -30,7 +30,7 @@ class Zea extends CI_Model
 	var $delete        = false;
 	var $delete_type   = 'submit';
 	var $edit          = false;
-	var $save          = false;
+	var $save          = true;
 	var $options       = array();
 	var $required      = array();
 	var $data          = array();
