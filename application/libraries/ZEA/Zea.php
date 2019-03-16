@@ -1165,20 +1165,23 @@ class Zea extends CI_Model
 						<div class="panel panel-footer">
 							<!-- <button class="btn btn-default" onclick="window.history.back();" data-toggle="tooltip" title="go back"><i class="fa fa-arrow-left"></i></button> -->
 							<?php
-							echo form_button(array(
-								'name'    => $this->formName,
-								'id'      => 'submit',
-								'value'   => 'true',
-								'type'    => 'success',
-								'content' => '<i class="fa fa-floppy-o"></i> submit',
-								'class'   => 'btn btn-success'));
-							echo form_button(array(
-								'name'    => 'reset',
-								'id'      => 'reset',
-								'value'   => 'true',
-								'type'    => 'reset',
-								'content' => '<i class="fa fa-undo"></i> reset',
-								'class'   => 'btn btn-warning'));
+							if(!empty($this->save))
+							{
+								echo form_button(array(
+									'name'    => $this->formName,
+									'id'      => 'submit',
+									'value'   => 'true',
+									'type'    => 'success',
+									'content' => '<i class="fa fa-floppy-o"></i> submit',
+									'class'   => 'btn btn-success'));
+								echo form_button(array(
+									'name'    => 'reset',
+									'id'      => 'reset',
+									'value'   => 'true',
+									'type'    => 'reset',
+									'content' => '<i class="fa fa-undo"></i> reset',
+									'class'   => 'btn btn-warning'));
+							}
 							?>
 						</div>
 					</div>
