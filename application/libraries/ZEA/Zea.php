@@ -1616,10 +1616,10 @@ class Zea extends CI_Model
 										foreach ($upload as $u_key => $u_value)
 										{
 											$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : $u_value.'_image';
+											$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
+											$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
 											if(!empty($_FILES[$upload[$i]]['name']) && empty($_FILES[$upload[$i]]['error']))
 											{
-												$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
-												$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
 												if(!is_dir($dir))
 												{
 													mkdir($dir, 0777,1);
@@ -1666,6 +1666,11 @@ class Zea extends CI_Model
 														$data_param['name']  = $dir_image;
 														$this->set_param($this->table, $dir_image, $data_param);
 													}
+												}
+											}else{
+												foreach (glob($dir.'*.*') as $image_link)
+												{
+													unlink($image_link);
 												}
 											}
 											$i++;
