@@ -195,6 +195,16 @@ class Admin_model extends CI_Model
 		        'icon' => 'fa-cog',
 		        'link' => base_url('admin/config/script')
 		      ),
+		      array(
+		        'title' => 'backup',
+		        'icon' => 'fa-download',
+		        'link' => base_url('admin/backup')
+		      ),
+		      array(
+		        'title' => 'restore',
+		        'icon' => 'fa-upload',
+		        'link' => base_url('admin/restore')
+		      ),
 		    )
 		  ),
 		);
