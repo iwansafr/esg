@@ -29,11 +29,14 @@
 								if($dvalue[$index] == $value['id'])
 								{
 									$link_image = str_replace(FCPATH,base_url(),$value['path']);
-									?>
-									<div class="col-md-3">
-										<img src="<?php echo $link_image ?>" alt="" class="img-responsive" width="200">
-									</div>
-									<?php
+									if(!empty(@getimagesize($link_image)))
+									{
+										?>
+										<div class="col-md-3">
+											<img src="<?php echo $link_image ?>" alt="" class="img-responsive" width="200">
+										</div>
+										<?php
+									}
 								}
 							}
 						}
@@ -48,12 +51,15 @@
 								{
 									foreach ($value as $gkey => $gvalue) 
 									{
-										$link_image = str_replace(FCPATH,base_url(),$gvalue['path']);
-										?>
-										<div class="col-md-3">
-											<img src="<?php echo $link_image ?>" alt="" class="img-responsive" width="200">
-										</div>
-										<?php
+										$link_image = str_replace(FCPATH,base_url(),$gvalue['path'].'/'.$gvalue['name']);
+										if(!empty(@getimagesize($link_image)))
+										{
+											?>
+											<div class="col-md-3">
+												<img src="<?php echo $link_image ?>" alt="" class="img-responsive" width="200">
+											</div>
+											<?php
+										}
 									}
 								}	
 							}
@@ -65,7 +71,7 @@
 		</div>
 	</div>
 	<div class="panel-footer">
-		<?php echo $pagination;?>
+		<?php echo @$pagination;?>
 		
 	</div>
 </div>

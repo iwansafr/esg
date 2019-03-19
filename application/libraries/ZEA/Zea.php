@@ -1577,6 +1577,7 @@ class Zea extends CI_Model
 							}
 							if($this->success)
 							{
+								$deleted_images = array();
 								if($this->init == 'edit')
 								{
 									if($this->set_data($this->table, $this->id, $_POST))
@@ -1615,11 +1616,11 @@ class Zea extends CI_Model
 										}
 										foreach ($upload as $u_key => $u_value)
 										{
-											$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : $u_value.'_image';
 											$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
 											$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
 											if(!empty($_FILES[$upload[$i]]['name']) && empty($_FILES[$upload[$i]]['error']))
 											{
+												$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : $u_value.'_image';
 												if(!is_dir($dir))
 												{
 													mkdir($dir, 0777,1);
@@ -1659,6 +1660,10 @@ class Zea extends CI_Model
 														{
 															if($dp_key=='image' || preg_match('~_image~', $dp_key))
 															{
+																if(!preg_match('~.'.$ext['extension'].'~',$file_name))
+																{
+																	$file_name = $file_name.'.'.$ext['extension'];
+																}
 																$_POST[$u_value] = $file_name;
 															}
 														}
@@ -1667,13 +1672,35 @@ class Zea extends CI_Model
 														$this->set_param($this->table, $dir_image, $data_param);
 													}
 												}
-											}else{
-												foreach (glob($dir.'*.*') as $image_link)
-												{
-													unlink($image_link);
-												}
 											}
 											$i++;
+										}
+										if($this->init == 'param')
+										{
+											$tmp_data_param = json_decode($data_param['value'], 1);
+											foreach ($tmp_data_param as $tdpkey => $tdpvalue) 
+											{
+												if(empty($tmp_data_param[$tdpkey]))
+												{
+													$deleted_images[] = $tdpkey;
+												}
+											}
+										}else if($this->init == 'edit')
+										{
+											foreach ($_POST as $tdpkey => $tdpvalue) 
+											{
+												if(empty($_POST[$tdpkey]))
+												{
+													$deleted_images[] = $tdpkey;
+												}
+											}
+										}
+										foreach ($deleted_images as $dikey => $divalue)
+										{
+											foreach(glob($dir.$divalue.'_*') as $file)
+											{
+												unlink($file);
+											}
 										}
 									}
 									if(!empty($uploads))
