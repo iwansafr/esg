@@ -105,6 +105,18 @@ class Admin_model extends CI_Model
 		    )
 		  ),
 		  array(
+		  	'title' => 'Gallery',
+		  	'icon' => 'fa-images',
+		  	'link' => base_url('admin/gallery'),
+		  	'list' => array(
+		  		array(
+		  			'title' => 'Images',
+				  	'icon' => 'fa-image',
+				  	'link' => base_url('admin/gallery'),
+		  		),
+		  	),
+		  ),
+		  array(
 		    'title' => 'User',
 		    'icon' => 'fa-user',
 		    'link' => base_url('admin/user/list'),
