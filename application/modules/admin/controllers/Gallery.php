@@ -22,6 +22,7 @@ class Gallery extends CI_Controller
 	public function images($module = '')
 	{
 		$data['module'] = $module;
+		$data['images'] = $this->gallery_model->get_images($module);
 		$this->load->view('index', $data);
 	}
 }
