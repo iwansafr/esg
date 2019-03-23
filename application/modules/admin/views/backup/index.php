@@ -15,6 +15,7 @@ if(is_root() || is_admin())
 				<table class="table">
 					<tr>
 						<td>back up data</td>
+						<td>Download</td>
 						<td>action</td>
 					</tr>
 					<?php 
@@ -24,6 +25,7 @@ if(is_root() || is_admin())
 						$name = end($name);
 						$name = str_replace('.zip', '', $name);
 						echo '<tr><td>'.$name.'</td>';
+						echo '<td><a href="'.base_url('images/modules/backup/'.$name).'" class="btn btn-sm btn-default"><i class="fa fa-download"></i>Download</a></td>';
 						echo '<td><a href="'.base_url('admin/backup/delete/'.$name).'" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> hapus</a></td></tr>';
 					}
 					?>
