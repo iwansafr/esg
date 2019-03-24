@@ -80,9 +80,12 @@ $(document).ready(function(){
 	$('a').on('click',function(){
 		var this_link = this.href;
 		if(this_link.includes('#')){
-			
+
 		}else{
 			$('#loading').removeClass('hidden');
 		}
+	});
+	$('form').on('submit',function(){
+		$('#loading').removeClass('hidden');
 	});
 });

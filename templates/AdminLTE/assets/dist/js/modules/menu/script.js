@@ -20,7 +20,7 @@ $(document).ready(function(){
 	    		console.log($('select[name="par_id"]').find('option[value="'+result.data.par_id+'"]').val(result.data.par_id).attr('selected','selected').length);
 	    		$('.select2').select2();
 	    	}else{
-	    		alert('data not found');
+	    		// alert('data not found');
 	    	}
 	    }
 	  });
@@ -96,7 +96,7 @@ $(document).ready(function(){
 				}
 				set_option(select, tmp);
     	}else{
-    		alert('data not found');
+    		// alert('data not found');
     	}
     }
   });
