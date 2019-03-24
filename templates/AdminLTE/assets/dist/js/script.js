@@ -77,5 +77,12 @@ $(document).ready(function(){
 		$(this).closest('.image').remove();
 		$('input[type="hidden"][value="'+a+'"]').remove();
 	});
-
+	$('a').on('click',function(){
+		var this_link = this.href;
+		if(this_link.includes('#')){
+			
+		}else{
+			$('#loading').removeClass('hidden');
+		}
+	});
 });

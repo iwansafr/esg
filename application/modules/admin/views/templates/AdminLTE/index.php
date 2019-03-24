@@ -7,6 +7,9 @@
   ?>
 </head>
 <body class="hold-transition skin-black sidebar-mini">
+<div id="loading" class="hidden">
+  <img src="<?php echo base_url('images/ajax-loader.gif') ?>">
+</div>
 <div class="wrapper">
   <?php $this->load->view('header', array('user'=>$user)); ?>
   <aside class="main-sidebar">
