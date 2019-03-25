@@ -15,7 +15,7 @@
 					{
 						$this->load->view('content_slider');
 						$this->load->view('content_top');
-						$data_tmp['home'] = $home;
+						$data_tmp['home'] = @$home;
 						$data_tmp['home']['content_top'] = @$home['content'];
 						$this->load->view('content_top', $data_tmp);
 						$data_tmp['home']['content_top'] = @$home['content_bottom'];
@@ -81,7 +81,7 @@
 					</div>
 					<?php $this->load->view('content_latest') ?>
 					<?php 
-					$data_tmp['home'] = $home;
+					$data_tmp['home'] = @$home;
 					$data_tmp['home']['content_latest'] = @$home['content_popular'];
 					$this->load->view('content_latest', $data_tmp);
 					$data_tmp['home']['widget_right'] = @$home['category'];

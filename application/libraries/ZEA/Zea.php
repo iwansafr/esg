@@ -171,7 +171,7 @@ class Zea extends CI_Model
         $data[$key] = $value;
       }
       $param = $this->db->query('SELECT * FROM '.$table.' WHERE name = ?', $name)->row_array();
-      if($param)
+      if(!empty($param))
       {
         return $this->db->update($table, $data, "`name` = '{$name}'");
       }else{
