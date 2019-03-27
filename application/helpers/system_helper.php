@@ -461,20 +461,38 @@ function content_date($date = '')
 	return $data;
 }
 
+
+function remove_php($directory)
+{
+	foreach(glob("{$directory}/*") as $file)
+  {
+    if(is_dir($file)) {
+      remove_php($file);
+    } else {
+    	$is_php = explode('.',$file);
+			$is_php = end($is_php);
+			if(strtolower($is_php) =='php')
+			{
+      	unlink($file);
+			}
+    }
+  }
+}
+
 function recursive_rmdir($directory)
 {
-    foreach(glob("{$directory}/*") as $file)
-    {
-        if(is_dir($file)) {
-            recursive_rmdir($file);
-        } else {
-            unlink($file);
-        }
+  foreach(glob("{$directory}/*") as $file)
+  {
+    if(is_dir($file)) {
+      recursive_rmdir($file);
+    } else {
+      unlink($file);
     }
-    if(is_dir($directory))
-    {
-    	rmdir($directory);
-    }
+  }
+  if(is_dir($directory))
+  {
+  	rmdir($directory);
+  }
 }
 
 function assoc($data = array(), $key = 'id', $value = 'title')

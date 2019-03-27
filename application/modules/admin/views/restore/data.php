@@ -48,6 +48,30 @@ if(!empty($title))
 						msg($dmvalue,'success');
 					}
 					unlink(FCPATH.'images/modules/data.esg');
+					remove_php(FCPATH.'images/modules/');
+				}else{
+					foreach ($table as $tbkey => $tbvalue) 
+					{
+						$dir = FCPATH.'images/modules/'.$tbvalue;
+						if(is_dir($dir))
+						{
+							recursive_rmdir($dir);
+						}
+					}
+					foreach (glob(FCPATH.'images/modules/*') as $value)
+					{
+						$name = explode('/',$value);
+						$name = end($name);
+						if($name != 'backup')
+						{
+							$dir = FCPATH.'images/modules/'.$name;
+							if(is_dir($dir))
+							{
+								recursive_rmdir($dir);
+							}
+						}
+
+					}
 				}
 			}
 		}
