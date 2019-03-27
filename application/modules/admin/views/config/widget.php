@@ -21,8 +21,11 @@ if(!empty($active_template))
 			$this->zea->init('param');
 			foreach ($_POST as $key => $value) 
 			{
-				$this->zea->addInput($key,'hidden');
-				$this->zea->setValue($key,$value);
+				if($key!='config_widget')
+				{
+					$this->zea->addInput($key,'hidden');
+					$this->zea->setValue($key,$value);
+				}
 			}
 			$this->zea->setTable('config');
 			$this->zea->setParamName($config_title);

@@ -1488,35 +1488,36 @@ class Zea extends CI_Model
 				$last_id = 0;
 				if(!empty($_POST))
 				{
-					foreach ($_POST as $key => $value)
+					$data_post = $_POST;
+					foreach ($data_post as $key => $value)
 					{
-						if(empty($_POST['del_row']) && ($this->init == 'edit'))
+						if(empty($data_post['del_row']) && ($this->init == 'edit'))
 						{
 							if(is_array($value))
 							{
-								$_POST[$key] = ','.implode(',',$value).',';
+								$data_post[$key] = ','.implode(',',$value).',';
 							}
 						}
 					}
-					if(!empty($_POST[$this->formName]))
+					if(!empty($data_post[$this->formName]))
 					{
-						unset($_POST[$this->formName]);
-						unset($_POST[$this->security->get_csrf_token_name()]);
-						if(isset($_POST['password']))
+						unset($data_post[$this->formName]);
+						unset($data_post[$this->security->get_csrf_token_name()]);
+						if(isset($data_post['password']))
 						{
 							if(empty($this->encrypt))
 							{
-								$_POST['password'] = $_POST['password'];
+								$data_post['password'] = $data_post['password'];
 							}else{
-								$_POST['password'] = encrypt($_POST['password']);
+								$data_post['password'] = encrypt($data_post['password']);
 							}
 						}
 						$post_secure = array();
 						foreach ($this->input as $key => $value) 
 						{
-							$post_secure[$value['text']] = @$_POST[$value['text']];
+							$post_secure[$value['text']] = @$data_post[$value['text']];
 						}
-						$_POST = $post_secure;
+						$data_post = $post_secure;
 						if(!empty($this->table))
 						{
 							$data['msg']   = 'Data Failed to Save';
@@ -1539,13 +1540,13 @@ class Zea extends CI_Model
 								}
 								if($value['text'] != 'csrf_esg')
 								{
-									$_POST[$value['text']] = @$_POST[$value['text']];
+									$data_post[$value['text']] = @$data_post[$value['text']];
 								}
 								if($value['type'] == 'checkbox')
 								{
-									if(empty($_POST[$value['text']]))
+									if(empty($data_post[$value['text']]))
 									{
-										$_POST[$value['text']] = 0;
+										$data_post[$value['text']] = 0;
 									}
 								}
 							}
@@ -1564,14 +1565,14 @@ class Zea extends CI_Model
 								{
 									if(empty($this->id))
 									{
-										$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$_POST[$value])->row_array();
+										$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$data_post[$value])->row_array();
 									}else{
-										$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$_POST[$value], $this->id))->row_array();
+										$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$data_post[$value], $this->id))->row_array();
 									}
 									if(!empty($data))
 									{
 										$this->success = FALSE;
-										$this->msg[$value] = array('msg'=>$value.' '.@$_POST[$value].' was exist in table '.$this->table, 'alert' => 'danger',$value=>'has-error');
+										$this->msg[$value] = array('msg'=>$value.' '.@$data_post[$value].' was exist in table '.$this->table, 'alert' => 'danger',$value=>'has-error');
 									}
 								}
 							}
@@ -1580,7 +1581,7 @@ class Zea extends CI_Model
 								$deleted_images = array();
 								if($this->init == 'edit')
 								{
-									if($this->set_data($this->table, $this->id, $_POST))
+									if($this->set_data($this->table, $this->id, $data_post))
 									{
 										$data['msg']   = 'Data Saved Successfully';
 										$data['alert'] = 'success';
@@ -1588,10 +1589,10 @@ class Zea extends CI_Model
 								}else if($this->init == 'param')
 								{
 									$data_param = array();
-									if(!empty($_POST))
+									if(!empty($data_post))
 									{
 										$data_param['name'] = $this->paramname;
-										$data_param['value'] = json_encode($_POST);
+										$data_param['value'] = json_encode($data_post);
 									}
 									if($this->set_param($this->table, $this->paramname, $data_param))
 									{
@@ -1603,7 +1604,7 @@ class Zea extends CI_Model
 								$this->set_insert_id($last_id);
 								if(!empty($last_id) || !empty($this->id) || !empty($this->paramname))
 								{
-									$post_ori = $_POST;
+									$post_ori = $data_post;
 									if(!empty($upload))
 									{
 										$i = 0;
@@ -1620,7 +1621,7 @@ class Zea extends CI_Model
 											$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
 											if(!empty($_FILES[$upload[$i]]['name']) && empty($_FILES[$upload[$i]]['error']))
 											{
-												$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : $u_value.'_image';
+												$data_post[$u_value] = !empty($data_post[$title]) ? $u_value.'_'.str_replace(' ','_',$data_post[$title]) : $u_value.'_image';
 												if(!is_dir($dir))
 												{
 													mkdir($dir, 0777,1);
@@ -1628,7 +1629,7 @@ class Zea extends CI_Model
 												$ext = pathinfo($_FILES[$upload[$i]]['name']);
 												if($this->check_type($ext['extension'],$u_value))
 												{
-													$file_name = $_POST[$u_value].'.'.$ext['extension'];
+													$file_name = $data_post[$u_value].'.'.$ext['extension'];
 													if($this->init == 'edit')
 													{
 														$file_name_exist = $this->get_one($this->table, $u_value);
@@ -1637,7 +1638,7 @@ class Zea extends CI_Model
 														$data_image      = json_decode($data_param['value'],1);
 														$file_name_exist = $data_image[$u_value];
 													}
-													if(empty($_POST[$u_value]))
+													if(empty($data_post[$u_value]))
 													{
 														foreach(glob($dir.'/'.$u_value.'_*') as $file)
 														{
@@ -1656,7 +1657,7 @@ class Zea extends CI_Model
 														$update_file = array($u_value => $file_name);
 														$this->set_data($this->table, $dir_image, $update_file);
 													}else if($this->init == 'param'){
-														foreach ($_POST as $dp_key => $dp_value)
+														foreach ($data_post as $dp_key => $dp_value)
 														{
 															if($dp_key=='image' || preg_match('~_image~', $dp_key))
 															{
@@ -1664,10 +1665,10 @@ class Zea extends CI_Model
 																{
 																	$file_name = $file_name.'.'.$ext['extension'];
 																}
-																$_POST[$u_value] = $file_name;
+																$data_post[$u_value] = $file_name;
 															}
 														}
-														$data_param['value'] = json_encode($_POST);
+														$data_param['value'] = json_encode($data_post);
 														$data_param['name']  = $dir_image;
 														$this->set_param($this->table, $dir_image, $data_param);
 													}
@@ -1687,9 +1688,9 @@ class Zea extends CI_Model
 											}
 										}else if($this->init == 'edit')
 										{
-											foreach ($_POST as $tdpkey => $tdpvalue) 
+											foreach ($data_post as $tdpkey => $tdpvalue) 
 											{
-												if(empty($_POST[$tdpkey]))
+												if(empty($data_post[$tdpkey]))
 												{
 													$deleted_images[] = $tdpkey;
 												}
@@ -1715,7 +1716,7 @@ class Zea extends CI_Model
 										}
 										foreach ($uploads as $u_key => $u_value)
 										{
-											$_POST[$u_value] = !empty($_POST[$title]) ? $u_value.'_'.str_replace(' ','_',$_POST[$title]) : 'image';
+											$data_post[$u_value] = !empty($data_post[$title]) ? $u_value.'_'.str_replace(' ','_',$data_post[$title]) : 'image';
 											$files_ready     = true;
 											if(!empty($_FILES[$uploads[$i]]['error']))
 											{
@@ -1740,7 +1741,7 @@ class Zea extends CI_Model
 												foreach ($_FILES[$uploads[$i]]['name'] as $n_key => $n_value)
 												{
 													$exts[$n_key]       = pathinfo($n_value);
-													$files_name[$n_key] = $_POST[$u_value].'_'.$n_key.'_'.time().'.'.$exts[$n_key]['extension'];
+													$files_name[$n_key] = $data_post[$u_value].'_'.$n_key.'_'.time().'.'.$exts[$n_key]['extension'];
 												}
 												$files_upload = array();
 												$j = 0;
@@ -1807,14 +1808,14 @@ class Zea extends CI_Model
 													$this->set_data($this->table, $dir_image, $update_file);
 												}else if($this->init == 'param')
 												{
-													foreach ($_POST as $dp_key => $dp_value)
+													foreach ($data_post as $dp_key => $dp_value)
 													{
 														if($dp_key=='image')
 														{
-															$_POST[$dp_key] = $file_name;
+															$data_post[$dp_key] = $file_name;
 														}
 													}
-													$data_param['value'] = json_encode($_POST);
+													$data_param['value'] = json_encode($data_post);
 													$data_param['name']  = $dir_image;
 													// $this->set_param($this->table, $dir_image, $data_param);
 												}
@@ -1833,14 +1834,14 @@ class Zea extends CI_Model
 														$this->set_data($this->table, $dir_image, $update_file);
 													}else if($this->init == 'param')
 													{
-														foreach ($_POST as $dp_key => $dp_value)
+														foreach ($data_post as $dp_key => $dp_value)
 														{
 															if($dp_key=='images')
 															{
-																$_POST[$dp_key] = $file_name;
+																$data_post[$dp_key] = $file_name;
 															}
 														}
-														$data_param['value'] = json_encode($_POST);
+														$data_param['value'] = json_encode($data_post);
 														$data_param['name']  = $dir_image;
 														$this->set_param($this->table, $dir_image, $data_param);
 													}
