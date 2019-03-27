@@ -7,6 +7,7 @@ class Restore extends CI_Controller
 		parent::__construct();
 		$this->load->model('esg_model');
 		$this->load->model('admin_model');
+		$this->load->model('restore_model');
 		$this->load->library('esg');
 		$this->load->helper('file');
 		$this->load->library('ZEA/zea');
@@ -15,6 +16,10 @@ class Restore extends CI_Controller
 	}
 	public function index()
 	{
+		if(!empty($_FILES) && (is_root() || is_admin()))
+		{
+			$this->restore_model->upload($_FILES['brf']);
+		}
 		$this->load->view('index');
 	}
 	public function data($title = '')

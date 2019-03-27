@@ -19,7 +19,7 @@ if(is_root() || is_admin())
 						<div class="panel-body">
 								<div class="form-group">
 									<label>Upload Backup</label>
-									<input type="file" name="brf" class="form-control" accept=".zip">
+									<input type="file" name="brf" class="form-control">
 								</div>
 						</div>
 						<div class="panel-footer">
