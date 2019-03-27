@@ -33,6 +33,7 @@ class Zea extends CI_Model
 	var $save          = true;
 	var $options       = array();
 	var $required      = array();
+	var $hide          = array();
 	var $data          = array();
 	var $input         = array();
 	var $link          = array();
@@ -65,6 +66,7 @@ class Zea extends CI_Model
 	var $insert_id     = 0;
 	var $url           = '';
 	var $get           = '';
+	var $key           = 'id';
 
 	public function init($text = '')
 	{
@@ -599,6 +601,23 @@ class Zea extends CI_Model
 		}
 	}
 
+	public function setHide($input = array())
+	{
+		if(!empty($input) && is_array($input))
+		{
+			foreach ($input as $key => $value)
+			{
+				foreach ($this->input as $ikey => $ivalue)
+				{
+					if($ivalue['text'] == $value)
+					{
+						$this->hide[$value] = TRUE;
+					}
+				}
+			}
+		}
+	}
+
 	public function startCollapse($field = '', $title = 'panel')
 	{
 		if(!empty($field))
@@ -654,6 +673,11 @@ class Zea extends CI_Model
 	public function setId($id = 0)
 	{
 		$this->id = @intval($id);
+	}
+
+	public function setKey($key = 'id')
+	{
+		$this->key = $key;
 	}
 
 	public function setLabel($field = '', $text = '')
@@ -1288,7 +1312,10 @@ class Zea extends CI_Model
 															{
 																$arrow = (@$_GET['type'] == 'asc') ? '<i class="fa fa-sort-alpha-asc"></i> ' : '<i class="fa fa-sort-alpha-desc"></i> ';
 															}
-															echo '<th><a href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
+															if(empty($this->hide[$field]))
+															{
+																echo '<th><a href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
+															}
 														}
 													}
 												}
@@ -1317,13 +1344,12 @@ class Zea extends CI_Model
 											{
 												$numbering_page = @intval($_GET['page']) < 1 ? 1 : @intval($_GET['page']);
 												$i = ($this->limit*$numbering_page)-$this->limit+1;
-
 												foreach ($data as $dkey => $dvalue)
 												{
-													if(!empty($dvalue['id']))
+													if(!empty($dvalue[$this->key]))
 													{
 														?>
-														<tr data-id="<?php echo $dvalue['id'] ?>">
+														<tr data-id="<?php echo $dvalue[$this->key] ?>">
 															<?php
 															if(!empty($this->numbering))
 															{
@@ -1337,7 +1363,7 @@ class Zea extends CI_Model
 																$required = !empty($ivalue['required']) ? $ivalue['required'] : '';
 																$image    = !empty($this->image[$field]) ? $this->image[$field] : '';
 
-																if(isset($dvalue[$ikey]))
+																if(isset($dvalue[$ikey]) && empty($this->hide[$ikey]))
 																{
 																	echo '<td>';
 																		switch ($ivalue['type'])
@@ -1385,7 +1411,7 @@ class Zea extends CI_Model
 															{
 																?>
 																<td>
-																	<a href="<?php echo $this->edit_link.$dvalue['id'] ?>" class="btn btn-default" title="click to edit" data-toggle="tooltip" data-placement="top"> <span class="fa fa-pencil-alt"></span></a>
+																	<a href="<?php echo $this->edit_link.$dvalue[$this->key] ?>" class="btn btn-default" title="click to edit" data-toggle="tooltip" data-placement="top"> <span class="fa fa-pencil-alt"></span></a>
 																</td>
 																<?php
 															}
@@ -1395,7 +1421,7 @@ class Zea extends CI_Model
 																<td>
 																	<div class="checkbox">
 																		<label>
-																			<input type="checkbox" class="del_check" name="del_row[]" value="<?php echo $dvalue['id']; ?>"> <span class="glyphicon glyphicon-trash"></span>
+																			<input type="checkbox" class="del_check" name="del_row[]" value="<?php echo $dvalue[$this->key]; ?>"> <span class="glyphicon glyphicon-trash"></span>
 																		</label>
 																	</div>
 																</td>
@@ -1416,6 +1442,10 @@ class Zea extends CI_Model
 															$tot_col--;
 														}
 													}
+												}
+												foreach ($this->hide as $hide_key => $hide_value) 
+												{
+													$tot_col--;
 												}
 												if(!empty($this->numbering))
 												{
@@ -1488,6 +1518,18 @@ class Zea extends CI_Model
 				$last_id = 0;
 				if(!empty($_POST))
 				{
+					foreach ($this->input as $key => $value) 
+					{
+						if($value['type'] == 'static')
+						{
+							if(!empty($this->value[$key]))
+							{
+								$_POST[$value['text']] = $this->value[$key];
+							}else{
+								$_POST[$value['text']] = '';
+							}
+						}
+					}
 					$data_post = $_POST;
 					foreach ($data_post as $key => $value)
 					{

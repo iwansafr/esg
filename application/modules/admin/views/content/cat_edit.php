@@ -15,7 +15,7 @@ $this->zea->tableOptions('par_id', 'content_cat','id','title');
 
 $this->zea->addInput('title','text');
 
-$slug_type = !empty($get_id) ? 'text' : 'hidden';
+$slug_type = !empty($get_id) ? 'text' : 'static';
 
 $this->zea->addInput('slug', $slug_type);
 

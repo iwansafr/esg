@@ -15,7 +15,7 @@ $this->zea->setMultiSelect('cat_ids','content_cat','id,par_id,title');
 
 $this->zea->addInput('title', 'text');
 
-$this->zea->addInput('author','hidden');
+$this->zea->addInput('author','static');
 $this->zea->setValue('author',$this->session->userdata[base_url().'_logged_in']['username']);
 
 $this->zea->addInput('image','upload');
@@ -41,7 +41,7 @@ $this->zea->setCollapse('images',TRUE);
 $this->zea->addInput('keyword','textarea');
 $this->zea->setLabel('keyword','Meta Keyword');
 
-$slug_type = !empty($id) ? 'text' : 'hidden';
+$slug_type = !empty($id) ? 'text' : 'static';
 
 $this->zea->addInput('slug', $slug_type);
 

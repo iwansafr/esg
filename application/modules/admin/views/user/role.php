@@ -28,7 +28,8 @@ if(is_root())
 	$form->setHeading('User Role List');
 	$form->setField(array('id','title'));
 	$form->setTable('user_role');
-	$form->addInput('id','hidden');
+	$form->addInput('id','static');
+	$form->setNumbering(TRUE);
 	$form->addInput('title','plaintext');
 	// $form->addInput('level','hidden');
 	$form->addInput('description','plaintext');
@@ -36,6 +37,7 @@ if(is_root())
 	$form->setEdit(TRUE);
 	$form->setEditLink(base_url('admin/user/role/?id='));
 	echo '<div class="col-md-9">';
+	$form->setHIde(array('id'));
 	$form->form();
 	echo '</div>';
 	echo '</div>';
