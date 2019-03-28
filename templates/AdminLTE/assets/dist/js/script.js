@@ -80,11 +80,14 @@ $(document).ready(function(){
 	$('a').on('click',function(){
 		var this_link = this.href;
 		var target = this.target;
+
 		if(this_link.includes('#')){
 
 		}else if(target=='_blank')
 		{
 
+		}else if(event.ctrlKey){
+			
 		}else{
 			$('#loading').removeClass('hidden');
 		}
