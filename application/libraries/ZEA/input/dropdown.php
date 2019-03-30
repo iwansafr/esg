@@ -23,7 +23,12 @@ if(!empty($field))
 	$cur_options = @$this->options[$field];
 	if($this->table == @$this->options['ref_table_'.$field])
 	{
-		unset($cur_options[@$dvalue[$this->key]]);
+		if($this->init == 'roll')
+		{
+			unset($cur_options[@$dvalue[$this->key]]);
+		}else{
+			unset($cur_options[@$data['id']]);
+		}
 	}
 	$input_array = array(
 			'name'     => $field.''.$field_name,

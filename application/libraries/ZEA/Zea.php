@@ -939,7 +939,7 @@ class Zea
 			$sql = 'SELECT '.$input.' FROM '.$this->table;
 			if(!empty($this->jointable))
 			{
-				$sql = 'SELECT '.$this->jointable['field'].' FROM '.$this->table.' LEFT JOIN '.$this->jointable['table'].' '.$this->jointable['condition'];
+				$sql = 'SELECT '.$this->jointable['field'].' FROM '.$this->table.' INNER JOIN '.$this->jointable['table'].' '.$this->jointable['condition'];
 			}
 			if(!empty($keyword) || !empty($this->where))
 			{
