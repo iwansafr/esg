@@ -48,6 +48,6 @@ if(!empty($field))
 	</script>
 	<?php
 	$js_extra = ob_get_contents();
-	$this->session->set_userdata('js_extra', $js_extra);
+	$this->CI->session->set_userdata('js_extra', $js_extra);
 	ob_end_clean();
 }

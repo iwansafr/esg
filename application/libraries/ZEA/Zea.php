@@ -1,15 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Zea extends CI_Model
+class Zea
 {
+
+	private $CI;
 	public function __construct()
 	{
-		parent::__construct();
-		$this->load->helper('url');
-		$this->load->helper('html');
-		$this->load->helper('form');
-		// $this->load->library('upload');
-		$this->load->library('pagination');
+		$this->CI =& get_instance();
+		$this->CI->config->item('esg');
+		$this->CI->load->database();
+		$this->CI->load->helper('url');
+		$this->CI->load->helper('html');
+		$this->CI->load->helper('form');
+		// $this->CI->load->library('upload');
+		$this->CI->load->library('pagination');
 		$this->setUrl();
 	}
 
@@ -94,7 +98,7 @@ class Zea extends CI_Model
 	{
 		if(empty($url))
 		{
-			$this->url = $this->uri->uri_string();
+			$this->url = $this->CI->uri->uri_string();
 			$this->url .= !empty($_SERVER['REDIRECT_QUERY_STRING']) ? '?'.$_SERVER['REDIRECT_QUERY_STRING'] : '';
 			if($this->hasOrder($this->url))
 			{
@@ -172,12 +176,12 @@ class Zea extends CI_Model
       {
         $data[$key] = $value;
       }
-      $param = $this->db->query('SELECT * FROM '.$table.' WHERE name = ?', $name)->row_array();
+      $param = $this->CI->db->query('SELECT * FROM '.$table.' WHERE name = ?', $name)->row_array();
       if(!empty($param))
       {
-        return $this->db->update($table, $data, "`name` = '{$name}'");
+        return $this->CI->db->update($table, $data, "`name` = '{$name}'");
       }else{
-        return $this->db->insert($table, $data);
+        return $this->CI->db->insert($table, $data);
       }
     }
   }
@@ -310,7 +314,7 @@ class Zea extends CI_Model
 	{
 		if(!empty($sql))
 		{
-			return $this->db->query($sql)->result_array();
+			return $this->CI->db->query($sql)->result_array();
 		}
 	}
 
@@ -347,14 +351,14 @@ class Zea extends CI_Model
 			{
 				if($value['text'] == $field)
 				{
-					$this->db->select($index);
-					$this->db->select($label);
-					$this->db->from($table);
+					$this->CI->db->select($index);
+					$this->CI->db->select($label);
+					$this->CI->db->from($table);
 					if(!empty($ex))
 					{
-						$this->db->where($ex);
+						$this->CI->db->where($ex);
 					}
-					$data = $this->db->get()->result_array();
+					$data = $this->CI->db->get()->result_array();
 					$options    = array();
 					$options[0] = 'None';
 					if(!empty($data))
@@ -470,7 +474,7 @@ class Zea extends CI_Model
 	{
 		if(!empty($this->input))
 		{
-			$field = $this->db->list_fields($this->table);
+			$field = $this->CI->db->list_fields($this->table);
 			foreach ($this->input as $key => $value)
 			{
 				if($this->init == 'param')
@@ -868,7 +872,7 @@ class Zea extends CI_Model
     {
       foreach ($ids as $key => $id)
       {
-        $this->db->delete($table, array('id'=>$id));
+        $this->CI->db->delete($table, array('id'=>$id));
         $dir = FCPATH.'images/modules/'.$table.'/'.$id.'/';
         recursive_rmdir($dir);
         $dir = FCPATH.'images/modules/'.$table.'/gallery'.'/'.$id.'/';
@@ -887,9 +891,9 @@ class Zea extends CI_Model
       }
       if($id > 0)
       {
-        return $this->db->update($table, $data, 'id = '.$id);
+        return $this->CI->db->update($table, $data, 'id = '.$id);
       }else{
-        return $this->db->insert($table, $data);
+        return $this->CI->db->insert($table, $data);
       }
     }
   }
@@ -903,7 +907,7 @@ class Zea extends CI_Model
       {
         $binds = $this->statement_value;
       }
-      $data = $this->db->query($sql,$binds)->row_array();
+      $data = $this->CI->db->query($sql,$binds)->row_array();
 
       return $data[$field];
     }
@@ -1004,7 +1008,7 @@ class Zea extends CI_Model
 				// $sql .= ' '.$where;
 				$sql .= $this->hasGet($sql) ? ' AND '.$this->where : ' '.$this->where;
 			}
-			$num_rows = $this->db->query($sql,$bind)->num_rows();
+			$num_rows = $this->CI->db->query($sql,$bind)->num_rows();
 
 			if(!empty($sort_by))
 			{
@@ -1013,13 +1017,13 @@ class Zea extends CI_Model
 
 			$sql          .= ' ORDER BY '.$this->orderby;
 			$sql          .= ' LIMIT '.$page*$limit.','.$limit;
-			$data['data']  = $this->db->query($sql,$bind)->result_array();
-			$data['query'] = $this->db->last_query();
-			$config        = pagination($num_rows,$limit,base_url($this->esg->get_esg('navigation')['string'].$url_get));
-	    $this->pagination->initialize($config);
-	    $data['pagination'] = $this->pagination->create_links();
+			$data['data']  = $this->CI->db->query($sql,$bind)->result_array();
+			$data['query'] = $this->CI->db->last_query();
+			$config        = pagination($num_rows,$limit,base_url($this->CI->esg->get_esg('navigation')['string'].$url_get));
+	    $this->CI->pagination->initialize($config);
+	    $data['pagination'] = $this->CI->pagination->create_links();
 		}else if($this->init == 'edit'){
-			$data = $this->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
+			$data = $this->CI->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
 			$data = @$data;
 		}
 		return $data;
@@ -1030,7 +1034,7 @@ class Zea extends CI_Model
 		if(!empty($this->paramname))
 		{
 			$data = array();
-			$data = $this->db->query('SELECT value FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
+			$data = $this->CI->db->query('SELECT value FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
 			return $data;
 		}
 	}
@@ -1544,7 +1548,7 @@ class Zea extends CI_Model
 					if(!empty($data_post[$this->formName]))
 					{
 						unset($data_post[$this->formName]);
-						unset($data_post[$this->security->get_csrf_token_name()]);
+						unset($data_post[$this->CI->security->get_csrf_token_name()]);
 						if(isset($data_post['password']))
 						{
 							if(empty($this->encrypt))
@@ -1607,9 +1611,9 @@ class Zea extends CI_Model
 								{
 									if(empty($this->id))
 									{
-										$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$data_post[$value])->row_array();
+										$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$data_post[$value])->row_array();
 									}else{
-										$data = $this->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$data_post[$value], $this->id))->row_array();
+										$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$data_post[$value], $this->id))->row_array();
 									}
 									if(!empty($data))
 									{
@@ -1642,7 +1646,7 @@ class Zea extends CI_Model
 										$data['alert'] = 'success';
 									}
 								}
-								$last_id = $this->db->insert_id();
+								$last_id = $this->CI->db->insert_id();
 								$this->set_insert_id($last_id);
 								if(!empty($last_id) || !empty($this->id) || !empty($this->paramname))
 								{
@@ -1955,12 +1959,12 @@ class Zea extends CI_Model
 										{
 											if(in_array($dc_id, $_POST[$inputvalue['text'].'_row']))
 											{
-												$this->db->update($this->table, array($inputvalue['text']=>1), 'id = '.$dc_id);
+												$this->CI->db->update($this->table, array($inputvalue['text']=>1), 'id = '.$dc_id);
 											}else{
-												$this->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
+												$this->CI->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
 											}
 										}else{
-											$this->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
+											$this->CI->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
 										}
 									}
 								}
@@ -1988,7 +1992,7 @@ class Zea extends CI_Model
 
 										if(!empty($_POST[$inputvalue['text'].'_row']))
 										{
-											$this->db->update($this->table, array($inputvalue['text']=>$_POST[$inputvalue['text'].'_row'][$dt_id]), 'id = '.$dt_id);
+											$this->CI->db->update($this->table, array($inputvalue['text']=>$_POST[$inputvalue['text'].'_row'][$dt_id]), 'id = '.$dt_id);
 										}
 									}
 								}
@@ -2016,7 +2020,7 @@ class Zea extends CI_Model
 
 										if(!empty($_POST[$inputvalue['text'].'_row']))
 										{
-											$this->db->update($this->table, array($inputvalue['text']=>$_POST[$inputvalue['text'].'_row'][$dt_id]), 'id = '.$dt_id);
+											$this->CI->db->update($this->table, array($inputvalue['text']=>$_POST[$inputvalue['text'].'_row'][$dt_id]), 'id = '.$dt_id);
 										}
 									}
 								}

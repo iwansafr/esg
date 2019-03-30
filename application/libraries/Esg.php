@@ -1,6 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-class Esg extends CI_Model
+class Esg
 {
+	private $CI;
+	public function __construct()
+	{
+		$this->CI =& get_instance();
+		$this->CI->config->item('esg');
+		$this->CI->load->database();
+	}
 
 	public function set_esg($index = '', $data = array())
 	{
@@ -12,7 +19,7 @@ class Esg extends CI_Model
 				$output[$index] = $data;
 			}
 		}
-		$this->config->set_item('esg', $output);
+		$this->CI->config->set_item('esg', $output);
 	}
 
 	function set_tag($table = 'content_tag')
@@ -23,24 +30,24 @@ class Esg extends CI_Model
     foreach ($post['tag_ids'] as $key => $value)
     {
     	$value = url_title($value);
-      $tag_exist = $this->db->query('SELECT title FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
+      $tag_exist = $this->CI->db->query('SELECT title FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
       $tag_exist = $tag_exist['title'];
       if(empty($tag_exist))
       {
-        $this->db->insert($table, array('title'=>$value));
+        $this->CI->db->insert($table, array('title'=>$value));
       }
-      $tag_id = $this->db->query('SELECT id FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
+      $tag_id = $this->CI->db->query('SELECT id FROM '.$table.' WHERE title = ? LIMIT 1',$value)->row_array();
       $tag_id = $tag_id['id'];
       if(!empty($tag_id))
       {
-      	$total = $this->db->query("SELECT count(id) AS total FROM content WHERE tag_ids LIKE '%,{$tag_id},%'")->row_array();
+      	$total = $this->CI->db->query("SELECT count(id) AS total FROM content WHERE tag_ids LIKE '%,{$tag_id},%'")->row_array();
       	if(!empty($total))
       	{
       		$total = $total['total'];
       	}else{
       		$total = 1;
       	}
-      	$this->db->update($table, array('total'=>$total), 'id = '.$tag_id);
+      	$this->CI->db->update($table, array('total'=>$total), 'id = '.$tag_id);
         $tag_ids[] = $tag_id;
       }
     }
@@ -51,7 +58,7 @@ class Esg extends CI_Model
 
 	public function check_login()
 	{
-		if(empty($this->session->userdata(base_url().'_logged_in')))
+		if(empty($this->CI->session->userdata(base_url().'_logged_in')))
 		{
 			$curent_url = base_url($_SERVER['PATH_INFO']);
 			$curent_url = urlencode($curent_url);
@@ -96,20 +103,20 @@ class Esg extends CI_Model
       'browser' => @$_SERVER['HTTP_USER_AGENT'],
       'status'  => $status
     );
-    $this->db->insert('user_login', $user_login);
+    $this->CI->db->insert('user_login', $user_login);
 	}
 
 	public function login()
 	{
-		$data = $this->input->post();
-		$failed_login = @intval($this->session->userdata(base_url().'_failed_login'));
+		$data = $this->CI->input->post();
+		$failed_login = @intval($this->CI->session->userdata(base_url().'_failed_login'));
 		if($failed_login > 4)
 		{
 			$this->set_esg('msg', array('status'=>'danger','msg'=>'you have failed login 5 time, wait for 30 minute forward and try again'));
 		}else{
 			if(!empty($data))
 			{
-				$user = $this->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data['username'])->row_array();
+				$user = $this->CI->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data['username'])->row_array();
 				if(!empty($user))
 				{
 					if(decrypt($data['password'], $user['password']))
@@ -125,7 +132,7 @@ class Esg extends CI_Model
 						{
 							$this->set_cookie($data);
 						}
-						$role = $this->db->query('SELECT level,title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
+						$role = $this->CI->db->query('SELECT level,title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
 						if(!empty($role))
 						{
 							$user['role'] = @$role['title'];
@@ -133,26 +140,26 @@ class Esg extends CI_Model
 						}else{
 							$user['role'] = 'user';
 						}
-						$this->session->set_userdata(base_url().'_logged_in', $user);
+						$this->CI->session->set_userdata(base_url().'_logged_in', $user);
 						$this->save_ip($user['id']);
 						redirect($url);
 					}else{
 						$this->set_esg('msg', array('status'=>'danger','msg'=>'wrong password'));
 						$failed_login++;
 						$this->save_ip(0,0);
-						$this->session->set_userdata(base_url().'_failed_login', $failed_login);
+						$this->CI->session->set_userdata(base_url().'_failed_login', $failed_login);
 					}
 				}else{
 					$this->set_esg('msg', array('status'=>'danger','msg'=>'username is not valid'));
 					$failed_login++;
 					$this->save_ip(0,0);
-					$this->session->set_userdata(base_url().'_failed_login', $failed_login);
+					$this->CI->session->set_userdata(base_url().'_failed_login', $failed_login);
 				}
 			}else{
 				if(!empty($_COOKIE))
 				{
 					$data = $_COOKIE;
-					$user = $this->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data[base_url().'_username'])->row_array();
+					$user = $this->CI->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data[base_url().'_username'])->row_array();
 					if(!empty($user))
 					{
 						if(decrypt($data[base_url().'_password'], $user['password']))
@@ -164,7 +171,7 @@ class Esg extends CI_Model
 							}else{
 								$url = 'admin/index';
 							}
-							$role = $this->db->query('SELECT level,title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
+							$role = $this->CI->db->query('SELECT level,title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
 							if(!empty($role))
 							{
 								$user['role'] = @$role['title'];
@@ -172,7 +179,7 @@ class Esg extends CI_Model
 							}else{
 								$user['role'] = 'user';
 							}
-							$this->session->set_userdata(base_url().'_logged_in', $user);
+							$this->CI->session->set_userdata(base_url().'_logged_in', $user);
 							$this->save_ip($user['id']);
 							redirect($url);
 						}
@@ -186,13 +193,13 @@ class Esg extends CI_Model
 	public function logout()
 	{
 		$this->delete_cookie();
-		$this->session->sess_destroy();
+		$this->CI->session->sess_destroy();
     redirect(base_url('admin/index'));
 	}
 
 	public function get_esg($index = '')
 	{
-		$data   = $this->config->item('esg');
+		$data   = $this->CI->config->item('esg');
 		$output = $data;
 		if(!empty($index))
 		{
@@ -206,7 +213,7 @@ class Esg extends CI_Model
 		$data = array();
 		if(!empty($name))
 		{
-			$value = $this->db->query('SELECT value FROM config WHERE name = ?', $name)->row_array();
+			$value = $this->CI->db->query('SELECT value FROM config WHERE name = ?', $name)->row_array();
 			if(!empty($value))
 			{
 				$data = json_decode($value['value'], 1);
@@ -217,7 +224,7 @@ class Esg extends CI_Model
 
 	public function extra_css()
 	{
-		$data = $this->config->item('esg');
+		$data = $this->CI->config->item('esg');
 		$data = @$data['extra_css'];
 		if(!empty($data))
 		{
@@ -234,7 +241,7 @@ class Esg extends CI_Model
 	}
 	public function extra_js()
 	{
-		$data = $this->config->item('esg');
+		$data = $this->CI->config->item('esg');
 		$data = $this->get_esg('extra_js');
 		if(!empty($data))
 		{

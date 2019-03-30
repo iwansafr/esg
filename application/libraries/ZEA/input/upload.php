@@ -3,7 +3,7 @@ if(!empty($field))
 {
 	if(!empty($this->id))
 	{
-		$data_image = $this->db->query('SELECT '.$field.' FROM '.$this->table.' WHERE id = ?',$this->id)->row_array();
+		$data_image = $this->CI->db->query('SELECT '.$field.' FROM '.$this->table.' WHERE id = ?',$this->id)->row_array();
 		$data_image = @$data_image[$field];
 		$image      = !empty($data_image) ? $this->id.'/'.$data_image : '';
 	}else if($this->init == 'param')
