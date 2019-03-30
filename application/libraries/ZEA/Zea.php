@@ -354,6 +354,7 @@ class Zea
 					$this->CI->db->select($index);
 					$this->CI->db->select($label);
 					$this->CI->db->from($table);
+					$this->options['ref_table_'.$field] = $table;
 					if(!empty($ex))
 					{
 						$this->CI->db->where($ex);

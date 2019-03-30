@@ -19,10 +19,16 @@ if(!empty($field))
 		$data_value = $dvalue[$ikey];
 		$field_name = '_row['.$dvalue['id'].']';
 	}
+
+	$cur_options = @$this->options[$field];
+	if($this->table == @$this->options['ref_table_'.$field])
+	{
+		unset($cur_options[@$dvalue[$this->key]]);
+	}
 	$input_array = array(
 			'name'     => $field.''.$field_name,
 			'class'    => 'form-control select2',
-			'options'  => @$this->options[$field],
+			'options'  => @$cur_options,
 			$required  => $required,
 			'selected' => $data_value,
 			'style'    => 'width: 100%;'
@@ -30,7 +36,7 @@ if(!empty($field))
 
 	// if($this->init == 'roll')
 	// {
-		// unset($this->options[$field][$dvalue['id']]);
+		// unset($cur_options[$dvalue['id']]);
 	// }
 
 	if(!empty($this->attribute[$field]))
@@ -47,7 +53,7 @@ if(!empty($field))
 		}
 	}
 
-	if(!empty($this->options[$field]))
+	if(!empty($cur_options))
 	{
 		echo form_dropdown($input_array);
 	}else{

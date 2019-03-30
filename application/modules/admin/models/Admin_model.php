@@ -161,6 +161,23 @@ class Admin_model extends CI_Model
 		    )
 		  ),
 		  array(
+		    'title' => 'Admin Menu',
+		    'icon' => 'fa-list',
+		    'link' => base_url('admin/admin_menu/list'),
+		    'list' => array(
+		    	array(
+		        'title' => 'Add Menu',
+		        'icon' => 'fa-pencil-alt',
+		        'link' => base_url('admin/admin_menu/edit')
+		      ),
+		      array(
+		        'title' => 'Menu List',
+		        'icon' => 'fa-list',
+		        'link' => base_url('admin/admin_menu/list')
+		      ),
+		    )
+		  ),
+		  array(
 		    'title' => 'data',
 		    'icon' => 'fa-database',
 		    'link' => base_url('admin/visitor'),
