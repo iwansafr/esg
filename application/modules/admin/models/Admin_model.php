@@ -9,7 +9,8 @@ class Admin_model extends CI_Model
 		$this->load->model('esg_model');
 		$this->load->library('esg');
 		// $this->load->library('ZEA/zea');
-		$this->sidebar_menu();
+		// $this->sidebar_menu();
+		$this->menu();
 		$this->site();
 	}
 
@@ -175,6 +176,11 @@ class Admin_model extends CI_Model
 		        'icon' => 'fa-list',
 		        'link' => base_url('admin/admin_menu/list')
 		      ),
+		      array(
+		        'title' => 'Parent Menu',
+		        'icon' => 'fa-list',
+		        'link' => base_url('admin/admin_menu?id=0')
+		      ),
 		    )
 		  ),
 		  array(
@@ -239,6 +245,46 @@ class Admin_model extends CI_Model
 		);
 		$data['menu'] = $menu;
 		$this->esg->set_esg('sidebar_menu', $data['menu']);
+	}
+
+	public function menu()
+	{
+		$data = array();
+		$role_id = @$this->session->userdata(base_url('_logged_in'))['user_role_id'];
+		$menu = $this->db->query("SELECT * FROM admin_menu WHERE user_role_ids LIKE '%,{$role_id},%' ORDER BY sort_order")->result_array();
+		$tmp_data = $menu;
+		if(!empty($tmp_data))
+		{
+			$output = array();
+			$data = array();
+			$b_data = array();
+			foreach ($tmp_data as $tmkey => $tmvalue)
+			{
+				$b_data[$tmvalue['id']] = $tmvalue;
+			}
+			foreach ($b_data as $tkey => $tvalue)
+			{
+				if($tvalue['par_id'] == 0)
+				{
+					$data[$tvalue['id']] = $tvalue;
+				}
+			}
+			foreach ($b_data as $tkey => $tvalue)
+			{
+				if($tvalue['par_id'] > 0)
+				{
+					if(!empty($data[$tvalue['par_id']]))
+					{
+						$data[$tvalue['par_id']]['list'][$tvalue['id']]  = $tvalue;
+					}else if(!empty($b_data[$tvalue['par_id']]))
+					{
+						$id = $b_data[$tvalue['par_id']]['par_id'];
+						$data[$id]['list'][$tvalue['id']]  = $tvalue;
+					}
+				}
+			}
+			$this->esg->set_esg('sidebar_menu', $data);
+		}
 	}
 
 	public function site()

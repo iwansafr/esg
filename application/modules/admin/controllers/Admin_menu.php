@@ -14,11 +14,17 @@ class Admin_menu extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('index');
+		$data['data_menu'] = array();
+		if(isset($_GET['id']))
+		{
+			$data['data_menu'] = $this->admin_menu_model->get_menu(@intval($_GET['id']));
+		}
+		$this->load->view('index', $data);
 	}
 
 	public function list()
 	{
+		$data['data_menu'] = array();
 		if(!empty($_POST['del_row']))
 		{
 			foreach ($_POST['del_row'] as $key => $value) 
@@ -26,7 +32,11 @@ class Admin_menu extends CI_Controller
 				$this->admin_menu_model->del_menu($value);
 			}
 		}
-		$this->load->view('index');
+		if(isset($_GET['id']))
+		{
+			$data['data_menu'] = $this->admin_menu_model->get_menu(@intval($_GET['id']));
+		}
+		$this->load->view('index', $data);
 	}
 	public function edit()
 	{

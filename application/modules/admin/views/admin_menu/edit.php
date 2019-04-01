@@ -10,7 +10,7 @@ if(!empty($id))
 {
 	$this->zea->setId($id);
 }
-echo '<a href="'.base_url('admin/admin_menu/list?id='.$po_id.'&p_id='.@intval($p_id)).'" class="btn btn-default pull-right"><i class="fa fa-list"></i> menu list</a>';
+echo '<a href="'.base_url('admin/admin_menu?id='.@intval($p_id)).'" class="btn btn-default pull-right"><i class="fa fa-list"></i></a>';
 $this->zea->setHeading('Admin Menu');
 
 $this->zea->addInput('par_id','dropdown');

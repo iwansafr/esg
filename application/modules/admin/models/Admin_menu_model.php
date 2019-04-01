@@ -16,7 +16,7 @@ class Admin_menu_model extends CI_Model
 		$data = array();
 		if(!empty($id))
 		{
-			$data = $this->db->query('SELECT * FROM admin_menu WHERE id = ?', $id);
+			$data = $this->db->query('SELECT * FROM admin_menu WHERE id = ? LIMIT 1', $id)->row_array();
 		}
 		return $data;
 	}

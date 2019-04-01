@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
+$this->CI->load->helper('string');
 if(!empty($field))
 {
 	$link_get = $this->link['link_get'][$field];
@@ -31,6 +31,6 @@ if(!empty($field))
 		$attribute = $this->attribute[$field];
 	}
 	?>
-	<a href="<?php echo $this->link[$field].$key_get.$link_get.$ext_link; ?>" <?php echo $attribute ?>><?php echo $data_value ?></a>
+	<a href="<?php echo reduce_double_slashes($this->link[$field].$key_get.$link_get.$ext_link); ?>" <?php echo $attribute ?>><?php echo $data_value ?></a>
 	<?php
 }

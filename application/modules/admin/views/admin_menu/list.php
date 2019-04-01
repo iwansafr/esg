@@ -2,7 +2,8 @@
 $form = new zea();
 
 $form->init('roll');
-$form->setTable('admin_menu', 'id', 'DESC');
+// $form->setTable('admin_menu', 'id', 'DESC');
+$form->setTable('admin_menu');
 $ext = '';
 if(!empty($p_id))
 {
@@ -14,9 +15,17 @@ if(!empty($p_id))
 	if(!empty($id))
 	{
 		$form->setWhere(' AND par_id = 0');
+	}else if($id == 0 AND isset($_GET['id']))
+	{
+		$form->setWhere(' par_id = 0');
 	}
 }
-$form->setHeading('<a href="'.base_url('admin/admin_menu/edit'.$ext).'"><button class="btn btn-sm btn-default"><i class="fa fa-plus-circle"></i> new menu</button></a>');
+$back_button = '';
+if(!empty($data_menu))
+{
+	$back_button = ' | <a href="'.base_url('admin/admin_menu/?id='.$data_menu['par_id']).'"><button class="btn btn-sm btn-default"><i class="fa fa-level-up-alt"></i></button></a><div class="clearfix">';
+}
+$form->setHeading('<a href="'.base_url('admin/admin_menu/edit'.$ext).'"><button class="btn btn-sm btn-default"><i class="fa fa-plus-circle"></i></button></a>'.$back_button);
 $form->search();
 $form->order_by('sort_order', 'ASC');
 $form->setField(array('title'));
@@ -27,12 +36,9 @@ $form->tableOptions('par_id','admin_menu','id','title');
 
 $form->addInput('title','plaintext');
 
-if(!empty($id) || !empty($p_id))
-{
-	$form->addInput('sort_order','text');
-	$form->setAttribute('sort_order',array('type'=>'number'));
-	$form->setLabel('sort_order', 'sort');
-}
+$form->addInput('sort_order','text');
+$form->setAttribute('sort_order',array('type'=>'number'));
+$form->setLabel('sort_order', 'sort');
 
 $form->addInput('link','link');
 $form->setLink('link',base_url('admin/admin_menu'),'id');
