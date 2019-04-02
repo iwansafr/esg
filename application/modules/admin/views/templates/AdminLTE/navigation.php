@@ -4,7 +4,7 @@ $title = end($navigation['array']);
 $title = $title == 'admin' ? 'home' : $title;
 ?>
 <h1>
-	<?php echo $title ?>
+	<?php echo str_replace('_',' ',$title) ?>
 </h1>
 <ol class="breadcrumb">
 	<?php

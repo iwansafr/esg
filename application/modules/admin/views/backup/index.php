@@ -14,9 +14,9 @@ if(is_root() || is_admin())
 			<div class="table-responsive">
 				<table class="table">
 					<tr>
-						<td>back up data</td>
-						<td>Download</td>
-						<td>action</td>
+						<th>back up data</th>
+						<th>Download</th>
+						<th>action</th>
 					</tr>
 					<?php 
 					foreach (glob(FCPATH.'images/modules/backup/*.zip') AS $value) 
@@ -25,8 +25,8 @@ if(is_root() || is_admin())
 						$name = end($name);
 						$name = str_replace('.zip', '', $name);
 						echo '<tr><td>'.$name.'</td>';
-						echo '<td><a href="'.base_url('images/modules/backup/'.$name).'.zip" class="btn btn-sm btn-default"><i class="fa fa-download"></i>Download</a></td>';
-						echo '<td><a href="'.base_url('admin/backup/delete/'.$name).'" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> hapus</a></td></tr>';
+						echo '<td><a href="'.base_url('images/modules/backup/'.$name).'.zip" class="btn btn-sm btn-default" no_load="no_load"><i class="fa fa-download"></i>Download</a></td>';
+						echo '<td><a href="'.base_url('admin/backup/delete/'.$name).'" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a></td></tr>';
 					}
 					?>
 				</table>

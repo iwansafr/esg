@@ -80,12 +80,15 @@ $(document).ready(function(){
 	$('a').on('click',function(){
 		var this_link = this.href;
 		var target = this.target;
+		var no_load = $(this).attr('no_load');
 
 		if(this_link.includes('#')){
 
 		}else if(target=='_blank')
 		{
 
+		}else if(no_load){
+			
 		}else if(event.ctrlKey){
 			
 		}else{

@@ -155,6 +155,48 @@ if(!function_exists('pr'))
 	}
 }
 
+function copy_dir($source = '', $destination = '')
+{
+	$output = ['msg'=>'copy failed','type'=>'danger'];
+	if(!empty($source) && !empty($destination))
+	{
+		if(is_dir($source))
+		{
+			foreach(glob("{$source}/*") as $file)
+		  {
+	    	$file_name = explode('/',$file);
+				$file_name = end($file_name);
+		    if(is_dir($file)) {
+		      copy_dir($file, $destination.'/'.$file_name);
+		    } else {
+		    	if(is_dir($destination))
+		    	{
+			    	if(!file_exists($destination.'/'.$file_name))
+			    	{
+			      	copy($file, $destination.'/'.$file_name);
+			    	}
+		    	}else{
+		    		$cn_dir = explode('/',$destination);
+		    		$dev_dir = '/';
+		    		foreach ($cn_dir as $key => $value) 
+		    		{
+		    			$dev_dir .= $value.'/';
+		    			if(!is_dir($dev_dir))
+		    			{
+		    				mkdir($dev_dir);
+								copy_dir($file, $destination);		    		
+		    			}else{
+								copy_dir($file, $destination);		    		
+		    			}
+		    		}
+		    		copy($file, $dev_dir.'/'.$file_name);
+		    	}
+		    }
+		  }
+		}
+	}
+}
+
 function curl($url = '')
 {
 	// create a new cURL resource

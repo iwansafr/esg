@@ -32,8 +32,8 @@ if(is_root() || is_admin())
 			<div class="table-responsive">
 				<table class="table">
 					<tr>
-						<td>data</td>
-						<td>action</td>
+						<th>data</th>
+						<th>action</th>
 					</tr>
 					<?php 
 					foreach (glob(FCPATH.'images/modules/backup/*.zip') AS $value) 

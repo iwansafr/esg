@@ -2,6 +2,7 @@
 $template_names = array();
 
 ?>
+<a href="<?php echo base_url().'admin/config/template_list' ?>" class="btn btn-default pull-right" ><i class=" fa fa-images"></i> Manage Templates</a>
 <a href="<?php echo base_url().'admin/config/widget' ?>" class="btn btn-default pull-right" ><i class=" fa fa-cog"></i> Manage Widget</a>
 <?php
 if(is_admin() || is_root())
