@@ -6,6 +6,7 @@ $(document).ready(function(){
 			current.closest('ul').closest('li').addClass('active');
 		}
 	}
+	$('[data-toggle="tooltip"]').tooltip()
 	li_active();
 	$('input,textarea,select').filter(':visible:first').focus();
 	// CKEDITOR.replace('textckeditor');

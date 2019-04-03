@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>esoftgreat | 404 page not found</title>
+  <?php 
+  $title = !empty($msg) ? $msg : '404 page not found';
+  ?>
+  <title>esoftgreat | <?php echo $title;?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -30,7 +33,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body" style="background: black;">
-    <h1>404 page not found</h1>
+    <h1><?php echo $title ?></h1>
     <center>
       <a href="<?php echo base_url() ?>"><button class="btn btn-bg btn-warning"> <i class="fa fa-home"></i> back to home</button></a>
     </center>
