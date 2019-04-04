@@ -5,6 +5,7 @@
 !*/cache/index.html
 !*/cache/.htaccess
 images/modules/*
+images/cache/*
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
@@ -14,6 +15,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 #codeigniter 3
 # application/config/config.php
 application/config/database.php
+application/cache
 sftp-config.json
 /.htaccess
 .htaccess

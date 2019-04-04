@@ -17,6 +17,7 @@ class Content_model extends CI_Model
 		{
 			$slug = str_replace('.html', '', $slug);
 		}
+		$this->db->cache_on();
 		$data = $this->db->query('SELECT * FROM content WHERE slug = ? AND publish = 1', $slug)->row_array();
 		if(!empty($data))
 		{
@@ -70,7 +71,8 @@ class Content_model extends CI_Model
 		$zea_t    = 'title';
 		$taxonomy = TRUE;
 		$table    = 'content';
-
+		
+		$this->db->cache_on();
 		if($module != 'search')
 		{
 			if($module=='category')

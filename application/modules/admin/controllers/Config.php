@@ -116,4 +116,22 @@ class Config extends CI_Controller
 
 		}
 	}
+	public function delete_cache()
+	{
+		foreach(glob(FCPATH.'application/cache/*') AS $file)
+		{
+			if(!preg_match('~.index.html~', $file))
+			{
+				unlink($file);
+			}
+		}
+		foreach(glob(FCPATH.'images/cache/*') AS $file)
+		{
+			if(!preg_match('~.index.html~', $file))
+			{
+				recursive_rmdir($file);
+			}
+		}
+		$this->load->view('index');
+	}
 }
