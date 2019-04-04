@@ -208,6 +208,14 @@ class Esg
 		return $output;
 	}
 
+	public function check_cache()
+	{
+		if(!is_dir(FCPATH.'images/cache'))
+		{
+			mkdir(FCPATH.'images/cache',0775);
+		}
+	}
+
 	public function get_config($name = '')
   	{
 		$data = array();
