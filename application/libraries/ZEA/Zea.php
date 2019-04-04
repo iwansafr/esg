@@ -915,6 +915,15 @@ class Zea
   }
 	public function getData()
 	{
+		$navigation = $this->CI->esg->get_esg('navigation');
+		$nav_module = @$navigation['array'][0];
+		$nav_task = !empty($navigation['array'][1]) ? $navigation['array'][1] : 'index';
+		if(!empty($_GET['page']))
+		{
+			$this->CI->db->cache_delete($nav_module, $nav_task);
+			$this->CI->db->cache_off();
+			$this->CI->output->delete_cache();
+		}
 		$data = array();
 		if($this->init == 'roll')
 		{

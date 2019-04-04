@@ -113,7 +113,7 @@ class Home_model extends CI_Model
 	{
 		if(!empty($data['content']))
 		{
-			$this->db->cache_on();
+			$this->db->cache_off();
 			$tmp_data = $this->db->query('SELECT * FROM menu WHERE position_id = ? AND publish = 1 ORDER BY sort_order', @intval($data['content']))->result_array();
 			$position_name = $this->db->query('SELECT title FROM menu_position WHERE id = ?', @intval($data['content']))->row_array();
 			$position_name = @$position_name['title'];
@@ -179,7 +179,7 @@ class Home_model extends CI_Model
 					$q = 'SELECT * FROM content WHERE publish = 1 ORDER BY hits DESC '.$limit;
 				}
 			}
-			$this->db->cache_on();
+			$this->db->cache_off();
 			$tmp_data = $this->db->query($q)->result_array();
 			if(!empty($tmp_data))
 			{
@@ -220,7 +220,7 @@ class Home_model extends CI_Model
 			$table = array_start_one($table);
 			$table = $table[$id];
 
-			$this->db->cache_on();
+			$this->db->cache_off();
 			$tmp_data = $this->db->query('SELECT * FROM '.$table.' ORDER BY id DESC '.$limit)->result_array();
 			if(!empty($tmp_data))
 			{

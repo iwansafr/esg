@@ -4,7 +4,7 @@
 			<a href="<?php echo base_url()?>"><img src="<?php echo image_module('config/logo', @$logo['image']) ?>" alt="" width="<?php echo @$logo['width'] ?>" height="<?php echo @$logo['height'] ?>"></a>
 		</div>
 		<div class="login-content">
-			<a href="<?php echo base_url()?>">Register / Login</a>
+			<a href="https://www.esoftgreat.com/contact-us.html">Register / Login</a>
 		</div>
 	</div>
 </div>

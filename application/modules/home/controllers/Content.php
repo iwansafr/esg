@@ -5,6 +5,7 @@ class Content extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->db->cache_off();
 		$this->load->model('home_model');
 		$this->load->model('content_model');
 		$this->load->helper('content');
