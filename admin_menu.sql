@@ -20,7 +20,6 @@ CREATE TABLE `admin_menu` (
   `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-TRUNCATE TABLE `admin_menu`;
 INSERT INTO `admin_menu` (`id`, `par_id`, `user_role_ids`, `title`, `icon`, `link`, `sort_order`, `created`, `updated`) VALUES
 (1, 0, ',1,2,3,', 'Dashboard', 'fa fa-tachometer-alt', '/', 1, '2019-03-30 03:05:59', '2019-03-30 03:29:18'),
 (2, 0, ',1,2,3,', 'Content', 'fa fa-file-alt', '/content', 2, '2019-03-30 03:24:19', '2019-03-31 23:06:51'),
@@ -52,7 +51,8 @@ INSERT INTO `admin_menu` (`id`, `par_id`, `user_role_ids`, `title`, `icon`, `lin
 (28, 23, ',1,2,', 'Style', 'fa fa-cog', '/config/style', 85, '2019-04-01 06:06:52', '2019-04-01 06:08:52'),
 (29, 23, ',1,2,', 'Script', 'fa fa-cog', '/config/script', 86, '2019-04-01 06:07:29', '2019-04-01 06:08:52'),
 (30, 23, ',1,2,', 'Backup', 'fa fa-download', '/backup', 87, '2019-04-01 06:08:04', '2019-04-01 06:08:52'),
-(31, 23, ',1,2,', 'Restore', 'fa fa-upload', '/restore', 88, '2019-04-01 06:08:15', '2019-04-01 06:08:52');
+(31, 23, ',1,2,', 'Restore', 'fa fa-upload', '/restore', 88, '2019-04-01 06:08:15', '2019-04-01 06:08:52'),
+(32, 23, ',1,2,', 'Delete Cache', 'fa fa-trash', '/config/delete_cache', 89, '2019-04-04 00:08:10', '2019-04-04 00:12:39');
 
 
 ALTER TABLE `admin_menu`
@@ -60,7 +60,7 @@ ALTER TABLE `admin_menu`
 
 
 ALTER TABLE `admin_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
