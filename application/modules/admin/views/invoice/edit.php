@@ -1,0 +1,34 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+$this->zea->init('edit');
+$this->zea->setTable('invoice');
+$this->zea->search();
+
+$id = @intval($_GET['id']);
+$this->zea->setHeading('Invoice');
+if(!empty($id))
+{
+	$this->zea->setId($id);
+}
+
+$this->zea->addInput('code','text');
+$this->zea->setLabel('code','invoice code');
+$this->zea->addInput('receiver','text');
+$this->zea->addInput('payment_method','dropdown');
+$this->zea->setOptions('payment_method',['1'=>'Cash','2'=>'Transfer Bank']);
+$this->zea->setLabel('payment_method','Payment Methode');
+
+$this->zea->addInput('notes','textarea');
+$this->zea->addInput('items','textarea');
+$this->zea->setAttribute('items','placeholder="item 1 = 1000, item 2 = 2000"');
+
+$this->zea->addInput('ppn','dropdown');
+$this->zea->setOptions('ppn',['With PPN','Without PPN']);
+$this->zea->setLabel('ppn','PPN');
+
+$this->zea->addInput('status','dropdown');
+$this->zea->setOptions('status',['Unpaid','Paid']);
+$this->zea->setLabel('status','PPN');
+
+$this->zea->setFormName('invoice_form');
+$this->zea->form();
