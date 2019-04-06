@@ -19,6 +19,11 @@ class Config extends CI_Controller
 		$this->load->view('index');
 	}
 
+	public function bank_account($id = 0)
+	{
+		$this->load->view('index');
+	}
+
 	public function site()
 	{
 		$this->load->view('index');

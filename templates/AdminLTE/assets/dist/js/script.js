@@ -78,11 +78,10 @@ $(document).ready(function(){
 		$(this).closest('.image').remove();
 		$('input[type="hidden"][value="'+a+'"]').remove();
 	});
-	$('a').on('click',function(){
+	$(document).on('click','a',function(e){
 		var this_link = this.href;
 		var target = this.target;
 		var no_load = $(this).attr('no_load');
-
 		if(this_link.includes('#')){
 
 		}else if(target=='_blank')
@@ -92,6 +91,13 @@ $(document).ready(function(){
 			
 		}else if(event.ctrlKey){
 			
+		}else if($(this).hasClass('page-link')){
+			e.preventDefault();
+			$('#loading').removeClass('hidden');
+			if($('.content').load(this_link))
+			{
+				$('#loading').addClass('hidden');
+			}
 		}else{
 			$('#loading').removeClass('hidden');
 		}

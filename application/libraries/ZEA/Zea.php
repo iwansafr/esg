@@ -1024,12 +1024,12 @@ class Zea
 			{
 				$this->order_by($sort_by, @$_GET['type']);
 			}
-
 			$sql          .= ' ORDER BY '.$this->orderby;
 			$sql          .= ' LIMIT '.$page*$limit.','.$limit;
 			$data['data']  = $this->CI->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->CI->db->last_query();
-			$config        = pagination($num_rows,$limit,base_url($this->CI->esg->get_esg('navigation')['string'].$url_get));
+			// $config        = pagination($num_rows,$limit,base_url($this->CI->esg->get_esg('navigation')['string'].$url_get));
+			$config        = pagination($num_rows,$limit,base_url($this->url.$url_get));
 	    $this->CI->pagination->initialize($config);
 	    $data['pagination'] = $this->CI->pagination->create_links();
 		}else if($this->init == 'edit'){
@@ -1328,7 +1328,7 @@ class Zea
 															}
 															if(empty($this->hide[$field]))
 															{
-																echo '<th><a href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
+																echo '<th><a class="page-link" href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
 															}
 														}
 													}
