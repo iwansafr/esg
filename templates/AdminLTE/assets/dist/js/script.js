@@ -91,14 +91,12 @@ $(document).ready(function(){
 			
 		}else if(event.ctrlKey){
 			
-		}else if($(this).hasClass('page-link')){
-			e.preventDefault();
-			$('#loading').removeClass('hidden');
-			if($('.content').load(this_link))
-			{
-				$('#loading').addClass('hidden');
-			}
-		}else{
+		}
+		// else if($(this).hasClass('page-link')){
+		// 	e.preventDefault();
+		// 	$('.content').load(this_link)
+		// }
+		else{
 			$('#loading').removeClass('hidden');
 		}
 	});
