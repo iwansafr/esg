@@ -44,8 +44,16 @@ class Content extends CI_Controller
 		$this->load->view('index');
 		$this->content_model->category_slug();
 	}
+	public function clear_category()
+	{
+		$this->load->view('content/category');
+	}
 	public function tag()
 	{
 		$this->load->view('index');
+	}
+	public function clear_tag()
+	{
+		$this->load->view('content/tag');
 	}
 }

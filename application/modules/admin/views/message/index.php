@@ -18,5 +18,6 @@ $form->addInput('created','plaintext');
 $form->addInput('status', 'dropdown');
 $form->setOptions('status', $status);
 $form->setFormName('message');
+$form->setUrl('admin/message/clear_list');
 $form->setDelete(TRUE);
 $form->form();

@@ -36,6 +36,7 @@ if(is_root())
 	$form->setDelete(TRUE);
 	$form->setEdit(TRUE);
 	$form->setEditLink(base_url('admin/user/role/?id='));
+	$form->setUrl('admin/user/clear_role');
 	echo '<div class="col-md-9">';
 	$form->setHIde(array('id'));
 	$form->form();

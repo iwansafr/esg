@@ -21,6 +21,7 @@ $form->setEditLink('position?id=');
 $form->setDelete(true);
 $form->setEdit(TRUE);
 $form->setFormName('pos_list');
+$form->setUrl('admin/menu/clear_position');
 if(!empty($form->getData()['data']))
 {
 	$form->form();

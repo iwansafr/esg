@@ -32,6 +32,7 @@ $form->setExtLink('slug', '&type=category&t='.urlencode(encrypt(time())));
 $form->setPlaintext('slug','<i class="fa fa-plus-circle"></i>  add to menu');
 
 $form->setEditLink('category?id=');
+$form->setUrl('admin/content/clear_category');
 
 $form->setDelete(true);
 $form->setEdit(TRUE);

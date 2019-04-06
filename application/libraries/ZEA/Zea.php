@@ -2,7 +2,6 @@
 
 class Zea
 {
-
 	private $CI;
 	public function __construct()
 	{
@@ -471,30 +470,35 @@ class Zea
 		$this->field = $fields;
 	}
 
-	public function setData()
+	public function setData($data = array())
 	{
-		if(!empty($this->input))
+		if(empty($data))
 		{
-			$field = $this->CI->db->list_fields($this->table);
-			foreach ($this->input as $key => $value)
+			if(!empty($this->input))
 			{
-				if($this->init == 'param')
+				$field = $this->CI->db->list_fields($this->table);
+				foreach ($this->input as $key => $value)
 				{
-					$this->data[$key] = '';
-				}else if($this->init == 'edit'){
-					if(in_array($value['text'],$field))
+					if($this->init == 'param')
 					{
 						$this->data[$key] = '';
-					}
-				}else if($this->init == 'roll')
-				{
-					$this->data[0][$key] = '';
-					if(!in_array('id', $this->input))
+					}else if($this->init == 'edit'){
+						if(in_array($value['text'],$field))
+						{
+							$this->data[$key] = '';
+						}
+					}else if($this->init == 'roll')
 					{
-						$this->data[0]['id'] = 0;
+						$this->data[0][$key] = '';
+						if(!in_array('id', $this->input))
+						{
+							$this->data[0]['id'] = 0;
+						}
 					}
 				}
 			}
+		}else{
+			$this->data = $data;
 		}
 	}
 
@@ -567,6 +571,15 @@ class Zea
 	{
 		$this->input[$text] = array('text'=>$text, 'type'=>$type);
 	}
+	public function clearInput()
+	{
+		$this->input = array();
+	}
+	public function setInput($text = '', $type = '')
+	{
+		$this->input[$text] = array('text'=>$text, 'type'=>$type);
+	}
+
 
 	public function setTable($table = '', $index = '', $sort = '')
 	{
@@ -1291,6 +1304,39 @@ class Zea
 												{
 													echo '<th>No</th>';
 												}
+												$url_get  = '';
+												$sort_by = @$_GET['sort_by'];
+												$keyword = @$_GET['keyword'];
+												$id      = @intval($_GET['id']);
+												$get = @$_GET;
+												if(!empty($keyword) || !empty($this->where))
+												{
+													$url_get .= '?';
+												}else if(!empty($sort_by) || !empty($id))
+												{
+													$url_get .= '?';
+												}
+												if(!empty($get))
+												{
+													$i = 0;
+													foreach ($get as $key => $value)
+													{
+														if($key != 'page')
+														{
+															if($i > 0)
+															{
+																$url_get .= '&';
+															}
+															$url_get .= $key.'='.$value;
+														}
+														$i++;
+													}
+												}
+												$this->url .= $url_get;
+												if($this->hasOrder($this->url))
+												{
+													$this->url = preg_replace('~\&?sort_by([\S]+)~', '', $this->url);
+												}
 												$delimiter_link = $this->hasGet($this->url) ? '&':'?';
 												foreach ($this->input as $key => $value)
 												{
@@ -1938,7 +1984,8 @@ class Zea
 				return $this->msg;
 			}else if($this->init == 'roll')
 			{
-				$current_data = $this->getdata();
+				// $current_data = $this->getdata();
+				$current_data = $data;
 				$current_data = $current_data['data'];
 				$data = array();
 				if(!empty($this->table))

@@ -17,6 +17,12 @@ Class Invoice extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+
+	public function clear_list()
+	{
+		$this->load->view('invoice/index');
+	}
+
 	public function edit()
 	{
 		$this->load->view('index');

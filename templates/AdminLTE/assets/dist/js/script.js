@@ -92,10 +92,13 @@ $(document).ready(function(){
 		}else if(event.ctrlKey){
 			
 		}
-		// else if($(this).hasClass('page-link')){
-		// 	e.preventDefault();
-		// 	$('.content').load(this_link)
-		// }
+		else if($(this).hasClass('page-link')){
+			e.preventDefault();
+			$('#loading').removeClass('hidden');
+			$('.content').load(this_link, function(){
+				$('#loading').addClass('hidden');
+			});
+		}
 		else{
 			$('#loading').removeClass('hidden');
 		}

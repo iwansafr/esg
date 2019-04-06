@@ -25,4 +25,5 @@ $this->zea->addInput('active', 'checkbox');
 $this->zea->setDelete(TRUE);
 $this->zea->setEdit(TRUE);
 $this->zea->setEditLink(base_url('admin/user/edit?id='),'id');
+$this->zea->setUrl('admin/user/clear_list');
 $this->zea->form();

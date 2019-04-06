@@ -48,11 +48,13 @@ INSERT INTO `admin_menu` (`id`, `par_id`, `user_role_ids`, `title`, `icon`, `lin
 (25, 23, ',1,2,', 'Site', 'fa fa-cog', '/config/site', 82, '2019-04-01 06:04:41', '2019-04-01 06:08:52'),
 (26, 23, ',1,2,', 'Templates', 'fa fa-cog', '/config/templates', 83, '2019-04-01 06:04:57', '2019-04-01 06:08:52'),
 (27, 23, ',1,2,', 'Contact', 'fa fa-cog', '/config/contact', 84, '2019-04-01 06:05:14', '2019-04-01 06:08:52'),
-(28, 23, ',1,2,', 'Style', 'fa fa-cog', '/config/style', 85, '2019-04-01 06:06:52', '2019-04-01 06:08:52'),
-(29, 23, ',1,2,', 'Script', 'fa fa-cog', '/config/script', 86, '2019-04-01 06:07:29', '2019-04-01 06:08:52'),
-(30, 23, ',1,2,', 'Backup', 'fa fa-download', '/backup', 87, '2019-04-01 06:08:04', '2019-04-01 06:08:52'),
-(31, 23, ',1,2,', 'Restore', 'fa fa-upload', '/restore', 88, '2019-04-01 06:08:15', '2019-04-01 06:08:52'),
-(32, 23, ',1,2,', 'Delete Cache', 'fa fa-trash', '/config/delete_cache', 89, '2019-04-04 00:08:10', '2019-04-04 00:12:39');
+(28, 23, ',1,2,', 'Style', 'fa fa-cog', '/config/style', 86, '2019-04-01 06:06:52', '2019-04-06 01:38:22'),
+(29, 23, ',1,2,', 'Script', 'fa fa-cog', '/config/script', 87, '2019-04-01 06:07:29', '2019-04-06 01:38:22'),
+(30, 21, ',1,2,', 'Backup', 'fa fa-download', '/backup', 87, '2019-04-01 06:08:04', '2019-04-05 23:06:08'),
+(31, 21, ',1,2,', 'Restore', 'fa fa-upload', '/restore', 88, '2019-04-01 06:08:15', '2019-04-05 23:06:14'),
+(32, 21, ',1,2,', 'Delete Cache', 'fa fa-trash', '/config/delete_cache', 89, '2019-04-04 00:08:10', '2019-04-05 23:06:19'),
+(33, 21, ',1,2,', 'Invoice', 'fa fa-money', '/invoice', 1, '2019-04-05 23:07:23', '2019-04-05 23:07:23'),
+(34, 23, ',1,2,', 'Bank Account', 'fa fa-user', '/config/bank_account', 85, '2019-04-06 01:37:09', '2019-04-06 01:38:22');
 
 
 ALTER TABLE `admin_menu`
@@ -60,7 +62,7 @@ ALTER TABLE `admin_menu`
 
 
 ALTER TABLE `admin_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

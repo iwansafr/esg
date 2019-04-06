@@ -39,6 +39,22 @@ class Admin_menu extends CI_Controller
 		}
 		$this->load->view('index', $data);
 	}
+	public function clear_list()
+	{
+		$data['data_menu'] = array();
+		if(!empty($_POST['del_row']))
+		{
+			foreach ($_POST['del_row'] as $key => $value) 
+			{
+				$this->admin_menu_model->del_menu($value);
+			}
+		}
+		if(isset($_GET['id']))
+		{
+			$data['data_menu'] = $this->admin_menu_model->get_menu(@intval($_GET['id']));
+		}
+		$this->load->view('admin_menu/list', $data);
+	}
 	public function edit()
 	{
 		$data['menu_parent'] = $this->admin_menu_model->menu_parent();

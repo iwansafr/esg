@@ -22,6 +22,10 @@ class User extends CI_Controller
 		$this->esg->set_esg('extra_js',base_url('templates/AdminLTE/assets/jquery-slimscroll/jquery.slimscroll.min.js'));
 		$this->load->view('index');
 	}
+	public function clear_list()
+	{
+		$this->load->view('user/list');
+	}
 	public function edit()
 	{
 		$this->load->view('index');
@@ -29,5 +33,9 @@ class User extends CI_Controller
 	public function role()
 	{
 		$this->load->view('index');
+	}
+	public function clear_role()
+	{
+		$this->load->view('user/role');
 	}
 }

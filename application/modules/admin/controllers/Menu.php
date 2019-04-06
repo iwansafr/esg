@@ -22,6 +22,10 @@ class Menu extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+	public function clear_position()
+	{
+		$this->load->view('menu/position');
+	}
 	public function list()
 	{
 		if(!empty($_POST['del_row']))
@@ -32,6 +36,17 @@ class Menu extends CI_Controller
 			}
 		}
 		$this->load->view('index');
+	}
+	public function clear_list()
+	{
+		if(!empty($_POST['del_row']))
+		{
+			foreach ($_POST['del_row'] as $key => $value) 
+			{
+				$this->menu_model->del_menu($value);
+			}
+		}
+		$this->load->view('menu/list');
 	}
 	public function edit()
 	{

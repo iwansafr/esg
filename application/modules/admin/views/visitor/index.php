@@ -13,5 +13,5 @@ $form->addInput('region','plaintext');
 $form->addInput('country','plaintext');
 $form->addInput('browser','plaintext');
 $form->addInput('created','plaintext');
-
+$form->setUrl('admin/visitor/clear_list');
 $form->form();

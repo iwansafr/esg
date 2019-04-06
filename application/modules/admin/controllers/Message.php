@@ -16,4 +16,8 @@ class Message extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+	public function clear_list()
+	{
+		$this->load->view('message/index');
+	}
 }

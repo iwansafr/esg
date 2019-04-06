@@ -37,7 +37,7 @@ $this->zea->addInput('publish','checkbox');
 $this->zea->setDelete(TRUE);
 $this->zea->setEdit(TRUE);
 $this->zea->setEditLink(base_url('admin/content/edit?id='));
-// $this->zea->setUrl('admin/content/clear_list');
+$this->zea->setUrl('admin/content/clear_list');
 $this->zea->setFormName('content_list');
 if(!empty($this->zea->getData()['data']))
 {
