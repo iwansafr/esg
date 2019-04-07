@@ -84,6 +84,8 @@ $(document).ready(function(){
 		var no_load = $(this).attr('no_load');
 		if(this_link.includes('#')){
 
+		}else if(this_link.includes('javascript')){
+
 		}else if(target=='_blank')
 		{
 
