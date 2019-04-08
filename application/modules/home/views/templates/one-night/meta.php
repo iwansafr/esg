@@ -1,33 +1,3 @@
-<?php
-$link = base_url($this->esg->get_esg('navigation')['string']);
-$meta = $this->esg->get_esg('meta');
-
-$module = '';
-$description = @$meta['description'];
-if(!empty($navigation['array'][1]))
-{
-	if($navigation['array'][0] == 'tag')
-	{
-		$module = 'content_tag';
-	}else{
-		$module = 'content_cat';
-	}
-}else{
-	$module = 'content';
-}
-if($mod['content'] == 'home/index')
-{
-	$image = image_module('config/site', $meta['icon']);
-}else{
-	if($module == 'content_tag')
-	{
-		$image = image_module($module,$meta['image'], 1);
-	}else{
-		$image = image_module($module,$meta);
-	}
-	$description = @$this->esg->get_esg('site')['title'];
-}
-?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,9 +35,3 @@ if($mod['content'] == 'home/index')
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<script type="text/javascript">
-  var _URL = '<?php echo base_url() ?>';
-</script>
-<?php $this->load->view('style') ?>
-<link itemprop="thumbnailUrl" href="<?php echo $image ?>">
-<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> <link itemprop="url" href="<?php echo $image ?>"> </span>

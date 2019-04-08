@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="<?php echo @$site['lang'] ?>">
 <head>
 	<?php $this->load->view('meta') ?>
 </head>

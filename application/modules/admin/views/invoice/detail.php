@@ -2,21 +2,22 @@
 $site = $this->esg->get_esg('site')['site'];
 $logo = $this->esg->get_esg('site')['logo'];
 $contact = $this->esg->get_config('contact');
-pr($contact);
 ?>
 <html lang="en"><head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?php echo @$site['title'] ?> - Invoice #<?php echo @$data['code']; ?></title>
-	<link href="all.min.css" rel="stylesheet">
-	<link href="invoice.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo image_module('config/site', @$site['image']); ?>">
+	<link href="<?php echo base_url('templates/AdminLTE/assets/dist/css/modules/config/') ?>all.min.css" rel="stylesheet">
+	<link href="<?php echo base_url('templates/AdminLTE/assets/dist/css/modules/config/') ?>invoice.css" rel="stylesheet">
+	<link href="<?php echo base_url('templates/AdminLTE/assets/font-awesome/css/') ?>font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container-fluid invoice-container">
 			<div class="row invoice-header">
 				<div class="invoice-col">
-					<p><img src="<?php echo image_module('logo', $logo['image']) ?>" title="<?php echo @$site['title'] ?>" width="350"></p>
+					<p><img src="<?php echo image_module('config/logo', $logo['image']) ?>" class="img-responsive" title="<?php echo @$site['title'] ?>" height="100"></p>
 					<h3>Invoice #<?php echo @$data['code']; ?></h3>
 				</div>
 				<?php
@@ -25,7 +26,7 @@ pr($contact);
 				$img   = ($data['status'] == 1) ? 'paid.png' : 'unpaid.png';
 				?>
 				<div class="invoice-col " style="margin-top: 2%; padding-left: 140px;">
-					<img src="<?php echo base_url('images/'.$img) ?>" style="margin-lef: 100px;transform :rotate(30deg); height: 50px; height: 60px; width: 230px;">
+					<img src="<?php echo base_url('images/'.$img) ?>" class="img-responsive" style="margin-lef: 100px;transform :rotate(30deg); height: 50px; height: 60px; width: 230px;">
 				</div>
 			</div>
 			<hr>
@@ -50,7 +51,7 @@ pr($contact);
 				<div class="invoice-col right">
 					<strong>Payment Method</strong><br>
 					<span class="small-text">
-						<?php echo $data['payment_method'] ?>
+						<?php echo (empty($data['payment_method'])) ? 'CASH' : 'TRANSFER BANK'; ?>
 					</span>
 				</div>
 				<div class="invoice-col">
@@ -76,7 +77,7 @@ pr($contact);
 				<h3 class="panel-title"><strong>Notes</strong></h3>
 			</div>
 			<div class="panel-body">
-				<?php echo $_POST['notes'] ?>
+				<?php echo $data['notes'] ?>
 			</div>
 		</div>
 		<div class="panel panel-default">
@@ -94,7 +95,7 @@ pr($contact);
 						</thead>
 						<tbody>
 							<?php
-							$items = $_POST['items'];
+							$items = $data['items'];
 							$items = explode(',',$items);
 							$each_item = array();
 							$sub_total = 0;
@@ -168,8 +169,8 @@ pr($contact);
 					<tbody>
 														<tr>
 								<td class=""><?php echo date('d/m/Y') ?></td>
-								<td class=""><?php echo $_POST['payment_method'];?></td>
-								<td class=""><?php echo ($_POST['payment_method'] == 'cash') ? 'CASH' : 'BCA'; ?>-<?php echo substr(time(), 0,4).'-'.substr(time(), 5,8) ?></td>
+								<td class=""><?php echo $data['payment_method'];?></td>
+								<td class=""><?php echo ($data['payment_method'] == 'cash') ? 'CASH' : 'BCA'; ?>-<?php echo substr(time(), 0,4).'-'.substr(time(), 5,8) ?></td>
 								<td class=""><?php echo 'Rp. '.number_format($total, 2, ',', '.'); ?></td>
 							</tr>
 													<tr>

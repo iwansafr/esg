@@ -55,11 +55,3 @@ if($mod['content'] == 'home/index')
 <link href="<?php echo $link_template.'/';?>lib/magnific-popup/magnific-popup.css" rel="stylesheet">
 
 <link href="<?php echo $link_template.'/';?>css/style.css" rel="stylesheet">
-
-<script type="text/javascript">
-  var _URL = '<?php echo base_url() ?>';
-</script>
-<?php $this->load->view('style') ?>
-
-<link itemprop="thumbnailUrl" href="<?php echo $image ?>">
-<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> <link itemprop="url" href="<?php echo $image ?>"> </span>

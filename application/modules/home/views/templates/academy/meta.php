@@ -57,11 +57,3 @@ if($mod['content'] == 'home/index')
 <meta content="<?php echo $image ?>" itemprop='url'/>
 <link href="<?php echo $image; ?>" rel="icon">
 <link href="<?php echo $image; ?>" rel="apple-touch-icon">
-
-<script type="text/javascript">
-  var _URL = '<?php echo base_url() ?>';
-</script>
-<?php $this->load->view('style') ?>
-
-<link itemprop="thumbnailUrl" href="<?php echo $image ?>">
-<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> <link itemprop="url" href="<?php echo $image ?>"> </span>
