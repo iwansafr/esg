@@ -11,8 +11,12 @@ if(!empty($id))
 	$this->zea->setId($id);
 }
 
-$this->zea->addInput('code','text');
-$this->zea->setLabel('code','invoice code');
+if(!empty($id))
+{
+	$this->zea->addInput('code','text');
+	$this->zea->setLabel('code','invoice code');
+	$this->zea->setAttribute('code','readonly');
+}
 $this->zea->addInput('receiver','text');
 $this->zea->addInput('payment_method','dropdown');
 $this->zea->setOptions('payment_method',['1'=>'Cash','2'=>'Transfer Bank']);
