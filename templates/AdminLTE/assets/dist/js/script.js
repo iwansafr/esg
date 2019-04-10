@@ -16,14 +16,14 @@ $(document).ready(function(){
 	    $(this).prop('checked', checkedStatus);
 	  });
 	});
-	$('.selectAll').on('click',function(){
+	$(document).on('click','.selectAll',function(){
 		var checkedStatus = this.checked;
 		var add = $(this).attr('add');
 		$('input[class="'+add+'"]').each(function() {
 	    $(this).prop('checked', checkedStatus);
 	  });
 	});
-	$('#selectAllPub').on('click',function() {
+	$(document).on('click','#selectAllPub',function() {
 	  var checkedStatus = this.checked;
 	  $('input[class="pub_check"]').each(function() {
 	    $(this).prop('checked', checkedStatus);
