@@ -1,3 +1,4 @@
+<a href="<?php echo base_url('admin/invoice') ?>" class="btn btn-default btn-sm pull-right"><i class="fa fa-list"></i></a>
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 $this->zea->init('edit');

@@ -26,10 +26,12 @@ Class Invoice extends CI_Controller
 	public function edit()
 	{
 		$this->load->view('index');
+		$this->invoice_model->save();
 	}
 	public function detail($id = 0)
 	{
 		$data['data'] = $this->invoice_model->get_detail($id);
+		$data['bank'] = $this->invoice_model->get_bank();
 		$this->load->view('invoice/detail', $data);
 	}
 }

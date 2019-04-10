@@ -41,7 +41,7 @@ $form->setFormName('bank_roll_form');
 $form->setUrl('admin/bank_account/clear_list');
 $form->setEdit(TRUE);
 $form->setDelete(TRUE);
-$form->setEditLink('bank_account/?id=','id');
+$form->setEditLink(base_url('admin/bank_account/?id='),'id');
 ?>
 <div class="row">
 	<div class="col-md-4">

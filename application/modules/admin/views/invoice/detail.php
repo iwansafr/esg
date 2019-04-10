@@ -64,10 +64,14 @@ $contact = $this->esg->get_config('contact');
 			<div class="row">
 				<div class="invoice-col right">
 					<strong>Bank Detail</strong><br>
-					<span class="small-text">
-						No Rek 	: <br>0312609779 <br>
-						A/N 		: <br>Iwan Safrudin
-					</span>
+					<?php foreach ($bank as $key => $value): ?>
+						<span class="small-text">
+							Bank 		: <?php echo $value['bank_name'] ?> 
+							No Rek 	: <?php echo $value['bank_number'] ?> 
+							A/N 		: <?php echo $value['person_name'] ?> 
+						</span>
+						<br>
+					<?php endforeach ?>
 					<br><br>
 				</div>
 			</div>
@@ -102,7 +106,10 @@ $contact = $this->esg->get_config('contact');
 							foreach ($items as $key => $value)
 							{
 								$value = explode('=', $value);
-								$each_item[$value[0]] = (int) $value[1];
+								if(count($value)>1)
+								{
+									$each_item[$value[0]] = (int) $value[1];
+								}
 							}
 							foreach ($each_item as $key => $value)
 							{
@@ -168,9 +175,17 @@ $contact = $this->esg->get_config('contact');
 					</thead>
 					<tbody>
 														<tr>
-								<td class=""><?php echo date('d/m/Y') ?></td>
+								<td class=""><?php echo $data['updated'] ?></td>
 								<td class=""><?php echo $data['payment_method'];?></td>
-								<td class=""><?php echo ($data['payment_method'] == 'cash') ? 'CASH' : 'BCA'; ?>-<?php echo substr(time(), 0,4).'-'.substr(time(), 5,8) ?></td>
+								<td class="">
+									-
+									<?php 
+									// echo ($data['payment_method'] == 'cash') ? 'CASH' : 'BCA'; 
+									?>
+									<?php 
+									// echo substr(time(), 0,4).'-'.substr(time(), 5,8) 
+									?>
+								</td>
 								<td class=""><?php echo 'Rp. '.number_format($total, 2, ',', '.'); ?></td>
 							</tr>
 													<tr>
