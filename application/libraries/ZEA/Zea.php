@@ -1984,8 +1984,8 @@ class Zea
 				return $this->msg;
 			}else if($this->init == 'roll')
 			{
-				// $current_data = $this->getdata();
-				$current_data = $data;
+				$current_data = $this->getdata();
+				// $current_data = $data;
 				$current_data = $current_data['data'];
 				$data = array();
 				if(!empty($this->table))

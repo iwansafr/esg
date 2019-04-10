@@ -10,7 +10,7 @@ $(document).ready(function(){
 	li_active();
 	$('input,textarea,select').filter(':visible:first').focus();
 	// CKEDITOR.replace('textckeditor');
-	$('#selectAllDel').on('click',function() {
+	$(document).on('click','#selectAllDel',function() {
 	  var checkedStatus = this.checked;
 	  $('input[class="del_check"]').each(function() {
 	    $(this).prop('checked', checkedStatus);
