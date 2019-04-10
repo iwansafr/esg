@@ -78,7 +78,7 @@
 		</ul>
 	</div>
 </footer>
-<button id="toTop" style="position: fixed;bottom: 15%;right: 5%;" class="btn btn-default"><i class="fa fa-arrow-up"></i></button>
+<button id="toTop" class="btn btn-default"><i class="fa fa-arrow-up"></i></button>
 <script src="<?php echo @$link_template;?>/vendor/jquery/jquery.min.js"></script>
 <script src="<?php echo @$link_template;?>/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo @$link_template;?>/assets/js/script.js"></script>
