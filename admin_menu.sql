@@ -54,7 +54,8 @@ INSERT INTO `admin_menu` (`id`, `par_id`, `user_role_ids`, `title`, `icon`, `lin
 (31, 21, ',1,2,', 'Restore', 'fa fa-upload', '/restore', 88, '2019-04-01 06:08:15', '2019-04-05 23:06:14'),
 (32, 21, ',1,2,', 'Delete Cache', 'fa fa-trash', '/config/delete_cache', 89, '2019-04-04 00:08:10', '2019-04-05 23:06:19'),
 (33, 21, ',1,2,', 'Invoice', 'fa fa-money', '/invoice', 1, '2019-04-05 23:07:23', '2019-04-05 23:07:23'),
-(34, 23, ',1,2,', 'Bank Account', 'fa fa-user', '/config/bank_account', 85, '2019-04-06 01:37:09', '2019-04-06 01:38:22');
+(34, 23, ',1,2,', 'Bank Account', 'fa fa-user', '/config/bank_account', 85, '2019-04-06 01:37:09', '2019-04-06 01:38:22'),
+(35, 21, ',1,2,', 'Bank Account', 'fa fa-money', '/bank_account', 1, '2019-04-10 02:40:32', '2019-04-10 02:40:32');
 
 
 ALTER TABLE `admin_menu`
@@ -62,7 +63,7 @@ ALTER TABLE `admin_menu`
 
 
 ALTER TABLE `admin_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
