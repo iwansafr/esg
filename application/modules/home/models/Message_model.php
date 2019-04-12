@@ -17,10 +17,10 @@ class Message_model extends CI_Model
 			$data = $_POST;
 			$output = 'Your Message Failed to Sent';
 			$today = date('Y-m-d');
-			$check = $this->db->query("SELECT id FROM message WHERE email = ? AND created LIKE '{$date}%'", $data['email'])->num_rows();
+			$check = $this->db->query("SELECT id FROM message WHERE email = ? AND created LIKE '{$today}%'", $data['email'])->num_rows();
 			if($check > 4)
 			{
-				$output = 'You have Reach 5 maximum send messsage, please contact admin';
+				$output = 'You have Reach 5 maximum send messsage per day, please contact admin';
 			}else{
 				if($this->db->query('INSERT INTO message (name,email,subject,message) VALUES (?,?,?,?)', $data))
 				{
