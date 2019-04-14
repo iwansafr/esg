@@ -12,7 +12,7 @@ if(!empty($field))
 	}
 	if(empty($this->image[$field]))
 	{
-		$this->image[$field]['module'] = 'content';
+		$this->image[$field]['module'] = $this->table;
 	}
 	if(!empty($this->image[$field]['src']))
 	{
