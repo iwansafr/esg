@@ -20,6 +20,21 @@
             }
             ?>
           </div>
+          <?php if (!empty($account_bank)): ?>
+            <h3 style="font-size: 16px;">Bank Detail</h3>
+            <?php foreach ($account_bank as $abkey => $abvalue): ?>
+              <div class="row">
+                <div class="col-md-2">
+                  <img src="<?php echo image_module('bank_account', $abvalue['id'].'/'.$abvalue['icon']) ?>" height="40">
+                </div>
+                <div class="col-md-10" style="text-align: right;">
+                  <p><?php echo $abvalue['person_name'] ?><br>
+                  <?php echo $abvalue['bank_name'] ?><br>
+                  <?php echo $abvalue['bank_number'] ?></p>
+                </div>
+              </div>
+            <?php endforeach ?>
+          <?php endif ?>
         </div>
         <?php
       }

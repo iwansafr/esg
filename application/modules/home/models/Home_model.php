@@ -22,6 +22,7 @@ class Home_model extends CI_Model
 		// $this->home();
 		// $this->js();
 		$this->get_visitor();
+		$this->account_bank();
 	}
 
 	public function mod()
@@ -255,6 +256,15 @@ class Home_model extends CI_Model
 		{
 			$this->esg->set_esg('site', $data);
 		}
+	}
+
+	public function account_bank()
+	{
+		$data = $this->db->get('bank_account')->result_array();
+		if(!empty($data))
+		{
+			$this->esg->set_esg('account_bank', $data);
+		}	
 	}
 
 	public function archived()
