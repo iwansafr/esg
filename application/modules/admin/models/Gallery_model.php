@@ -18,7 +18,7 @@ class Gallery_model extends CI_Model{
 		{
 			$module_name = explode('/',$name);
 			$module_name = end($module_name);
-			if($module_name != 'backup')
+			if($module_name != 'backup' && $module_name != 'tmp')
 			{
 				$module[$i]['name'] = $module_name;
 				$module[$i]['path'] = $name;
@@ -42,7 +42,7 @@ class Gallery_model extends CI_Model{
 				$module_name = end($module_name);
 				unset($module_name_array[$size]);
 				$id = end($module_name_array);
-				if($module_name != 'backup')
+				if($module_name != 'backup' && $module_name != 'tmp')
 				{
 					if(is_dir($name))
 					{
@@ -54,7 +54,8 @@ class Gallery_model extends CI_Model{
 							$module_name_array = $module_name;
 							$module_name = end($module_name);
 							unset($module_name_array[$size]);
-							$id                   = end($module_name_array);
+							$id = end($module_name_array);
+
 							$data['gallery'][$i][$j]['id']   = $id;
 							$data['gallery'][$i][$j]['name'] = $module_name;
 							$data['gallery'][$i][$j]['path'] = $name;
@@ -80,6 +81,8 @@ class Gallery_model extends CI_Model{
 				}else if($module == 'content_cat')
 				{
 					$this->zea->setWhere("image != ''");
+					$this->zea->addInput('id','plaintext');
+				}else{
 					$this->zea->addInput('id','plaintext');
 				}
 				$data['table_data'] = $this->zea->getData();
