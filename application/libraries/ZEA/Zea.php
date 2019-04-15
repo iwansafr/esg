@@ -25,7 +25,7 @@ class Zea
 	var $numbering     = FALSE;
 	var $paramname     = '';
 	var $where         = '';
-	var $encrypt       = TRUE;
+	var $encrypt       = array();
 	var $file_error    = array();
 	var $edit_link     = 'edit?id=';
 	var $limit         = 12;
@@ -418,9 +418,21 @@ class Zea
 		}
 	}
 
-	public function setEncrypt($encrypt = TRUE)
+	public function setEncrypt($input = array())
 	{
-		$this->encrypt = $encrypt;
+		if(!empty($input) && is_array($input))
+		{
+			foreach ($input as $key => $value)
+			{
+				foreach ($this->input as $ikey => $ivalue)
+				{
+					if($ivalue['text'] == $value)
+					{
+						$this->encrypt[] = $value;
+					}
+				}
+			}
+		}
 	}
 
 	public function setElementId($field = '', $id = '')
@@ -1605,13 +1617,20 @@ class Zea
 					{
 						unset($data_post[$this->formName]);
 						unset($data_post[$this->CI->security->get_csrf_token_name()]);
-						if(isset($data_post['password']))
+						// if(isset($data_post['password']))
+						// {
+						// 	if(empty($this->encrypt))
+						// 	{
+						// 		$data_post['password'] = $data_post['password'];
+						// 	}else{
+						// 		$data_post['password'] = encrypt($data_post['password']);
+						// 	}
+						// }
+						if(!empty($this->encrypt))
 						{
-							if(empty($this->encrypt))
+							foreach ($this->encrypt as $en_key => $en_value) 
 							{
-								$data_post['password'] = $data_post['password'];
-							}else{
-								$data_post['password'] = encrypt($data_post['password']);
+								$data_post[$en_value] = encrypt($data_post[$en_value]);
 							}
 						}
 						$post_secure = array();
