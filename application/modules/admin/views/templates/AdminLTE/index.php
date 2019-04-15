@@ -3,7 +3,7 @@
 <head>
   <?php
   $user = $this->session->userdata(base_url().'_logged_in');
-  $this->load->view('templates/'.$admin_template.'/meta');
+  $this->load->view('templates/'.$templates['admin_template'].'/meta');
   ?>
 </head>
 <body class="hold-transition skin-black sidebar-mini">
@@ -26,7 +26,7 @@
       $mod['name'] = $this->router->fetch_class();
       $mod['task'] = $this->router->fetch_method();
       $content  = $mod['name'].'/'.$mod['task'];
-      $content = $content == 'admin/index' ? 'templates'.DIRECTORY_SEPARATOR.$admin_template.DIRECTORY_SEPARATOR.'home' :$content;
+      $content = $content == 'admin/index' ? 'templates'.DIRECTORY_SEPARATOR.$templates['admin_template'].DIRECTORY_SEPARATOR.'home' :$content;
       $this->load->view($content);
       ?>
     </section>

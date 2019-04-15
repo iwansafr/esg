@@ -33,7 +33,7 @@ $this->zea->setLabel('ppn','PPN');
 
 $this->zea->addInput('status','dropdown');
 $this->zea->setOptions('status',['Unpaid','Paid']);
-$this->zea->setLabel('status','PPN');
+$this->zea->setLabel('status','Payment Status');
 
 $this->zea->setFormName('invoice_form');
 $this->zea->form();
