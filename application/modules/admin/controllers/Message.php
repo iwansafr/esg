@@ -20,4 +20,14 @@ class Message extends CI_Controller
 	{
 		$this->load->view('message/index');
 	}
+	public function detail($id = 0)
+	{
+		if(!empty($id))
+		{
+			$data['id'] = $id;
+			$this->zea->set_data('message', $id, ['status'=>2]);
+			$this->admin_model->message();
+			$this->load->view('index', $data);
+		}
+	}
 }

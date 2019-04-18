@@ -11,6 +11,7 @@
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="<?php echo $admin_template; ?>/assets/dist/js/demo.js"></script> -->
 <script src="<?php echo $admin_template; ?>/assets/dist/js/script.js"></script>
+<script src="<?php echo $admin_template; ?>/assets/summernote/summernote.js"></script>
 <script src="<?php echo $admin_template; ?>/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script type="text/javascript">
 	$('.select2').select2();

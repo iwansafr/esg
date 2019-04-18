@@ -2,8 +2,8 @@
 $template_names = array();
 
 ?>
-<a href="<?php echo base_url().'admin/config/template_list' ?>" class="btn btn-default pull-right" title="manage template" data-toggle="tooltip" data-placement="bottom"><i class=" fa fa-paint-roller"></i></a>
-<a href="<?php echo base_url().'admin/config/widget' ?>" class="btn btn-default pull-right" title="manage widget" data-toggle="tooltip" data-placement="bottom"><i class=" fa fa-columns"></i></a>
+<a href="<?php echo base_url().'admin/config/template_list' ?>" class="btn btn-default btn-secondary btn-sm pull-right" title="manage template" data-toggle="tooltip" data-placement="bottom"><i class=" fa fa-paint-roller"></i></a>
+<a href="<?php echo base_url().'admin/config/widget' ?>" class="btn btn-default btn-secondary  btn-sm pull-right" title="manage widget" data-toggle="tooltip" data-placement="bottom"><i class=" fa fa-columns"></i></a>
 <?php
 if(is_admin() || is_root())
 {

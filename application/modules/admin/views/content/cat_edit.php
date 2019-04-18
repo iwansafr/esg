@@ -1,7 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $get_id = $this->input->get('id');
 // $form = new zea();
-
+$this->zea->get_template();
+$this->zea->panel();
 $this->zea->init('edit');
 $this->zea->setTable('content_cat');
 

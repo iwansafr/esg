@@ -351,7 +351,7 @@ function image_module($module = '', $image = '', $is_uri = '')
 				}else{
 					$url = $url.$image;
 					$check_path = $check_path.$image;
-					if(file_exists($check_path))
+					if(file_exists($check_path) && is_file($check_path))
 					{
 						$src = $url;
 					}

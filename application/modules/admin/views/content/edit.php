@@ -2,6 +2,8 @@
 $id = $this->input->get('id');
 
 $this->zea->init('edit');
+$this->zea->get_template();
+$this->zea->panel();
 $this->zea->setTable('content');
 
 $this->zea->setId($id);
@@ -31,11 +33,11 @@ $this->zea->setCollapse('image',TRUE);
 $this->zea->addInput('images','gallery');
 $this->zea->setAccept('images', '.jpg,.jpeg,.png');
 $this->zea->setAttribute('images','multiple');
-$this->zea->addInput('files','uploads');
-$this->zea->setAccept('files', '.doc,.docx,.xls,.xlsx,.pdf,.ppt,.pptx');
-$this->zea->setAttribute('files','multiple');
+$this->zea->addInput('document','uploads');
+$this->zea->setAccept('document', '.doc,.docx,.xls,.xlsx,.pdf,.ppt,.pptx');
+$this->zea->setAttribute('document','multiple');
 $this->zea->startCollapse('images', 'Gallery');
-$this->zea->endCollapse('files');
+$this->zea->endCollapse('document');
 $this->zea->setCollapse('images',TRUE);
 
 $this->zea->addInput('keyword','textarea');
@@ -55,7 +57,8 @@ $this->zea->setCollapse('keyword',TRUE);
 
 
 $this->zea->addInput('content','textarea');
-$this->zea->setElementId('content','textckeditor');
+// $this->zea->setElementId('content','textckesditor');
+$this->zea->setElementId('content','summernote');
 $this->zea->setRequired(array('title','content','cat_ids'));
 
 

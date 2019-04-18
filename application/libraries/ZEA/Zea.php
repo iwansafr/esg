@@ -14,6 +14,8 @@ class Zea
 		// $this->CI->load->library('upload');
 		$this->CI->load->library('pagination');
 		$this->setUrl();
+		$this->get_template();
+		$this->panel();
 	}
 
 	var $table         = '';
@@ -70,6 +72,23 @@ class Zea
 	var $url           = '';
 	var $get           = '';
 	var $key           = 'id';
+	var $template      = 'sb-admin-2';
+	var $panel         = 'panel';
+
+	public function get_template()
+	{
+		$this->template = $this->CI->esg->get_esg('templates')['admin_template'];
+	}
+
+	public function panel()
+	{
+		if($this->template != 'sb-admin-2')
+		{
+			$this->panel = 'panel';
+		}else{
+			$this->panel = 'card';
+		}
+	}
 
 	public function init($text = '')
 	{
@@ -237,15 +256,15 @@ class Zea
 		$collapse = !empty($this->collapse[$id]) ? 'collapse' : '';
 		?>
 		<br>
-		<div class="panel-group">
-			<div class="panel panel-<?php echo $type ?>">
-				<div class="panel-heading">
-					<h4 class="panel-title">
+		<div class="<?php echo $this->panel;?>-group">
+			<div class="<?php echo $this->panel ?> <?php echo $this->panel ?>-<?php echo $type ?>">
+				<div class="<?php echo $this->panel ?>-<?php echo ($this->panel=='card') ? 'header' : 'heading';?>">
+					<h6 class="<?php echo $this->panel ?>-title m-0 font-weight-bold text-primary">
 						<a data-toggle="collapse" href="#<?php echo $id; ?>"><?php echo $title ?></a>
-					</h4>
+					</h6>
 				</div>
-				<div id="<?php echo $id ?>" class="panel-collapse <?php echo $collapse ?>">
-					<div class="panel-body">
+				<div id="<?php echo $id ?>" class="<?php echo $this->panel;?>-collapse <?php echo $collapse ?>">
+					<div class="<?php echo $this->panel;?>-body">
 
 		<?php
 	}
@@ -254,7 +273,7 @@ class Zea
 	{
 		?>
 					</div>
-					<div class="panel-footer">Panel Footer</div>
+					<div class="<?php echo $this->panel; ?>-footer">Panel Footer</div>
 				</div>
 			</div>
 		</div>
@@ -1102,9 +1121,9 @@ class Zea
 				$action = !empty($this->view) ? base_url($this->view).'/'.$this->id : '';
 				?>
 				<form method="post" action="<?php echo $action ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
-					<div class="panel panel-default">
-						<div class="panel panel-heading">
-							<h4 class="panel-title">
+					<div class="<?php echo $this->panel ?> <?php echo $this->panel ?>-default">
+						<div class="<?php echo $this->panel ?> <?php echo $this->panel ?>-<?php echo ($this->panel=='card') ? 'header' : 'heading';?>">
+							<h6 class="<?php echo $this->panel ?>-title m-0 font-weight-bold text-primary">
 								<?php
 								if($this->init == 'edit')
 								{
@@ -1117,9 +1136,9 @@ class Zea
 									echo $this->heading;
 								}
 								?>
-							</h4>
+							</h6>
 						</div>
-						<div class="panel panel-body">
+						<div class="<?php echo $this->panel ?> <?php echo $this->panel ?>-body">
 							<?php
 							if(!empty($message))
 							{
@@ -1231,7 +1250,7 @@ class Zea
 							}
 							?>
 						</div>
-						<div class="panel panel-footer">
+						<div class="<?php echo ($this->panel='card') ? '' : 'panel'; ?> <?php echo $this->panel ?>-footer">
 							<!-- <button class="btn btn-default" onclick="window.history.back();" data-toggle="tooltip" title="go back"><i class="fa fa-arrow-left"></i></button> -->
 							<?php
 							if(!empty($this->save))
@@ -1859,17 +1878,23 @@ class Zea
 												}
 												$exts = array();
 												$files_name = array();
-												foreach ($_FILES[$uploads[$i]]['name'] as $n_key => $n_value)
+												if(empty($_FILES[$uploads[$i]]['name']))
 												{
-													$exts[$n_key]       = pathinfo($n_value);
-													$files_name[$n_key] = $data_post[$u_value].'_'.$n_key.'_'.time().'.'.$exts[$n_key]['extension'];
+													foreach ($_FILES[$uploads[$i]]['name'] as $n_key => $n_value)
+													{
+														$exts[$n_key]       = pathinfo($n_value);
+														$files_name[$n_key] = $data_post[$u_value].'_'.$n_key.'_'.time().'.'.$exts[$n_key]['extension'];
+													}
 												}
 												$files_upload = array();
 												$j = 0;
-												foreach ($_FILES[$uploads[$i]]['tmp_name'] as $n_key => $n_value)
+												if(!empty($_FILES[$uploads[$i]]['tmp_name']))
 												{
-													$files_upload[$j]['tmp'] = $n_value;
-													$j++;
+													foreach ($_FILES[$uploads[$i]]['tmp_name'] as $n_key => $n_value)
+													{
+														$files_upload[$j]['tmp'] = $n_value;
+														$j++;
+													}
 												}
 												$j = 0;
 												foreach ($files_name as $f_key => $f_value)

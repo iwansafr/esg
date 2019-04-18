@@ -18,7 +18,7 @@ if(!empty($field))
 	}
 	$array_input = array(
 		'name'  => $field,
-		'class' => 'form-control',
+		'class' => 'form-control ',
 		'rows'  => 4,
 		'value' => $data_value);
 	if(!empty($this->elementid[$field]))
@@ -45,7 +45,7 @@ if(!empty($field))
 		$array_input[$required] = $required;
 	}
 	echo form_textarea($array_input);
-	if(!empty($this->elementid[$field]))
+	if(!empty($this->elementid[$field]) && $this->elementid[$field] =='textckeditor')
 	{
 		?>
 		<script type="text/javascript">

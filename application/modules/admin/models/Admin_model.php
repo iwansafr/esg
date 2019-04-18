@@ -12,6 +12,8 @@ class Admin_model extends CI_Model
 		// $this->sidebar_menu();
 		$this->menu();
 		$this->site();
+		$this->user();
+		$this->message();
 	}
 
 	public function visitor()
@@ -293,6 +295,19 @@ class Admin_model extends CI_Model
 		$data['logo'] = $this->esg->get_config('logo');
 		$data['site'] = $this->esg->get_config('site');
 		$this->esg->set_esg('site', $data);
+	}
+
+	public function user()
+	{
+		$this->esg->set_esg('user', $this->session->userdata(base_url().'_logged_in'));
+	}
+
+	public function message()
+	{
+		$data = array();
+		$data['list'] = $this->db->query('SELECT * FROM message WHERE status = 1 LIMIT 10')->result_array();
+		$data['total'] = $this->db->query('SELECT id FROM message WHERE status = 1')->num_rows();
+		$this->esg->set_esg('message', $data);
 	}
 
 	public function home()

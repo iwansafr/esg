@@ -28,6 +28,7 @@ $template = $this->esg->get_esg('templates')['admin_template'];
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/dist/css/skins/_all-skins.min.css">
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/dist/css/style.css">
+<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/summernote/summernote.css">
 <script src="<?php echo base_url().'templates/AdminLTE/assets/ckeditor/'; ?>ckeditor.js"></script>
 <?php
 echo $this->esg->extra_css();
