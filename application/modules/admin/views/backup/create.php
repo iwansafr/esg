@@ -15,7 +15,8 @@ if(!empty($key))
 				$this->zip->read_dir($value, FALSE);
 			}
 		}
-		$table = array('config','comment','content','content_cat','content_tag','menu','menu_position','message','user','user_login','user_role');
+		// $table = array('config','comment','content','content_cat','content_tag','menu','menu_position','message','user','user_login','user_role');
+		$table = $this->config_model->get_table();
 		foreach ($table as $key => $value) 
 		{
 			$data[$value] = $this->db->get($value)->result_array();

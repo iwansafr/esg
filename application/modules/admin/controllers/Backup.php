@@ -8,6 +8,7 @@ class Backup extends CI_Controller
 		$this->db->cache_off();
 		$this->load->model('esg_model');
 		$this->load->model('admin_model');
+		$this->load->model('config_model');
 		$this->load->library('esg');
 		$this->load->library('ZEA/zea');
 		$this->load->library('zip');
