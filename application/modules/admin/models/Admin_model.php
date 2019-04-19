@@ -313,14 +313,17 @@ class Admin_model extends CI_Model
 	public function home()
 	{
 		$data = array();
-		$data['content'] = $this->db->query('SELECT id FROM content')->num_rows();
-		$data['category'] = $this->db->query('SELECT id FROM content_cat')->num_rows();
-		$data['tag'] = $this->db->query('SELECT id FROM content_tag')->num_rows();
-		$data['menu'] = $this->db->query('SELECT id FROM menu')->num_rows();
-		$data['menu_position'] = $this->db->query('SELECT id FROM menu_position')->num_rows();
-		$data['user'] = $this->db->query('SELECT id FROM user')->num_rows();
-		$data['user_role'] = $this->db->query('SELECT id FROM user_role')->num_rows();
-		$data['message'] = $this->db->query('SELECT id FROM message WHERE status = 1')->num_rows();
+		$table = $this->esg->get_config('dashboard');
+		if(!empty($table['publish_row']))
+		{
+			$table_tmp = $table['publish_row'];
+			foreach ($table_tmp as $key => $value) 
+			{
+				$data[$value]['total'] = $this->db->query('SELECT id FROM '.$value)->num_rows();
+				$data[$value]['color'] = $table['color_row'][$value];
+				$data[$value]['icon'] = $table['icon'][$value];
+			}
+		}
 		$this->esg->set_esg('home', $data);
 	}
 

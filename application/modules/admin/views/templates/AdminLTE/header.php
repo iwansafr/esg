@@ -26,7 +26,7 @@ $message = $this->esg->get_esg('message');
               <li class="header">You have <?php echo $message['total'] ?> messages</li>
               <li>
             <?php else: ?>
-              <li class="header">'you dont have new message</li>
+              <li class="header">you dont have new message</li>
             <?php endif ?>
             <?php if (!empty($message['list'])): ?>
               <ul class="menu">

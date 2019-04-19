@@ -19,6 +19,14 @@ class Config extends CI_Controller
 		$this->load->view('index');
 	}
 	
+	public function dashboard()
+	{
+		$data['msg'] = $this->config_model->dashboard_save();
+		$data['table'] = $this->config_model->get_table();
+		$data['dashboard_config'] = $this->esg->get_config('dashboard');
+		$this->load->view('index', $data);
+	}
+
 	public function mail()
 	{
 		$this->load->view('index');
