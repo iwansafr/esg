@@ -11,7 +11,7 @@ foreach ($table as $key => $value)
 		{
 			$checked = 'checked="checked"';
 		}
-		$this->table->add_row([$i,$value,'<input type="text" placeholder="fa fa-chart-bar" class="form-control" name="icon['.$value.']">','<input type="text" placeholder="/admin/config/dashboard" class="form-control" name="link['.$value.']">','<div class="checkbox"><label><input type="checkbox" name="publish_row[]" value="'.$value.'" '.$checked.' class="publish" >Publish</label></div>','<input type="color" value="'.@$dashboard_config['color_row'][$value].'" name="color_row['.$value.']">']);
+		$this->table->add_row([$i,$value,'<input type="text" placeholder="fa fa-chart-bar" class="form-control" value="'.@$dashboard_config['icon'][$value].'" name="icon['.$value.']">','<input type="text" placeholder="/admin/config/dashboard" class="form-control" value="'.@$dashboard_config['link'][$value].'" name="link['.$value.']">','<div class="checkbox"><label><input type="checkbox" name="publish_row[]" value="'.$value.'" '.$checked.' class="publish" >Publish</label></div>','<input type="color" value="'.@$dashboard_config['color_row'][$value].'" name="color_row['.$value.']">']);
 		$i++;
 	}
 }

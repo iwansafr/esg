@@ -322,6 +322,7 @@ class Admin_model extends CI_Model
 				$data[$value]['total'] = $this->db->query('SELECT id FROM '.$value)->num_rows();
 				$data[$value]['color'] = $table['color_row'][$value];
 				$data[$value]['icon'] = $table['icon'][$value];
+				$data[$value]['link'] = base_url($table['link'][$value]);
 			}
 		}
 		$this->esg->set_esg('home', $data);
