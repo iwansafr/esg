@@ -11,7 +11,8 @@ if(!empty($title))
 			$zip = new ZipArchive;
 			if($zip->open($value) === TRUE)
 			{
-				$table = array('config','comment','content','content_cat','content_tag','menu','menu_position','message','prala','prala_location','prala_location_bulan','prala_pendidikan','prala_user','prodi','user','user_login','user_role');
+				// $table = array('config','comment','content','content_cat','content_tag','menu','menu_position','message','prala','prala_location','prala_location_bulan','prala_pendidikan','prala_user','prodi','user','user_login','user_role');
+				$table = $this->config_model->get_table();
 				foreach ($table as $tbkey => $tbvalue) 
 				{
 					$dir = FCPATH.'images/modules/'.$tbvalue;

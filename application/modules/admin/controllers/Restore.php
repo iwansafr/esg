@@ -9,6 +9,7 @@ class Restore extends CI_Controller
 		$this->load->model('esg_model');
 		$this->load->model('admin_model');
 		$this->load->model('restore_model');
+		$this->load->model('config_model');
 		$this->load->library('esg');
 		$this->load->helper('file');
 		$this->load->library('ZEA/zea');
