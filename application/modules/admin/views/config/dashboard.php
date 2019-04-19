@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->library('table');
-$this->table->set_heading(['No','Table','icon','<div class="checkbox"><label><input id="selectAllpublish" add="publish" class="selectAll" type="checkbox">Publish</label></div>','color']);
+$this->table->set_heading(['No','Table','icon','link','<div class="checkbox"><label><input id="selectAllpublish" add="publish" class="selectAll" type="checkbox">Publish</label></div>','color']);
 $i = 1;
 foreach ($table as $key => $value) 
 {
@@ -11,7 +11,7 @@ foreach ($table as $key => $value)
 		{
 			$checked = 'checked="checked"';
 		}
-		$this->table->add_row([$i,$value,'<input type="text" placeholder="fa fa-chart-bar" class="form-control" name="icon['.$value.']">','<div class="checkbox"><label><input type="checkbox" name="publish_row[]" value="'.$value.'" '.$checked.' class="publish" >Publish</label></div>','<input type="color" value="'.@$dashboard_config['color_row'][$value].'" name="color_row['.$value.']">']);
+		$this->table->add_row([$i,$value,'<input type="text" placeholder="fa fa-chart-bar" class="form-control" name="icon['.$value.']">','<input type="text" placeholder="/admin/config/dashboard" class="form-control" name="link['.$value.']">','<div class="checkbox"><label><input type="checkbox" name="publish_row[]" value="'.$value.'" '.$checked.' class="publish" >Publish</label></div>','<input type="color" value="'.@$dashboard_config['color_row'][$value].'" name="color_row['.$value.']">']);
 		$i++;
 	}
 }
