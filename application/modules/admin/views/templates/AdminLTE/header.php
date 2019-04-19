@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-$new_message = @intval($this->esg->get_esg('home')['message']);
+$message = $this->esg->get_esg('message');
 ?>
 <header class="main-header">
   <a href="<?php echo base_url('admin') ?>" class="logo">
@@ -19,10 +19,34 @@ $new_message = @intval($this->esg->get_esg('home')['message']);
         <li class="dropdown messages-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-envelope"></i>
-            <span class="label label-success"><?php echo $new_message ?></span>
+            <span class="label label-success"><?php echo !empty(@intval($message['total'])) ? $message['total'] : '';?></span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header"><?php echo (!empty($new_message)) ? 'you have '.$new_message.' new message' : 'you dont have new message';?></li>
+            <?php if (@intval($message['total']) > 0): ?>
+              <li class="header">You have <?php echo $message['total'] ?> messages</li>
+              <li>
+            <?php else: ?>
+              <li class="header">'you dont have new message</li>
+            <?php endif ?>
+            <?php if (!empty($message['list'])): ?>
+              <ul class="menu">
+                <?php foreach ($message['list'] as $l_key => $l_value): ?>
+                  <li>
+                    <a href="<?php echo base_url('admin/message/detail/'.$l_value['id']) ?>">
+                      <div class="pull-left">
+                        <img src="<?php echo $meta['icon'] ?>" class="img-circle" alt="User Image">
+                      </div>
+                      <h4>
+                        <?php echo $l_value['name'] ?>
+                        <small><i class="fa fa-clock-o"></i> <?php echo $l_value['created'] ?></small>
+                      </h4>
+                      <p><?php echo $l_value['subject'] ?></p>
+                    </a>
+                  </li>
+                <?php endforeach ?>
+              </ul>
+            <?php endif ?>
+            </li>
             <li class="footer"><a href="<?php echo base_url('admin/message') ?>">See All Messages</a></li>
           </ul>
         </li>

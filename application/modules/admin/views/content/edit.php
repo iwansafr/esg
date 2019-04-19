@@ -51,6 +51,7 @@ $this->zea->addInput('description','textarea');
 $this->zea->setLabel('description','Meta Description');
 $this->zea->addInput('intro','textarea');
 $this->zea->addInput('source','textarea');
+$this->zea->setAttribute('source',['style'=>'background: black;color:white;','placeholder'=>'<p>your script</p>']);
 $this->zea->startCollapse('keyword', 'meta');
 $this->zea->endCollapse('source');
 $this->zea->setCollapse('keyword',TRUE);

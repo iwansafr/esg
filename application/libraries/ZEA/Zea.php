@@ -569,11 +569,25 @@ class Zea
 	{
 		if(!empty($field))
 		{
-			foreach ($this->input as $key => $value)
+			if(is_array($field))
 			{
-				if($value['text'] == $field)
+				foreach ($field as $field_key => $field_value) 
 				{
-					$this->clearget[$field] = 1;
+					foreach ($this->input as $key => $value)
+					{
+						if($value['text'] == $field_value)
+						{
+							$this->clearget[$field_value] = 1;
+						}
+					}
+				}
+			}else{
+				foreach ($this->input as $key => $value)
+				{
+					if($value['text'] == $field)
+					{
+						$this->clearget[$field] = 1;
+					}
 				}
 			}
 		}

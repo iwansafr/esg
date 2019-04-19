@@ -17,6 +17,7 @@ if(!empty($is_tag))
 }
 $this->zea->setNumbering(TRUE);
 $this->zea->setField(array('title'));
+$this->zea->setHeading('<a href="'.base_url('admin/content/edit').'" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a>');
 $this->zea->addInput('id','plaintext');
 $this->zea->addInput('image','thumbnail');
 $this->zea->addInput('title','plaintext');

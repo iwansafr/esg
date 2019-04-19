@@ -28,7 +28,16 @@ if(!empty($field))
 	$attribute = '';
 	if(!empty($this->attribute[$field]))
 	{
-		$attribute = $this->attribute[$field];
+		$attr = $this->attribute[$field];
+		if(is_array($attr))
+		{
+			foreach ($attr as $attr_key => $attr_value)
+			{
+				$attribute .= $attr_key.'="'.$attr_value.'"';
+			}
+		}else{
+			$attribute = $attr;
+		}
 	}
 	?>
 	<a href="<?php echo reduce_double_slashes($this->link[$field].$key_get.$link_get.$ext_link); ?>" <?php echo $attribute ?>><?php echo $data_value ?></a>
