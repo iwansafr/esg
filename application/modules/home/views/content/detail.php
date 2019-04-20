@@ -1,6 +1,7 @@
 <?php
 if(!empty($content))
 {
+	ob_start();
 	?>
 	<div class="row">
 		<div class="col">
@@ -100,18 +101,24 @@ if(!empty($content))
 			</p>
 		</div>
 	</div>
+	<?php
+	$ob_content = ob_get_contents();
+	ob_end_clean();
+	echo $ob_content;
+	?>
+
 	<div class="row">
 		<div class="col">
 		</div>
 		<div class="col no-left text-right">
 			<div class="btn-group">
-				<a class="btn btn-light btn-sm" id="icon_pdf">
+				<a class="btn btn-light btn-sm" id="icon_pdf" target="_blank" href="<?php echo base_url('home/content/clear_detail/'.$content['slug'].'.html') ?>">
 					<i class="fa fa-file-pdf-o" title="Konversi ke pdf"></i>
 				</a>
-				<a class="btn btn-light btn-sm" id="icon_mail">
+				<a class="btn btn-light btn-sm" id="icon_mail" href="mailto:someone@example.com?subject=<?php echo base_url() ?>&body=<?php echo htmlentities($ob_content) ?>" target="_top">
 					<i class="fa fa-envelope" title="tell friend"></i>
 				</a>
-				<a class="btn btn-light btn-sm" id="icon_print">
+				<a class="btn btn-light btn-sm" id="icon_print" target="_blank" href="<?php echo base_url('home/content/clear_detail/'.$content['slug'].'.html') ?>">
 					<i class="fa fa-print" title="Print Preview"></i>
 				</a>
 				<div class="clearfix"></div>

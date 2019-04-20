@@ -24,6 +24,21 @@ class Content extends CI_Controller
 		$this->load->view('index');
 	}
 
+	public function clear_detail($slug = '')
+	{
+		if(!empty($slug))
+		{
+			$this->home_model->home();
+			$this->content_model->detail();
+			$this->load->view('home/content/detail', $this->esg->get_esg());
+			?>
+			<script type="text/javascript">
+				window.print();
+			</script>
+			<?php
+		}
+	}
+
 	public function detail()
 	{
 		$this->home_model->home();
