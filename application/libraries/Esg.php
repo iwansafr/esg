@@ -58,11 +58,16 @@ class Esg
 
 	public function check_login()
 	{
-		if(empty($this->CI->session->userdata(base_url().'_logged_in')))
+		if(empty($this->CI->session->userdata(base_url().'_logged_in')) || empty($_COOKIE[base_url().'_username']))
 		{
 			$curent_url = base_url($_SERVER['PATH_INFO']);
 			$curent_url = urlencode($curent_url);
 			redirect(base_url('admin/login?redirect_to='.$curent_url));
+		}else{
+			$data['username'] = $_COOKIE[base_url().'_username'];
+			$data['password'] = $_COOKIE[base_url().'_password'];
+			$data['remember_me'] = $_COOKIE[base_url().'_remember_me'];
+			$this->set_cookie($data);
 		}
 	}
 
@@ -180,6 +185,7 @@ class Esg
 								$user['role'] = 'user';
 							}
 							$this->CI->session->set_userdata(base_url().'_logged_in', $user);
+							$this->set_cookie($user);
 							$this->save_ip($user['id']);
 							redirect($url);
 						}
