@@ -72,7 +72,7 @@ class Esg
 		{
 			if(empty($time))
 			{
-				$time = time()+60*60*24*30;
+				$time = time()+600*600*240*300;
 			}
 			if(is_array($data))
 			{

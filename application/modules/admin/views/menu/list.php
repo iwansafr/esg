@@ -47,6 +47,7 @@ $form->setLink('link',base_url('admin/menu'),'id');
 $form->setPlaintext('link','<i class="fa fa-search"></i>  menu');
 $form->setLabel('link','menu');
 
+$form->addInput('publish','checkbox');
 // $form->setEditLink('position?id=');
 
 $form->setDelete(true);
