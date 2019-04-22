@@ -5,6 +5,7 @@ if(!empty($field))
 	if($this->init == 'edit' || $this->init == 'param')
 	{
 		$data_value = empty($this->id) ? 1 : $data[$field];
+		$data_value = ($this->init == 'param') ? $data[$field] : $data_value;
 		$values     = !empty($data[$field]) ? $data[$field] : '1';
 		echo '<br>';
 		echo form_label(ucfirst($label), $label);
@@ -57,5 +58,4 @@ if(!empty($field))
 		echo '</label>';
 		echo '</div>';
 	}
-
 }

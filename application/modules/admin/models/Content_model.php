@@ -146,7 +146,11 @@ class Content_model extends CI_Model{
 		    if(!empty($post))
 		    {
 		      $this->zea->set_data('content', $last_id, $post);
-		      $this->config_model->subscriber_feed('new article from '.base_url().' <a href="'.base_url($post['slug'].'.html').'">'.$_POST['title'].'</a>');
+		      $subscriber_config = $this->esg->get_config('subscriber');
+		      if(!empty($subscriber_config['broadcast']))
+		      {
+		      	$this->config_model->subscriber_feed('new article from '.base_url().' <a href="'.base_url($post['slug'].'.html').'">'.$_POST['title'].'</a>');
+		      }
 		    }
 		  }
 		}
