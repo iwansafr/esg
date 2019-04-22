@@ -7,6 +7,7 @@ if(!empty($content['data']))
 {
   if(!empty(@$tpl) && file_exists(APPPATH.'/modules/home/views/templates/'.@$templates['public_template'].'/'.@$tpl.'.php'))
   {
+    $data = $this->esg->get_esg();
     $data['home'][$tpl]                = $content['data'];
     $data['home'][$tpl][0]['category'] = $content['taxonomy'];
     

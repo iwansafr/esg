@@ -1,5 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <?php if (!empty($home['content_testimonial'])): ?>
+	<?php $header = $this->esg->get_config('header');?>
+	<style type="text/css">
+		.testimonials_area {
+	    background-image: url(<?php echo image_module('config', 'header'.'/'.$header['image']) ?>);
+		}
+	</style>
 	<section class="testimonials_area section_gap">
 		<div class="container">
 			<div class="testi_slider owl-carousel">

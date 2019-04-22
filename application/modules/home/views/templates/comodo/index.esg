@@ -69,5 +69,10 @@
 	</div>
 </div>
 <div class="col-md-12">
-	{menu_footer}
+	<div class="panel-group">
+		<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+		<div class="panel panel-default default text-center">
+			<h5>Contact</h5>
+		</div>
+	</div>
 </div>

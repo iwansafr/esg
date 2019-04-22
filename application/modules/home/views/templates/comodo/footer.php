@@ -1,17 +1,51 @@
-<script src="<?php echo $link_template ?>/js/jquery-3.2.1.min.js"></script>
-<script src="<?php echo $link_template ?>/js/popper.js"></script>
-<script src="<?php echo $link_template ?>/js/bootstrap.min.js"></script>
-<script src="<?php echo $link_template ?>/js/stellar.js"></script>
-<script src="<?php echo $link_template ?>/js/jquery.magnific-popup.min.js"></script>
-<script src="<?php echo $link_template ?>/vendors/nice-select/js/jquery.nice-select.min.js"></script>
-<script src="<?php echo $link_template ?>/vendors/isotope/imagesloaded.pkgd.min.js"></script>
-<script src="<?php echo $link_template ?>/vendors/isotope/isotope-min.js"></script>
-<script src="<?php echo $link_template ?>/vendors/owl-carousel/owl.carousel.min.js"></script>
-<script src="<?php echo $link_template ?>/js/jquery.ajaxchimp.min.js"></script>
-<script src="<?php echo $link_template ?>/vendors/counter-up/jquery.waypoints.min.js"></script>
-<script src="<?php echo $link_template ?>/vendors/counter-up/jquery.counterup.min.js"></script>
-<script src="<?php echo $link_template ?>/js/mail-script.js"></script>
-<!--gmaps Js-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-<script src="<?php echo $link_template ?>/js/gmaps.min.js"></script>
-<script src="<?php echo $link_template ?>/js/theme.js"></script>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
+<div class="row footer_inner">
+	<?php 
+	for($i=1;$i<5;$i++)
+	{
+		if(!empty(@$home['menu_bottom_'.$i]))
+		{
+			$position_name = @end($home['menu_bottom_'.$i]);
+			$position_name = @$position_name['position_name'];
+			?>
+			<div class="col-lg-3 col-sm-6">
+				<aside class="f_widget ab_widget">
+					<div class="f_title">
+						<h4><?php echo @$position_name ?></h4>
+					</div>
+					<ul>
+						<?php
+						foreach ($home['menu_bottom_'.$i] as $key => $value) 
+						{
+							?>
+							<li><a href="<?php echo $value['link'] ?>"></a><?php echo $value['title'] ?></a></li>
+							<?php
+						}
+						?>
+					</ul>
+				</aside>
+			</div>
+			<?php
+		}
+	}
+	?>
+</div>
+<div class="row single-footer-widget">
+	<div class="col-lg-6 col-md-6 col-sm-12">
+		<div class="copy_right_text">
+			<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a href="https://www.esoftgreat.com" title="esoftgreat">esoftgreat</a> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-12">
+		<div class="social_widget">
+			<?php foreach ($meta['contact'] as $key => $value): ?>
+				<?php if (isLink($value)): ?>
+					<a href="<?php echo $value ?>"><i class="fa fa-<?php echo $key?>"></i></a>
+				<?php endif ?>
+			<?php endforeach ?>
+		</div>
+	</div>
+</div>

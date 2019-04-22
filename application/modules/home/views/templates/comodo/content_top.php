@@ -1,4 +1,4 @@
-<?php 
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 $header = $this->esg->get_config('header');
 if (!empty($header)): ?>
 	<style type="text/css">
