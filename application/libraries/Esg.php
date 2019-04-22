@@ -58,16 +58,43 @@ class Esg
 
 	public function check_login()
 	{
-		if(empty($this->CI->session->userdata(base_url().'_logged_in')) || empty($_COOKIE[base_url().'_username']))
+		if(empty($this->CI->session->userdata(base_url().'_logged_in')) && empty($_COOKIE[base_url().'_username']))
 		{
 			$curent_url = base_url($_SERVER['PATH_INFO']);
 			$curent_url = urlencode($curent_url);
 			redirect(base_url('admin/login?redirect_to='.$curent_url));
 		}else{
-			$data['username'] = $_COOKIE[base_url().'_username'];
-			$data['password'] = $_COOKIE[base_url().'_password'];
-			$data['remember_me'] = $_COOKIE[base_url().'_remember_me'];
-			$this->set_cookie($data);
+			if(!empty($_COOKIE[base_url().'_username']))
+			{
+				$data['username'] = @$_COOKIE[base_url().'_username'];
+				$data['password'] = @$_COOKIE[base_url().'_password'];
+				$data['remember_me'] = @$_COOKIE[base_url().'_remember_me'];
+				$this->set_cookie($data);
+				$user = $this->CI->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data['username'])->row_array();
+				if(!empty($user))
+				{
+					if(decrypt($data['password'], $user['password']))
+					{
+						$url = @$_GET['redirect_to'];
+						if(!empty($url))
+						{
+							$url = urldecode($url);
+						}else{
+							$url = 'admin/index';
+						}
+						$role = $this->CI->db->query('SELECT level,title FROM user_role WHERE id = ? LIMIT 1', @$user['user_role_id'])->row_array();
+						if(!empty($role))
+						{
+							$user['role'] = @$role['title'];
+							$user['level'] = @$role['level'];
+						}else{
+							$user['role'] = 'user';
+						}
+						$this->CI->session->set_userdata(base_url().'_logged_in', $user);
+						$this->save_ip($user['id']);
+					}
+				}
+			}
 		}
 	}
 
