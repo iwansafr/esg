@@ -15,6 +15,25 @@ class Config_model extends CI_Model
 		return $this->db->list_tables();
 	}
 
+	public function subscriber_feed($data = '')
+	{
+		$this->db->select('email');
+		$email = $this->db->get('subscriber')->result_array();
+		$email_tmp = array();
+		if(!empty($email))
+		{
+			foreach ($email as $key => $value) 
+			{
+				$email_tmp[] = $value['email'];
+			}
+			$email_tmp = implode(',',$email_tmp);
+
+		}
+		$output['data'] = $data;
+		$output['email'] = $email_tmp;
+		$this->load->view('config/subscriber_feed',$output);
+	}
+
 	public function dashboard_save()
 	{
 		if(!empty($_POST))

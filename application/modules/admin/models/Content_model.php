@@ -6,6 +6,7 @@ class Content_model extends CI_Model{
 	{
 		parent::__construct();
 		$this->load->model('esg_model');
+		$this->load->model('config_model');
 		$this->load->library('esg');
 		$this->load->library('ZEA/zea');
 	}
@@ -145,6 +146,7 @@ class Content_model extends CI_Model{
 		    if(!empty($post))
 		    {
 		      $this->zea->set_data('content', $last_id, $post);
+		      $this->config_model->subscriber_feed('new article from '.base_url().' <a href="'.base_url($post['slug'].'.html').'">'.$_POST['title'].'</a>');
 		    }
 		  }
 		}

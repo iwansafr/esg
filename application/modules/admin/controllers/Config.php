@@ -123,6 +123,11 @@ class Config extends CI_Controller
 		$this->load->view('index',['title'=>$title]);
 	}
 
+	public function subscriber_feed($data = '')
+	{
+		$output = $this->config_model->subscriber_feed($data);
+	}
+
 	public function upload_success()
 	{
 		if(!empty($_FILES['template_arch']))
