@@ -17,6 +17,6 @@ class Subscriber extends CI_Controller
 	}
 	public function clear_list()
 	{
-		$this->load->view('bank_account/index');
+		$this->load->view('subscriber/index');
 	}
 }

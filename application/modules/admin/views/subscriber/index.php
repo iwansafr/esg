@@ -7,5 +7,6 @@ $form->search();
 $form->addInput('id','plaintext');
 $form->addInput('email','plaintext');
 $form->addInput('created','plaintext');
+$form->setUrl('admin/subscriber/clear_list');
 $form->setDelete(TRUE);
 $form->form();
