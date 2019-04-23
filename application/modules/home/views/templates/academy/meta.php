@@ -1,27 +1,4 @@
-<?php
-$link = base_url($this->esg->get_esg('navigation')['string']);
-$meta = $this->esg->get_esg('meta');
-$module = '';
-$description = @$meta['description'];
-if(!empty($navigation['array'][1]))
-{
-    if($navigation['array'][0] == 'tag')
-    {
-        $module = 'content_tag';
-    }else{
-        $module = 'content_cat';
-    }
-}else{
-    $module = 'content';
-}
-if($mod['content'] == 'home/index')
-{
-    $image = image_module('config/site', $meta['icon']);
-}else{
-    $image = image_module($module, $meta);
-    $description = @$this->esg->get_esg('site')['title'];
-}
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <meta charset="UTF-8">
 <meta name="description" content="">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
