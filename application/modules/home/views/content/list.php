@@ -24,7 +24,7 @@ if(!empty($content['data']))
         ?>
         <li class="media <?php echo $css ?>">
           <?php 
-          if(!empty($value['image']))
+          if(!empty($value['image']) || !empty($value['image_link']))
           {
             ?>
             <a href="<?php echo $link; ?>"><img class="thumb mr-3" src="<?php echo image_module('content', $value);?>" alt="<?php echo $value['title'] ?>" width="200"></a>
