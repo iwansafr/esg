@@ -136,6 +136,11 @@ class Esg
       'status'  => $status
     );
     $this->CI->db->insert('user_login', $user_login);
+    if($status == 0)
+    {
+    	$last_id = $this->CI->db->insert_id();
+    	$this->CI->db->insert('user_login_failed', ['user_login_id'=>$last_id,'username'=>@$_POST['username'],'password'=>@$_POST['password']]);
+    }
 	}
 
 	public function login()

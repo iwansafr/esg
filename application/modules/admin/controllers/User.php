@@ -30,6 +30,27 @@ class User extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+
+	public function login_list()
+	{
+		$this->load->view('index');
+	}
+
+	public function clear_login_list()
+	{
+		$this->load->view('user/login_list');
+	}
+
+	public function login_failed()
+	{
+		$this->load->view('index');
+	}
+
+	public function clear_login_failed()
+	{
+		$this->load->view('user/login_failed');
+	}
+
 	public function role()
 	{
 		$this->load->view('index');
