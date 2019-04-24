@@ -57,7 +57,7 @@ if(@$_SERVER['SERVER_NAME'] == 'localhost')
 {
 	$env = 'development';
 }else{
-	$env = 'production';
+	$env = 'development';
 }
 define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : $env);
 
