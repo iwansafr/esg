@@ -7,24 +7,23 @@ if(!empty($site['use_cache']))
 $data['link'] = $navigation['string'];
 $ata['meta']  = $meta;
 
-$tmp_templates = 'mag';
-$cur_path = FCPATH;
-$cur_path = explode('/', $cur_path);
-array_pop($cur_path);
-array_pop($cur_path);
-$cur_path = implode('/', $cur_path).'/';
-if(is_dir(FCPATH.'templates/'.$templates['public_template']))
-{
-	$data['link_template'] = base_url().'templates/'.$templates['public_template'];	
-}else{
-	unlink(FCPATH.'templates/'.$templates['public_template']);
-	if(symlink($cur_path.'esg_templates/'.$templates['public_template'], FCPATH.'templates/'.$templates['public_template']))
-	{
-		$data['link_template'] = base_url().'templates/'.$templates['public_template'];	
-	}else{
-		$data['link_template'] = 'https://templates.esoftgreat.com/'.$templates['public_template'];
-	}
-}
+// $cur_path = FCPATH;
+// $cur_path = explode('/', $cur_path);
+// array_pop($cur_path);
+// array_pop($cur_path);
+// $cur_path = implode('/', $cur_path).'/';
+// if(is_dir(FCPATH.'templates/'.$templates['public_template']))
+// {
+// 	$data['link_template'] = base_url().'templates/'.$templates['public_template'];	
+// }else{
+// 	unlink(FCPATH.'templates/'.$templates['public_template']);
+// 	if(symlink($cur_path.'esg_templates/'.$templates['public_template'], FCPATH.'templates/'.$templates['public_template']))
+// 	{
+// 		$data['link_template'] = base_url().'templates/'.$templates['public_template'];	
+// 	}else{
+// 		$data['link_template'] = 'https://templates.esoftgreat.com/'.$templates['public_template'];
+// 	}
+// }
 
 // if(@$_SERVER['SERVER_NAME'] == 'localhost')
 // {

@@ -39,12 +39,29 @@ class Home_model extends CI_Model
 		if(!empty($data))
 		{
 			$this->esg->set_esg('templates', $data);
-		 	if(@$_SERVER['SERVER_NAME'] == 'localhost')
-		  {
-		    $link_template = base_url().'templates/'.$data['public_template'];
-		  }else{
-		    $link_template = 'https://templates.esoftgreat.com/'.$data['public_template'];
-		  }
+			$cur_path = FCPATH;
+			$cur_path = explode('/', $cur_path);
+			array_pop($cur_path);
+			array_pop($cur_path);
+			$cur_path = implode('/', $cur_path).'/';
+			if(is_dir(FCPATH.'templates/'.$data['public_template']))
+			{
+				$link_template = base_url().'templates/'.$data['public_template'];	
+			}else{
+				unlink(FCPATH.'templates/'.$data['public_template']);
+				if(symlink($cur_path.'esg_templates/'.$data['public_template'], FCPATH.'templates/'.$data['public_template']))
+				{
+					$link_template = base_url().'templates/'.$data['public_template'];	
+				}else{
+					$link_template = 'https://templates.esoftgreat.com/'.$data['public_template'];
+				}
+			}
+		 	// if(@$_SERVER['SERVER_NAME'] == 'localhost')
+		  // {
+		  //   $link_template = base_url().'templates/'.$data['public_template'];
+		  // }else{
+		  //   $link_template = 'https://templates.esoftgreat.com/'.$data['public_template'];
+		  // }
 			$this->esg->set_esg('link_template', $link_template);
 		}
 	}
