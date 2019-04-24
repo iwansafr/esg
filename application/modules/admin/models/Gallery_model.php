@@ -85,6 +85,7 @@ class Gallery_model extends CI_Model{
 				}else{
 					$this->zea->addInput('id','plaintext');
 				}
+				$this->zea->setUrl('admin/gallery/clear_images/'.$module);
 				$data['table_data'] = $this->zea->getData();
 			}
 			return $data;

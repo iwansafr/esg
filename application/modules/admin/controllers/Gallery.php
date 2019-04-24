@@ -26,4 +26,11 @@ class Gallery extends CI_Controller
 		$data['images'] = $this->gallery_model->get_images($module);
 		$this->load->view('index', $data);
 	}
+
+	public function clear_images($module = '')
+	{
+		$data['module'] = $module;
+		$data['images'] = $this->gallery_model->get_images($module);
+		$this->load->view('gallery/images', $data);
+	}
 }
