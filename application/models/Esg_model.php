@@ -48,4 +48,20 @@ class Esg_model extends CI_Model
 		$uri['array'] = explode('/',$uri['string']);
 		$this->esg->set_esg('navigation',$uri);
 	}
+	public function set_nav_title($title = '')
+	{
+		if(!empty($title))
+		{
+			$current_nav = $this->esg->get_esg('navigation');
+			if(!empty($current_nav))
+			{
+				$title = slug($title);
+				$last_index = count($current_nav['array'])-1;
+				$current_nav['array'][$last_index] = $title;
+				$string = implode('/',$current_nav['array']);
+				$current_nav['string'] = $string;
+				$this->esg->set_esg('navigation',$current_nav);
+			}
+		}
+	}
 }

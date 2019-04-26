@@ -18,7 +18,12 @@ if(!empty($field))
 	{
 		$image_src = $data[$field];
 	}else{
-		$image_src = image_module($this->image[$field]['module'], $dvalue['id'].'/'.$data_value);
+		if($this->init == 'roll' )
+		{
+			$image_src = image_module($this->image[$field]['module'], $dvalue['id'].'/'.$data_value);
+		}else{
+			$image_src = image_module($this->image[$field]['module'], $data['id'].'/'.$data_value);
+		}
 	}
 	if(!empty($data_value))
 	{

@@ -2,8 +2,6 @@
 $id = $this->input->get('id');
 
 $this->zea->init('edit');
-$this->zea->get_template();
-$this->zea->panel();
 $this->zea->setTable('content');
 
 $this->zea->setId($id);

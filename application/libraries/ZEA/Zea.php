@@ -14,8 +14,6 @@ class Zea
 		// $this->CI->load->library('upload');
 		$this->CI->load->library('pagination');
 		$this->setUrl();
-		$this->get_template();
-		$this->panel();
 	}
 
 	var $table         = '';
@@ -72,23 +70,6 @@ class Zea
 	var $url           = '';
 	var $get           = '';
 	var $key           = 'id';
-	var $template      = 'sb-admin-2';
-	var $panel         = 'panel';
-
-	public function get_template()
-	{
-		$this->template = $this->CI->esg->get_esg('templates')['admin_template'];
-	}
-
-	public function panel()
-	{
-		if($this->template != 'sb-admin-2')
-		{
-			$this->panel = 'panel';
-		}else{
-			$this->panel = 'card';
-		}
-	}
 
 	public function init($text = '')
 	{
@@ -187,6 +168,7 @@ class Zea
 
 	public function set_param($table = '',$name = '', $post = array())
   {
+  	$status = array();
     if(!empty($table))
     {
       $data = array();
@@ -197,11 +179,14 @@ class Zea
       $param = $this->CI->db->query('SELECT * FROM '.$table.' WHERE name = ?', $name)->row_array();
       if(!empty($param))
       {
-        return $this->CI->db->update($table, $data, "`name` = '{$name}'");
+        $status = $this->CI->db->update($table, $data, "`name` = '{$name}'");
       }else{
-        return $this->CI->db->insert($table, $data);
+        $status = $this->CI->db->insert($table, $data);
+        $last_id = $this->CI->db->insert_id();
+				$this->set_insert_id($last_id);
       }
     }
+    return $status;
   }
 
 	public function join($table = '', $cond = '', $field = '')
@@ -256,15 +241,15 @@ class Zea
 		$collapse = !empty($this->collapse[$id]) ? 'collapse' : '';
 		?>
 		<br>
-		<div class="<?php echo $this->panel;?>-group">
-			<div class="<?php echo $this->panel ?> <?php echo $this->panel ?>-<?php echo $type ?>">
-				<div class="<?php echo $this->panel ?>-<?php echo ($this->panel=='card') ? 'header' : 'heading';?>">
-					<h6 class="<?php echo $this->panel ?>-title m-0 font-weight-bold text-primary">
+		<div class="card-group panel-group">
+			<div class="panel panel-<?php echo $type ?> card card-<?php echo $type ?>">
+				<div class="panel-heading card-header">
+					<h6 class="card-title panel-title m-0 font-weight-bold text-primary">
 						<a data-toggle="collapse" href="#<?php echo $id; ?>"><?php echo $title ?></a>
 					</h6>
 				</div>
-				<div id="<?php echo $id ?>" class="<?php echo $this->panel;?>-collapse <?php echo $collapse ?>">
-					<div class="<?php echo $this->panel;?>-body">
+				<div id="<?php echo $id ?>" class="card-collapse panel-collapse <?php echo $collapse ?>">
+					<div class="card-body panel-body">
 
 		<?php
 	}
@@ -273,7 +258,7 @@ class Zea
 	{
 		?>
 					</div>
-					<div class="<?php echo $this->panel; ?>-footer">Panel Footer</div>
+					<div class="card-footer panel-footer">Panel Footer</div>
 				</div>
 			</div>
 		</div>
@@ -941,6 +926,7 @@ class Zea
   }
 	public function set_data($table = '',$id = 0, $post = array())
   {
+  	$status = array();
     if(!empty($table))
     {
       $data = array();
@@ -950,11 +936,14 @@ class Zea
       }
       if($id > 0)
       {
-        return $this->CI->db->update($table, $data, 'id = '.$id);
+        $status = $this->CI->db->update($table, $data, 'id = '.$id);
       }else{
-        return $this->CI->db->insert($table, $data);
+        $status = $this->CI->db->insert($table, $data);
+        $last_id = $this->CI->db->insert_id();
+				$this->set_insert_id($last_id);
       }
     }
+    return $status;
   }
   public function get_one($table = '', $field = '', $where = '')
   {
@@ -1135,9 +1124,9 @@ class Zea
 				$action = !empty($this->view) ? base_url($this->view).'/'.$this->id : '';
 				?>
 				<form method="post" action="<?php echo $action ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
-					<div class="<?php echo $this->panel ?> <?php echo $this->panel ?>-default">
-						<div class="<?php echo $this->panel ?> <?php echo $this->panel ?>-<?php echo ($this->panel=='card') ? 'header' : 'heading';?>">
-							<h6 class="<?php echo $this->panel ?>-title m-0 font-weight-bold text-primary">
+					<div class="panel panel-default card card-default">
+						<div class="panel panel-heading card card-heading">
+							<h6 class="panel-title m-0 font-weight-bold text-primary">
 								<?php
 								if($this->init == 'edit')
 								{
@@ -1145,14 +1134,14 @@ class Zea
 									{
 										echo !empty($this->id) ? 'Edit ' : 'Add ';
 									}
-									echo $this->heading;
+									echo !empty($this->heading) ? $this->heading: $this->table;
 								}else{
-									echo $this->heading;
+									echo !empty($this->heading) ? $this->heading: $this->table;
 								}
 								?>
 							</h6>
 						</div>
-						<div class="<?php echo $this->panel ?> <?php echo $this->panel ?>-body">
+						<div class="panel panel-body card card-body">
 							<?php
 							if(!empty($message))
 							{
@@ -1264,7 +1253,7 @@ class Zea
 							}
 							?>
 						</div>
-						<div class="<?php echo ($this->panel='card') ? '' : 'panel'; ?> <?php echo $this->panel ?>-footer">
+						<div class="panel panel-footer card card-footer">
 							<!-- <button class="btn btn-default" onclick="window.history.back();" data-toggle="tooltip" title="go back"><i class="fa fa-arrow-left"></i></button> -->
 							<?php
 							if(!empty($this->save))

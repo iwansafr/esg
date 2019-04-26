@@ -60,8 +60,18 @@ if(!empty($field))
 
 	if(!empty($cur_options))
 	{
-		echo form_dropdown($input_array);
+		if(@$attr=='disabled')
+		{
+			if($this->init=='edit' || $this->init == 'param')
+			{
+				echo '<br>';
+			}
+			echo @$input_array['options'][@intval($data_value)];
+		}else{
+			echo form_dropdown($input_array);
+		}
 	}else{
 		msg('Option for '.$field.' is Empty','danger');
 	}
+	$attr = '';
 }

@@ -2,7 +2,6 @@
 
 if(!empty($field))
 {
-	// pr($this->id);
 	if($this->init == 'edit' || $this->init == 'param')
 	{
 		$data_value =  $data[$field];
@@ -11,10 +10,13 @@ if(!empty($field))
 		$data_value = $dvalue[$ikey];
 	}
 
+	$value_data_value = !empty($this->value[$field]) ? $this->value[$field] : '';
+
 	echo form_password(array(
 		'name'    => $field,
 		'class'   => 'form-control',
-		'required'=>'required'
+		'required'=>'required',
+		'value'=>@$value_data_value
 		)
 	);
 }
