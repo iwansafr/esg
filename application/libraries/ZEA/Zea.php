@@ -999,7 +999,7 @@ class Zea
 			}
 			if(!empty($keyword) || !empty($this->where))
 			{
-				$sql     .= ' WHERE ';
+				$sql     .= ' WHERE (';
 				$url_get .= '?';
 			}else if(!empty($sort_by) || !empty($id))
 			{
@@ -1045,6 +1045,7 @@ class Zea
 								$where .= $value.' LIKE ?';
 								$bind[] = '%'.$keyword.'%';
 							}
+							$where .= ')';
 						}else{
 							foreach ($this->field as $key => $value)
 							{
@@ -1054,6 +1055,7 @@ class Zea
 								$where .= $value.' LIKE ?';
 								$bind[] = '%'.$keyword.'%';
 							}
+							$where .= ')';
 						}
 					}
 					$sql .= $where;
@@ -1063,7 +1065,7 @@ class Zea
 			{
 				// $where .= $this->hasGet($sql) ? ' AND '.$this->where : ' '.$this->where;
 				// $sql .= ' '.$where;
-				$sql .= $this->hasGet($sql) ? ' AND '.$this->where : ' '.$this->where;
+				$sql .= $this->hasGet($sql) ? ' AND ('.$this->where.' )' : ' '.$this->where.')';
 			}
 			$num_rows = $this->CI->db->query($sql,$bind)->num_rows();
 
