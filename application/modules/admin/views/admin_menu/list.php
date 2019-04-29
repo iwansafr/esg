@@ -47,7 +47,7 @@ $form->setLabel('link','menu');
 
 $form->setDelete(true);
 $form->setEdit(TRUE);
-$form->setEditLink(base_url('admin/admin_menu/edit?id='));
+$form->setEditLink(base_url('admin/admin_menu/edit?p_id='.@intval($_GET['id']).'&id='));
 $form->setUrl('admin/admin_menu/clear_list');
 $form->setFormName('menu');
 if(!empty($form->getData()['data']) || empty($_GET['keyword']))

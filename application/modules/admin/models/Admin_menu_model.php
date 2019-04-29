@@ -32,13 +32,13 @@ class Admin_menu_model extends CI_Model
 
 		if(!empty($id) || !empty($p_id))
 		{
-			if(!empty($id))
+			if(empty($p_id))
 			{
 				$q = 'SELECT id,title FROM admin_menu WHERE id != ?'.$ext;
 				$id = array($id);
 				$bind = array_merge($id,$bind);
 			}
-			if(!empty($p_id))
+			if(empty($id) || (!empty($id) && !empty($p_id)))
 			{
 				$q = 'SELECT id,title FROM admin_menu WHERE id = ?'.$ext;
 				$p_id = array($p_id);
