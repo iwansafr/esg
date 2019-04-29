@@ -12,7 +12,8 @@ if(!empty($id))
 	$this->zea->setId($id);
 	// $data = $this->zea->getData();
 }
-echo '<a href="'.base_url('admin/menu/list?id='.$po_id.'&p_id='.@intval($p_id)).'" class="btn btn-default pull-right"><i class="fa fa-list"></i> menu list</a>';
+// echo '<a href="'.base_url('admin/menu/list?id='.$po_id.'&p_id='.@intval($p_id)).'" class="btn btn-default pull-right"><i class="fa fa-list"></i> menu list</a>';
+echo '<a href="'.base_url('admin/menu?id='.@intval($p_id)).'" class="btn btn-default pull-right"><i class="fa fa-list"></i></a>';
 $this->zea->setHeading('Menu');
 $this->zea->addInput('position_id','dropdown');
 $this->zea->setLabel('position_id','Menu Position');

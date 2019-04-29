@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 $id    = $this->input->get('id');
-$po_id = $this->input->get('po_id');
+// $po_id = $this->input->get('po_id');
 $p_id  = $this->input->get('p_id');
 
 $this->zea->init('edit');
