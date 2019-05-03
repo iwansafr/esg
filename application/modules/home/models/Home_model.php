@@ -262,6 +262,7 @@ class Home_model extends CI_Model
 		$data = $this->esg->get_config('logo');
 		if(!empty($data))
 		{
+			$data['tag_image'] = '<img src="'.image_module('config','logo/'.$data['image']).'" width="'.@$data['width'].'" height="'.@$data['height'].'" class="img img-responsive">';
 			$this->esg->set_esg('logo', $data);
 		}
 	}

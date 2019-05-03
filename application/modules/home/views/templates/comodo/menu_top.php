@@ -1,7 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light">
 	<?php if (!empty($home['menu_top'])): ?>
 		<div class="container">
-			<a class="navbar-brand logo_h" href="<?php echo base_url() ?>"><img src="<?php echo image_module('config/logo', @$logo['image']) ?>" alt="<?php echo @$logo['title'] ?>" style="max-width: <?php echo @$logo['width'] ?>px;"></a>
+			<?php if (is_admin() || is_root()): ?>
+				<a href="<?php echo base_url('admin/config/logo') ?>" class="esg_edit"><i class="fa fa-pencil"></i></a>
+			<?php endif ?>
+			<a class="navbar-brand logo_h" href="<?php echo base_url() ?>">
+				<img src="<?php echo image_module('config/logo', @$logo['image']) ?>" alt="<?php echo @$logo['title'] ?>" style="max-width: <?php echo @$logo['width'] ?>px;">
+			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="icon-bar"></span>

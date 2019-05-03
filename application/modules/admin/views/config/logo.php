@@ -12,4 +12,7 @@ $form->addInput('width', 'text');
 $form->setAttribute('width',array('type'=>'number'));
 $form->addInput('height', 'text');
 $form->setAttribute('height',array('type'=>'number'));
+$form->addInput('display','dropdown');
+$form->setOptions('display',['title'=>'text','image'=>'logo image']);
+$form->setFormName('logo_config_form');
 $form->form();
