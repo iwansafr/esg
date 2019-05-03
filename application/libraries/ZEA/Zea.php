@@ -380,6 +380,25 @@ class Zea
 			}
 		}
 	}
+	public function setFirstOption($field = '', $options = array())
+	{
+		if(!empty($field) && !empty($options) && is_array($options))
+		{
+			foreach ($this->input as $key => $value) 
+			{
+				if($value['text'] == $field)
+				{
+					if(!empty($this->options[$field][0]))
+					{
+						foreach ($options as $okey => $ovalue) 
+						{
+							$this->options[$field][$okey] = $ovalue;
+						}
+					}
+				}
+			}
+		}
+	}
 	public function setOptions($field = '',$options = array())
 	{
 		if(!empty($field) && !empty($options))
