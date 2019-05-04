@@ -22,6 +22,42 @@ class Esg
 		$this->CI->config->set_item('esg', $output);
 	}
 
+	public function add_js($data = array())
+	{
+		$cur_js = $this->get_esg('extra_js');
+		$output = array();
+		if(!empty($cur_js))
+		{
+			$output[] = $cur_js;
+			$output[] = $data;
+		}else{
+			$output[] = $data;
+		}
+		$output = array_unique($output);
+		$this->set_esg('extra_js', $output);
+	}
+
+	public function add_script($data = array())
+	{
+		if(!empty($data))
+		{
+			$cur_script = $this->get_esg('script');
+			$output = array();
+			if(!empty($cur_script))
+			{
+				$output = $cur_script;
+				$output[] = $data;
+			}else{
+				$output[] = $data;
+			}
+			if(is_array($output))
+			{
+				$output = array_unique($output);
+			}
+			$this->set_esg('script', $output);
+		}
+	}
+
 	function set_tag($table = 'content_tag')
 	{
     $post['tag_ids'] = $_POST['tag_ids'];
@@ -270,7 +306,7 @@ class Esg
 
 	public function extra_css()
 	{
-		$data = $this->CI->config->item('esg');
+		// $data = $this->CI->config->item('esg');
 		$data = @$data['extra_css'];
 		if(!empty($data))
 		{
@@ -287,7 +323,7 @@ class Esg
 	}
 	public function extra_js()
 	{
-		$data = $this->CI->config->item('esg');
+		// $data = $this->CI->config->item('esg');
 		$data = $this->get_esg('extra_js');
 		if(!empty($data))
 		{
@@ -299,6 +335,23 @@ class Esg
 				}
 			}else{
 				echo '<script src="'.$data.'"></script>'."\n";
+			}
+		}
+	}
+	public function script()
+	{
+		// $data = $this->CI->config->item('esg');
+		$data = $this->get_esg('script');
+		if(!empty($data))
+		{
+			if(is_array($data))
+			{
+				foreach ($data as $key => $value)
+				{
+					echo '<script type="text/javascript">'."\n".''.$value."\n".'</script>'."\n";
+				}
+			}else{
+				echo '<script type="text/javascript">'."\n".''.$data."\n".'</script>'."\n";
 			}
 		}
 	}

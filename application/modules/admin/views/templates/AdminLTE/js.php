@@ -23,3 +23,4 @@
 </script>
 <?php 
 $this->esg->extra_js();
+$this->esg->script();
