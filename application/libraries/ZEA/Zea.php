@@ -66,6 +66,7 @@ class Zea
 	var $msg           = array();
 	var $search        = FALSE;
 	var $success       = FALSE;
+	var $datatable     = FALSE;
 	var $insert_id     = 0;
 	var $url           = '';
 	var $get           = '';
@@ -535,6 +536,11 @@ class Zea
 		}else{
 			$this->data = $data;
 		}
+	}
+
+	public function setDataTable($option = TRUE)
+	{
+		$this->datatable = $option;
 	}
 
 	public function setLink($field = '', $link = '', $get = '')
@@ -1093,13 +1099,22 @@ class Zea
 				$this->order_by($sort_by, @$_GET['type']);
 			}
 			$sql          .= ' ORDER BY '.$this->orderby;
-			$sql          .= ' LIMIT '.$page*$limit.','.$limit;
+			if(!$this->datatable)
+			{
+				$sql          .= ' LIMIT '.$page*$limit.','.$limit;
+			}
 			$data['data']  = $this->CI->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->CI->db->last_query();
+			$data['num_rows'] = $num_rows;
 			// $config        = pagination($num_rows,$limit,base_url($this->CI->esg->get_esg('navigation')['string'].$url_get));
-			$config        = pagination($num_rows,$limit,base_url($this->url.$url_get));
-	    $this->CI->pagination->initialize($config);
-	    $data['pagination'] = $this->CI->pagination->create_links();
+			if(!$this->datatable)
+			{
+				$config        = pagination($num_rows,$limit,base_url($this->url.$url_get));
+		    $this->CI->pagination->initialize($config);
+		    $data['pagination'] = $this->CI->pagination->create_links();
+			}else{
+				$data['pagination'] = '';
+			}
 		}else if($this->init == 'edit'){
 			$data = $this->CI->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
 			$data = @$data;
@@ -1328,31 +1343,66 @@ class Zea
 								<?php
 								if($this->search == TRUE)
 								{
-									$the
-									?>
-			             	<div class="box-tools">
-			             		<form action="" method="get">
-					              <div class="input-group input-group-sm" style="width: 150px;">
-					                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>" required>
-					                <?php if (!empty($this->get)): ?>
-					                	<?php foreach ($this->get as $key => $value): ?>
-					                		<input type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
-					                	<?php endforeach ?>
-					                	
-					                <?php endif ?>
-					                <div class="input-group-btn">
-					                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-					                </div>
-					              </div>
-	              			</form>
-			            	</div>
-									<?php
+									if(!$this->datatable)
+									{
+										?>
+				             	<div class="box-tools">
+				             		<form action="" method="get">
+						              <div class="input-group input-group-sm" style="width: 150px;">
+						                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>" required>
+						                <?php if (!empty($this->get)): ?>
+						                	<?php foreach ($this->get as $key => $value): ?>
+						                		<input type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
+						                	<?php endforeach ?>
+						                	
+						                <?php endif ?>
+						                <div class="input-group-btn">
+						                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+						                </div>
+						              </div>
+		              			</form>
+				            	</div>
+										<?php
+									}
 								}?>
 		          </div>
 							<form method="post" action="<?php echo !empty($this->view) ? base_url($this->view).$page : ''; ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
 								<div class="box-body table-responsive no-padding">
-									<table class="table table-bordered table-hover table-striped" table_name="<?php echo $this->table; ?>">
-										<tbody>
+									<?php if ($this->datatable): ?>
+										<div class="box-tools">
+											<div class="pull-right">
+												<?php
+												foreach ($this->input as $inputkey => $inputvalue)
+												{
+													if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
+													{
+														if(empty($this->attribute[$inputvalue['text']]) || is_array($this->attribute[$inputvalue['text']]))
+														{
+														// $add_text = $inputvalue['type'] == 'text' ? 'Save ' : '';
+															$add_text = 'Save ';
+															?>
+															<button type="submit" name="<?php echo $inputvalue['text'] ?>" value="1" class="btn btn-info btn-sm">
+																<span class="glyphicon glyphicon-floppy-saved"></span> <?php echo $add_text.' '.$inputvalue['text'] ?>
+															</button>
+															<?php
+														}
+													}
+												}
+												if($this->delete)
+												{
+													?>
+													<button type="<?php echo $this->delete_type ?>" name="delete_<?php echo $this->formName?>" value="1" class="btn btn-danger btn-sm">
+														<span class="glyphicon glyphicon-trash"></span> DELETE
+													</button>
+													<?php
+												}
+												?>
+											</div>
+										</div>
+										<hr>
+									<?php endif ?>
+									<table class="table table-bordered table-hover table-striped <?php echo $this->datatable ? 'esg_data_table' : ''; ?>" table_name="<?php echo $this->table; ?>">
+										<thead>
 											<tr>
 												<?php
 												if(!empty($this->numbering))
@@ -1429,7 +1479,12 @@ class Zea
 															}
 															if(empty($this->hide[$field]))
 															{
-																echo '<th><a class="page-link" href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
+																if(!$this->datatable)
+																{
+																	echo '<th><a class="page-link" href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
+																}else{
+																	echo '<th>'.ucwords($label).'</th>';
+																}
 															}
 														}
 													}
@@ -1454,6 +1509,8 @@ class Zea
 												}
 											 ?>
 											</tr>
+										</thead>
+										<tbody>
 											<?php
 											if(!empty($data))
 											{
@@ -1566,46 +1623,49 @@ class Zea
 												{
 													$tot_col++;
 												}
-												?>
-												<tr>
-													<td colspan="<?php echo $tot_col; ?>"><?php echo !empty($pagination) ? $pagination : ''; ?></td>
-													<?php
-													foreach ($this->input as $inputkey => $inputvalue)
-													{
-														if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
+												if(!$this->datatable)
+												{
+													?>
+													<tr>
+														<td colspan="<?php echo $tot_col; ?>"><?php echo !empty($pagination) ? $pagination : ''; ?></td>
+														<?php
+														foreach ($this->input as $inputkey => $inputvalue)
 														{
-															if(empty($this->attribute[$inputvalue['text']]) || is_array($this->attribute[$inputvalue['text']]))
+															if($inputvalue['type'] == 'checkbox' || $inputvalue['type'] == 'text' || $inputvalue['type'] == 'dropdown')
 															{
-															// $add_text = $inputvalue['type'] == 'text' ? 'Save ' : '';
-																$add_text = 'Save ';
-																?>
-																<td>
-																	<button type="submit" name="<?php echo $inputvalue['text'] ?>" value="1" class="btn btn-info btn-sm">
-																		<span class="glyphicon glyphicon-floppy-saved"></span> <?php echo $add_text.' '.$inputvalue['text'] ?>
-																	</button>
-																</td>
-																<?php
+																if(empty($this->attribute[$inputvalue['text']]) || is_array($this->attribute[$inputvalue['text']]))
+																{
+																// $add_text = $inputvalue['type'] == 'text' ? 'Save ' : '';
+																	$add_text = 'Save ';
+																	?>
+																	<td>
+																		<button type="submit" name="<?php echo $inputvalue['text'] ?>" value="1" class="btn btn-info btn-sm">
+																			<span class="glyphicon glyphicon-floppy-saved"></span> <?php echo $add_text.' '.$inputvalue['text'] ?>
+																		</button>
+																	</td>
+																	<?php
+																}
 															}
 														}
-													}
-													if($this->edit == true)
-													{
-														// $tot_col = $tot_col+1;
-														echo '<td></td>';
-													}
-													if($this->delete)
-													{
+														if($this->edit == true)
+														{
+															// $tot_col = $tot_col+1;
+															echo '<td></td>';
+														}
+														if($this->delete)
+														{
+															?>
+															<td>
+																<button type="<?php echo $this->delete_type ?>" name="delete_<?php echo $this->formName?>" value="1" class="btn btn-danger btn-sm">
+																	<span class="glyphicon glyphicon-trash"></span> DELETE
+																</button>
+															</td>
+															<?php
+														}
 														?>
-														<td>
-															<button type="<?php echo $this->delete_type ?>" name="delete_<?php echo $this->formName?>" value="1" class="btn btn-danger btn-sm">
-																<span class="glyphicon glyphicon-trash"></span> DELETE
-															</button>
-														</td>
-														<?php
-													}
-													?>
-												</tr>
-												<?php
+													</tr>
+													<?php
+												}
 											}
 											?>
 											<!-- <button class="btn btn-default" onclick="window.history.back();" data-toggle="tooltip" title="go back"><i class="fa fa-arrow-left"></i></button> -->
