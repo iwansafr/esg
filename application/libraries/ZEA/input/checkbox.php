@@ -57,5 +57,9 @@ if(!empty($field))
 			)).ucfirst($field);
 		echo '</label>';
 		echo '</div>';
+		if($this->datatable)
+		{
+			echo form_hidden($field.'_row_h[]', $values);
+		}
 	}
 }

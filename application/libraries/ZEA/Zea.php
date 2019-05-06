@@ -1676,7 +1676,6 @@ class Zea
 						</div>
 					</div>
 				</div>
-
 				<?php
 			}
 		}
@@ -2126,10 +2125,19 @@ class Zea
 							{
 								$data_checkbox = array();
 								$currentdatai = 0;
-								foreach ($current_data as $currnetdatakey => $currentdatavalue)
+								if($this->datatable)
 								{
-									$data_checkbox[$currentdatai] = $currentdatavalue['id'];
-									$currentdatai++;
+									foreach ($_POST[$inputvalue['text'].'_row_h'] as $currnetdatakey => $currentdatavalue)
+									{
+										$data_checkbox[$currentdatai] = $currentdatavalue;
+										$currentdatai++;
+									}
+								}else{
+									foreach ($current_data as $currnetdatakey => $currentdatavalue)
+									{
+										$data_checkbox[$currentdatai] = $currentdatavalue['id'];
+										$currentdatai++;
+									}
 								}
 								if(!empty($data_checkbox))
 								{
