@@ -108,5 +108,5 @@ $(document).ready(function(){
 	$('form').on('submit',function(){
 		$('#loading').removeClass('hidden');
 	});
-	$('#summernote').summernote();	
+	$('#summernote').summernote({maximumImageFileSize:524288});	
 });
