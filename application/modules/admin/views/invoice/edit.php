@@ -28,7 +28,7 @@ $this->zea->addInput('items','textarea');
 $this->zea->setAttribute('items','placeholder="item 1 = 1000, item 2 = 2000"');
 
 $this->zea->addInput('ppn','dropdown');
-$this->zea->setOptions('ppn',['With PPN','Without PPN']);
+$this->zea->setOptions('ppn',[1=>'With PPN',0=>'Without PPN']);
 $this->zea->setLabel('ppn','PPN');
 
 $this->zea->addInput('status','dropdown');
