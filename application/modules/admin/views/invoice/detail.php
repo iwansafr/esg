@@ -125,7 +125,7 @@ $contact = $this->esg->get_config('contact');
 								<?php
 								$sub_total += $value;
 							}
-							if(!empty($_POST['ppn']))
+							if(!empty($data['ppn']))
 							{
 								$ppn = ($sub_total*10)/100;
 								$total = $sub_total+$ppn;
