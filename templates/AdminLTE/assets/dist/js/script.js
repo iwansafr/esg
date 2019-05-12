@@ -109,4 +109,5 @@ $(document).ready(function(){
 		$('#loading').removeClass('hidden');
 	});
 	$('#summernote').summernote({maximumImageFileSize:524288});	
+	$('.summernote').summernote({maximumImageFileSize:524288});	
 });
