@@ -389,12 +389,9 @@ class Zea
 			{
 				if($value['text'] == $field)
 				{
-					if(!empty($this->options[$field][0]))
+					foreach ($options as $okey => $ovalue) 
 					{
-						foreach ($options as $okey => $ovalue) 
-						{
-							$this->options[$field][$okey] = $ovalue;
-						}
+						$this->options[$field][$okey] = $ovalue;
 					}
 				}
 			}

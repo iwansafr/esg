@@ -9,8 +9,12 @@ if(!empty($field))
 	{
 		$data_value = $data[$field];
 		$link_get   = $data[$link_get];
-
-		echo form_label(ucfirst($label), $label);
+		if(!empty($this->plaintext[$field])){
+			echo form_label(ucfirst($label), $label).'<br>';
+			$data_value = $this->plaintext[$field];
+		}else{
+			echo form_label(ucfirst($label), $label);
+		}
 	}else{
 		$data_value = $dvalue[$ikey];
 		$link_get   = $dvalue[$link_get];
