@@ -21,38 +21,41 @@
     <li class="header">MAIN NAVIGATION</li>
     <?php
     $menu = $this->esg->get_esg('sidebar_menu');
-    foreach ($menu as $key => $value)
+    if(!empty($menu))
     {
-      if(!empty($value['list']))
+      foreach ($menu as $key => $value)
       {
-        ?>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa <?php echo $value['icon'] ?>"></i> <span><?php echo $value['title'] ?></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <?php
-            foreach ($value['list'] as $vkey => $vvalue)
-            {
-              ?>
-              <li><a href="<?php echo base_url('admin'.$vvalue['link']) ?>"><i class="fa <?php echo $vvalue['icon'] ?>"></i> <?php echo $vvalue['title'] ?></a></li>
+        if(!empty($value['list']))
+        {
+          ?>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa <?php echo $value['icon'] ?>"></i> <span><?php echo $value['title'] ?></span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
               <?php
-            }?>
-          </ul>
-        </li>
-        <?php
-      }else{
-        ?>
-        <!-- <li class="treeview"> -->
-        <li>
-          <a href="<?php echo base_url('admin'.$value['link']) ?>">
-            <i class="fa <?php echo $value['icon'] ?>"></i> <span><?php echo $value['title'] ?></span>
-          </a>
-        </li>
-        <?php
+              foreach ($value['list'] as $vkey => $vvalue)
+              {
+                ?>
+                <li><a href="<?php echo base_url('admin'.$vvalue['link']) ?>"><i class="fa <?php echo $vvalue['icon'] ?>"></i> <?php echo $vvalue['title'] ?></a></li>
+                <?php
+              }?>
+            </ul>
+          </li>
+          <?php
+        }else{
+          ?>
+          <!-- <li class="treeview"> -->
+          <li>
+            <a href="<?php echo base_url('admin'.$value['link']) ?>">
+              <i class="fa <?php echo $value['icon'] ?>"></i> <span><?php echo $value['title'] ?></span>
+            </a>
+          </li>
+          <?php
+        }
       }
     }
     ?>

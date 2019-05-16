@@ -291,7 +291,7 @@ class Esg
 	}
 
 	public function get_config($name = '')
-  	{
+  {
 		$data = array();
 		if(!empty($name))
 		{
