@@ -56,6 +56,10 @@ class Config extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+	public function footer()
+	{
+		$this->load->view('index');
+	}
 	public function style()
 	{
 		$this->load->view('index');

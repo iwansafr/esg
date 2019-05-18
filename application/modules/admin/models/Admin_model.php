@@ -12,6 +12,7 @@ class Admin_model extends CI_Model
 		// $this->sidebar_menu();
 		$this->menu();
 		$this->site();
+		$this->footer();
 		$this->user();
 		$this->message();
 	}
@@ -295,6 +296,12 @@ class Admin_model extends CI_Model
 		$data['logo'] = $this->esg->get_config('logo');
 		$data['site'] = $this->esg->get_config('site');
 		$this->esg->set_esg('site', $data);
+	}
+	public function footer()
+	{
+		$data = array();
+		$data['footer'] = $this->esg->get_config('footer');
+		$this->esg->set_esg('footer', $data);
 	}
 
 	public function user()

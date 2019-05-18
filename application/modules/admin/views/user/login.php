@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php $site = $this->esg->get_esg('site');?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>esoftgreat | Log in</title>
+  <title><?php echo @$site['site']['title'] ?> | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -28,18 +29,28 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition login-page" style="background: black;">
-	<?php
+<body class="hold-transition login-page" style="background: #d2d6de;">
+  <?php
   $msg  = $this->esg->get_esg('msg');
   $data = $this->input->post();
   ?>
 <div class="login-box">
   <div class="login-logo">
-    <img src="<?php echo base_url('images/logo.png') ?>" height="50">
+    <?php 
+    if($site['logo']['display'] == 'title')
+    {
+      echo '<h1>'.@$site['logo']['title'].'</h1>';
+    }else{
+      ?>
+      <img src="<?php echo image_module('config','logo/'.$site['logo']['image']) ?>" height="50">
+      <?php
+    }
+    ?>
+
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body" style="background: black;">
-    <p class="login-box-msg">Sign in to start your session</p>
+  <div class="login-box-body" style="background: #929090; color: white;">
+    <p class="login-box-msg">pastikan username dan sandi benar</p>
     <?php
     if(!empty($msg))
     {
@@ -59,13 +70,13 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox" name="remember_me"> Remember Me
+              <input type="checkbox" name="remember_me"> ingat saya
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
         </div>
         <!-- /.col -->
       </div>
