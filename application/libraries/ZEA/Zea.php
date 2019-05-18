@@ -1165,7 +1165,7 @@ class Zea
 								{
 									if(!empty($this->edit_status))
 									{
-										echo !empty($this->id) ? 'Edit ' : 'Add ';
+										echo !empty($this->id) ? 'Ubah ' : 'Tambah ';
 									}
 									echo !empty($this->heading) ? $this->heading: $this->table;
 								}else{
