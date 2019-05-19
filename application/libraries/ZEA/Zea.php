@@ -1964,7 +1964,7 @@ class Zea
 												}
 												$exts = array();
 												$files_name = array();
-												if(empty($_FILES[$uploads[$i]]['name']))
+												if(!empty($_FILES[$uploads[$i]]['name']))
 												{
 													foreach ($_FILES[$uploads[$i]]['name'] as $n_key => $n_value)
 													{

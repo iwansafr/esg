@@ -38,6 +38,8 @@ if(!empty($field))
 			$multi_file = pathinfo($im_value);
 			$image_type = array('jpg','jpeg','png','gif');
 			$file_type = array('doc','docs','xls','xlsx','pdf','ppt','pptx');
+			$title = explode('/',$im_value);
+			$title = str_replace('_',' ',end($title));
 			?>
 			<div class="col-md-3 col-lg-2 col-xl-3">
 				<div class="image" data="<?php echo $data_image[$im_key] ?>">
@@ -48,9 +50,16 @@ if(!empty($field))
 						</a>
 					<?php else: ?>
 						<span><a href="#del_image" class="del_images"><i class="fa fa-close" style="color: red;"></i></a></span><br>
-						<a href="<?php echo image_module($this->table, $im_value); ?>">
-							<i class="fa fa-file-alt" style="font-size: 140px;" title="<?php echo $multi_file['basename'] ?>"></i>
-						</a>
+						<?php if (!empty($im_value)): ?>
+			        <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+			        <div class="mailbox-attachment-info">
+			          <a target="_blank" href="<?php echo image_module($this->table, $im_value) ?>" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> <?php echo $title ?></a>
+		              <span class="mailbox-attachment-size">
+		                <?php echo round(filesize(FCPATH.'images/modules/'.$this->table.'/'.$im_value)/1000, 1); ?> KB
+		                <a target="_blank" href="<?php echo image_module($this->table, $im_value) ?>" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download-alt"></i></a>
+		              </span>
+			        </div>
+				  	<?php endif ?>
 					<?php endif ?>
 				</div>
 				<br>
