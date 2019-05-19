@@ -389,10 +389,16 @@ class Zea
 			{
 				if($value['text'] == $field)
 				{
+					$tmp_opt = array();
 					foreach ($options as $okey => $ovalue) 
 					{
-						$this->options[$field][$okey] = $ovalue;
+						$tmp_opt[$field][$okey] = $ovalue;
 					}
+					foreach ($this->options[$field] as $opkey => $opvalue) 
+					{
+						$tmp_opt[$field][$opkey] = $opvalue;
+					}
+					$this->options[$field] = $tmp_opt;
 				}
 			}
 		}

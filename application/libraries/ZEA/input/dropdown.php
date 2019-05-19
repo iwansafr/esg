@@ -19,7 +19,6 @@ if(!empty($field))
 		$data_value = $dvalue[$ikey];
 		$field_name = '_row['.$dvalue['id'].']';
 	}
-
 	$cur_options = @$this->options[$field];
 	if($this->table == @$this->options['ref_table_'.$field])
 	{
