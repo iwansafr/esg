@@ -37,7 +37,7 @@
 <div class="login-box">
   <div class="login-logo">
     <?php 
-    if($site['logo']['display'] == 'title')
+    if(@$site['logo']['display'] == 'title')
     {
       echo '<h1>'.@$site['logo']['title'].'</h1>';
     }else{
