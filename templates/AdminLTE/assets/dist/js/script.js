@@ -105,6 +105,10 @@ $(document).ready(function(){
 			$('#loading').removeClass('hidden');
 		}
 	});
+	$('.download_file').on('click',function(){
+		var a = $(this).attr('href');
+		window.open(a,'_blank').document.write('<h1>File Berhasil di Download, silahkan cek folder download anda, dan silahkan tutup jendela ini</h1>');
+	});
 	$('form').on('submit',function(){
 		$('#loading').removeClass('hidden');
 	});
