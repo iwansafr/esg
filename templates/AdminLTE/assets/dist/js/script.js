@@ -82,6 +82,7 @@ $(document).ready(function(){
 		var this_link = this.href;
 		var target = this.target;
 		var no_load = $(this).attr('no_load');
+		console.log(event);
 		if(this_link.includes('#')){
 
 		}else if(this_link.includes('javascript')){
@@ -92,6 +93,8 @@ $(document).ready(function(){
 		}else if(no_load){
 			
 		}else if(event.ctrlKey){
+			
+		}else if(event.metaKey){
 			
 		}
 		else if($(this).hasClass('page-link')){
