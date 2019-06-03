@@ -1164,7 +1164,7 @@ class Zea
 				?>
 				<form method="post" action="<?php echo $action ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
 					<div class="panel panel-default card card-default">
-						<div class="panel panel-heading card card-heading">
+						<div class="panel panel-heading card card-header">
 							<h6 class="panel-title m-0 font-weight-bold text-primary">
 								<?php
 								if($this->init == 'edit')
@@ -1292,7 +1292,7 @@ class Zea
 							}
 							?>
 						</div>
-						<div class="panel panel-footer card card-footer">
+						<div class="panel panel-footer card-footer">
 							<!-- <button class="btn btn-default" onclick="window.history.back();" data-toggle="tooltip" title="go back"><i class="fa fa-arrow-left"></i></button> -->
 							<?php
 							if(!empty($this->save))
@@ -1484,7 +1484,7 @@ class Zea
 															{
 																if(!$this->datatable)
 																{
-																	echo '<th><a class="page-link" href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
+																	echo '<th><a class="load_link" href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
 																}else{
 																	echo '<th>'.ucwords($label).'</th>';
 																}
