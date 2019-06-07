@@ -101,6 +101,10 @@ $(document).ready(function(){
 			$('#loading').removeClass('hidden');
 			$('.content').load(this_link, function(){
 				$('#loading').addClass('hidden');
+				$('.select2').select2();
+				$('form').on('submit',function(){
+					$('#loading').removeClass('hidden');
+				});
 			});
 		}
 		else{

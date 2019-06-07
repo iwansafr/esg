@@ -9,15 +9,18 @@ $title = $title == 'admin' ? 'home' : $title;
 <ol class="breadcrumb">
 	<?php
 	echo '<li><a href="'.base_url('admin').'"> <i class="fa fa-home"></i> Home</a></li>';
-	if(count($navigation['array']) > 1)
+	$nav_tot = count($navigation['array']) - 1;
+	if($nav_tot > 1)
 	{
 		$url = '';
 		foreach ($navigation['array'] as $key => $value)
 		{
 			$url .= '/'.$value;
-			if($key > 0)
+			if($key < $nav_tot)
 			{
 				echo '<li><a href="'.base_url($url).'">'.$value.'</a></li>';
+			}else{
+				echo '<li>'.$value.'</li>';
 			}
 		}
 	}

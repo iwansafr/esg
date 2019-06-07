@@ -993,12 +993,12 @@ class Zea
 		$navigation = $this->CI->esg->get_esg('navigation');
 		$nav_module = @$navigation['array'][0];
 		$nav_task = !empty($navigation['array'][1]) ? $navigation['array'][1] : 'index';
-		if(!empty($_GET['page']))
-		{
-			$this->CI->db->cache_delete($nav_module, $nav_task);
-			$this->CI->db->cache_off();
-			$this->CI->output->delete_cache();
-		}
+		// if(!empty($_GET['page']))
+		// {
+		// 	$this->CI->db->cache_delete($nav_module, $nav_task);
+		// 	$this->CI->db->cache_off();
+		// 	$this->CI->output->delete_cache();
+		// }
 		$data = array();
 		if($this->init == 'roll')
 		{
@@ -1011,6 +1011,11 @@ class Zea
 			$where   = '';
 			$bind    = array();
 			$url_get = '';
+			if(!empty($keyword))
+			{
+				$_GET['page'] = 0;
+				$page         = 0;
+			}
 			$get = @$_GET;
 			foreach ($this->input as $key => $value)
 			{
@@ -1355,7 +1360,9 @@ class Zea
 						                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>" required>
 						                <?php if (!empty($this->get)): ?>
 						                	<?php foreach ($this->get as $key => $value): ?>
-						                		<input type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
+						                		<?php if ($key != 'page'): ?>
+						                			<input type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
+						                		<?php endif ?>
 						                	<?php endforeach ?>
 						                	
 						                <?php endif ?>
@@ -1659,7 +1666,7 @@ class Zea
 														{
 															?>
 															<td>
-																<button type="<?php echo $this->delete_type ?>" name="delete_<?php echo $this->formName?>" value="1" class="btn btn-danger btn-sm">
+																<button type="<?php echo $this->delete_type ?>" name="delete_<?php echo $this->formName?>" onclick="if(confirm('apakah anda yakin ingin menghapus data tsb ?')){}else{return false;};" value="1" class="btn btn-danger btn-sm">
 																	<span class="glyphicon glyphicon-trash"></span> DELETE
 																</button>
 															</td>
