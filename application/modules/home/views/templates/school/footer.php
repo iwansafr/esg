@@ -2,17 +2,17 @@
 	<div class="container bottom_border">
 		<div class="row">
 			<div class=" col-sm-4 col-md col-sm-4  col-12 col">
-				<h5 class="headin5_amrc col_white_amrc pt2">Alamat Kantor</h5>
+				<h5 class="headin5_amrc col_white_amrc pt2">ALAMAT KANTOR</h5>
 				<?php
 				if(!empty($meta['contact']))
 				{
 					$contact = $meta['contact'];
 					?>
 					<p class="mb10"><?php echo $contact['address'] ?></p>
-					<p><i class="fa fa-user"></i> <?php echo $contact['name'] ?></p>
+					<!-- <p><i class="fa fa-user"></i> <?php echo $contact['name'] ?></p>
 					<p><i class="fa fa-phone"></i>  <?php echo $contact['phone'] ?>  </p>
 					<p><i class="fa fa-whatsapp"></i>  <?php echo $contact['wa'] ?>  </p>
-					<p><i class="fa fa fa-envelope"></i> <?php echo $contact['email'] ?>  </p>
+					<p><i class="fa fa fa-envelope"></i> <?php echo $contact['email'] ?>  </p> -->
 					<?php
 				}?>
 			</div>
@@ -60,7 +60,7 @@
 			}
 			?>
 		</ul>
-		<p class="text-center">Copyright @<?php echo @$this->esg->get_esg('site')['year']; ?> <?php echo !empty($this->esg->get_esg('site')['link']) ? '<a href="'.$this->esg->get_esg('site')['link'].'">'.$this->esg->get_esg('site')['title'].'</a>' : ''; ?> | Powered by <a href="https://www.esoftgreat.com">esoftgreat</a></p>
+		<p class="text-center">Copyright @<?php echo @$this->esg->get_esg('site')['year']; ?> <?php echo !empty($this->esg->get_esg('site')['link']) ? '<a href="'.$this->esg->get_esg('site')['link'].'">'.$this->esg->get_esg('site')['title'].'</a>' : ''; ?> <div style="display:none;"> | Powered by <a href="https://www.esoftgreat.com">esoftgreat</a></div></p>
 		<ul class="social_footer_ul">
 			<?php 
 			$contact = @$this->esg->get_esg('meta')['contact'];
