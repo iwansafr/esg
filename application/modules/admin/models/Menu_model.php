@@ -88,6 +88,10 @@ class Menu_model extends CI_Model
 			}
 		}
 
+		if(empty($data))
+		{
+			$data = ['0'=>'None'];
+		}
 		return $data;
 	}
 

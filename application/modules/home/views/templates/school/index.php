@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php $this->load->view('meta', $this->esg->get_esg()); ?>
+		<?php $this->load->view('meta'); ?>
 	</head>
 	<body>
 		<div class="container">
