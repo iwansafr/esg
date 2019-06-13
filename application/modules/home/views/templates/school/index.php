@@ -84,6 +84,7 @@
 					$data_tmp['home'] = @$home;
 					$data_tmp['home']['content_latest'] = @$home['content_popular'];
 					$this->load->view('content_latest', $data_tmp);
+					$this->load->view('twitter_block');
 					$data_tmp['home']['widget_right'] = @$home['category'];
 					$this->load->view('widget_right', $data_tmp);
 					$data_tmp['home']['widget_right'] = @$home['tag'];

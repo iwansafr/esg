@@ -1011,11 +1011,11 @@ class Zea
 			$where   = '';
 			$bind    = array();
 			$url_get = '';
-			if(!empty($keyword))
-			{
-				$_GET['page'] = 0;
-				$page         = 0;
-			}
+			// if(!empty($keyword))
+			// {
+			// 	$_GET['page'] = 0;
+			// 	$page         = 0;
+			// }
 			$get = @$_GET;
 			foreach ($this->input as $key => $value)
 			{
