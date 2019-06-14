@@ -1111,6 +1111,7 @@ class Zea
 			{
 				$sql          .= ' LIMIT '.$page*$limit.','.$limit;
 			}
+			pr($sql);
 			$data['data']  = $this->CI->db->query($sql,$bind)->result_array();
 			$data['query'] = $this->CI->db->last_query();
 			$data['num_rows'] = $num_rows;
