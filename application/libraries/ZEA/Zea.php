@@ -1111,8 +1111,12 @@ class Zea
 			{
 				$sql          .= ' LIMIT '.$page*$limit.','.$limit;
 			}
-			pr($sql);
-			$data['data']  = $this->CI->db->query($sql,$bind)->result_array();
+			if(!empty($bind))
+			{
+				$data['data']  = $this->CI->db->query($sql,$bind)->result_array();
+			}else{
+				$data['data']  = $this->CI->db->query($sql)->result_array();
+			}
 			$data['query'] = $this->CI->db->last_query();
 			$data['num_rows'] = $num_rows;
 			// $config        = pagination($num_rows,$limit,base_url($this->CI->esg->get_esg('navigation')['string'].$url_get));
