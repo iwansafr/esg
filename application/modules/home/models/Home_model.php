@@ -118,6 +118,8 @@ class Home_model extends CI_Model
 					}else if(preg_match('~content~', $key))
 					{
 						$this->content($key, $value);
+					}else if($key == 'twitter_widget'){
+						$this->twitter($key,$value);
 					}else{
 						$this->custom($key, $value);
 					}
@@ -256,6 +258,20 @@ class Home_model extends CI_Model
 				$this->esg->set_esg('home', $home);
 			}
 		}
+	}
+
+	public function twitter($key = '',$data=array())
+	{
+		$home = $this->esg->get_esg('home');
+		$output = array();
+		$output[$key] = $data;
+		if(!empty($home))
+		{
+			$home = array_merge($home, $output);
+		}else{
+			$home = $output;
+		}
+		$this->esg->set_esg('home', $home);
 	}
 
 	public function logo()

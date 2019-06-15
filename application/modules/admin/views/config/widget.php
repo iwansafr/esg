@@ -96,52 +96,66 @@ if(is_admin() || is_root())
 				$this->zea->setCollapse($block_title,TRUE);
 				$this->zea->open_collapse($block_title, str_replace('_',' ',$block_title),'default');
 				echo '<h3>'.str_replace('_',' ',$block_title).'</h3>';
-				echo '<label>content</label>';
-				?>
-				<select class="form-control" name="<?php echo $block_title?>[content]">
-				<?php
-				$option_block = array();
-				if(preg_match('~menu_~', $block_title))
+				if($block_title=='twitter_widget')
 				{
-					$option_block = $menu;
-				}else if(preg_match('~product_~', $block_title)){
-					$option_block = $prodcat;
-				}else if(preg_match('~content~', $block_title)){
-					$option_block = $cat;
-				}else{
-					$option_block = array(
-						array(
-							'id'=>'1',
-							'title' => 'Category'
-						),
-						array(
-							'id'=>'2',
-							'title' => 'Tag'
-						),
-						array(
-							'id'=>'3',
-							'title' => 'Content'
-						),
-						array(
-							'id'=>'4',
-							'title' => 'Image'
-						)
-					);
-				}
-				echo '<option value="0">None</option>';
-				foreach ($option_block as $keys => $values)
-				{
-					$selected = ($values['id'] == $data[$block_title]['content']) ? 'selected' : '';
-					echo '<option value="'.$values['id'].'" '.$selected.'>'.$values['title'].'</option>';
-				}
-				echo '</select>';
-				if(!preg_match('~menu_~', $block_title))
-				{
-					echo '<label>limit</label>';
 					$limit = !empty($data[$block_title]['limit']) ? $data[$block_title]['limit'] : '7';
+					echo '<label>twitter link</label>';
 					?>
-					<input type="number" name="<?php echo $block_title ?>[limit]" class="form-control" value="<?php echo $limit ?>">
+					<div class="form-group">
+						<input type="text" name="<?php echo $block_title ?>[content]" class="form-control" value="<?php echo @$data[$block_title]['content'] ?>">
+					</div>
+					<div class="form-group">
+						<input type="number" name="<?php echo $block_title ?>[limit]" class="form-control" value="<?php echo $limit ?>">
+					</div>
 					<?php
+				}else{
+					echo '<label>content</label>';
+					?>
+					<select class="form-control" name="<?php echo $block_title?>[content]">
+					<?php
+					$option_block = array();
+					if(preg_match('~menu_~', $block_title))
+					{
+						$option_block = $menu;
+					}else if(preg_match('~product_~', $block_title)){
+						$option_block = $prodcat;
+					}else if(preg_match('~content~', $block_title)){
+						$option_block = $cat;
+					}else{
+						$option_block = array(
+							array(
+								'id'=>'1',
+								'title' => 'Category'
+							),
+							array(
+								'id'=>'2',
+								'title' => 'Tag'
+							),
+							array(
+								'id'=>'3',
+								'title' => 'Content'
+							),
+							array(
+								'id'=>'4',
+								'title' => 'Image'
+							)
+						);
+					}
+					echo '<option value="0">None</option>';
+					foreach ($option_block as $keys => $values)
+					{
+						$selected = ($values['id'] == $data[$block_title]['content']) ? 'selected' : '';
+						echo '<option value="'.$values['id'].'" '.$selected.'>'.$values['title'].'</option>';
+					}
+					echo '</select>';
+					if(!preg_match('~menu_~', $block_title))
+					{
+						echo '<label>limit</label>';
+						$limit = !empty($data[$block_title]['limit']) ? $data[$block_title]['limit'] : '7';
+						?>
+						<input type="number" name="<?php echo $block_title ?>[limit]" class="form-control" value="<?php echo $limit ?>">
+						<?php
+					}	
 				}
 				$this->zea->close_collapse();
 				$options = ob_get_contents();
