@@ -66,5 +66,8 @@ if(!empty($field))
 		echo form_hidden($field,$data[$field]);
 	}else{
 		echo form_hidden($field,'');
+		?>
+		<img src="" class="image_place" class="img img-responsive" style="object-fit: cover; height: 100px;" alt="">
+		<?php
 	}
 }
