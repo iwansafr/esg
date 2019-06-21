@@ -168,27 +168,27 @@ class Zea
 	}
 
 	public function set_param($table = '',$name = '', $post = array())
-  {
-  	$status = array();
-    if(!empty($table))
-    {
-      $data = array();
-      foreach ($post as $key => $value)
-      {
-        $data[$key] = $value;
-      }
-      $param = $this->CI->db->query('SELECT * FROM '.$table.' WHERE name = ?', $name)->row_array();
-      if(!empty($param))
-      {
-        $status = $this->CI->db->update($table, $data, "`name` = '{$name}'");
-      }else{
-        $status = $this->CI->db->insert($table, $data);
-        $last_id = $this->CI->db->insert_id();
-				$this->set_insert_id($last_id);
-      }
-    }
-    return $status;
-  }
+	{
+		$status = array();
+		if(!empty($table))
+		{
+		  $data = array();
+		  foreach ($post as $key => $value)
+		  {
+		    $data[$key] = $value;
+		  }
+		  $param = $this->CI->db->query('SELECT * FROM '.$table.' WHERE name = ?', $name)->row_array();
+		  if(!empty($param))
+		  {
+		    $status = $this->CI->db->update($table, $data, "`name` = '{$name}'");
+		  }else{
+		    $status = $this->CI->db->insert($table, $data);
+		    $last_id = $this->CI->db->insert_id();
+					$this->set_insert_id($last_id);
+		  }
+		}
+		return $status;
+	}
 
 	public function join($table = '', $cond = '', $field = '')
 	{
