@@ -28,6 +28,10 @@ if(!empty($field))
 	if(!empty($data_value))
 	{
 		$dvalue['id'] = !empty($dvalue['id']) ? $dvalue['id'] : time();
+		if($this->init == 'edit' || $this->init == 'param')
+		{
+			echo form_hidden($field,$data_value);
+		}
 		?>
 		<div class="image">
 			<a href="#">
