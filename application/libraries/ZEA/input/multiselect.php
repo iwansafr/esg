@@ -10,7 +10,7 @@ if(!empty($field))
 	{
 		$data_size = 10;
 	}
-	echo form_label(ucfirst($label), $label);
+	echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
 	?>
 	<select name="<?php echo $field ?>[]" multiple="multiple" id="<?php echo $field ?>" size="<?php echo $data_size; ?>" class="form-control" <?php echo (!empty($required)) ? 'required="required"' : ''; ?>>
 		<?php echo $this->createOption($r_data, $data_ids);?>

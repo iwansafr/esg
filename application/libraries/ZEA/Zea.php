@@ -58,6 +58,7 @@ class Zea
 	var $collapse      = array();
 	var $param         = array();
 	var $plaintext     = array();
+	var $help          = array();
 	var $selected      = array();
 	var $money         = array();
 	var $clearget      = array();
@@ -403,6 +404,21 @@ class Zea
 			}
 		}
 	}
+
+	public function setHelp($field = '', $text = '')
+	{
+		if(!empty($field) && !empty($text))
+		{
+			foreach ($this->input as $key => $value)
+			{
+				if($value['text'] == $field)
+				{
+					$this->help[$field] = '<a href="#tooltip_'.$field.'" id="tooltip_'.$field.'" data-toggle="tooltip" data-placement="top" title="'.$text.'"><i class="fa fa-question-circle"></i></a>';
+				}
+			}
+		}
+	}
+
 	public function setOptions($field = '',$options = array())
 	{
 		if(!empty($field) && !empty($options))
@@ -425,7 +441,12 @@ class Zea
 			{
 				if($value['text'] == $field)
 				{
-					$this->multiselect[$field]['data'] = $this->get_all("SELECT {$col} FROM `{$table}` WHERE 1");
+					if(is_array($table))
+					{
+						$this->multiselect[$field]['data'] = $table;
+					}else{
+						$this->multiselect[$field]['data'] = $this->get_all("SELECT {$col} FROM `{$table}` WHERE 1");
+					}
 				}
 			}
 		}

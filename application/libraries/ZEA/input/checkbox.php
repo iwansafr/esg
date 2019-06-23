@@ -8,7 +8,7 @@ if(!empty($field))
 		$data_value = ($this->init == 'param') ? $data[$field] : $data_value;
 		$values     = !empty($data[$field]) ? $data[$field] : '1';
 		echo '<br>';
-		echo form_label(ucfirst($label), $label);
+		echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
 		$name = $field;
 	}else{
 		$data_value = $dvalue[$ikey];

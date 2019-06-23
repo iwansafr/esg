@@ -10,10 +10,10 @@ if(!empty($field))
 		$data_value = $data[$field];
 		$link_get   = $data[$link_get];
 		if(!empty($this->plaintext[$field])){
-			echo form_label(ucfirst($label), $label).'<br>';
+			echo form_label(ucfirst($label), $label).'<br>'.' '.@$this->help[$field];
 			$data_value = $this->plaintext[$field];
 		}else{
-			echo form_label(ucfirst($label), $label);
+			echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
 		}
 	}else{
 		$data_value = $dvalue[$ikey];
