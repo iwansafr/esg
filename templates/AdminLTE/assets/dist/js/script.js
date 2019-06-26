@@ -29,13 +29,16 @@ $(document).ready(function(){
 	    $(this).prop('checked', checkedStatus);
 	  });
 	});
+	function isFileImage(file) {
+    return file && file['type'].split('/')[0] === 'image';
+	}
 	function readURL(input,a){
     if (input.files && input.files[0]){
       var reader = new FileReader();
       reader.onload = function(e){
-      	if(e.total>500000){
-      		alert('ukuran file tidak boleh lebih dari 500KB');
-        	$(a).siblings('input[type="file"]').val('');
+      	if(e.total>500000 && isFileImage(input.files[0])){
+      		var suc = $(a).siblings('input[type="file"]').val('');
+    			alert('ukuran file tidak boleh lebih dari 500KB');
       	}else{
         	$(a).attr('src', e.target.result);
       	}
@@ -44,8 +47,8 @@ $(document).ready(function(){
     }
 	}
 	$(document).on('change', 'input[type="file"]', function(){
+		console.log($(this));
 		var a = $(this).siblings('.image_place');
-		console.log(a);
 		readURL(this,a);
 	});
 
