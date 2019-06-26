@@ -33,7 +33,12 @@ $(document).ready(function(){
     if (input.files && input.files[0]){
       var reader = new FileReader();
       reader.onload = function(e){
-        $(a).attr('src', e.target.result);
+      	if(e.total>500000){
+      		alert('ukuran file tidak boleh lebih dari 500KB');
+        	$(a).siblings('input[type="file"]').val('');
+      	}else{
+        	$(a).attr('src', e.target.result);
+      	}
       };
       reader.readAsDataURL(input.files[0]);
     }
