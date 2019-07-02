@@ -123,6 +123,21 @@ $(document).ready(function(){
 		var a = $(this).attr('href');
 		window.open(a,'_blank').document.write('<h1>File Berhasil di Download, silahkan cek folder download anda, dan silahkan tutup jendela ini</h1>');
 	});
+	$('button').on('click',function(){
+		var new_tab = false;
+		if(event.ctrlKey){
+			new_tab = true;
+		}else if(event.metaKey){
+			new_tab = true;
+		}
+		if(new_tab){
+			var hide = setInterval(hide_load,500);
+			clearInterval(hide);
+		}
+	});
+	function hide_load(){
+		$('#loading').addClass('hidden');
+	}
 	$('form').on('submit',function(){
 		$('#loading').removeClass('hidden');
 	});
