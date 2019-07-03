@@ -235,11 +235,13 @@ class Home_model extends CI_Model
 	{
 		if(!empty($data['content']))
 		{
-			$id    = $data['content'];
-			$limit = 'LIMIT '.@intval($data['limit']);
-			$table = array('content_cat','content_tag','content','content');
-			$table = array_start_one($table);
-			$table = $table[$id];
+			$id          = $data['content'];
+			$limit       = 'LIMIT '.@intval($data['limit']);
+			$table       = array('content_cat','content_tag','content','content');
+			$table       = array_start_one($table);
+			$table       = $table[$id];
+			$table_field = array('content_cat' => 'category','content_tag'=>'tag','content'=>'article','content'=>'article');
+			$table_field = $table_field[$table];
 
 			$this->db->cache_off();
 			$tmp_data = $this->db->query('SELECT * FROM '.$table.' ORDER BY id DESC '.$limit)->result_array();
@@ -248,6 +250,7 @@ class Home_model extends CI_Model
 				$output = array();
 				$output[$key]['data'] = $tmp_data;
 				$output[$key]['table'] = $table;
+				$output[$key]['table_title'] = $table_field;
 				$home = $this->esg->get_esg('home');
 				if(!empty($home))
 				{

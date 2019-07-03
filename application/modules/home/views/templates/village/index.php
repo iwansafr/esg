@@ -65,43 +65,22 @@
 				</div>
 				<div class="col-md-3" style="padding: 20px;">
 					<div class="sidebar">
-						<div class="content">
-							<div class="sidebar-title">
-								Kategori
-							</div>
-							<div class="sidebar-body">
-								<a href="" class="item">Satu</a>
-								<a href="" class="item">Dua</a>
-								<a href="" class="item">Tiga</a>
-								<a href="" class="item">Empat</a>
-								<a href="" class="item">Lima</a>
-								<a href="" class="item">Enam</a>
-								<a href="" class="item">Tujuh</a>
-								<a href="" class="item">Delapan</a>
-								<a href="" class="item">Sembilan</a>
-								<a href="" class="item">Sepuluh</a>
-								<a href="" class="item">Sebelas</a>
-								<a href="" class="item">DuaBelas</a>
-							</div>
-						</div>
+						<?php $this->load->view('twitter_block') ?>
+					</div>
+					<br>
+					<?php 
+					$data_tmp['home'] = @$home;
+					$data_tmp['home']['widget_right'] = @$home['category'];
+					?>
+					<div class="sidebar">
+						<?php $this->load->view('widget_right', $data_tmp) ?>
 					</div>
 					<br>
 					<div class="sidebar">
-						<div class="content">
-							<div class="sidebar-title">
-								Acara
-							</div>
-							<div class="sidebar-body">
-								<a href="" class="item">Satu</a>
-								<a href="" class="item">Dua</a>
-								<a href="" class="item">Tiga</a>
-								<a href="" class="item">Empat</a>
-								<a href="" class="item">Lima</a>
-								<a href="" class="item">Enam</a>
-								<a href="" class="item">Tujuh</a>
-								<a href="" class="item">Delapan</a>
-							</div>
-						</div>
+						<?php 
+						$data_tmp['home']['widget_right'] = @$home['tag'];
+						$this->load->view('widget_right', $data_tmp);
+						?>
 					</div>
 				</div>
 			</div>
