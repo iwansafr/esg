@@ -1064,7 +1064,7 @@ class Zea
 				$i = 0;
 				foreach ($get as $key => $value)
 				{
-					if($key != 'page')
+					if($key != 'page' && $key != 'keyword')
 					{
 						if($i > 0)
 						{
