@@ -5,7 +5,7 @@ if(!empty($field))
 	if($this->init == 'edit' || $this->init == 'param')
 	{
 		$data_value =  $data[$field];
-		echo form_label(ucfirst($label), $label);
+		echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
 	}else{
 		$data_value = $dvalue[$ikey];
 	}

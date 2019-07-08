@@ -2,12 +2,20 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
-			<h3>Sipapat</h3>
-			<ul>
-				<li><i class="fas fa-location-arrow"></i> <p>Srobyong, Mlonggo, Jepara, Jawa Tengah</p></li>
-				<li><i class="far fa-envelope"></i> <p>infodesa@yahoo.com</p></li>
-				<li><i class="fas fa-phone-alt"></i> <p>+62 890 898 890</p></li>
-			</ul>
+			<?php
+			if(!empty($meta['contact']))
+			{
+				$contact = $meta['contact'];
+				?>
+				<h3><?php echo $contact['name'] ?></h3>
+				<ul>
+					<li><i class="fas fa-location-arrow"></i> <p><?php echo $contact['address'] ?></p></li>
+					<li><i class="far fa-envelope"></i> <p><?php echo $contact['email'] ?></p></li>
+					<li><i class="fas fa-phone-alt"></i> <p><?php echo $contact['phone'] ?></p></li>
+					<li><i class="fas fa-whatsapp"></i> <p><?php echo $contact['wa'] ?></p></li>
+				</ul>
+				<?php
+			}?>
 		</div>	
 		<div class="col-md-3">
 			<h5>Nav Links</h5>

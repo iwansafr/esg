@@ -12,7 +12,7 @@ if(!empty($field))
 		{
 			$data_value = $this->value[$field];
 		}
-		echo form_label(ucfirst($label), $label);
+		echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
 	}else{
 		$data_value = @$dvalue[$ikey];
 	}

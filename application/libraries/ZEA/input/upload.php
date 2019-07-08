@@ -10,7 +10,7 @@ if(!empty($field))
 	{
 		$image    = !empty($data[$field]) ? $name.'/'.$data[$field] : '';
 	}
-	echo form_label(ucfirst($label), $label);
+	echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
 	if(!empty($image))
 	{
 		?>

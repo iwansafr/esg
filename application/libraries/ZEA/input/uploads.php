@@ -29,7 +29,7 @@ if(!empty($field))
 			}
 		}
 	}
-	echo form_label(ucfirst($label), $label);
+	echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
 	echo '<br>';
 	if(!empty($image_src))
 	{
