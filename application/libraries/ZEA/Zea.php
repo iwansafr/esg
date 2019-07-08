@@ -1064,7 +1064,7 @@ class Zea
 				$i = 0;
 				foreach ($get as $key => $value)
 				{
-					if($key != 'page' && $key != 'keyword')
+					if($key != 'page')
 					{
 						if($i > 0)
 						{
@@ -1073,6 +1073,10 @@ class Zea
 						$url_get .= $key.'='.$value;
 					}
 					$i++;
+				}
+				if(!empty($keyword))
+				{
+					$this->url = str_replace('?keyword='.$keyword, '', $this->url);
 				}
 			}
 			if(!empty($keyword))
