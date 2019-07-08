@@ -86,6 +86,7 @@ if(!empty($field))
 	$array_input = array(
 		'name'   => $field.'[]',
 		'class'  => 'form-control',
+		'multiple' => 'multiple',
 		'accept' => @$this->accept[$field],
 		$required => $required,
 		// 'value'  => $value_input
