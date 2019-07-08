@@ -4,6 +4,7 @@
 	<?php $this->load->view('meta') ?>
 </head>
 <body>
+	<?php $this->load->view('header') ?>
 	<?php $this->load->view('menu_top') ?>
 	<div class="banner">
 		<div class="container">

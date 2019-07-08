@@ -5,6 +5,14 @@
 	}
 </style>
 <div class="col-md-12">
+	<div class="panel-group">
+		<a href="#admin/config/header#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+		<div class="panel panel-default default text-center">
+			<h5>header</h5>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
 	<div class="col-md-4">
 		<div class="panel-group">
 			<a href="#admin/config/logo#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
