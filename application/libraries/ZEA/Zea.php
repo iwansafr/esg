@@ -2184,15 +2184,12 @@ class Zea
 										{
 											if(in_array($dc_id, $_POST[$inputvalue['text'].'_row']))
 											{
-												// $this->CI->db->update($this->table, array($inputvalue['text']=>1), 'id = '.$dc_id);
 												$checkbox_q[] = ['id'=>$dc_id,$inputvalue['text']=>1];
 											}else{
 												$checkbox_q[] = ['id'=>$dc_id,$inputvalue['text']=>0];
-												// $this->CI->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
 											}
 										}else{
 											$checkbox_q[] = ['id'=>$dc_id,$inputvalue['text']=>0];
-											// $this->CI->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
 										}
 									}
 									$this->CI->db->update_batch($this->table, $checkbox_q,'id');
