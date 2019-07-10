@@ -2193,7 +2193,6 @@ class Zea
 										}
 									}
 									$this->CI->db->update_batch($this->table, $checkbox_q,'id');
-									pr($this->CI->db->last_query());
 								}
 							}
 						}
