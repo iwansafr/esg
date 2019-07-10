@@ -2165,24 +2165,16 @@ class Zea
 							{
 								$data_checkbox = array();
 								$currentdatai = 0;
-								if($this->datatable)
+								foreach ($_POST[$inputvalue['text'].'_row_h'] as $currnetdatakey => $currentdatavalue)
 								{
-									foreach ($_POST[$inputvalue['text'].'_row_h'] as $currnetdatakey => $currentdatavalue)
-									{
-										$data_checkbox[$currentdatai] = $currentdatavalue;
-										$currentdatai++;
-									}
-								}else{
-									foreach ($current_data as $currnetdatakey => $currentdatavalue)
-									{
-										$data_checkbox[$currentdatai] = $currentdatavalue['id'];
-										$currentdatai++;
-									}
+									$data_checkbox[$currentdatai] = $currentdatavalue;
+									$currentdatai++;
 								}
 								if(!empty($data_checkbox))
 								{
 									$data['msg']   = 'No Data Selected to '.$inputvalue['text'];
 									$data['alert'] = 'success';
+									$checkbox_q = [];
 									foreach ($data_checkbox as $dc_key => $dc_id)
 									{
 										$data['msg']   = 'Data '.ucfirst($inputvalue['text']).' Successfully';
@@ -2192,14 +2184,19 @@ class Zea
 										{
 											if(in_array($dc_id, $_POST[$inputvalue['text'].'_row']))
 											{
-												$this->CI->db->update($this->table, array($inputvalue['text']=>1), 'id = '.$dc_id);
+												// $this->CI->db->update($this->table, array($inputvalue['text']=>1), 'id = '.$dc_id);
+												$checkbox_q[] = ['id'=>$dc_id,$inputvalue['text']=>1];
 											}else{
-												$this->CI->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
+												$checkbox_q[] = ['id'=>$dc_id,$inputvalue['text']=>0];
+												// $this->CI->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
 											}
 										}else{
-											$this->CI->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
+											$checkbox_q[] = ['id'=>$dc_id,$inputvalue['text']=>0];
+											// $this->CI->db->update($this->table, array($inputvalue['text']=>0), 'id = '.$dc_id);
 										}
 									}
+									$this->CI->db->update_batch($this->table, $checkbox_q,'id');
+									pr($this->CI->db->last_query());
 								}
 							}
 						}
