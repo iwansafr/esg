@@ -1,41 +1,94 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php 
 if(!empty($home['content_top']))
 {
   $category = @$home['content_top'][0]['category'];
+  $spc = ($category['title'] == 'Most Popular') ? 'popular' : '';
+  $content_top_data = array();
+  foreach($home['content_top'] AS $key => $value)
+  {
+    if($key > 0)
+    {
+      $content_top_data[] = $value;
+    }
+  }
   ?>
-  <section id="features">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 offset-lg-4">
-          <div class="section-header wow fadeIn" data-wow-duration="1s">
-            <a href="<?php echo content_cat_link(@$category['slug']) ?>"><h3 class="section-title"><?php echo $category['title'] ?></h3></a>
-            <span class="section-divider"></span>
+  <div class="card top-border mt-3">
+    <div class="card-header">
+      <a href="<?php echo content_cat_link(@$category['slug'], $spc, $spc) ?>"><?php echo @$category['title'] ?></a>
+    </div>
+    <ul class="list-group list-group-flush">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-6 px-0">
+            <div id="slider_top" class="carousel slide m-3" data-ride="carousel">
+              <div class="carousel-inner">
+                <?php 
+                if(!empty($home['content_top'][0]['images']))
+                {
+                  $images = json_decode($home['content_top'][0]['images']);
+                  foreach ($images as $key => $value) 
+                  {
+                    $class = ($key == 1) ? 'active' : '';
+                    ?>
+                    <div class="carousel-item <?php echo $class ?>">
+                      <img class="slider d-block w-100" src="<?php echo image_module('content/gallery/'.$home['content_top'][0]['id'], $value) ?>" alt="Slide" >
+                    </div>
+                    <?php
+                  }
+                }?>
+              </div>
+              <a class="carousel-control-prev" href="#slider_top" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#slider_top" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="<?php echo content_link($home['content_top'][0]['slug']) ?>"><h6><?php echo $home['content_top'][0]['title'] ?></h6></a>
+                  <div class="clearfix"></div>
+                  <span class="xs-title">
+                    <?php echo content_date($home['content_top'][0]['created']) ?> | <?php echo @$category['title'] ?>
+                  </span>
+                  <p class="xs-title">
+                    <?php echo $home['content_top'][0]['intro'] ?>
+                  </p>
+                </div>              
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-5 features-img">
-          <?php $image = !empty($category['image']) ? $category['id'].'/'.$category['image'] : ''; ?>
-          <img src="<?php echo image_module('content_cat', $image); ?>" class="img img-fluid" alt="" class="wow fadeInLeft">
-        </div>
-        <div class="col-lg-8 col-md-7 ">
-          <div class="row">
-            <?php 
-            $i = 0;
-            foreach ($home['content_top'] as $key => $value) 
+          <div class="col-xl-6 px-0 content_list">
+            <?php
+            foreach ($content_top_data as $key => $value) 
             {
               ?>
-              <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.<?php echo $i; ?>s">
-                <div class="icon"><i class="fa <?php echo @$value['icon'] ?>"></i></div>
-                <h4 class="title"><a href="<?php echo content_link($value['slug']) ?>"><?php echo $value['title'];?></a></h4>
-                <p class="description"><?php echo $value['description'] ?></p>
-              </div>
-              <?php
-              $i++;
-            }
+              <li class="list-group-item">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-2">
+                      <img src="<?php echo image_module('content', $value) ?>" class="thumbnail">
+                    </div>
+                    <div class="col-10">
+                      <a href="<?php echo content_link($value['slug']) ?>" class="sm-title"><?php echo $value['title'] ?></a>
+                      <div class="clearfix"></div>
+                      <span class="xs-title">
+                        <?php echo content_date($value['created']) ?> | <?php echo @$category['title'] ?>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <?php 
+            } 
             ?>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </ul>
+  </div>
   <?php
 }

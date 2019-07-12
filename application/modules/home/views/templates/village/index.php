@@ -14,7 +14,17 @@
 				<div class="col-md-9" style="padding: 20px;">
 					<?php if ($mod['content'] == 'home/index'): ?>
 						<?php $this->load->view('content_slider') ?>
-						<?php $this->load->view('content') ?>
+						<?php 
+						// $this->load->view('content') 
+						?>
+						<?php
+						$this->load->view('content_top');
+						$data_tmp['home'] = @$home;
+						$data_tmp['home']['content_top'] = @$home['content'];
+						$this->load->view('content_top', $data_tmp);
+						$data_tmp['home']['content_top'] = @$home['content_bottom'];
+						$this->load->view('content_top', $data_tmp);
+						?>
 					<?php else: ?>
 						<?php $title = end($navigation['array']);?>
 						<nav aria-label="breadcrumb">
