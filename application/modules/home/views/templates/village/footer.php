@@ -58,6 +58,11 @@
 			</form>
 		</div>	 -->
 	</div>
+	<?php
+	if(!empty($contact['wa']))
+	{
+		echo '<a href="https://wa.me/'.$contact['wa'].'?text=hai+'.@$contact['name'].'"><img src="https://www.esoftgreat.com/images/wa.png" style="height: 75px; position: fixed;bottom: 5%; right: 0.5%;z-index: 9999;"></a>';
+	}?>
 	<br>
 	<hr>
 	<p style="margin: 0;padding: 0;height: 60px;line-height: 45px;">&copy; Copyright <?php echo date('Y') ?> All Right Reserved. <a style="color: #16a085;" href="https://www.dinusa.co.id">PT Media Nusa Perkasa</a></p>
