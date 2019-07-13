@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-if($user['id'] == @intval($_GET['id']))
+if($user['id'] == @intval($_GET['id']) || is_root() || is_admin())
 {
 	$id = @intval($_GET['id']);
 	if(!empty($id))
