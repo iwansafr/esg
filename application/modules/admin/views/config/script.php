@@ -12,7 +12,7 @@ if(is_admin() || is_root())
 			$template_name = end($template_dir);
 			if(is_admin())
 			{
-				$template_names[$public_template] = $public_template;
+				$template_names[$templates['public_template']] = $templates['public_template'];
 			}else{
 				$template_names[$template_name] = $template_name;
 			}
