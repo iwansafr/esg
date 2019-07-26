@@ -25,7 +25,7 @@ $this->zea->setOptions('par_id',$menu_parent);
 
 $this->zea->addInput('title','text');
 $this->zea->addInput('link','text');
-$this->zea->setType('link','url');
+// $this->zea->setType('link','url');
 if(!empty($type))
 {
 	$this->zea->setValue('link',$type.'/'.@$_GET['slug'].'.html');
