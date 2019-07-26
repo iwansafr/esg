@@ -135,6 +135,15 @@ $(document).ready(function(){
 			clearInterval(hide);
 		}
 	});
+
+	function type_url(){
+		$(document).on('keyup','input[type="url"]', function(){
+			a = this.value;
+			a = a.split(' ').join('');
+			$(this).val(a);
+		});
+	}
+	type_url();
 	function hide_load(){
 		$('#loading').addClass('hidden');
 	}
