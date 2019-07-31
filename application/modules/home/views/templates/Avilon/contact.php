@@ -90,3 +90,12 @@
 
   </div>
 </div>
+<?php
+if(!empty($contact['wa']))
+{
+  echo '
+  <a class="btn btn-success" href="https://wa.me/'.$contact['wa'].'?text=hai+'.@$contact['name'].'" style="position: fixed;bottom: 5%; right: 2%;z-index: 9999; height: 45px;">
+    <span class="fa fa-whatsapp" style="font-size: 28px;"></span>
+  </a>';
+}
+?>
