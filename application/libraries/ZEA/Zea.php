@@ -1404,9 +1404,23 @@ class Zea
 				            	</div>
 										<?php
 									}
-								}?>
+								}
+								$get_url = '';
+								if(!empty($_GET)){
+									$get_url = '?';
+									foreach($_GET AS $getkey => $getvalue){
+										$get_url .= $getkey.'='.$getvalue.'&';
+									}
+									$get_url = substr($get_url, 0, -1);
+								}
+								if(!empty($get_url)){
+									$get_url = $get_url;
+								}else if(!empty($this->view)){
+									$get_url = base_url($this->view).$page;
+								}
+								?>
 		          </div>
-							<form method="post" action="<?php echo !empty($this->view) ? base_url($this->view).$page : ''; ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
+							<form method="post" action="<?php echo $get_url; ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
 								<div class="box-body table-responsive no-padding">
 									<?php if ($this->datatable): ?>
 										<div class="box-tools">
@@ -2165,7 +2179,7 @@ class Zea
 							{
 								$data_checkbox = array();
 								$currentdatai = 0;
-								foreach ($_POST[$inputvalue['text'].'_row_h'] as $currnetdatakey => $currentdatavalue)
+								foreach ($_POST[$inputvalue['text'].'_row_h'] as $currentdatakey => $currentdatavalue)
 								{
 									$data_checkbox[$currentdatai] = $currentdatavalue;
 									$currentdatai++;
@@ -2202,15 +2216,16 @@ class Zea
 							{
 								$data_text = array();
 								$currentdatai = 0;
-								foreach ($current_data as $currnetdatakey => $currentdatavalue)
+								foreach ($_POST[$inputvalue['text'].'_row'] as $currentdatakey => $currentdatavalue)
 								{
-									$data_text[$currentdatai] = $currentdatavalue['id'];
+									$data_text[$currentdatai] = $currentdatakey;
 									$currentdatai++;
 								}
 								if(!empty($data_text))
 								{
 									$data['msg']   = 'No Data Selected to '.$inputvalue['text'];
 									$data['alert'] = 'success';
+									$text_q = [];
 									foreach ($data_text as $dt_key => $dt_id)
 									{
 										$data['msg']   = 'Data '.ucfirst($inputvalue['text']).' Successfully';
@@ -2218,9 +2233,11 @@ class Zea
 
 										if(!empty($_POST[$inputvalue['text'].'_row']))
 										{
-											$this->CI->db->update($this->table, array($inputvalue['text']=>$_POST[$inputvalue['text'].'_row'][$dt_id]), 'id = '.$dt_id);
+											$text_q[] = ['id'=>$dt_id, $inputvalue['text']=>$_POST[$inputvalue['text'].'_row'][$dt_id]];
 										}
 									}
+									// $this->CI->db->update($this->table, array($inputvalue['text']=>$_POST[$inputvalue['text'].'_row'][$dt_id]), 'id = '.$dt_id);
+									$this->CI->db->update_batch($this->table, $text_q, 'id');
 								}
 							}
 						}
