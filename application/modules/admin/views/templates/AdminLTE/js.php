@@ -1,6 +1,7 @@
 <?php $admin_template = base_url('templates/'.$this->esg->get_esg('templates')['admin_template']); ?>
 <!-- jQuery 3 -->
 <script src="<?php echo $admin_template ; ?>/assets/jquery/jquery.min.js"></script>
+<script src="<?php echo $admin_template ; ?>/assets/jquery/jquery.doubleScroll.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo $admin_template; ?>/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?php echo $admin_template; ?>/assets/bootstrap/js/bootstrap-tagsinput.js"></script>

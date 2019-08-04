@@ -152,4 +152,5 @@ $(document).ready(function(){
 	});
 	$('#summernote').summernote({maximumImageFileSize:524288});	
 	$('.summernote').summernote({maximumImageFileSize:524288});	
+	$('.table-responsive').doubleScroll();
 });
