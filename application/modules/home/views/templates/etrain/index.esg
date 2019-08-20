@@ -1,0 +1,72 @@
+<style type="text/css">
+	.default{
+		margin-top: 5%;
+		height: 40px;
+	}
+</style>
+<div class="col-md-12">
+	<div class="col-md-4">
+		<div class="panel-group">
+			<a href="#admin/config/logo#" target="_blank" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Logo</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		{menu_top}
+	</div>
+</div>
+<div class="col-md-12">
+	{content_banner}
+</div>
+<div class="col-md-12">
+	{content_feature}
+</div>
+<div class="col-md-12">
+	{content_about}
+</div>
+<div class="col-md-12">
+	{content_banner}
+</div>
+<div class="col-md-12">
+	{content_count}
+</div>
+<div class="col-md-12">
+	{content_courses}
+</div>
+<div class="col-md-12">
+	{content_advance}
+</div>
+<div class="col-md-12">
+	{content_testimonials}
+</div>
+<div class="col-md-12">
+	{content_blog}
+</div>
+<div class="col-md-12">
+	<div class="col-md-4">
+		<div class="panel-group">
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Company</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel-group">
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>NewsLetter</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel-group">
+			<a href="#admin/config/widget/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default default text-center">
+				<h5>Contact Us</h5>
+			</div>
+		</div>
+	</div>
+</div>
