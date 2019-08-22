@@ -16,11 +16,15 @@
 <script src="<?php echo $admin_template; ?>/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="<?php echo $admin_template; ?>/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo $admin_template; ?>/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo $admin_template; ?>/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
 	$('.select2').select2();
 	$(document).ready(function(){
 		$('.esg_data_table').DataTable();
 	})
+	$('#datepicker').datepicker({
+      autoclose: true
+    })
 </script>
 <?php 
 $this->esg->extra_js();
