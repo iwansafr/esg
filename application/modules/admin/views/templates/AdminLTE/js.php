@@ -23,7 +23,8 @@
 		$('.esg_data_table').DataTable();
 	})
 	$('#datepicker').datepicker({
-      autoclose: true
+      autoclose: true,
+      format: 'yyyy-mm-dd'
     })
 </script>
 <?php 
