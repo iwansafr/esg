@@ -19,7 +19,7 @@ if(!empty($home['content_feature']))
 					<div class="col-sm-6 col-xl-3">
 						<div class="single_feature">
 							<div class="single_feature_part">
-								<span class="single_feature_icon"><i class="fa <?php echo $value['icon'] ?>"></i></span>
+								<span class="single_feature_icon"><i class="<?php echo $value['icon'] ?>"></i></span>
 								<h4><?php echo $value['title'] ?></h4>
 								<p><?php echo $value['description'] ?></p>
 							</div>
