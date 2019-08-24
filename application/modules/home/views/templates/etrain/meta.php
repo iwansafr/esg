@@ -14,6 +14,6 @@
 <!-- swiper CSS -->
 <link rel="stylesheet" href="<?php echo $link_template;?>/css/slick.css">
 <!-- style CSS -->
-<link rel="stylesheet" href="<?php echo $link_template;?>/css/style.css">
-
 <link rel="stylesheet" href="<?php echo $link_template;?>/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="<?php echo $link_template;?>/css/style.css">

@@ -19,7 +19,7 @@
 			<?php if (!empty($home['menu_top'])): ?>
 				<?php foreach ($home['menu_top'] as $key => $value): ?>
 					<?php if (empty($value['child'])): ?>
-						<li class="nav-item active">
+						<li class="nav-item">
 							<a class="nav-link" href="<?php echo $value['link'] ?>"><?php echo $value['title'] ?></a>
 						</li>
 					<?php else: ?>
