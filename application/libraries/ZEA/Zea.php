@@ -1147,6 +1147,8 @@ class Zea
 			// $config        = pagination($num_rows,$limit,base_url($this->CI->esg->get_esg('navigation')['string'].$url_get));
 			if(!$this->datatable)
 			{
+				pr($this->url);
+				pr($url_get);
 				$config        = pagination($num_rows,$limit,base_url($this->url.$url_get));
 		    $this->CI->pagination->initialize($config);
 		    $data['pagination'] = $this->CI->pagination->create_links();
