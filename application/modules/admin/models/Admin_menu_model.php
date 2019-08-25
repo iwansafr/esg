@@ -117,7 +117,7 @@ class Admin_menu_model extends CI_Model
 				$ids = array();
 				foreach ($data as $key => $value) 
 				{
-					call_user_func(array('menu_model', __FUNCTION__), $value['id']);
+					call_user_func(array('admin_menu_model', __FUNCTION__), $value['id']);
 					$ids[] = $value['id'];
 				}
 				$this->zea->del_data('admin_menu', $ids);
