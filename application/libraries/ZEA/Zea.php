@@ -64,6 +64,7 @@ class Zea
 	var $clearget      = array();
 	var $jointable     = array();
 	var $unique        = array();
+	var $unique_msg    = '';
 	var $msg           = array();
 	var $search        = FALSE;
 	var $success       = FALSE;
@@ -323,7 +324,7 @@ class Zea
 		}
 	}
 
-	public function setUnique($input = array())
+	public function setUnique($input = array(), $msg = '{value} was exist in table {table}')
 	{
 		if(!empty($input) && is_array($input))
 		{
@@ -345,6 +346,11 @@ class Zea
 					$this->unique[] = $ivalue;
 				}
 			}
+		}
+		if(!empty($msg))
+		{
+			// $msg = '{value} was exist in table {table} ';
+			$this->unique_msg = $msg;
 		}
 	}
 
@@ -1855,7 +1861,15 @@ class Zea
 									if(!empty($data))
 									{
 										$this->success = FALSE;
-										$this->msg[$value] = array('msg'=>$value.' '.@$data_post[$value].' was exist in table '.$this->table, 'alert' => 'danger',$value=>'has-error');
+										if(!empty($this->unique_msg))
+										{
+											$pattern[0] = '~{value}~';
+											$pattern[1]= '~{table}~';
+											$this->unique_msg = $value.' '.preg_replace($pattern, [@$data_post[$value], $this->table], $this->unique_msg);
+										}else{
+											$this->unique_msg = $value.' '.@$data_post[$value].' was exist in table '.$this->table;
+										}
+										$this->msg[$value] = array('msg'=>$this->unique_msg, 'alert' => 'danger',$value=>'has-error');
 									}
 								}
 							}
