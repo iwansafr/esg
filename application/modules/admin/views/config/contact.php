@@ -1,4 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<a href="<?php echo base_url('admin/bank_account') ?>" class="btn btn-success">Bank Account</a>
+<?php
 // $form = new zea();
 $this->zea->init('param');
 $this->zea->setTable('config');
