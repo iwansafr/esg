@@ -1019,14 +1019,9 @@ class Zea
 	{
 		$navigation = $this->CI->esg->get_esg('navigation');
 		$nav_module = @$navigation['array'][0];
-		$nav_task = !empty($navigation['array'][1]) ? $navigation['array'][1] : 'index';
-		// if(!empty($_GET['page']))
-		// {
-		// 	$this->CI->db->cache_delete($nav_module, $nav_task);
-		// 	$this->CI->db->cache_off();
-		// 	$this->CI->output->delete_cache();
-		// }
-		$data = array();
+		$nav_task   = !empty($navigation['array'][1]) ? $navigation['array'][1] : 'index';
+		$data       = array();
+
 		if($this->init == 'roll')
 		{
 			$input   = array();
@@ -1038,12 +1033,8 @@ class Zea
 			$where   = '';
 			$bind    = array();
 			$url_get = '';
-			// if(!empty($keyword))
-			// {
-			// 	$_GET['page'] = 0;
-			// 	$page         = 0;
-			// }
-			$get = @$_GET;
+			$get     = @$_GET;
+			
 			foreach ($this->input as $key => $value)
 			{
 				$input[] = $key;
@@ -1085,6 +1076,9 @@ class Zea
 						$url_get .= $key.'='.$value;
 					}
 					$i++;
+				}
+				if(!preg_match('~\?~', $url_get, $match)){
+					$url_get = '?'.$url_get;
 				}
 				if(!empty($keyword))
 				{
@@ -1133,8 +1127,6 @@ class Zea
 			}
 			if(!empty($this->where))
 			{
-				// $where .= $this->hasGet($sql) ? ' AND '.$this->where : ' '.$this->where;
-				// $sql .= ' '.$where;
 				$sql .= $this->hasGet($sql) ? ' AND ('.$this->where.' )' : ' '.$this->where.')';
 			}
 			$num_rows = $this->CI->db->query($sql,$bind)->num_rows();
@@ -1143,10 +1135,10 @@ class Zea
 			{
 				$this->order_by($sort_by, @$_GET['type']);
 			}
-			$sql          .= ' ORDER BY '.$this->orderby;
+			$sql .= ' ORDER BY '.$this->orderby;
 			if(!$this->datatable)
 			{
-				$sql          .= ' LIMIT '.$page*$limit.','.$limit;
+				$sql .= ' LIMIT '.$page*$limit.','.$limit;
 			}
 			if(!empty($bind))
 			{
@@ -1156,7 +1148,6 @@ class Zea
 			}
 			$data['query'] = $this->CI->db->last_query();
 			$data['num_rows'] = $num_rows;
-			// $config        = pagination($num_rows,$limit,base_url($this->CI->esg->get_esg('navigation')['string'].$url_get));
 			if(!$this->datatable)
 			{
 				$config        = pagination($num_rows,$limit,base_url($this->url.$url_get));
