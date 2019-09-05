@@ -17,7 +17,7 @@
 							<div class="card">
 								<img src="<?php echo image_module('content', $value) ?>" class="card-img-top" alt="blog">
 								<div class="card-body">
-									<a href="<?php echo content_cat_link($value['category']['slug']) ?>" class="btn_4"><?php echo $value['category']['title'] ?></a>
+									<a href="<?php echo content_cat_link(@$home['content_blog'][0]['category']['slug']) ?>" class="btn_4"><?php echo @$home['content_blog'][0]['category']['title'] ?></a>
 									<a href="<?php echo content_link($value['slug']) ?>">
 										<h5 class="card-title"><?php echo $value['title'] ?></h5>
 									</a>
