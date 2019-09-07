@@ -15,6 +15,10 @@ if(!empty($field))
 		echo '<br>';
 	}else{
 		$data_value = $dvalue[$ikey];
+		if(!empty($this->plaintext[$field])){
+			$data_value = $this->plaintext[$field];
+			$data_value = preg_replace('~{.*?}~', $dvalue['id'], $data_value);
+		}
 	}
 	if(!empty($this->money[$field]))
 	{
