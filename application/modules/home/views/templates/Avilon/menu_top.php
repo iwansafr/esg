@@ -50,14 +50,14 @@ if($mod['content'] != 'home/index')
                   ?>
                   <li class="menu-has-children">
                     <a href="#">
-                      <?php echo $cvalue['title'] ?>
+                      <?php echo @$cvalue['title'] ?>
                     </a>
                     <ul>
                       <?php
                       foreach ($cvalue['child'] as $cckey => $ccvalue)
                       {
                         ?>
-                        <li><a href="<?php echo menu_link($ccvalue['link']) ?>"><?php echo $ccvalue['title'] ?></a></li>
+                        <li><a href="<?php echo menu_link($ccvalue['link']) ?>"><?php echo @$ccvalue['title'] ?></a></li>
                         <?php
                       }
                       ?>
