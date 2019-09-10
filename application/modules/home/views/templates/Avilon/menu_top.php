@@ -33,7 +33,7 @@ if($mod['content'] != 'home/index')
           ?>
           <li class="menu-has-children">
             <a href="#">
-              <?php echo $value['title'] ?>
+              <?php echo @$value['title'] ?>
             </a>
             <ul>
               <?php
