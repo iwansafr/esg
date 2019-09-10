@@ -296,6 +296,21 @@ class Admin_model extends CI_Model
 		$data['logo'] = $this->esg->get_config('logo');
 		$data['site'] = $this->esg->get_config('site');
 		$this->esg->set_esg('site', $data);
+
+		$site = $this->esg->get_esg('site')['site'];
+		$meta = $this->esg->get_esg('meta');
+		if(!empty($site))
+		{
+			foreach ($site as $key => $value) 
+			{
+				if($key == 'image' && !empty($value))
+				{
+					$meta['icon'] = image_module('config/site',$value);
+				}
+				$meta[$key] = $value;
+			}
+			$this->esg->set_esg('meta', $meta);
+		}
 	}
 	public function footer()
 	{
@@ -333,20 +348,6 @@ class Admin_model extends CI_Model
 			}
 		}
 		$this->esg->set_esg('home', $data);
-		$site = $this->esg->get_esg('site')['site'];
-		$meta = $this->esg->get_esg('meta');
-		if(!empty($site))
-		{
-			foreach ($site as $key => $value) 
-			{
-				if($key == 'image' && !empty($value))
-				{
-					$meta['icon'] = image_module('config/site',$value);
-				}
-				$meta[$key] = $value;
-			}
-			$this->esg->set_esg('meta', $meta);
-		}
 	}
 
 }
