@@ -16,6 +16,14 @@
 	<div class="col-md-8">
 		{menu_top}
 	</div>
+	<div class="col-md-12">
+		<dic class="panel-group">
+			<a href="#admin/config/widget/header#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default text-center">
+				<h5>Header</h5>
+			</div>
+		</dic>
+	</div>
 </div>
 <div class="col-md-12">
 	{content_banner}
