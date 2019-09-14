@@ -20,16 +20,16 @@
 				<?php foreach ($home['menu_top'] as $key => $value): ?>
 					<?php if (empty($value['child'])): ?>
 						<li class="nav-item">
-							<a class="nav-link" href="<?php echo $value['link'] ?>"><?php echo $value['title'] ?></a>
+							<a class="nav-link" href="<?php echo menu_link($value['link']) ?>"><?php echo $value['title'] ?></a>
 						</li>
 					<?php else: ?>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="<?php echo $value['link'] ?>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" href="<?php echo menu_link($value['link']) ?>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<?php echo $value['title'] ?>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<?php foreach ($value['child'] as $ckey => $cvalue): ?>
-									<a class="dropdown-item" href="<?php echo $cvalue['link'] ?>"><?php echo $cvalue['title'] ?></a>
+									<a class="dropdown-item" href="<?php echo menu_link($cvalue['link']) ?>"><?php echo $cvalue['title'] ?></a>
 								<?php endforeach ?>
 							</div>
 						</li>

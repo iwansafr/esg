@@ -34,13 +34,16 @@ if(!empty($content))
 			$data = $content['images'];
 			if(!empty($data))
 			{
+				echo '<div class="row">';
 				$data = json_decode($data);
 				$i = 1;
 				foreach ($data as $key => $value) 
 				{
 					$title = 'image for '.$content['title'];
 					?>
-					<img src="<?php echo image_module('content', 'gallery'.'/'.$content['id'].'/'.$value);?>"  data-toggle="modal" data-target="#img-<?php echo $i;?>" class="img-responsive" style="object-fit: cover;height: 50px;">
+					<div class="col-md-3">
+						<img src="<?php echo image_module('content', 'gallery'.'/'.$content['id'].'/'.$value);?>"  data-toggle="modal" data-target="#img-<?php echo $i;?>" class="img-responsive" style="object-fit: cover;width: 100%;">
+					</div>
 					<!-- Modal -->
 					<div class="modal fade" id="img-<?php echo $i;?>" tabindex="-1" role="dialog" aria-labelledby="img-<?php echo $i;?>" aria-hidden="true">
 					  <div class="modal-dialog modal-lg" role="document">
@@ -63,6 +66,7 @@ if(!empty($content))
 					<?php
 					$i++;
 				}
+				echo '</div>';
 			}
 			?>
 		</figure>
