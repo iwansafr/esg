@@ -12,7 +12,7 @@ class Esg_model extends CI_Model
 	public function init()
 	{
 		$this->navigation();
-		$this->set_meta();
+		// $this->set_meta();
 		// $this->js();
 		$this->templates = $this->esg->get_config('templates');
 		$this->esg->set_esg('templates',$this->templates);

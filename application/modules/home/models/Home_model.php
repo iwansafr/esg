@@ -13,7 +13,7 @@ class Home_model extends CI_Model
 	public function init()
 	{
 		$this->esg_model->navigation();
-		$this->esg_model->set_meta();
+		// $this->esg_model->set_meta();
 		$this->logo();
 		$this->site();
 		$this->meta();
