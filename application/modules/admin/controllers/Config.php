@@ -19,6 +19,13 @@ class Config extends CI_Controller
 		$this->load->view('index');
 	}
 	
+	public function image()
+	{
+		$this->db->cache_off();
+		$data = $this->config_model->save_default_image();
+		$this->load->view('index',['data'=>$data]);
+	}
+
 	public function dashboard()
 	{
 		$data['msg'] = $this->config_model->dashboard_save();

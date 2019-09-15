@@ -90,4 +90,41 @@ class Config_model extends CI_Model
 		}
 		return $msg;
 	}
+
+	public function save_default_image()
+	{
+		$item = '';
+		$files = [];
+		if(!empty($_POST))
+		{
+			$item = @$_POST['item'];
+		}
+		if(!empty($_FILES))
+		{
+			$files = $_FILES;
+		}
+		if(!empty($item) && !empty($files))
+		{
+			$config['upload_path']   = FCPATH.'images/';
+			$config['allowed_types'] = 'png';
+      // $config['max_size']      = 500;
+      // $config['max_width']     = 1024;
+      // $config['max_height']    = 768;
+      $config['file_name']     = $item.'.png';
+      $config['overwrite']     = true; 
+
+      $this->load->library('upload', $config);
+
+      if (!$this->upload->do_upload('image'))
+      {
+        $error = array('error' => $this->upload->display_errors());
+        return $error;
+      }else{
+        $data = array('upload_data' => $this->upload->data());
+        return $data;
+      }
+		}
+
+	}
+
 }
