@@ -16,7 +16,9 @@ class Admin extends CI_Controller
 	{
 		$this->admin_model->home();
 		// $this->admin_model->visitor();
-		$this->load->view('index');
+		$user = $this->session->userdata(base_url().'_logged_in');
+		$tmp_data = $this->db->get_where('dashboard', " role_ids LIKE '%,{$user['user_role_id']},%'")->result_array();
+		$this->load->view('index',['dashboard'=>$tmp_data]);
 	}
 
 	public function list()

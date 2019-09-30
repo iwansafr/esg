@@ -2236,7 +2236,7 @@ class Zea
 							{
 								$data_text = array();
 								$currentdatai = 0;
-								foreach ($_POST[$inputvalue['text'].'_row'] as $currentdatakey => $currentdatavalue)
+								foreach ((array) @$_POST[$inputvalue['text'].'_row'] as $currentdatakey => $currentdatavalue)
 								{
 									$data_text[$currentdatai] = $currentdatakey;
 									$currentdatai++;

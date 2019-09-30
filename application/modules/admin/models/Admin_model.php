@@ -348,6 +348,9 @@ class Admin_model extends CI_Model
 			}
 		}
 		$this->esg->set_esg('home', $data);
+
+		
+		// $this->esg->set_esg('dashboard', $tmp_data);
 	}
 
 }

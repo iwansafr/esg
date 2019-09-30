@@ -34,6 +34,15 @@ class Config extends CI_Controller
 		$this->load->view('index', $data);
 	}
 
+	public function custom_dashboard()
+	{
+		$this->load->view('index');	
+	}
+	public function clear_custom_dashboard()
+	{
+		$this->load->view('config/custom_dashboard');	
+	}
+
 	public function mail()
 	{
 		$this->load->view('index');
