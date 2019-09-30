@@ -7,7 +7,7 @@ foreach ($table as $key => $value)
 	if($value != 'config' && $value != 'admin_menu')
 	{
 		$checked = '';
-		if(in_array($value, $dashboard_config['publish_row']))
+		if(in_array($value, (array) @$dashboard_config['publish_row']))
 		{
 			$checked = 'checked="checked"';
 		}
