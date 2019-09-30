@@ -192,13 +192,18 @@ class Zea
 		return $status;
 	}
 
-	public function join($table = '', $cond = '', $field = '')
+	public function join($table = '', $cond = '', $field = '', $table2 = '', $cond2 = '')
 	{
 		if(!empty($table) && !empty($cond) && !empty($field))
 		{
 			$this->jointable['table']     = $table;
 			$this->jointable['condition'] = $cond;
 			$this->jointable['field']     = $field;
+		}
+		if(!empty($table2) && !empty($cond2))
+		{
+			$this->jointable['table2']     = $table2;
+			$this->jointable['condition2'] = $cond2;	
 		}
 	}
 
@@ -1047,6 +1052,10 @@ class Zea
 			if(!empty($this->jointable))
 			{
 				$sql = 'SELECT '.$this->jointable['field'].' FROM '.$this->table.' INNER JOIN '.$this->jointable['table'].' '.$this->jointable['condition'];
+				if(!empty($this->jointable['table2']) && !empty($this->jointable['condition2']))
+				{
+					$sql .= ' INNER JOIN '.$this->jointable['table2'].' '.$this->jointable['condition2'];
+				}
 			}
 			if(!empty($keyword))
 			{
