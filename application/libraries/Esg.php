@@ -37,6 +37,21 @@ class Esg
 		$this->set_esg('extra_js', $output);
 	}
 
+	public function add_css($data = array())
+	{
+		$cur_js = $this->get_esg('extra_css');
+		$output = array();
+		if(!empty($cur_js))
+		{
+			$output[] = $cur_js;
+			$output[] = $data;
+		}else{
+			$output[] = $data;
+		}
+		$output = array_unique($output);
+		$this->set_esg('extra_css', $output);
+	}
+
 	public function add_script($data = array())
 	{
 		if(!empty($data))
@@ -306,7 +321,7 @@ class Esg
 
 	public function extra_css()
 	{
-		// $data = $this->CI->config->item('esg');
+		$data = $this->CI->config->item('esg');
 		$data = @$data['extra_css'];
 		if(!empty($data))
 		{
