@@ -56,7 +56,7 @@ class Menu extends CI_Controller
 		if(empty(@intval($_GET['p_id'])))
 		{
 			// $this->esg->set_esg('extra_js', base_url('templates/AdminLTE/assets/dist/js/modules/menu/script.js'));
-			$this->esg->add_js(base_url('templates/AdminLTE/assets/dist/js/modules/menu/script.js'));
+			$this->esg->add_js([base_url('templates/AdminLTE/assets/dist/js/modules/menu/script.js')]);
 		}
 		$this->load->view('index',$data);
 	}
