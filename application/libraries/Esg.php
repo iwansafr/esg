@@ -344,6 +344,7 @@ class Esg
 		{
 			if(is_array($data))
 			{
+				$data = $data[0];
 				foreach ($data as $key => $value)
 				{
 					echo '<script src="'.$value.'"></script>'."\n";
