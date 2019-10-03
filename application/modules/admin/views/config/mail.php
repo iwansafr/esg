@@ -2,7 +2,7 @@
 $this->load->library('email');
 if(!empty($_POST))
 {
-	$this->email->from($this->email->smtp_user, @$this->esg->get_config('contact'));
+	$this->email->from($this->email->smtp_user, @$this->esg->get_config('contact')['name']);
 	$this->email->to($_POST['email']);
 	$this->email->subject('Email Test');
 	$this->email->message($_POST['message']);
