@@ -4,7 +4,7 @@ if(!empty($_POST))
 {
 	$this->email->from($this->email->smtp_user, @$this->esg->get_config('contact')['name']);
 	$this->email->to($_POST['email']);
-	$this->email->subject('Email Test');
+	$this->email->subject(@$this->esg->get_config('contact')['name']);
 	$this->email->message($_POST['message']);
 	$this->email->send();
 	echo $this->email->print_debugger();
