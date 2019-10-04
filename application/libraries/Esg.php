@@ -343,19 +343,17 @@ class Esg
 		if(!empty($data))
 		{
 			$data = $data[0];
-			if(count($data) > 1)
+			if(is_array($data))
 			{
-				foreach ($data as $key => $value)
+				if(count($data) > 1)
 				{
-					echo '<script src="'.$value.'"></script>'."\n";
+					foreach ($data as $key => $value)
+					{
+						echo '<script src="'.$value.'"></script>'."\n";
+					}
 				}
 			}else{
-				if(is_array($data))
-				{
-					echo '<script src="'.@$data[0].'"></script>'."\n";
-				}else{
-					echo '<script src="'.@$data.'"></script>'."\n";
-				}
+				echo '<script src="'.@$data.'"></script>'."\n";
 			}
 		}
 	}
