@@ -342,15 +342,20 @@ class Esg
 		$data = $this->get_esg('extra_js');
 		if(!empty($data))
 		{
-			if(is_array($data))
+			$data = $data[0];
+			if(count($data) > 1)
 			{
-				$data = $data[0];
 				foreach ($data as $key => $value)
 				{
 					echo '<script src="'.$value.'"></script>'."\n";
 				}
 			}else{
-				echo '<script src="'.$data.'"></script>'."\n";
+				if(is_array($data))
+				{
+					echo '<script src="'.@$data[0].'"></script>'."\n";
+				}else{
+					echo '<script src="'.@$data.'"></script>'."\n";
+				}
 			}
 		}
 	}
