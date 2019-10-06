@@ -20,7 +20,7 @@ if(!empty($navigation['array'][1]))
 }
 if($mod['content'] == 'home/index')
 {
-	$image = image_module('config/site', $meta['icon']);
+	$image = image_module('config/site', @$meta['icon']);
 }else{
 	if($module == 'content_tag')
 	{
