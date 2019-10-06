@@ -12,7 +12,7 @@ $template = $this->esg->get_esg('templates')['admin_template'];
 <meta name="developer" content="esoftgreat.com">
 <meta name="author" content="esoftgreat">
 <meta name="ROBOTS" content="all, index, follow">
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo $meta['icon']; ?>">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo @$meta['icon']; ?>">
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/bootstrap/css/bootstrap-tagsinput.css">
@@ -58,15 +58,15 @@ echo $this->esg->extra_css();
 <meta name="og:title" content="<?php echo $meta['title'] ?>"/>
 <meta name="og:type" content="site"/>
 <meta name="og:url" content="<?php echo base_url($this->esg->get_esg('navigation')['string']) ?>"/>
-<meta name="og:image" content="<?php echo $meta['icon'] ?>"/>
+<meta name="og:image" content="<?php echo @$meta['icon'] ?>"/>
 <meta name="og:site_name" content="<?php echo $meta['title'] ?>"/>
 <meta name="og:description" content="<?php echo $meta['description'] ?>"/>
 
-<meta content="<?php echo $meta['icon'] ?>" property="og:image"/>
+<meta content="<?php echo @$meta['icon'] ?>" property="og:image"/>
 <meta content="<?php echo $meta['title'] ?>" property="og:title"/>
 <meta content="<?php echo $meta['description'] ?>" property="og:description"/>
-<meta content="<?php echo $meta['icon'] ?>" itemprop='url'/>
+<meta content="<?php echo @$meta['icon'] ?>" itemprop='url'/>
 
-<link itemprop="thumbnailUrl" href="<?php echo $meta['icon'] ?>">
-<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> <link itemprop="url" href="<?php echo $meta['icon'] ?>"> </span>
+<link itemprop="thumbnailUrl" href="<?php echo @$meta['icon'] ?>">
+<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> <link itemprop="url" href="<?php echo @$meta['icon'] ?>"> </span>
 
