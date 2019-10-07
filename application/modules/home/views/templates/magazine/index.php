@@ -29,228 +29,27 @@
 					<?php $this->load->view('menu_main') ?>
 				</nav>
 			</div>
-		</header><!-- #header end -->
-
-		<!-- Content
-		============================================= -->
+		</header>
 		<section id="content">
-
 			<div class="content-wrap">
-
 				<div class="section header-stick bottommargin-lg clearfix" style="padding: 20px 0;">
 					<div>
-						<div class="container clearfix">
-							<span class="label label-danger bnews-title">Breaking News:</span>
-
-							<div class="fslider bnews-slider nobottommargin" data-speed="800" data-pause="6000" data-arrows="false" data-pagi="false">
-								<div class="flexslider">
-									<div class="slider-wrap">
-										<div class="slide"><a href="#"><strong>Russia hits back, says US acts like a 'bad surgeon'..</strong></a></div>
-										<div class="slide"><a href="#"><strong>'Sulking' Narayan Rane needs consolation: Uddhav reacts to Cong leader's attack..</strong></a></div>
-										<div class="slide"><a href="#"><strong>Rane needs consolation. I pray to God that he gets mental peace in a political party..</strong></a></div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php $this->load->view('content_news') ?>
 					</div>
 				</div>
-
 				<div class="container clearfix">
-
 					<div class="row">
-
 						<div class="col-md-8 bottommargin">
-
 							<div class="col_full bottommargin-lg">
-								<div class="fslider flex-thumb-grid grid-6" data-animation="fade" data-arrows="true" data-thumbs="true">
-									<div class="flexslider">
-										<div class="slider-wrap">
-											<div class="slide" data-thumb="images/magazine/thumb/1.jpg">
-												<a href="#">
-													<img src="<?php echo $link_template;?>/images/magazine/1.jpg" alt="">
-													<div class="overlay">
-														<div class="text-overlay">
-															<div class="text-overlay-title">
-																<h3>Locked Steel Gate</h3>
-															</div>
-															<div class="text-overlay-meta">
-																<span>Illustrations</span>
-															</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/2.jpg">
-												<a href="#">
-													<img src="<?php echo $link_template;?>/images/magazine/2.jpg" alt="">
-													<div class="overlay">
-														<div class="text-overlay">
-															<div class="text-overlay-title">
-																<h3>Russia hits back, says US acts like a 'bad surgeon'</h3>
-															</div>
-															<div class="text-overlay-meta">
-																<span><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i> <i class="icon-star-empty"></i></span>
-															</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/3.jpg">
-												<a href="#">
-													<img src="<?php echo $link_template;?>/images/magazine/3.jpg" alt="">
-													<div class="overlay">
-														<div class="text-overlay">
-															<div class="text-overlay-title">
-																<h3>Locked Steel Gate</h3>
-															</div>
-															<div class="text-overlay-meta">
-																<span>Technology</span>
-															</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/4.jpg">
-												<iframe src="http://player.vimeo.com/video/99895335" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/5.jpg">
-												<a href="#">
-													<img src="<?php echo $link_template;?>/images/magazine/5.jpg" alt="">
-													<div class="overlay">
-														<div class="text-overlay">
-															<div class="text-overlay-title">
-																<h3>Locked Steel Gate</h3>
-															</div>
-															<div class="text-overlay-meta">
-																<span><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i> <i class="icon-star-empty"></i></span>
-															</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="slide" data-thumb="images/magazine/thumb/6.jpg">
-												<a href="#">
-													<img src="<?php echo $link_template;?>/images/magazine/6.jpg" alt="">
-													<div class="overlay">
-														<div class="text-overlay">
-															<div class="text-overlay-title">
-																<h3>Locked Steel Gate</h3>
-															</div>
-															<div class="text-overlay-meta">
-																<span>Entertainment</span>
-															</div>
-														</div>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
+								<?php $this->load->view('content_slider') ?>
 							</div>
-
 							<div class="clear"></div>
-
 							<div class="col_full bottommargin-lg clearfix">
-
-								<div class="fancy-title title-border">
-									<h3>Technology</h3>
-								</div>
-
-								<div class="ipost clearfix">
-									<div class="col_half bottommargin-sm">
-										<div class="entry-image">
-											<a href="#"><img class="image_fade" src="<?php echo $link_template;?>/images/magazine/7.jpg" alt="Image"></a>
-										</div>
-									</div>
-									<div class="col_half bottommargin-sm col_last">
-										<div class="entry-title">
-											<h3><a href="blog-single.html">Toyotas next minivan will let you shout at your kids without turning around</a></h3>
-										</div>
-										<ul class="entry-meta clearfix">
-											<li><i class="icon-calendar3"></i> 10th Feb 2014</li>
-											<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 21</a></li>
-											<li><a href="#"><i class="icon-camera-retro"></i></a></li>
-										</ul>
-										<div class="entry-content">
-											<p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibusdam veritatis quisquam laboriosam esse beatae hic perferendis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, repudiandae.</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="clear"></div>
-
-								<div class="col_half nobottommargin">
-
-									<div class="spost clearfix">
-										<div class="entry-image">
-											<a href="#"><img src="<?php echo $link_template;?>/images/magazine/small/1.jpg" alt=""></a>
-										</div>
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">UK government weighs Tesla's Model S for its ??5 million electric vehicle fleet</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li><i class="icon-calendar3"></i> 1st Aug 2014</li>
-												<li><a href="#"><i class="icon-comments"></i> 32</a></li>
-											</ul>
-										</div>
-									</div>
-
-									<div class="spost clearfix">
-										<div class="entry-image">
-											<a href="#"><img src="<?php echo $link_template;?>/images/magazine/small/2.jpg" alt=""></a>
-										</div>
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">MIT's new robot glove can give you extra fingers</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li><i class="icon-calendar3"></i> 13th Sep 2014</li>
-												<li><a href="#"><i class="icon-comments"></i> 11</a></li>
-											</ul>
-										</div>
-									</div>
-
-								</div>
-
-								<div class="col_half nobottommargin col_last">
-
-									<div class="spost clearfix">
-										<div class="entry-image">
-											<a href="#"><img src="<?php echo $link_template;?>/images/magazine/small/3.jpg" alt=""></a>
-										</div>
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">You can now listen to headphones through your hoodie</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li><i class="icon-calendar3"></i> 31st Jan 2014</li>
-												<li><a href="#"><i class="icon-comments"></i> 7</a></li>
-											</ul>
-										</div>
-									</div>
-
-									<div class="spost clearfix">
-										<div class="entry-image">
-											<a href="#"><img src="<?php echo $link_template;?>/images/magazine/small/4.jpg" alt=""></a>
-										</div>
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">How would you change Kobo's Aura HD e-reader?</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li><i class="icon-calendar3"></i> 27th July 2014</li>
-												<li><a href="#"><i class="icon-comments"></i> 13</a></li>
-											</ul>
-										</div>
-									</div>
-
-								</div>
-
+								<?php $this->load->view('content_block_1') ?>
 							</div>
 
 							<div class="bottommargin-lg">
-								<img src="<?php echo $link_template;?>/images/magazine/ad.jpg" alt="Ad" class="aligncenter notopmargin nobottommargin">
+								<?php $this->load->view('content_banner') ?>
 							</div>
 
 							<div class="col_full bottommargin-lg clearfix">
@@ -575,7 +374,7 @@
 								<div class="widget clearfix">
 
 									<h4>Flickr Photostream</h4>
-									<div id="flickr-widget" class="flickr-feed masonry-thumbs col-5" data-id="613394@N22" data-count="15" data-type="group" data-lightbox="gallery"></div>
+									<!-- <div id="flickr-widget" class="flickr-feed masonry-thumbs col-5" data-id="613394@N22" data-count="15" data-type="group" data-lightbox="gallery"></div> -->
 
 								</div>
 
@@ -725,7 +524,7 @@
 								</div>
 
 								<div class="widget clearfix">
-									<iframe src="http://player.vimeo.com/video/100299651" width="500" height="264" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+									<!-- <iframe src="http://player.vimeo.com/video/100299651" width="500" height="264" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
 								</div>
 
 								<div class="widget clearfix">
@@ -733,7 +532,7 @@
 								</div>
 
 								<div class="widget clearfix">
-									<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FEnvato&amp;width=350&amp;height=240&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true&amp;appId=499481203443583" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:350px; height:240px; max-width: 100% !important;" allowTransparency="true"></iframe>
+									<!-- <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FEnvato&amp;width=350&amp;height=240&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true&amp;appId=499481203443583" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:350px; height:240px; max-width: 100% !important;" allowTransparency="true"></iframe> -->
 								</div>
 
 							</div>
@@ -741,11 +540,8 @@
 						</div>
 
 					</div>
-
 				</div>
-
 			</div>
-
 		</section><!-- #content end -->
 
 		<!-- Footer

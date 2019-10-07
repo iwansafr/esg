@@ -168,7 +168,10 @@ class Home_model extends CI_Model
 							{
 								$data[$id]['child'][$par_id]['child'][$tvalue['id']]  = $tvalue;
 							}else{
-								$data[$b_data[$id]['par_id']]['child'][$id]['child'][$par_id]['child'][$tvalue['id']] = $tvalue;
+								if(!empty(@intval($data[$b_data[$id]['par_id']])))
+								{
+									$data[$b_data[$id]['par_id']]['child'][$id]['child'][$par_id]['child'][$tvalue['id']] = $tvalue;
+								}
 							}
 						}
 					}
