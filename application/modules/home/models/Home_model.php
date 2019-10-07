@@ -125,7 +125,6 @@ class Home_model extends CI_Model
 					}
 				}
 			}
-			// $this->archived();
 		}
 	}
 
@@ -139,7 +138,6 @@ class Home_model extends CI_Model
 			$position_name = @$position_name['title'];
 			if(!empty($tmp_data))
 			{
-				// $tmp_data[0]['position_name'] = $position_name;
 				$output = array();
 				$data = array();
 				$b_data = array();
