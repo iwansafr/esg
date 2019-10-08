@@ -16,26 +16,28 @@
 
 <div class="tab-container">
 	<?php $i = 1; ?>
-	<?php foreach ($data as $key => $value): ?>
-		<div class="tab-content clearfix" id="tabs-<?php echo $i;?>">
-			<div id="popular-post-list-sidebar">
-				<?php foreach ($value as $ckey => $cvalue): ?>
-					<div class="spost clearfix">
-						<div class="entry-image">
-							<a href="<?php echo content_link($cvalue['slug']) ?>" class="nobg"><img class="img-circle" src="<?php echo image_module('content',$cvalue) ?>" alt=""></a>
-						</div>
-						<div class="entry-c">
-							<div class="entry-title">
-								<h4><a href="<?php echo content_link($cvalue['slug']) ?>"><?php echo $cvalue['title'] ?></a></h4>
+	<?php if (!empty($data)): ?>
+		<?php foreach ($data as $key => $value): ?>
+			<div class="tab-content clearfix" id="tabs-<?php echo $i;?>">
+				<div id="popular-post-list-sidebar">
+					<?php foreach ($value as $ckey => $cvalue): ?>
+						<div class="spost clearfix">
+							<div class="entry-image">
+								<a href="<?php echo content_link($cvalue['slug']) ?>" class="nobg"><img class="img-circle" src="<?php echo image_module('content',$cvalue) ?>" alt=""></a>
 							</div>
-							<ul class="entry-meta">
-								<li><i class="icon-eye-alt"></i> <?php echo $cvalue['hits'] ?>x dilihat</li>
-							</ul>
-						</div>
-					</div>			
-				<?php endforeach ?>
+							<div class="entry-c">
+								<div class="entry-title">
+									<h4><a href="<?php echo content_link($cvalue['slug']) ?>"><?php echo $cvalue['title'] ?></a></h4>
+								</div>
+								<ul class="entry-meta">
+									<li><i class="icon-eye-alt"></i> <?php echo $cvalue['hits'] ?>x dilihat</li>
+								</ul>
+							</div>
+						</div>			
+					<?php endforeach ?>
+				</div>
 			</div>
-		</div>
-		<?php $i++; ?>
-	<?php endforeach ?>
+			<?php $i++; ?>
+		<?php endforeach ?>
+	<?php endif ?>
 </div>
