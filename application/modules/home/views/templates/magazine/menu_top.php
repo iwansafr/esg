@@ -6,7 +6,7 @@
 				<li><a href="<?php echo menu_link($value['link']) ?>"><?php echo $value['title'] ?></a></li>
 			<?php endforeach ?>
 		<?php endif ?>
-		<li><a href="#">Login</a>
+		<li id="login_form"><a href="#">Login</a>
 			<div class="top-link-section">
 				<form id="top-login" method="post" action="<?php echo base_url('admin/login') ?>" role="form">
 					<div class="input-group" id="top-login-username">
