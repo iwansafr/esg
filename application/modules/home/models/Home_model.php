@@ -48,7 +48,7 @@ class Home_model extends CI_Model
 			{
 				$link_template = base_url().'templates/'.$data['public_template'];	
 			}else{
-				unlink(FCPATH.'templates/'.$data['public_template']);
+				@unlink(FCPATH.'templates/'.$data['public_template']);
 				if(symlink($cur_path.'esg_templates/'.$data['public_template'], FCPATH.'templates/'.$data['public_template']))
 				{
 					$link_template = base_url().'templates/'.$data['public_template'];	
