@@ -134,18 +134,18 @@
 							<div class="row">
 
 								<div class="col-md-6 clearfix bottommargin-sm">
-									<a href="<?php echo @$meta['contact']['facebook'] ?>" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
+									<a target="_blank" href="<?php echo @$meta['contact']['facebook'] ?>" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
 										<i class="icon-facebook"></i>
 										<i class="icon-facebook"></i>
 									</a>
-									<a href="<?php echo @$meta['contact']['facebook'] ?>"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
+									<a target="_blank" href="<?php echo @$meta['contact']['facebook'] ?>"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
 								</div>
 								<div class="col-md-6 clearfix">
-									<a href="<?php echo @$meta['contact']['twitter'] ?>" class="social-icon si-dark si-colored si-twitter nobottommargin" style="margin-right: 10px;">
+									<a target="_blank" href="https://twitter.com/<?php echo @$meta['contact']['twitter'] ?>" class="social-icon si-dark si-colored si-twitter nobottommargin" style="margin-right: 10px;">
 										<i class="icon-twitter"></i>
 										<i class="icon-twitter"></i>
 									</a>
-									<a href="<?php echo @$meta['contact']['twitter'] ?>"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Twitter</small></a>
+									<a target="_blank" href="https://twitter.com/<?php echo @$meta['contact']['twitter'] ?>"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Twitter</small></a>
 								</div>
 
 							</div>
