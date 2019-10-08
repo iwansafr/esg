@@ -9,7 +9,7 @@
 
 		<p><?php echo $meta['contact']['description'] ?></p>
 
-		<div style="background: url('<?php echo $link_template;?>images/world-map.png') no-repeat center center; background-size: 100%;">
+		<div style="background: url('<?php echo $link_template;?>/images/world-map.png') no-repeat center center; background-size: 100%;">
 			<address>
 				<?php echo $meta['contact']['address'] ?>
 			</address>
