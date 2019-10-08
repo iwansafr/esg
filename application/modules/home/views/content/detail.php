@@ -92,13 +92,13 @@ if(!empty($content))
 		</div>
 	</div>
 	<div class="row">
-		<div class="col">
+		<div class="col col-xs-6">
 			<p>
 				<i class="fa fa-user"></i>
 				<span class="font-italic" style="font-family: 'Crete Round', serif;font-size: 14px;">author : <?php echo $content['author']; ?></span>
 			</p>
 		</div>
-		<div class="col">
+		<div class="col col-xs-6">
 			<p class="pull-right">
 				<i class="fa fa-calendar"></i>
 				<span class="font-italic" style="font-family: 'Crete Round', serif;font-size: 14px;">created : <?php echo content_date($content['created']); ?></span>

@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-if(!empty($home['content_block_1']))
+if(!empty($home['content_block_'.$number]))
 {
-	$category = @$home['content_block_1'][0]['category'];
-	$first_content = $home['content_block_1'][0];
-	$content_block_1 = $home['content_block_1'];
+	$category = @$home['content_block_'.$number][0]['category'];
+	$first_content = $home['content_block_'.$number][0];
+	$content_block_1 = $home['content_block_'.$number];
 	unset($content_block_1[0]);
 	$total_content = count($content_block_1);
 	?>
@@ -79,7 +79,7 @@ if(!empty($home['content_block_1']))
 	<?php else: ?>
 		<?php
 		$first_data = ['0'=>$content_block_1[1], '1'=>$content_block_1[2]];
-		$second_data = ['0'=>$content_block_1[3], '1'=>$content_block_1[4]];
+		$second_data = ['0'=>$content_block_1[3], '1'=>@$content_block_1[4]];
 		?>
 		<div class="col_half nobottommargin">
 			<?php foreach ($first_data as $key => $value): ?>
@@ -102,20 +102,22 @@ if(!empty($home['content_block_1']))
 
 		<div class="col_half nobottommargin col_last">
 			<?php foreach ($second_data as $key => $value): ?>
-				<div class="spost clearfix">
-					<div class="entry-image">
-						<a href="<?php echo content_link($value['slug']) ?>"><img src="<?php echo image_module('content',$value) ?>" alt=""></a>
-					</div>
-					<div class="entry-c">
-						<div class="entry-title">
-							<h4><a href="<?php echo content_link($value['slug']) ?>"><?php echo $value['title'] ?></a></h4>
+				<?php if (!empty($value)): ?>
+					<div class="spost clearfix">
+						<div class="entry-image">
+							<a href="<?php echo content_link($value['slug']) ?>"><img src="<?php echo image_module('content',$value) ?>" alt=""></a>
 						</div>
-						<ul class="entry-meta">
-							<li><i class="icon-calendar3"></i> <?php echo content_date($value['created']) ?></li>
-							<li><a href="#"><i class="icon-eye"></i> <?php echo $value['hits'] ?></a></li>
-						</ul>
+						<div class="entry-c">
+							<div class="entry-title">
+								<h4><a href="<?php echo content_link($value['slug']) ?>"><?php echo $value['title'] ?></a></h4>
+							</div>
+							<ul class="entry-meta">
+								<li><i class="icon-calendar3"></i> <?php echo content_date($value['created']) ?></li>
+								<li><a href="#"><i class="icon-eye"></i> <?php echo $value['hits'] ?></a></li>
+							</ul>
+						</div>
 					</div>
-				</div>
+				<?php endif ?>
 			<?php endforeach ?>
 		</div>	
 	<?php endif ?>
