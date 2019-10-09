@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<?php
-		if($i>3 && $last_col)
+		if($last_col)
 		{
 			?>
 			<div class="clear"></div>
