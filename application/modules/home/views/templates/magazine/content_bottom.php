@@ -13,7 +13,7 @@
 							<h4><a href="<?php echo content_link($value['slug']) ?>"><?php echo $value['title'] ?></a></h4>
 						</div>
 						<ul class="entry-meta">
-							<li><?php echo content_date($value['created']) ?></li>
+							<!-- <li><?php echo content_date($value['created']) ?></li> -->
 						</ul>
 					</div>
 				</div>
