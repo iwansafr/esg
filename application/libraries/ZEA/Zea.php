@@ -13,6 +13,7 @@ class Zea
 		$this->CI->load->helper('form');
 		// $this->CI->load->library('upload');
 		$this->CI->load->library('pagination');
+		// $this->CI->load->library('image_lib');
 		$this->setUrl();
 	}
 
@@ -1949,6 +1950,17 @@ class Zea
 														}
 													}
 													copy($_FILES[$upload[$i]]['tmp_name'], $dir.$file_name);
+
+													$config_image_lib['image_library']  = 'gd2';
+													$config_image_lib['source_image']   = $dir.$file_name;
+													// $config_image_lib['create_thumb']   = TRUE;
+													$config_image_lib['maintain_ratio'] = TRUE;
+													$config_image_lib['width']          = 1750;
+													$config_image_lib['height']         = 1500;
+
+													$this->CI->load->library('image_lib', $config_image_lib);
+
+													$this->CI->image_lib->resize();
 													if($this->init == 'edit')
 													{
 														$update_file = array($u_value => $file_name);
