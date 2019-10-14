@@ -254,7 +254,7 @@ class Admin_model extends CI_Model
 	{
 		$data = array();
 		$role_id = @$this->session->userdata(base_url('_logged_in'))['user_role_id'];
-		$menu = $this->db->query("SELECT * FROM admin_menu WHERE user_role_ids LIKE '%,{$role_id},%' ORDER BY sort_order")->result_array();
+		$menu = $this->db->query("SELECT * FROM admin_menu WHERE user_role_ids LIKE '%,{$role_id},%' ORDER BY sort_order ASC")->result_array();
 		$tmp_data = $menu;
 		if(!empty($tmp_data))
 		{
@@ -265,6 +265,7 @@ class Admin_model extends CI_Model
 			{
 				$b_data[$tmvalue['id']] = $tmvalue;
 			}
+			// pr($b_data);
 			foreach ($b_data as $tkey => $tvalue)
 			{
 				if($tvalue['par_id'] == 0)
@@ -282,10 +283,17 @@ class Admin_model extends CI_Model
 					}else if(!empty($b_data[$tvalue['par_id']]))
 					{
 						$id = $b_data[$tvalue['par_id']]['par_id'];
-						$data[$id]['list'][$tvalue['id']]  = $tvalue;
+						$data[$id]['list'][$tvalue['par_id']][$tvalue['id']]  = $tvalue;
+						// if($tvalue['id'] == '114')
+						// {
+						// 	pr($id);
+						// 	pr($tvalue['id']);
+						// 	pr($tvalue['par_id']);
+						// }
 					}
 				}
 			}
+			// pr($data);die();
 			$this->esg->set_esg('sidebar_menu', $data);
 		}
 	}
