@@ -82,6 +82,7 @@ if(!empty($field))
 			<?php
 		}
 	}
+	echo '<div class="clearfix"></div>';
 	$value_input = json_encode($data[$field]);
 	$array_input = array(
 		'name'   => $field.'[]',
