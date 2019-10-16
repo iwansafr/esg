@@ -21,7 +21,7 @@
 					<?php $this->load->view('logo') ?>
 				</div>
 				<div class="top-advert">
-					<img src="<?php echo $link_template;?>/images/magazine/ad.jpg" alt="Ad">
+					<?php $this->load->view('content_top_banner') ?>					
 				</div>
 			</div>
 			<div id="header-wrap">
