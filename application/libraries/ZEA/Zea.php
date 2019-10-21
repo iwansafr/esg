@@ -1113,6 +1113,10 @@ class Zea
 							$jointable_field = explode(',',$this->jointable['field']);
 							foreach ($jointable_field as $key => $value)
 							{
+								if(preg_match('~(.*?) AS~', $value, $ketemu))
+								{
+									$value = @$ketemu[1];
+								}
 								if($key > 0){
 									$where .= ' OR ';
 								}
