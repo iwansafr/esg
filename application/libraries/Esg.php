@@ -345,12 +345,9 @@ class Esg
 			$data = $data[0];
 			if(is_array($data))
 			{
-				if(count($data) > 1)
+				foreach ($data as $key => $value)
 				{
-					foreach ($data as $key => $value)
-					{
-						echo '<script src="'.$value.'"></script>'."\n";
-					}
+					echo '<script src="'.$value.'"></script>'."\n";
 				}
 			}else{
 				echo '<script src="'.@$data.'"></script>'."\n";

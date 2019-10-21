@@ -25,6 +25,7 @@ class Zea
 	var $edit_status   = true;
 	var $numbering     = FALSE;
 	var $paramname     = '';
+	var $dir_image     = '';
 	var $where         = '';
 	var $encrypt       = array();
 	var $file_error    = array();
@@ -234,6 +235,14 @@ class Zea
 		if(!empty($name))
 		{
 			$this->paramname = $name;
+		}
+	}
+
+	public function setDirImage($name = '')
+	{
+		if(!empty($name))
+		{
+			$this->dir_image = $name;
 		}
 	}
 
@@ -1911,7 +1920,7 @@ class Zea
 										{
 											$dir_image = !empty($this->id) ? $this->id : $last_id;
 										}else if($this->init == 'param'){
-											$dir_image = $this->paramname;
+											$dir_image = !empty($this->dir_image) ? $this->dir_image : $this->paramname;
 										}
 										foreach ($upload as $u_key => $u_value)
 										{
