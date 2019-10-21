@@ -1987,8 +1987,8 @@ class Zea
 															}
 														}
 														$data_param['value'] = json_encode($data_post);
-														$data_param['name']  = $dir_image;
-														$this->set_param($this->table, $dir_image, $data_param);
+														$data_param['name']  = $this->paramname;
+														$this->set_param($this->table, $this->paramname, $data_param);
 													}
 												}
 											}

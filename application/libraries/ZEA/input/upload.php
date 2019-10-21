@@ -8,6 +8,10 @@ if(!empty($field))
 		$image      = !empty($data_image) ? $this->id.'/'.$data_image : '';
 	}else if($this->init == 'param')
 	{
+		if(!empty($this->dir_image))
+		{
+			$name = $this->dir_image;
+		}
 		$image    = !empty($data[$field]) ? $name.'/'.$data[$field] : '';
 	}
 	echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
