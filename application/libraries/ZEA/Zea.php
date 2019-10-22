@@ -1822,6 +1822,7 @@ class Zea
 							$post_secure[$value['text']] = @$data_post[$value['text']];
 						}
 						$data_post = $post_secure;
+						pr($this->table);
 						if(!empty($this->table))
 						{
 							$data['msg']   = 'Data Failed to Save';
