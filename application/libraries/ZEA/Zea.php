@@ -1766,6 +1766,7 @@ class Zea
 		if(!empty($_POST))
 		{
 			$this->success = TRUE;
+			pr($this->success);
 			if($this->init == 'edit' || $this->init == 'param')
 			{
 				$data    = array();
@@ -1875,6 +1876,7 @@ class Zea
 									if(!empty($data))
 									{
 										$this->success = FALSE;
+										pr('unique');
 										if(!empty($this->unique_msg))
 										{
 											$pattern[0] = '~{value}~';
