@@ -1767,6 +1767,7 @@ class Zea
 		{
 			$this->success = TRUE;
 			pr($this->success);
+			pr($this->table);
 			if($this->init == 'edit' || $this->init == 'param')
 			{
 				$data    = array();
