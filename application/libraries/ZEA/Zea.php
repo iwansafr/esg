@@ -1766,7 +1766,6 @@ class Zea
 		if(!empty($_POST))
 		{
 			$this->success = TRUE;
-			pr($this->success);
 			if($this->init == 'edit' || $this->init == 'param')
 			{
 				$data    = array();
@@ -1798,9 +1797,9 @@ class Zea
 					}
 					pr($data_post);
 					pr($this->formName);
+					pr($data_post[$this->formName]);
 					if(!empty($data_post[$this->formName]))
 					{
-						pr($this->table);
 						unset($data_post[$this->formName]);
 						unset($data_post[$this->CI->security->get_csrf_token_name()]);
 						// if(isset($data_post['password']))
@@ -2216,7 +2215,6 @@ class Zea
 						// $data['alert'] = 'warning';
 					}
 				}
-				pr($data);
 				$this->msg[] = $data;
 				return $this->msg;
 			}else if($this->init == 'roll')
