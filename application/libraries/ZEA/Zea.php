@@ -2206,6 +2206,7 @@ class Zea
 						// $data['alert'] = 'warning';
 					}
 				}
+				pr($data);
 				$this->msg[] = $data;
 				return $this->msg;
 			}else if($this->init == 'roll')
