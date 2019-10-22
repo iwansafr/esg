@@ -1795,9 +1795,7 @@ class Zea
 							}
 						}
 					}
-					pr($data_post);
-					pr($this->formName);
-					pr($data_post[$this->formName]);
+					$this->formName = str_replace('.', '_', $this->formName);
 					if(!empty($data_post[$this->formName]))
 					{
 						unset($data_post[$this->formName]);
@@ -1878,7 +1876,6 @@ class Zea
 									if(!empty($data))
 									{
 										$this->success = FALSE;
-										pr('unique');
 										if(!empty($this->unique_msg))
 										{
 											$pattern[0] = '~{value}~';
@@ -1891,7 +1888,6 @@ class Zea
 									}
 								}
 							}
-							pr($this->success);
 							if($this->success)
 							{
 								$deleted_images = array();
@@ -1905,7 +1901,6 @@ class Zea
 								}else if($this->init == 'param')
 								{
 									$data_param = array();
-									pr($data_post);
 									if(!empty($data_post))
 									{
 										$data_param['name'] = $this->paramname;
