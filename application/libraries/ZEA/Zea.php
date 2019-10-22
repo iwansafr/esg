@@ -1799,6 +1799,7 @@ class Zea
 					}
 					pr($data_post);
 					pr($this->formName);
+					pr($this->table);
 					if(!empty($data_post[$this->formName]))
 					{
 						unset($data_post[$this->formName]);
