@@ -1767,7 +1767,6 @@ class Zea
 		{
 			$this->success = TRUE;
 			pr($this->success);
-			pr($this->table);
 			if($this->init == 'edit' || $this->init == 'param')
 			{
 				$data    = array();
@@ -1801,6 +1800,7 @@ class Zea
 					pr($this->formName);
 					if(!empty($data_post[$this->formName]))
 					{
+						pr($this->table);
 						unset($data_post[$this->formName]);
 						unset($data_post[$this->CI->security->get_csrf_token_name()]);
 						// if(isset($data_post['password']))
@@ -1825,8 +1825,6 @@ class Zea
 							$post_secure[$value['text']] = @$data_post[$value['text']];
 						}
 						$data_post = $post_secure;
-						pr($this->table);
-						pr($this->table);
 						if(!empty($this->table))
 						{
 							$data['msg']   = 'Data Failed to Save';
