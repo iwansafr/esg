@@ -1900,6 +1900,7 @@ class Zea
 								}else if($this->init == 'param')
 								{
 									$data_param = array();
+									pr($data_post);
 									if(!empty($data_post))
 									{
 										$data_param['name'] = $this->paramname;
@@ -1909,6 +1910,9 @@ class Zea
 									{
 										$data['msg']   = 'Data Saved Successfully';
 										$data['alert'] = 'success';
+									}else{
+										$data['msg']   = 'Data Failed to Saved';
+										$data['alert'] = 'danger';
 									}
 								}
 								$last_id = $this->CI->db->insert_id();
@@ -2206,7 +2210,6 @@ class Zea
 						// $data['alert'] = 'warning';
 					}
 				}
-				pr($data);
 				$this->msg[] = $data;
 				return $this->msg;
 			}else if($this->init == 'roll')
