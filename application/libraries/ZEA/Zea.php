@@ -1797,6 +1797,8 @@ class Zea
 							}
 						}
 					}
+					pr($data_post);
+					pr($this->formName);
 					if(!empty($data_post[$this->formName]))
 					{
 						unset($data_post[$this->formName]);
