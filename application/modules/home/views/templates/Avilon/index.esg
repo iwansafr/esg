@@ -64,6 +64,9 @@
 	{content_photo}
 </div>
 <div class="col-md-12">
+	{content_video}
+</div>
+<div class="col-md-12">
 	{content_payment}
 </div>
 <div class="col-md-12">

@@ -47,6 +47,8 @@
       <?php $this->load->view('content_gallery') ?>
 
       <?php $this->load->view('content_photo') ?>
+
+      <?php $this->load->view('content_video') ?>
       
       <section id="contact">
         <?php $this->load->view('contact') ?>
