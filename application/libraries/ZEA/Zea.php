@@ -24,6 +24,7 @@ class Zea
 	var $heading       = '';
 	var $edit_status   = true;
 	var $numbering     = FALSE;
+	var $none          = [];
 	var $paramname     = '';
 	var $dir_image     = '';
 	var $where         = '';
@@ -387,7 +388,9 @@ class Zea
 					}
 					$data = $this->CI->db->get()->result_array();
 					$options    = array();
-					$options[0] = 'None';
+					if(empty($this->none[$field])){
+						$options[0] = 'None';
+					}
 					if(!empty($data))
 					{
 						foreach ($data as $dkey => $dvalue)
@@ -437,6 +440,14 @@ class Zea
 					$this->help[$field] = '<a href="#tooltip_'.$field.'" id="tooltip_'.$field.'" data-toggle="tooltip" data-placement="top" title="'.$text.'"><i class="fa fa-question-circle"></i></a>';
 				}
 			}
+		}
+	}
+
+	public function removeNone($field = '',$none = true)
+	{
+		if(!empty($field))
+		{
+			$this->none[$field] = $none;
 		}
 	}
 
