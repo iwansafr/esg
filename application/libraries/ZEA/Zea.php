@@ -1977,7 +1977,7 @@ class Zea
 															unlink($file);
 														}
 													}
-													copy($_FILES[$upload[$i]]['tmp_name'], $dir.$file_name);
+													copy($_FILES[$upload[$i]]['tmp_name'], $dir.str_replace('/','_',$file_name));
 
 													$config_image_lib['image_library']  = 'gd2';
 													$config_image_lib['source_image']   = $dir.$file_name;
@@ -2122,7 +2122,7 @@ class Zea
 												}
 												foreach ($files_upload as $fu_key => $fu_value)
 												{
-													copy($fu_value['tmp'], $dir.$fu_value['name']);
+													copy($fu_value['tmp'], $dir.str_replace('/','_',$fu_value['name']));
 												}
 												if(is_array($files_name))
 												{
