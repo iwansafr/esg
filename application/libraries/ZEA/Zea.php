@@ -172,6 +172,11 @@ class Zea
 		}
 	}
 
+	public function disable_order_by()
+	{
+		$this->orderby = '';
+	}
+
 	public function set_param($table = '',$name = '', $post = array())
 	{
 		$status = array();
@@ -1169,7 +1174,10 @@ class Zea
 			{
 				$this->order_by($sort_by, @$_GET['type']);
 			}
-			$sql .= ' ORDER BY '.$this->orderby;
+			if(!empty($this->orderby))
+			{
+				$sql .= ' ORDER BY '.$this->orderby;
+			}
 			if(!$this->datatable)
 			{
 				$sql .= ' LIMIT '.$page*$limit.','.$limit;
