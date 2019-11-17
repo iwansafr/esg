@@ -1237,8 +1237,10 @@ class Zea
 					}else{
 						$this->param = $this->getParam();
 						$name = $this->paramname;
-						$data = json_decode($this->param['value'], 1);
+						$data = $this->param['value'];
+						$data = json_decode($data,1);
 					}
+					// pr($data);
 				}
 				$action = !empty($this->view) ? base_url($this->view).'/'.$this->id : '';
 				?>
