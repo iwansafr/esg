@@ -21,14 +21,14 @@ if(!empty($content))
 		</div>
 	</div>
 	<center>
-		<h3><?php echo $content['title'] ?></h3>
+		<!-- // <h3><?php echo $content['title'] ?></h3> ini di ilangin biar gaada judulnya ehehehe -->
 		<figure class="figure">
 			<?php 
 			if(!empty($content['image']) || !empty($content['image_link']))
 			{
 				?>
 				<img class="img-responsive image" src="<?php echo image_module('content', $content)?>" style="max-width: 100%; height: auto;">
-				<figcaption class="figure-caption text-center"><?php echo $content['title'] ?></figcaption>
+				<!-- // <figcaption class="figure-caption text-center"><?php echo $content['title'] ?></figcaption> ini juga di ilangin -->
 				<?php 
 			}
 			$data = $content['images'];
