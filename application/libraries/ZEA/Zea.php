@@ -1000,14 +1000,65 @@ class Zea
   {
     if(!empty($ids)&&!empty($table))
     {
-      foreach ($ids as $key => $id)
-      {
-        $this->CI->db->delete($table, array('id'=>$id));
-        $dir = FCPATH.'images/modules/'.$table.'/'.$id.'/';
-        recursive_rmdir($dir);
-        $dir = FCPATH.'images/modules/'.$table.'/gallery'.'/'.$id.'/';
-        recursive_rmdir($dir);
-      }
+  		$the_ids = implode(',',$ids);
+    	$data = $this->CI->db->query('SELECT * FROM '.$table.' WHERE id IN(?)', $the_ids)->result_array();
+    	if($table == 'trash')
+    	{
+    		$this->CI->db->where_in('id',$ids);
+    		$this->CI->db->delete($table);
+    		foreach ($data as $key => $value) 
+    		{
+    			$trash_dir = FCPATH.'images/modules/trash/'.$value['table_title'].'/'.$value['table_id'].'/';
+    			recursive_rmdir($trash_dir);
+    			$trash_dir = FCPATH.'images/modules/trash/'.$value['table_title'].'/gallery/'.$value['table_id'].'/';
+    			recursive_rmdir($trash_dir);
+    		}
+    	}else{
+	    	$new_data = [];
+	    	$val_data = [];
+	    	$i = 0;
+	    	foreach($data as $key => $value)
+	    	{
+	    		$val_data['table_id'] = $value['id'];
+	    		$val_data['user_id'] = @intval($_SESSION[base_url().'_logged_in']['id']);
+	    		$val_data['table_title'] = $table;
+	    		$val_data['table_content'] = json_encode($value);
+	    		$new_data[$i] = $val_data;
+	    		$i++;
+	    	}
+	    	$this->CI->db->insert_batch('trash', $new_data);
+	      foreach ($data as $key => $value)
+	      {
+	      	$id = $value['id'];
+	        $this->CI->db->delete($table, array('id'=>$id));
+	        $dir = FCPATH.'images/modules/'.$table.'/'.$id.'/';
+	        $trash_dir = FCPATH.'images/modules/trash/'.$table.'/'.$id.'/';
+	        if(!is_dir($trash_dir))
+	        {
+	        	mkdir($trash_dir,0777,1);
+	        }
+	        foreach(glob($dir.'*') as $file)
+					{
+						$name_file = explode('/', $file);
+						$name_file = end($name_file);
+						@copy($file,$trash_dir.'/'.$name_file);
+					}
+	        recursive_rmdir($dir);
+	        $dir = FCPATH.'images/modules/'.$table.'/gallery'.'/'.$id.'/';
+	        $trash_dir = FCPATH.'images/modules/trash/'.$table.'/gallery/'.$id.'/';
+	        if(!is_dir($trash_dir))
+	        {
+	        	mkdir($trash_dir,0777,1);
+	        }
+	        foreach(glob($dir.'*') as $file)
+					{
+						$name_file = explode('/', $file);
+						$name_file = end($name_file);
+						@copy($file,$trash_dir.'/'.$name_file);
+					}
+	        recursive_rmdir($dir);
+	      }
+    	}
     }
   }
 	public function set_data($table = '',$id = 0, $post = array())
