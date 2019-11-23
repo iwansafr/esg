@@ -1001,7 +1001,8 @@ class Zea
     if(!empty($ids)&&!empty($table))
     {
   		$the_ids = implode(',',$ids);
-    	$data = $this->CI->db->query('SELECT * FROM '.$table.' WHERE id IN(?)', $the_ids)->result_array();
+  		$this->CI->db->where_in('id',$ids);
+    	$data = $this->CI->db->get($table)->result_array();
     	if($table == 'trash')
     	{
     		$this->CI->db->where_in('id',$ids);

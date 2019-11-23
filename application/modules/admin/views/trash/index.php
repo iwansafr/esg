@@ -16,8 +16,8 @@ $form->setLabel('id','action');
 		    <span class="caret"></span>
 		  </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-		  	<li><a href="'.base_url('admin/trash/detail/').'{id}"><i class="fa fa-search"></i>Detail</a></li>
-		    <li><a href="'.base_url('admin/trash/restore/{id}').'"><i class="fa fa-recycle"></i>Restore</a></li>
+		  	<li><a href="'.base_url('admin/trash/detail/').'{id}/detail"><i class="fa fa-search"></i>Detail</a></li>
+		    <li><a href="'.base_url('admin/trash/restore/{id}/restore').'"><i class="fa fa-recycle"></i>Restore</a></li>
 		  </ul>
 		</div>
 		');

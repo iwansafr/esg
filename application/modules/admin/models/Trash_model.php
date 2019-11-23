@@ -31,8 +31,26 @@ class Trash_model extends CI_Model
 						@copy($file,$dir.'/'.$name_file);
 					}
 	        recursive_rmdir($trash_dir);
+	        return ['status'=>true,'data'=>$data];
+				}else{
+					return ['status'=>false,'data'=>[]];
 				}
 			}
 		}
+	}
+
+	public function detail($id = 0)
+	{
+		$id = @intval($id);
+		if(!empty($id))
+		{
+			$data = $this->db->get_where('trash',['id'=>$id])->row_array();
+			if(!empty($data))
+			{
+				$data['table_content'] = json_decode($data['table_content'],1);
+				return ['status'=>true,'data'=>$data];
+			}
+		}
+		return ['status'=>false,'data'=>[]];
 	}
 }

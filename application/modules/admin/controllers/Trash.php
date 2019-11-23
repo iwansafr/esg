@@ -25,4 +25,9 @@ class Trash extends CI_Controller
 		$this->load->view('index',['data'=>$this->trash_model->restore($id)]);
 	}
 
+	public function detail($id = 0)
+	{
+		$this->load->view('index',['data'=>$this->trash_model->detail($id)]);
+	}
+
 }
