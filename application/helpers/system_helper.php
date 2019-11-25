@@ -8,6 +8,11 @@ function msg($msg = 'alert', $alert = 'default')
 	<?php
 }
 
+function button($label = '', $link = '', $type='default')
+{
+	echo '<a href="'.$link.'" class="btn btn-'.$type.'" >'.$label.'</a>';
+}
+
 function array_to_string($data = array())
 {
 	if(!empty($data) && is_array($data))
