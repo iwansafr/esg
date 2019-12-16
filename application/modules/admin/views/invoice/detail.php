@@ -175,7 +175,7 @@ $contact = $this->esg->get_config('contact');
 					</thead>
 					<tbody>
 														<tr>
-								<td class=""><?php echo $data['updated'] ?></td>
+								<td class=""><?php echo $data['created'] ?></td>
 								<td class=""><?php echo $data['payment_method'];?></td>
 								<td class="">
 									-
