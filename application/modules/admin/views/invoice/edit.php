@@ -35,5 +35,11 @@ $this->zea->addInput('status','dropdown');
 $this->zea->setOptions('status',['Unpaid','Paid']);
 $this->zea->setLabel('status','Payment Status');
 
+if(!empty($this->input->get('custom_date')))
+{
+	$this->zea->addInput('created','text');
+	$this->zea->setType('created','datetime-local');
+}
+
 $this->zea->setFormName('invoice_form');
 $this->zea->form();
