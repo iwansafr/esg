@@ -836,7 +836,25 @@ class Zea
 			{
 				if($value['text'] == $field)
 				{
-					$this->plaintext[$field] = $text;
+					if(is_array($text))
+					{
+						$text_link = '';
+						foreach($text AS $text_key => $text_value)
+						{
+							$text_link .= '<li><a href="'.$text_key.'"><i class="fa fa-search"></i>'.$text_value.'</a></li>';
+						}
+						$text_link = 
+						'<div class="dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								Action
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">'.$text_link.'</ul>
+						</div>';
+						$this->plaintext[$field] = $text_link;
+					}else{
+						$this->plaintext[$field] = $text;
+					}
 				}
 			}
 		}
