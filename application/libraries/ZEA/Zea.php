@@ -17,6 +17,8 @@ class Zea
 		$this->setUrl();
 	}
 
+	var $api           = '';
+	var $api_server    = false;
 	var $table         = '';
 	var $formName      = 'form_1';
 	var $view          = '';
@@ -76,6 +78,19 @@ class Zea
 	var $url           = '';
 	var $get           = '';
 	var $key           = 'id';
+
+	public function api($url = '')
+	{
+		if(isLink($url))
+		{
+			$this->api = $url;
+		}
+	}
+
+	public function api_server()
+	{
+		$this->api_server = true;
+	}
 
 	public function init($text = '')
 	{
@@ -573,23 +588,26 @@ class Zea
 		{
 			if(!empty($this->input))
 			{
-				$field = $this->CI->db->list_fields($this->table);
-				foreach ($this->input as $key => $value)
+				if(empty($this->api))
 				{
-					if($this->init == 'param')
+					$field = $this->CI->db->list_fields($this->table);
+					foreach ($this->input as $key => $value)
 					{
-						$this->data[$key] = '';
-					}else if($this->init == 'edit'){
-						if(in_array($value['text'],$field))
+						if($this->init == 'param')
 						{
 							$this->data[$key] = '';
-						}
-					}else if($this->init == 'roll')
-					{
-						$this->data[0][$key] = '';
-						if(!in_array('id', $this->input))
+						}else if($this->init == 'edit'){
+							if(in_array($value['text'],$field))
+							{
+								$this->data[$key] = '';
+							}
+						}else if($this->init == 'roll')
 						{
-							$this->data[0]['id'] = 0;
+							$this->data[0][$key] = '';
+							if(!in_array('id', $this->input))
+							{
+								$this->data[0]['id'] = 0;
+							}
 						}
 					}
 				}
@@ -1124,159 +1142,170 @@ class Zea
   }
 	public function getData()
 	{
-		$navigation = $this->CI->esg->get_esg('navigation');
-		$nav_module = @$navigation['array'][0];
-		$nav_task   = !empty($navigation['array'][1]) ? $navigation['array'][1] : 'index';
-		$data       = array();
-
-		if($this->init == 'roll')
+		if(empty($this->api))
 		{
-			$input   = array();
-			$limit   = 12;
-			$page    = (@intval($_GET['page']) > 0 ) ? $_GET['page']-1 : @intval($_GET['page']);
-			$sort_by = @$_GET['sort_by'];
-			$keyword = @$_GET['keyword'];
-			$id      = @intval($_GET['id']);
-			$where   = '';
-			$bind    = array();
-			$url_get = '';
-			$get     = @$_GET;
-			
-			foreach ($this->input as $key => $value)
+
+			$navigation = $this->CI->esg->get_esg('navigation');
+			$nav_module = @$navigation['array'][0];
+			$nav_task   = !empty($navigation['array'][1]) ? $navigation['array'][1] : 'index';
+			$data       = array();
+
+			if($this->init == 'roll')
 			{
-				$input[] = $key;
-			}
-			if(!empty($input))
-			{
-				$input = implode($input,',');
-			}
-			$sql = 'SELECT '.$input.' FROM '.$this->table;
-			if(!empty($this->jointable))
-			{
-				$sql = 'SELECT '.$this->jointable['field'].' FROM '.$this->table.' INNER JOIN '.$this->jointable['table'].' '.$this->jointable['condition'];
-				if(!empty($this->jointable['table2']) && !empty($this->jointable['condition2']))
+				$input   = array();
+				$limit   = 12;
+				$page    = (@intval($_GET['page']) > 0 ) ? $_GET['page']-1 : @intval($_GET['page']);
+				$sort_by = @$_GET['sort_by'];
+				$keyword = @$_GET['keyword'];
+				$id      = @intval($_GET['id']);
+				$where   = '';
+				$bind    = array();
+				$url_get = '';
+				$get     = @$_GET;
+				
+				foreach ($this->input as $key => $value)
 				{
-					$sql .= ' INNER JOIN '.$this->jointable['table2'].' '.$this->jointable['condition2'];
+					$input[] = $key;
 				}
-			}
-			if(!empty($keyword))
-			{
-				$url_get .= '?';
-				$sql     .= ' WHERE (';
-			}else if(!empty($this->where)){
-				$sql     .= ' WHERE (';
-			}else if(!empty($sort_by) || !empty($id))
-			{
-				$url_get .= '?';
-			}
-			if(!empty($get['page']))
-			{
-				$this->url = str_replace('?page='.$get['page'], '', $this->url);
-			}
-			if(!empty($get))
-			{
-				$i = 0;
-				foreach ($get as $key => $value)
+				if(!empty($input))
 				{
-					if($key != 'page')
+					$input = implode($input,',');
+				}
+				$sql = 'SELECT '.$input.' FROM '.$this->table;
+				if(!empty($this->jointable))
+				{
+					$sql = 'SELECT '.$this->jointable['field'].' FROM '.$this->table.' INNER JOIN '.$this->jointable['table'].' '.$this->jointable['condition'];
+					if(!empty($this->jointable['table2']) && !empty($this->jointable['condition2']))
 					{
-						if($i > 0)
-						{
-							$url_get .= '&';
-						}
-						$url_get .= $key.'='.$value;
+						$sql .= ' INNER JOIN '.$this->jointable['table2'].' '.$this->jointable['condition2'];
 					}
-					$i++;
-				}
-				if(!preg_match('~\?~', $url_get, $match)){
-					$url_get = '?'.$url_get;
 				}
 				if(!empty($keyword))
 				{
-					$this->url = str_replace('?keyword='.$keyword, '', $this->url);
-				}
-			}
-			if(!empty($keyword))
-			{
-				if(empty($this->field))
+					$url_get .= '?';
+					$sql     .= ' WHERE (';
+				}else if(!empty($this->where)){
+					$sql     .= ' WHERE (';
+				}else if(!empty($sort_by) || !empty($id))
 				{
-					foreach ($this->input as $key => $value) 
+					$url_get .= '?';
+				}
+				if(!empty($get['page']))
+				{
+					$this->url = str_replace('?page='.$get['page'], '', $this->url);
+				}
+				if(!empty($get))
+				{
+					$i = 0;
+					foreach ($get as $key => $value)
 					{
-						$this->field[] = $value['text'];
+						if($key != 'page')
+						{
+							if($i > 0)
+							{
+								$url_get .= '&';
+							}
+							$url_get .= $key.'='.$value;
+						}
+						$i++;
+					}
+					if(!preg_match('~\?~', $url_get, $match)){
+						$url_get = '?'.$url_get;
+					}
+					if(!empty($keyword))
+					{
+						$this->url = str_replace('?keyword='.$keyword, '', $this->url);
 					}
 				}
-				if(!empty($this->field))
+				if(!empty($keyword))
 				{
-					if(is_array($this->field))
+					if(empty($this->field))
 					{
-						if(!empty($this->jointable))
+						foreach ($this->input as $key => $value) 
 						{
-							$jointable_field = explode(',',$this->jointable['field']);
-							foreach ($jointable_field as $key => $value)
-							{
-								if(preg_match('~(.*?) AS~', $value, $ketemu))
-								{
-									$value = @$ketemu[1];
-								}
-								if($key > 0){
-									$where .= ' OR ';
-								}
-								$where .= $value.' LIKE ?';
-								$bind[] = '%'.$keyword.'%';
-							}
-							$where .= ')';
-						}else{
-							foreach ($this->field as $key => $value)
-							{
-								if($key > 0){
-									$where .= ' OR ';
-								}
-								$where .= $value.' LIKE ?';
-								$bind[] = '%'.$keyword.'%';
-							}
-							$where .= ')';
+							$this->field[] = $value['text'];
 						}
 					}
-					$sql .= $where;
+					if(!empty($this->field))
+					{
+						if(is_array($this->field))
+						{
+							if(!empty($this->jointable))
+							{
+								$jointable_field = explode(',',$this->jointable['field']);
+								foreach ($jointable_field as $key => $value)
+								{
+									if(preg_match('~(.*?) AS~', $value, $ketemu))
+									{
+										$value = @$ketemu[1];
+									}
+									if($key > 0){
+										$where .= ' OR ';
+									}
+									$where .= $value.' LIKE ?';
+									$bind[] = '%'.$keyword.'%';
+								}
+								$where .= ')';
+							}else{
+								foreach ($this->field as $key => $value)
+								{
+									if($key > 0){
+										$where .= ' OR ';
+									}
+									$where .= $value.' LIKE ?';
+									$bind[] = '%'.$keyword.'%';
+								}
+								$where .= ')';
+							}
+						}
+						$sql .= $where;
+					}
 				}
-			}
-			if(!empty($this->where))
-			{
-				$sql .= $this->hasGet($sql) ? ' AND ('.$this->where.' )' : ' '.$this->where.')';
-			}
-			$num_rows = $this->CI->db->query($sql,$bind)->num_rows();
+				if(!empty($this->where))
+				{
+					$sql .= $this->hasGet($sql) ? ' AND ('.$this->where.' )' : ' '.$this->where.')';
+				}
+				$num_rows = $this->CI->db->query($sql,$bind)->num_rows();
 
-			if(!empty($sort_by))
-			{
-				$this->order_by($sort_by, @$_GET['type']);
+				if(!empty($sort_by))
+				{
+					$this->order_by($sort_by, @$_GET['type']);
+				}
+				if(!empty($this->orderby))
+				{
+					$sql .= ' ORDER BY '.$this->orderby;
+				}
+				if(!$this->datatable)
+				{
+					$sql .= ' LIMIT '.$page*$limit.','.$limit;
+				}
+				if(!empty($bind))
+				{
+					$data['data']  = $this->CI->db->query($sql,$bind)->result_array();
+				}else{
+					$data['data']  = $this->CI->db->query($sql)->result_array();
+				}
+				$data['query'] = $this->CI->db->last_query();
+				$data['num_rows'] = $num_rows;
+				if(!$this->datatable)
+				{
+					$config        = pagination($num_rows,$limit,base_url($this->url.$url_get));
+			    $this->CI->pagination->initialize($config);
+			    $data['pagination'] = $this->CI->pagination->create_links();
+				}else{
+					$data['pagination'] = '';
+				}
+			}else if($this->init == 'edit'){
+				$data = $this->CI->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
+				$data = @$data;
 			}
-			if(!empty($this->orderby))
+		}else{
+			// $data = file_get_contents($this->api);
+			$data = curl($this->api);
+			if(!empty($data))
 			{
-				$sql .= ' ORDER BY '.$this->orderby;
+				$data = json_decode($data,1);
 			}
-			if(!$this->datatable)
-			{
-				$sql .= ' LIMIT '.$page*$limit.','.$limit;
-			}
-			if(!empty($bind))
-			{
-				$data['data']  = $this->CI->db->query($sql,$bind)->result_array();
-			}else{
-				$data['data']  = $this->CI->db->query($sql)->result_array();
-			}
-			$data['query'] = $this->CI->db->last_query();
-			$data['num_rows'] = $num_rows;
-			if(!$this->datatable)
-			{
-				$config        = pagination($num_rows,$limit,base_url($this->url.$url_get));
-		    $this->CI->pagination->initialize($config);
-		    $data['pagination'] = $this->CI->pagination->create_links();
-			}else{
-				$data['pagination'] = '';
-			}
-		}else if($this->init == 'edit'){
-			$data = $this->CI->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
-			$data = @$data;
 		}
 		return $data;
 	}
@@ -1287,6 +1316,8 @@ class Zea
 		{
 			$data = array();
 			$data = $this->CI->db->query('SELECT value FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
+			// pr($this->CI->db->last_query());
+			// pr($data);die();
 			return $data;
 		}
 	}
@@ -2433,6 +2464,29 @@ class Zea
 				}
 				$this->msg[] = $data;
 				return $this->msg;
+			}
+		}
+		if(!empty($this->api_server))
+		{
+			if(empty($this->id))
+			{
+				if($this->init == 'param')
+				{
+					if(!empty($this->param))
+					{
+						$name = $this->paramname;
+						$data = json_decode($this->param['value'], 1);
+					}else{
+						$this->param = $this->getParam();
+						$name = $this->paramname;
+						$data = $this->param['value'];
+						$data = json_decode($data,1);
+					}
+				}else{
+					$this->setData();
+					$data = $this->data;
+				}
+				return $data;
 			}
 		}
 	}
