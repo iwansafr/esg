@@ -55,6 +55,7 @@ class Zea
 	var $checkbox      = array();
 	var $radio         = array();
 	var $orderby       = 'id DESC';
+	var $group_by      = '';
 	var $multiselect   = array();
 	var $elementid     = array();
 	var $value         = array();
@@ -185,6 +186,14 @@ class Zea
 		{
 			$this->orderby = $field.' '.$order;
 		}
+	}
+
+	public function group_by($field = '')
+	{
+		if(!empty($field))
+		{
+			$this->group_by = $field;
+		}	
 	}
 
 	public function disable_order_by()
@@ -1259,11 +1268,16 @@ class Zea
 							}
 						}
 						$sql .= $where;
+
 					}
 				}
 				if(!empty($this->where))
 				{
 					$sql .= $this->hasGet($sql) ? ' AND ('.$this->where.' )' : ' '.$this->where.')';
+				}
+				if(!empty($this->group_by))
+				{
+					$sql .= ' GROUP BY '.$this->group_by;
 				}
 				$num_rows = $this->CI->db->query($sql,$bind)->num_rows();
 
