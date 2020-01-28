@@ -66,11 +66,10 @@ $contact = $this->esg->get_config('contact');
 					<strong>Bank Detail</strong><br>
 					<?php foreach ($bank as $key => $value): ?>
 						<span class="small-text">
-							Bank 		: <?php echo $value['bank_name'] ?> 
-							No Rek 	: <?php echo $value['bank_number'] ?> 
-							A/N 		: <?php echo $value['person_name'] ?> 
+							Bank 		: <?php echo $value['bank_name'] ?> <br>
+							No Rek 	: <?php echo $value['bank_number'] ?> <br>
+							A/N 		: <?php echo $value['person_name'] ?> <br>
 						</span>
-						<br>
 					<?php endforeach ?>
 					<br><br>
 				</div>
