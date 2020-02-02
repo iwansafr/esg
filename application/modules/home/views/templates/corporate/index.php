@@ -12,7 +12,11 @@
 		</header>
 		<?php $this->load->view('content_slider') ?>
 		<section id="content">
-			<?php $this->load->view('content') ?>
+			<?php if ($mod['content']=='home/index'): ?>
+				<?php $this->load->view('content') ?>
+			<?php else: ?>
+				<?php $this->load->view('templates/'.$templates['public_template'].'/'.$mod['content']) ?>
+			<?php endif ?>
 		</section>
 		<footer id="footer" class="dark">
 			<div id="copyrights">
@@ -21,8 +25,8 @@
 		</footer>
 	</div>
 	<div id="gotoTop" class="icon-angle-up"></div>
-	<script type="text/javascript" src="<?php echo base_url('templates/corporate/');?>js/jquery.js"></script>
-	<script type="text/javascript" src="<?php echo base_url('templates/corporate/');?>js/plugins.js"></script>
-	<script type="text/javascript" src="<?php echo base_url('templates/corporate/');?>js/functions.js"></script>
+	<script type="text/javascript" src="<?php echo $link_template;?>/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo $link_template;?>/js/plugins.js"></script>
+	<script type="text/javascript" src="<?php echo $link_template;?>/js/functions.js"></script>
 </body>
 </html>

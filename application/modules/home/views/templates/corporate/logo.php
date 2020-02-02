@@ -1,6 +1,12 @@
 <div class="container clearfix">
 	<div id="logo" class="divcenter">
-		<a href="<?php echo base_url('templates/corporate');?>/index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img class="divcenter" src="<?php echo base_url('templates/corporate/');?>images/logo.png" alt="Canvas Logo"></a>
-		<a href="<?php echo base_url('templates/corporate');?>/index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img class="divcenter" src="<?php echo base_url('templates/corporate/');?>images/logo@2x.png" alt="Canvas Logo"></a>
+		<?php if (!empty($logo[$logo['display']]) && isLink($logo[$logo['display']])): ?>
+			<a href="<?php echo $site['link'] ?>" class="standard-logo" data-dark-logo="<?php echo image_module('config', 'logo/'.$logo['image']) ?>"><img class="divcenter" src="<?php echo image_module('config', 'logo/'.$logo['image']) ?>" alt="<?php echo $logo['title'] ?> Logo"></a>
+			<a href="<?php echo $site['link'] ?>" class="retina-logo" data-dark-logo="<?php echo image_module('config', 'logo/'.$logo['image']) ?>"><img class="divcenter" src="<?php echo image_module('config', 'logo/'.$logo['image']) ?>" alt="<?php echo $logo['title'] ?> Logo"></a>
+		<?php else: ?>
+			<a href="<?php echo $site['link'] ?>">
+				<h1 class="center"><?php echo $logo['title'] ?></h1>
+			</a>
+		<?php endif ?>
 	</div>
 </div>
