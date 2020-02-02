@@ -33,7 +33,7 @@ class Zea
 	var $encrypt       = array();
 	var $file_error    = array();
 	var $edit_link     = 'edit?id=';
-	var $limit         = 12;
+	var $limit         = 6;
 	var $id            = 0;
 	var $delete        = false;
 	var $delete_type   = 'submit';

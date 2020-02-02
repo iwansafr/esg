@@ -10,7 +10,11 @@
 			<?php $this->load->view('logo') ?>
 			<?php $this->load->view('menu_main') ?>
 		</header>
-		<?php $this->load->view('content_slider') ?>
+		<?php if ($mod['content'] == 'home/index'): ?>
+			<?php $this->load->view('content_slider') ?>
+		<?php else: ?>
+			<?php $this->load->view('page_title') ?>
+		<?php endif ?>
 		<section id="content">
 			<?php if ($mod['content']=='home/index'): ?>
 				<?php $this->load->view('content') ?>
