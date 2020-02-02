@@ -29,9 +29,11 @@
 					<div class="entry-content notopmargin">
 						<?php echo $content['content'] ?>
 						<div class="tagcloud clearfix bottommargin">
-							<?php foreach ($content['tag'] as $tag_key => $tag_value): ?>
-								<a href="<?php echo content_tag_link($tag_value['title']) ?>"><?php echo $tag_value['title'] ?></a>
-							<?php endforeach ?>
+							<?php if (!empty($content['tag'])): ?>
+								<?php foreach ($content['tag'] as $tag_key => $tag_value): ?>
+									<a href="<?php echo content_tag_link($tag_value['title']) ?>"><?php echo $tag_value['title'] ?></a>
+								<?php endforeach ?>
+							<?php endif ?>
 						</div>
 						<div class="clear"></div>
 					</div>
