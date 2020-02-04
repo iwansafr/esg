@@ -1,5 +1,4 @@
 <?php if (!empty($content)): ?>
-	
 	<div class="content-wrap">
 		<div class="container clearfix">
 			<div class="single-post nobottommargin">
@@ -41,4 +40,6 @@
 			</div>
 		</div>
 	</div>
+<?php else: ?>
+	<?php msg('Halaman Tidak Ditemukan','danger') ?>
 <?php endif ?>
