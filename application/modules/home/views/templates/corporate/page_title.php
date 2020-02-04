@@ -1,3 +1,4 @@
+<?php $page_title = ''; ?>
 <?php if (!empty($content['taxonomy'])): ?>
 	<?php $page_title = $content['taxonomy'] ?>
 <?php else: ?>
