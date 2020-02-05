@@ -2,6 +2,7 @@
 	<nav id="primary-menu" class="style-2">
 		<div class="container clearfix">
 			<?php if (!empty($home['menu_main'])): ?>
+				<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 				<ul>
 					<?php foreach ($home['menu_main'] as $key => $value): ?>
 						<?php if (empty($value['child'])): ?>
