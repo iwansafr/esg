@@ -1,0 +1,59 @@
+<style type="text/css">
+	.default{
+		margin-top: 5%;
+		height: 40px;
+	}
+</style>
+<div class="col-md-12">
+	<div class="col-md-6">
+		{menu_top}
+	</div>
+		<div class="col-md-6">
+			<div class="panel-group">
+				<a href="#admin/config/contact#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+				<div class="panel panel-default text-center">
+					<h5>Social Media</h5>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="col-md-12">
+	<div class="panel-group">
+		<a href="#admin/config/logo#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+		<div class="panel panel-default text-center">
+			<h5>logo</h5>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="col-md-6">
+		{menu_main}
+	</div>
+	<div class="col-md-6">
+		<div class="panel-group">
+			<div class="panel panel-default text-center">
+				<h5>Search</h5>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	{content_slider}
+</div>
+<div class="col-md-12">
+	{content}
+</div>
+<div class="col-md-12">
+	<div class="col-md-6">
+		<div class="panel-group">
+			<a href="#admin/config/logo#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>
+			<div class="panel panel-default text-center">
+				<h5>logo</h5>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		{menu_bottom}
+	</div>
+</div>
+
