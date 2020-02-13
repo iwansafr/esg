@@ -11,7 +11,7 @@
 						<?php if (empty($value['child'])): ?>
 							<li><a href="<?php echo menu_link($value['link']) ?>"><?php echo $value['title'] ?></a></li>
 						<?php else: ?>
-							<li class="mega-menu"><a href="#"><div><?php echo $value['title'] ?></div></a>
+							<li class="mega-menu"><a href="<?php echo menu_link($value['link']) ?>"><div><?php echo $value['title'] ?></div></a>
 								<div class="mega-menu-content style-2 clearfix">
 									<?php foreach ($value['child'] as $ckey => $cvalue): ?>
 										<ul class="mega-menu-column col-md-3">
