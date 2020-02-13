@@ -16,9 +16,9 @@
 									<?php foreach ($value['child'] as $ckey => $cvalue): ?>
 										<ul class="mega-menu-column col-md-3">
 											<?php if (empty($cvalue['child'])): ?>
-												<li><a href="<?php echo menu_link($cvalue['link']) ?>"><?php echo $cvalue['title'] ?></a></li>								
+												<li><a href="#"><?php echo $cvalue['title'] ?></a></li>								
 											<?php else: ?>
-												<li class="mega-menu-title"><a href="#"><div><i class="icon-stack"></i><?php echo $cvalue['title'] ?></div></a>
+												<li class="mega-menu-title"><a href="<?php echo menu_link($cvalue['link']) ?>"><div><i class="icon-stack"></i><?php echo $cvalue['title'] ?></div></a>
 													<ul>
 														<?php foreach ($cvalue['child'] as $gckey => $gcvalue): ?>
 															<?php if (empty($gcvalue['child'])): ?>
