@@ -15,7 +15,7 @@ if(!empty($home['menu_top']))
 							<?php
 						}
 						?>
-						<li><a href="<?php echo base_url('admin') ?>">Login</a>
+						<!-- <li><a href="<?php echo base_url('admin') ?>">Login</a>
 							<div class="top-link-section">
 								<form method="post" action="<?php echo base_url('admin/login') ?>">
 									<div class="input-group" id="top-login-username">
@@ -32,7 +32,7 @@ if(!empty($home['menu_top']))
 									<button class="btn btn-danger btn-block" type="submit">Sign in</button>
 								</form>
 							</div>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 			</div>
