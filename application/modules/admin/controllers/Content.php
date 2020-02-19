@@ -31,7 +31,7 @@ class Content extends CI_Controller
 	{
 		$data['tag_name'] = $this->content_model->content_tag();
 		$this->content_model->load();
-		$this->esg->set_esg('extra_js', base_url('templates/AdminLTE/assets/dist/js/modules/content/script.js'));
+		$this->esg->set_esg('extra_js', [base_url('templates/AdminLTE/assets/dist/js/modules/content/script.js')]);
 		$this->load->view('index', $data);
 		$this->content_model->content_save();
 	}
