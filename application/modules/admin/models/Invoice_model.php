@@ -32,4 +32,34 @@ class Invoice_model extends CI_Model
 	{
 		return $this->db->get('bank_account')->result_array();
 	}
+
+	public function graphics()
+	{
+		$data = [];
+		$this->db->where(['MONTH(created)'=>date('m'),'YEAR(created)'=>date('Y'),'status'=>1]);
+		$data['month_paid'] = $this->db->get('invoice')->result_array();
+		$data['month_paid_venue'] = [];
+		if(!empty($data['month_paid']))
+		{
+			foreach ($data['month_paid'] as $key => $value) 
+			{
+				$money = explode(',',$value['items']);
+				foreach ($money as $mkey => $mvalue)
+				{
+					$items = explode('=', $mvalue);
+					if(!isset($data['month_paid_venue'][$items[0]])){
+						$data['month_paid_venue'][$items[0]] = 0;
+					}
+					$ppn = $value['ppn'] == 1 ? $items[1]*0.1 : 0;
+					$data['month_paid_venue'][$items[0]] += @intval($items[1]) + $ppn;
+				}
+			}
+			$data['month_venue_total'] = 0;
+			foreach ($data['month_paid_venue'] as $key => $value) 
+			{
+				$data['month_venue_total'] += $value;
+			}
+		}
+		return $data;
+	}
 }

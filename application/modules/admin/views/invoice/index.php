@@ -1,7 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-
-<?php
+if(!empty($data['month_venue_total'])){
+	?>
+	<span class="badge">Pendapatan Bulan ini Rp,- <?php echo number_format($data['month_venue_total'],2,',','.');?></span>
+	<?php
+}
 $this->zea->init('roll');
 $this->zea->setTable('invoice');
 $this->zea->search();
