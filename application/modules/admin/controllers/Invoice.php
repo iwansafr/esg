@@ -40,4 +40,16 @@ Class Invoice extends CI_Controller
 	{
 		$data = $this->invoice_model->graphics();
 	}
+
+	public function config()
+	{
+		$templates = [];
+		foreach(glob(APPPATH.'modules/admin/views/invoice/template_*') AS $key => $value){
+			$value = explode('/', $value);
+			$value = end($value);
+			$value = str_replace('.php','',$value);
+			$templates[$value] = $value;
+		}
+		$this->load->view('index',['invoice_templates'=>$templates]);
+	}
 }
