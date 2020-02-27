@@ -127,6 +127,9 @@ if(!empty($content))
 				</a>
 				<div class="clearfix"></div>
 			</div>
+			<div id="fb-root"></div>
+			<script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v6.0"></script>
+			<div class="fb-share-button" data-href="<?php echo base_url($this->uri->uri_string) ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
 		</div>
 	</div>	
 	<br>
