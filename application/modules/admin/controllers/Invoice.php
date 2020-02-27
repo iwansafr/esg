@@ -15,7 +15,8 @@ Class Invoice extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('index');
+		$data = $this->invoice_model->graphics();
+		$this->load->view('index',['data'=>$data]);
 	}
 
 	public function clear_list()
@@ -33,5 +34,22 @@ Class Invoice extends CI_Controller
 		$data['data'] = $this->invoice_model->get_detail($id);
 		$data['bank'] = $this->invoice_model->get_bank();
 		$this->load->view('invoice/detail', $data);
+	}
+
+	public function graphics()
+	{
+		$data = $this->invoice_model->graphics();
+	}
+
+	public function config()
+	{
+		$templates = [];
+		foreach(glob(APPPATH.'modules/admin/views/invoice/template_*') AS $key => $value){
+			$value = explode('/', $value);
+			$value = end($value);
+			$value = str_replace('.php','',$value);
+			$templates[$value] = $value;
+		}
+		$this->load->view('index',['invoice_templates'=>$templates]);
 	}
 }
