@@ -2,7 +2,7 @@
 	if(!empty($home['content_extra']))
 	{
 		?>
-		<div class="row" style="margin: 0 10% 0 10%;">
+		<div class="row" style="margin: 5% 10% 0 10%;">
 			<hr>
 			<?php
 			foreach ($home['content_extra'] as $key => $value) 
