@@ -12,7 +12,7 @@ if(!empty($link_template))
 	<link rel="stylesheet" href="<?php echo $link_template;?>/css/font-icons.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $link_template;?>/css/animate.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $link_template;?>/css/magnific-popup.css" type="text/css" />
-
+	<link href="<?php echo base_url();?>/templates/avilon/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo $link_template;?>/css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php

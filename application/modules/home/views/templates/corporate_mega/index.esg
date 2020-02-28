@@ -44,6 +44,9 @@
 	{content}
 </div>
 <div class="col-md-12">
+	{content_extra}
+</div>
+<div class="col-md-12">
 	<div class="col-md-6">
 		<div class="panel-group">
 			<a href="#admin/config/logo#" class="btn btn-default pull-right" style="position: absolute;"><i class="fa fa-pencil-alt"></i></a>

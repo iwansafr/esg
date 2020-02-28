@@ -17,6 +17,7 @@
 		<section id="content">
 			<?php if ($mod['content']=='home/index'): ?>
 				<?php $this->load->view('content') ?>
+				<?php $this->load->view('content_extra') ?>
 			<?php else: ?>
 				<?php $this->load->view('templates/'.$templates['public_template'].'/'.$mod['content']) ?>
 			<?php endif ?>
