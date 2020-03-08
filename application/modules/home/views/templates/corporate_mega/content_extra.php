@@ -9,7 +9,7 @@
 			{
 				?>
 				<div class="col-md-6">
-					<div class="row" style="border: 1px black solid;margin-bottom: 5%; height: 150px;">
+					<div class="row" style="margin-bottom: 5%; height: 200px;">
 						<div class="col-md-2">
 							<i class="fa <?php echo $value['icon'] ?>" style="color: #666666;font-size: 80px;transition: 0.5s;line-height: 0;"></i>
 						</div>
