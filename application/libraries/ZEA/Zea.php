@@ -2114,8 +2114,8 @@ class Zea
 													$config_image_lib['source_image']   = $dir.$file_name;
 													// $config_image_lib['create_thumb']   = TRUE;
 													$config_image_lib['maintain_ratio'] = TRUE;
-													$config_image_lib['width']          = 1750;
-													$config_image_lib['height']         = 1500;
+													$config_image_lib['width']          = 750;
+													$config_image_lib['height']         = 500;
 
 													$this->CI->load->library('image_lib', $config_image_lib);
 
