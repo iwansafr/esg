@@ -1542,34 +1542,37 @@ class Zea
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">
-									<?php echo $this->heading;?>
-								</h3>
-
+								<div class="col-md-8">
+									<h3 class="box-title">
+										<?php echo $this->heading;?>
+									</h3>
+								</div>
 								<?php
 								if($this->search == TRUE)
 								{
 									if(!$this->datatable)
 									{
 										?>
-				             	<div class="box-tools">
-				             		<form action="" method="get">
-						              <div class="input-group input-group-sm" style="width: 150px;">
-						                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>" required>
-						                <?php if (!empty($this->get)): ?>
-						                	<?php foreach ($this->get as $key => $value): ?>
-						                		<?php if ($key != 'page'): ?>
-						                			<input type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
-						                		<?php endif ?>
-						                	<?php endforeach ?>
-						                	
-						                <?php endif ?>
-						                <div class="input-group-btn">
-						                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-						                </div>
-						              </div>
-		              			</form>
-				            	</div>
+											<div class="col-md-2 pull-right">
+					             	<div class="box-tools">
+					             		<form action="" method="get">
+							              <div class="input-group input-group-sm">
+							                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>" required>
+							                <?php if (!empty($this->get)): ?>
+							                	<?php foreach ($this->get as $key => $value): ?>
+							                		<?php if ($key != 'page'): ?>
+							                			<input type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
+							                		<?php endif ?>
+							                	<?php endforeach ?>
+							                	
+							                <?php endif ?>
+							                <div class="input-group-btn">
+							                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+							                </div>
+							              </div>
+			              			</form>
+					            	</div>
+											</div>
 										<?php
 									}
 								}
