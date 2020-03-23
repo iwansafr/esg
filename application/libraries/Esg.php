@@ -310,7 +310,8 @@ class Esg
 		$data = array();
 		if(!empty($name))
 		{
-			$value = $this->CI->db->query('SELECT value FROM config WHERE name = ?', $name)->row_array();
+			// $value = $this->CI->db->query('SELECT value FROM config WHERE name = ?', $name)->row_array();
+			$value = $this->CI->db->get_where('config', ['name'=>$name])->row_array();
 			if(!empty($value))
 			{
 				$data = json_decode($value['value'], 1);
