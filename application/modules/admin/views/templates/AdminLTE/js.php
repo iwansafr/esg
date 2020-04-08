@@ -16,11 +16,28 @@
 <script src="<?php echo $admin_template; ?>/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="<?php echo $admin_template; ?>/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo $admin_template; ?>/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
+<!-- <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script> -->
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+
 <script src="<?php echo $admin_template; ?>/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript">
 	$('.select2').select2();
 	$(document).ready(function(){
-		$('.esg_data_table').DataTable();
+		var table = $('.esg_data_table').DataTable({
+			lengthChange: false,
+        buttons: [ 'copy', 'excel', 'colvis' ]
+		});
+		table.buttons().container()
+        .prependTo( '.table-responsive' );
 	})
 	$('#datepicker').datepicker({
       autoclose: true,

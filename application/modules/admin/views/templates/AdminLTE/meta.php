@@ -12,6 +12,9 @@ $template = $this->esg->get_esg('templates')['admin_template'];
 <meta name="developer" content="esoftgreat.com">
 <meta name="author" content="esoftgreat">
 <meta name="ROBOTS" content="all, index, follow">
+
+<meta name="google-signin-client_id" content="13443026150-36lm0h6cf9rf77mqqghfct1hg19l8trc.apps.googleusercontent.com">
+
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo @$meta['icon']; ?>">
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/bootstrap/css/bootstrap.min.css">
@@ -31,7 +34,12 @@ $template = $this->esg->get_esg('templates')['admin_template'];
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/dist/css/style.css">
 <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/assets/summernote/summernote.css">
 <script src="<?php echo base_url().'templates/AdminLTE/assets/ckeditor/'; ?>ckeditor.js"></script>
-<link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<!-- <link rel="stylesheet" href="<?php echo base_url('templates/'.$template); ?>/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.bootstrap.min.css">
 <?php
 echo $this->esg->extra_css();
 ?>
