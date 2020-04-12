@@ -399,7 +399,7 @@ class Zea
 		}
 	}
 
-	public function tableOptions($field = '', $table = '', $index= '', $label = '', $ex = '')
+	public function tableOptions($field = '', $table = '', $index= '', $label = '', $ex = '',$extra_label = '')
 	{
 		if(!empty($table) && !empty($index) && !empty($label))
 		{
@@ -409,6 +409,10 @@ class Zea
 				{
 					$this->CI->db->select($index);
 					$this->CI->db->select($label);
+					if(!empty($extra_label))
+					{
+						$this->CI->db->select($extra_label);
+					}
 					$this->CI->db->from($table);
 					$this->options['ref_table_'.$field] = $table;
 					if(!empty($ex))
@@ -424,8 +428,9 @@ class Zea
 					{
 						foreach ($data as $dkey => $dvalue)
 						{
+							$value_extra_label = !empty($extra_label) ? $dvalue[$extra_label] : '';
 							$dvalue[$index] = $dvalue[$index] == 0 ? '': $dvalue[$index];
-							$options[$dvalue[$index]] = $dvalue[$label];
+							$options[$dvalue[$index]] = $dvalue[$label]. ' | '.$value_extra_label;
 						}
 						$this->options[$field] = $options;
 					}else{
