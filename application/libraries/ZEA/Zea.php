@@ -428,9 +428,9 @@ class Zea
 					{
 						foreach ($data as $dkey => $dvalue)
 						{
-							$value_extra_label = !empty($extra_label) ? $dvalue[$extra_label] : '';
+							$value_extra_label = !empty($extra_label) ? ' | '.$dvalue[$extra_label] : '';
 							$dvalue[$index] = $dvalue[$index] == 0 ? '': $dvalue[$index];
-							$options[$dvalue[$index]] = $dvalue[$label]. ' | '.$value_extra_label;
+							$options[$dvalue[$index]] = $dvalue[$label].$value_extra_label;
 						}
 						$this->options[$field] = $options;
 					}else{
