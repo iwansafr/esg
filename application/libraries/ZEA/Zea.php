@@ -1767,7 +1767,8 @@ class Zea
 
 																if(isset($dvalue[$ikey]) && empty($this->hide[$ikey]))
 																{
-																	echo '<td>';
+																	$data_id = (!empty($dvalue[$ivalue['text']]) && ($dvalue[$ivalue['text']] > 0))  ? $ivalue['text'].'="'.$dvalue[$ivalue['text']].'"' : '';
+																	echo '<td '.$data_id.'>';
 																		switch ($ivalue['type'])
 																		{
 																			case 'text':
