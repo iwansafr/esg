@@ -1167,7 +1167,7 @@ class Zea
 			if($this->init == 'roll')
 			{
 				$input   = array();
-				$limit   = 12;
+				$limit   = !empty($this->limit) ? $this->limit : 12;
 				$page    = (@intval($_GET['page']) > 0 ) ? $_GET['page']-1 : @intval($_GET['page']);
 				$sort_by = @$_GET['sort_by'];
 				$keyword = @$_GET['keyword'];
