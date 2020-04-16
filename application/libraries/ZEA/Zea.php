@@ -2117,7 +2117,8 @@ class Zea
 															unlink($file);
 														}
 													}
-													copy($_FILES[$upload[$i]]['tmp_name'], $dir.str_replace('/','_',$file_name));
+													$file_name = str_replace('/','_',$file_name);
+													copy($_FILES[$upload[$i]]['tmp_name'], $dir.$file_name);
 
 													$config_image_lib['image_library']  = 'gd2';
 													$config_image_lib['source_image']   = $dir.$file_name;
@@ -2128,7 +2129,10 @@ class Zea
 
 													$this->CI->load->library('image_lib', $config_image_lib);
 
-													$this->CI->image_lib->resize();
+													if($this->CI->image_lib->resize())
+													{
+														pr($this->CI->image_lib);
+													}
 													if($this->init == 'edit')
 													{
 														$update_file = array($u_value => $file_name);
