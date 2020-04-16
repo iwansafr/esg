@@ -2131,7 +2131,7 @@ class Zea
 
 													if($this->CI->image_lib->resize())
 													{
-														pr($this->CI->image_lib);
+														// pr($this->CI->image_lib);
 													}
 													if($this->init == 'edit')
 													{
