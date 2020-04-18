@@ -2,7 +2,12 @@
 
 if(!empty($field))
 {
-	$data_ids  = !empty($data[$field]) ? explode(',', $data[$field]): '';
+	if(is_array($data[$field]))
+	{
+		$data_ids  = $data[$field];
+	}else{
+		$data_ids  = !empty($data[$field]) ? explode(',', $data[$field]): '';
+	}
 	$r_data    = $this->array_path($this->multiselect[$field]['data'], 0, '>','','--');
 	$data_size = count($r_data);
 
