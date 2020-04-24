@@ -518,6 +518,17 @@ class Zea
 		}
 	}
 
+	public function setSimpleMultiSelect($field = array())
+	{
+		if(!empty($field))
+		{
+			foreach ($field as $key => $value) 
+			{
+				$this->multiselect[$value]['simple'] = TRUE;
+			}
+		}
+	}
+
 	public function setType($field = '', $type = '') /*untuk input type text*/
 	{
 		if(!empty($field) && !empty($type))

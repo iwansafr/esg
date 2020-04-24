@@ -25,7 +25,6 @@ if(!empty($field))
 		}else if($this->init == 'param'){
 			$data_check = $data_value;
 		}
-
 		foreach ($this->checkbox[$field] as $cfkey => $cfvalue)
 		{
 			if(!empty($data_check) && is_array($data_check))
