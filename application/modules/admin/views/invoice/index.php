@@ -25,4 +25,5 @@ $this->zea->setEdit(TRUE);
 $this->zea->setEditLink(base_url('admin/invoice/edit?id='),'id');
 $this->zea->setDelete(TRUE);
 $this->zea->setFormName('invoice_list');
+$this->zea->setUrl('admin/invoice/clear_list');
 $this->zea->form();
