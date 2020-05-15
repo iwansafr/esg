@@ -86,6 +86,8 @@
       if (!empty($_COOKIE))
       {
         pr($_COOKIE);
+        pr(base_url());
+        pr(str_replace('.','_',base_url()));
       }
       ?>
     </div>
