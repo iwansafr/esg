@@ -266,10 +266,10 @@ class Esg
 					{
 						$cookie_username = @$_COOKIE[$base_url.'_username'];
 					}
-					$cookie_password = @$_COOKIE[base_url().'password'];
+					$cookie_password = @$_COOKIE[base_url().'_password'];
 					if(empty($cookie_password))
 					{
-						$cookie_password = @$_COOKIE[$base_url.'password'];
+						$cookie_password = @$_COOKIE[$base_url.'_password'];
 					}
 					$user = $this->CI->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',$cookie_username)->row_array();
 					if(!empty($user))
