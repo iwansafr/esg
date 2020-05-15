@@ -115,11 +115,18 @@ class Esg
 			$curent_url = urlencode($curent_url);
 			redirect(base_url('admin/login?redirect_to='.$curent_url));
 		}else{
-			if(!empty($_COOKIE[base_url().'_username']))
+			$base_url = str_replace('.', '_', base_url());
+			if(!empty($_COOKIE[base_url().'_username']) || !empty($base_url.'_username'))
 			{
 				$data['username'] = @$_COOKIE[base_url().'_username'];
 				$data['password'] = @$_COOKIE[base_url().'_password'];
 				$data['remember_me'] = @$_COOKIE[base_url().'_remember_me'];
+				if(empty($data['username']))
+				{
+					$data['username'] = @$_COOKIE[$base_url.'_username'];
+					$data['password'] = @$_COOKIE[$base_url.'_password'];
+					$data['remember_me'] = @$_COOKIE[$base_url.'_remember_me'];
+				}
 				$this->set_cookie($data);
 				$user = $this->CI->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data['username'])->row_array();
 				if(!empty($user))
