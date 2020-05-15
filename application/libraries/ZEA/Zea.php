@@ -1363,6 +1363,8 @@ class Zea
 	{
 		if(!empty($this->input))
 		{
+			$bg_class = $this->darkmode ? 'bg-dark text-white' : '';
+			$darkmodestyle = $this->darkmode ? 'background: #495057;color: white;' : '';
 			$data = $this->getData();
 			$message = array();
 			if(!empty($_POST))
@@ -1387,8 +1389,6 @@ class Zea
 					// pr($data);
 				}
 				$action = !empty($this->view) ? base_url($this->view).'/'.$this->id : '';
-				$bg_class = $this->darkmode ? 'bg-dark text-white' : '';
-				$darkmodestyle = $this->darkmode ? 'background: #495057;color: white;' : '';
 				?>
 				<form method="post" action="<?php echo $action ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
 					<div class="panel panel-default card card-default <?php echo $bg_class ?>">
