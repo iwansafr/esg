@@ -260,10 +260,21 @@ class Esg
 				if(!empty($_COOKIE))
 				{
 					$data = $_COOKIE;
-					$user = $this->CI->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',@$data[base_url().'_username'])->row_array();
+					$base_url = str_replace('.', '_', base_url());
+					$cookie_username = @$_COOKIE[base_url().'_username'];
+					if(empty($cookie_username))
+					{
+						$cookie_username = @$_COOKIE[$base_url.'_username'];
+					}
+					$cookie_password = @$_COOKIE[base_url().'password'];
+					if(empty($cookie_password))
+					{
+						$cookie_password = @$_COOKIE[$base_url.'password'];
+					}
+					$user = $this->CI->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',$cookie_username)->row_array();
 					if(!empty($user))
 					{
-						if(decrypt($data[base_url().'_password'], $user['password']))
+						if(decrypt($cookie_password, $user['password']))
 						{
 							$url = @$_GET['redirect_to'];
 							if(!empty($url))
