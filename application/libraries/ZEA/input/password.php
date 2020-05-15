@@ -16,6 +16,7 @@ if(!empty($field))
 		'name'    => $field,
 		'class'   => 'form-control',
 		'required'=>'required',
+		'style' => $darkmodestyle,
 		'value'=>@$value_data_value
 		)
 	);

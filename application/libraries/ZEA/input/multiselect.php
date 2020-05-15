@@ -36,6 +36,7 @@ if(!empty($field))
 			'selected'=>$data_ids,
 			'size'=>$data_size,
 			'id'=>$field,
+			'style' => $darkmodestyle,
 			'class'=>'form-control'
 		];
 		if(!empty($required))

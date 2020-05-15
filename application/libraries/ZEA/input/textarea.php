@@ -20,7 +20,9 @@ if(!empty($field))
 		'name'  => $field,
 		'class' => 'form-control ',
 		'rows'  => 4,
-		'value' => $data_value);
+		'value' => $data_value,
+		'style' => $darkmodestyle,
+	);
 	if(!empty($this->elementid[$field]))
 	{
 		$array_input['id'] = $this->elementid[$field];

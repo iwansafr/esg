@@ -75,6 +75,7 @@ class Zea
 	var $search        = FALSE;
 	var $success       = FALSE;
 	var $datatable     = FALSE;
+	var $darkmode      = FALSE;
 	var $insert_id     = 0;
 	var $url           = '';
 	var $get           = '';
@@ -287,17 +288,19 @@ class Zea
 	public function open_collapse($id = 'collapse1', $title = 'Collapsible Panel', $type = 'default')
 	{
 		$collapse = !empty($this->collapse[$id]) ? 'collapse' : '';
+		$bg_class = $this->darkmode ? 'bg-dark text-white' : '';
+		$darkmodestyle = $this->darkmode ? 'background: #495057;color: white;' : '';
 		?>
 		<br>
 		<div class="card-group panel-group">
-			<div class="panel panel-<?php echo $type ?> card card-<?php echo $type ?>">
+			<div class="panel panel-<?php echo $type ?> card card-<?php echo $type ?> <?php echo $bg_class ?>">
 				<div class="panel-heading card-header">
 					<h6 class="card-title panel-title m-0 font-weight-bold text-primary">
 						<a data-toggle="collapse" href="#<?php echo $id; ?>"><?php echo $title ?></a>
 					</h6>
 				</div>
 				<div id="<?php echo $id ?>" class="card-collapse panel-collapse <?php echo $collapse ?>">
-					<div class="card-body panel-body">
+					<div class="card-body panel-body <?php echo $bg_class ?>">
 
 		<?php
 	}
@@ -645,6 +648,10 @@ class Zea
 	public function setDataTable($option = TRUE)
 	{
 		$this->datatable = $option;
+	}
+	public function setDarkMode($option = TRUE)
+	{
+		$this->darkmode = $option;
 	}
 
 	public function setLink($field = '', $link = '', $get = '')
@@ -1380,10 +1387,12 @@ class Zea
 					// pr($data);
 				}
 				$action = !empty($this->view) ? base_url($this->view).'/'.$this->id : '';
+				$bg_class = $this->darkmode ? 'bg-dark text-white' : '';
+				$darkmodestyle = $this->darkmode ? 'background: #495057;color: white;' : '';
 				?>
 				<form method="post" action="<?php echo $action ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
-					<div class="panel panel-default card card-default">
-						<div class="panel panel-heading card card-header">
+					<div class="panel panel-default card card-default <?php echo $bg_class ?>">
+						<div class="panel panel-heading card-header <?php echo $bg_class ?>">
 							<h6 class="panel-title m-0 font-weight-bold text-primary">
 								<?php
 								if($this->init == 'edit')
@@ -1399,7 +1408,7 @@ class Zea
 								?>
 							</h6>
 						</div>
-						<div class="panel panel-body card card-body">
+						<div class="panel panel-body card-body">
 							<?php
 							if(!empty($message))
 							{

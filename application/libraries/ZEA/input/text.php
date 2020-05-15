@@ -35,6 +35,7 @@ if(!empty($field))
 		'class'   => 'form-control',
 		$required => $required,
 		'type'    => $type,
+		'style' => $darkmodestyle,
 		'value'   => $data_value);
 	if(!empty($this->attribute[$field]))
 	{

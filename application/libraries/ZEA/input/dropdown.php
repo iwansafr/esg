@@ -35,7 +35,7 @@ if(!empty($field))
 			'options'  => @$cur_options,
 			$required  => $required,
 			'selected' => $data_value,
-			'style'    => 'width: 100%;'
+			'style'    => 'width: 100%;'.$darkmodestyle
 		);
 
 	// if($this->init == 'roll')

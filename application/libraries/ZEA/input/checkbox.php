@@ -39,7 +39,8 @@ if(!empty($field))
 				'name'    => $name.'[]',
 				'value'   => $cfkey,
 				'checked' => $checked,
-				'class' => $name
+				'class' => $name,
+				'style' => $darkmodestyle,
 				)).ucfirst($cfvalue);
 			echo '</label>';
 			echo '</div>';
