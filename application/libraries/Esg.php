@@ -274,7 +274,13 @@ class Esg
 					$user = $this->CI->db->query('SELECT * FROM user WHERE username = ? LIMIT 1',$cookie_username)->row_array();
 					if(!empty($user))
 					{
-						if(decrypt($cookie_password, $user['password']))
+						if(empty($_COOKIE[base_url().'_role']) || empty($_COOKIE[$base_url.'_role']))
+						{
+							$decrypt = decrypt($cookie_password, $user['password']);
+						}else{
+							$decrypt = $cookie_password == $user['password'];
+						}
+						if($decrypt)
 						{
 							$url = @$_GET['redirect_to'];
 							if(!empty($url))
