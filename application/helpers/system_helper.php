@@ -317,6 +317,8 @@ function menu_link($text = '')
 		if(filter_var($text, FILTER_VALIDATE_URL) !== false)
 		{
 			$link = $text;
+		}else if(preg_match('~:~',$text)){
+			$link = $text;
 		}else{
 			$link = base_url($text);
 		}
