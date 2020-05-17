@@ -10,7 +10,11 @@ $this->zea->setHeading('Content');
 $this->zea->addInput('cat_ids','multiselect');
 $this->zea->setLabel('cat_ids', 'Category');
 $this->zea->setMultiSelect('cat_ids','content_cat','id,par_id,title');
-
+$cat_id = @intval($_GET['cat_id']);
+if(!empty($cat_id))
+{
+	$this->zea->setSelected('cat_ids',$cat_id);
+}
 
 $this->zea->addInput('title', 'text');
 

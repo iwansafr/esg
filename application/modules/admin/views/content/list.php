@@ -6,9 +6,11 @@ $is_tag = $this->input->get('is_tag');
 $this->zea->init('roll');
 $this->zea->setTable('content');
 $this->zea->search();
+$cat_plus = '';
 if(!empty($id))
 {
 	$this->zea->setWhere("cat_ids LIKE '%,{$id},%'");
+	$cat_plus = '?cat_id='.$id;
 }
 
 if(!empty($is_tag))
@@ -17,7 +19,7 @@ if(!empty($is_tag))
 }
 $this->zea->setNumbering(TRUE);
 $this->zea->setField(array('title'));
-$this->zea->setHeading('<a href="'.base_url('admin/content/edit').'" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a>');
+$this->zea->setHeading('<a href="'.base_url('admin/content/edit'.$cat_plus).'" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a>');
 $this->zea->addInput('id','plaintext');
 $this->zea->addInput('image','thumbnail');
 $this->zea->addInput('title','plaintext');

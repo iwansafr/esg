@@ -17,6 +17,10 @@ if(!empty($field))
 		{
 			$data_size = 10;
 		}
+		if(!empty($this->selected[$field]))
+		{
+			$data_ids = [$this->selected[$field]];
+		}
 		echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
 		?>
 		<select name="<?php echo $field ?>[]" multiple="multiple" id="<?php echo $field ?>" size="<?php echo $data_size; ?>" class="form-control" <?php echo (!empty($required)) ? 'required="required"' : ''; ?>>

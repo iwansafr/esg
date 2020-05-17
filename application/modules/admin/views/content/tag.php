@@ -14,6 +14,7 @@ $form->setPlaintext('id','<i class="fa fa-search"></i>  content');
 $form->setLabel('id','Content');
 $form->addInput('total','plaintext');
 $form->setFormName('tag');
+$form->setDelete(true);
 $form->setUrl('admin/content/clear_tag');
 if(!empty($form->getData()['data']))
 {
