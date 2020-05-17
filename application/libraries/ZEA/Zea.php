@@ -981,6 +981,27 @@ class Zea
 		}
 	}
 
+	public function setFile($field = '', $type = '')
+	{
+		if(!empty($field))
+		{
+			switch ($type) {
+				case 'video':
+					$this->input[$field]['file'] = $type;
+					break;
+				case 'image':
+					$this->input[$field]['file'] = $type;
+					break;
+				case 'audio':
+					$this->input[$field]['file'] = $type;
+					break;
+				default:
+					$this->input[$field]['file'] = 'image';
+					break;
+			}
+		}
+	}
+
 	public function setAccept($field = '', $accept = '')
 	{
 		if(!empty($field) && !empty($accept))

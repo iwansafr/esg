@@ -21,7 +21,36 @@ if(!empty($field))
 		<div class="image" data="<?php echo $field ?>">
 			<span><a href="#del_image" class="del_image"><i class="fa fa-close" style="color: red;"></i></a></span>
 			<a href="#">
-				<img src="<?php echo image_module($this->table, $image) ?>" class="img-responsive image-thumbnail image" style="object-fit: cover;width: 200px;height: 140px;" data-toggle="modal" data-target="#img_<?php echo $field?>">
+				<?php 
+				if(!empty($this->input[$field]['file']))
+				{
+					switch ($this->input[$field]['file']) {
+						case 'video':
+							
+							break;
+						case 'image':
+							
+							break;
+						case 'audio':
+							?>
+							<audio controls>
+							  <source src="<?php echo image_module($this->table, $image) ?>" class="image" type="audio/mpeg">
+							Browser Anda tidak mendukung untuk media audio ini
+							</audio>
+							<?php
+							break;
+						default:
+							?>
+							<img src="<?php echo image_module($this->table, $image) ?>" class="img-responsive image-thumbnail image" style="object-fit: cover;width: 200px;height: 140px;" data-toggle="modal" data-target="#img_<?php echo $field?>">
+							<?php
+							break;
+					}
+				}else{
+					?>
+					<img src="<?php echo image_module($this->table, $image) ?>" class="img-responsive image-thumbnail image" style="object-fit: cover;width: 200px;height: 140px;" data-toggle="modal" data-target="#img_<?php echo $field?>">
+					<?php
+				}
+				?>
 			</a>
 		</div>
 
