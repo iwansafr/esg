@@ -29,6 +29,19 @@ class Content extends CI_Controller
 	}
 	public function edit()
 	{
+		if(!$this->db->field_exists('par_id','content'))
+		{
+			$this->load->dbforge();
+			$fields = array(
+        'par_id' => array(
+                'type' => 'INT',
+                'constraint' => '11',
+                'default' => '0',
+                'after' => 'cat_ids'
+        ),
+			);
+			$this->dbforge->add_column('content',$fields);
+		}
 		$data['tag_name'] = $this->content_model->content_tag();
 		$this->content_model->load();
 		$this->esg->set_esg('extra_js', [base_url('templates/AdminLTE/assets/dist/js/modules/content/script.js')]);

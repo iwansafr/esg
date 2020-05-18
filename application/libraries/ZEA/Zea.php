@@ -1246,6 +1246,7 @@ class Zea
 				if(!empty($get['page']))
 				{
 					$this->url = str_replace('?page='.$get['page'], '', $this->url);
+					$this->url = str_replace('&page='.$get['page'], '', $this->url);
 				}
 				if(!empty($get))
 				{

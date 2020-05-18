@@ -16,6 +16,15 @@ if(!empty($cat_id))
 	$this->zea->setSelected('cat_ids',$cat_id);
 }
 
+$this->zea->addInput('par_id','dropdown');
+$this->zea->setLabel('par_id','parent');
+if(!empty($id))
+{
+	$this->zea->tableOptions('par_id','content','id','title',' par_id = 0 AND id != '.$id);
+}else{
+	$this->zea->tableOptions('par_id','content','id','title',' par_id = 0');
+}
+
 $this->zea->addInput('title', 'text');
 
 $this->zea->addInput('author','static');

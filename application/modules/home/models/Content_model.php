@@ -38,6 +38,10 @@ class Content_model extends CI_Model
 				$cat = $this->db->query('SELECT * FROM content_cat WHERE id IN('.$cat_ids.')')->result_array();
 				$data['cat'] = $cat;
 			}
+			if(!empty($data['id']))
+			{
+				$data['child'] = $this->db->query('SELECT * FROM content WHERE par_id = ? AND publish = 1', $data['id'])->result_array();
+			}
 		}
 		$this->meta($data);
 		$this->esg->set_esg('content', $data);
