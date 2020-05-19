@@ -10,6 +10,7 @@
 				<div class="col-md-12">
 					<a target="_blank" class="btn btn-sm btn-default" href="<?php echo $value['source'] ?>" style="position: absolute;">Lihat Peta Lebih Besar</a>
 					<img src="<?php echo image_module('content',$value) ?>" alt="" style="object-fit: cover; height: 200px; width: 100%;">
+					<?php echo $value['content'] ?>
 				</div>
 			<?php endforeach ?>
 		</center>
