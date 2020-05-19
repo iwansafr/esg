@@ -18,7 +18,7 @@
 <div id="oc-images" class="owl-carousel owl-carousel-full news-carousel header-stick bottommargin-lg carousel-widget" data-margin="3" data-loop="true" data-stage-padding="50" data-pagi="false" data-items-xs="1" data-items-lg="<?php echo count($home['content_category']) ?>">
 	<?php foreach ($home['content_category'] as $key => $value): ?>
 		<div class="oc-item">
-			<a href="#"><img height="200" src="<?php echo base_url();?>templates/property/images/magazine/carousel/1.jpg" alt="Image 1" style="object-fit: cover;"></a>
+			<a href="#"><img height="200" src="<?php echo image_module('content',$value) ?>" alt="Image 1" style="object-fit: cover;"></a>
 			<div class="overlay">
 				<div class="text-overlay">
 					<!-- <span class="label label-danger">World</span> -->
