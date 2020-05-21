@@ -19,6 +19,7 @@
 		<?php else: ?>
 			<section id="content">
 				<?php $this->load->view('templates/'.$templates['public_template'].'/'.$mod['content']) ?>
+				<?php $this->load->view('content_gallery') ?>
 				<?php $this->load->view('content_contact') ?>
 			</section>
 		<?php endif ?>
