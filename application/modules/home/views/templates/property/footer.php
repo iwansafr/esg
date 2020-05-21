@@ -3,8 +3,9 @@
 		<div class="footer-widgets-wrap clearfix">
 			<div class="col_one_third">
 				<div class="widget clearfix">
-					<?php if (!empty($home['menu_bottom_1'][1]['position_name'])): ?>
-						<h4><?php echo $home['menu_bottom_1'][1]['position_name'] ?></h4>
+					<?php $key_first = array_key_first($home['menu_bottom_1']); ?>
+					<?php if (!empty($home['menu_bottom_1'][$key_first]['position_name'])): ?>
+						<h4><?php echo $home['menu_bottom_1'][$key_first]['position_name'] ?></h4>
 					<?php endif ?>
 					<div class="row">
 						<div class="bottommargin-sm widget_links">
@@ -21,8 +22,9 @@
 			</div>
 			<div class="col_one_third">
 				<div class="widget clearfix">
-					<?php if (!empty($home['menu_bottom_2'][1]['position_name'])): ?>
-						<h4><?php echo $home['menu_bottom_2'][1]['position_name'] ?></h4>
+					<?php $key_first = array_key_first($home['menu_bottom_2']); ?>
+					<?php if (!empty($home['menu_bottom_2'][$key_first]['position_name'])): ?>
+						<h4><?php echo $home['menu_bottom_2'][$key_first]['position_name'] ?></h4>
 					<?php endif ?>
 					<div class="row">
 						<div class="bottommargin-sm widget_links">
