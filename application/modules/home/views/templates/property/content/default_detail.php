@@ -13,7 +13,7 @@ if(!empty($content))
 	}
 	?>
 	<div class="container">
-		<div class="fslider" data-easing="easeInQuad">
+		<div class="fslider" data-easing="easeInQuad" data-pause="2000" data-lightbox="gallery">
       <div class="flexslider">
         <div class="slider-wrap">
           <?php foreach ($images as $key => $value): ?>

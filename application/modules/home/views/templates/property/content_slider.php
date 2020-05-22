@@ -1,5 +1,5 @@
 <?php if (!empty($home['content_slider'])): ?>
-	<section id="slider" class="slider-parallax swiper_wrapper full-screen clearfix">
+	<section id="slider" class="slider-parallax swiper_wrapper full-screen clearfix" data-autoplay="2000" data-speed="650" data-loop="true">
 		<div class="slider-parallax-inner">
 			<div class="swiper-container swiper-parent">
 				<div class="swiper-wrapper">

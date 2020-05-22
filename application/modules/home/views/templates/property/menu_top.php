@@ -1,3 +1,19 @@
+<style>
+	@media (max-width: 991px){
+		#header{
+	    position: fixed;
+	    top: 0;
+	    width: 100%;
+	    z-index: 999;
+		}
+		#content{
+			margin-top: 50px; 
+		}
+		#slider{
+			margin-top: 100px; 
+		}
+	}
+</style>
 <header id="header">
 	<div id="header-wrap">
 		<div class="container clearfix">
