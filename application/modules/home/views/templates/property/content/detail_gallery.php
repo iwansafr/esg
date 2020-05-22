@@ -40,7 +40,7 @@ if(!empty($content))
 					<h1 class="highlight-me">Gallery <?php echo $content['title'] ?></h1>
 				</div>
 			</center>
-			<div class="masonry-thumbs col-6" data-lightbox="gallery">
+			<div data-lightbox="gallery">
 				<?php foreach ($content['child'] as $key => $value): ?>
 					<?php 
 					$child_images = [];
@@ -56,7 +56,7 @@ if(!empty($content))
 					}
 					?>
 						<?php foreach ($child_images as $ckey => $cvalue): ?>
-						  <a href="<?php echo $cvalue['image_link'] ?>" data-lightbox="gallery-item"><img class="image_fade" src="<?php echo $cvalue['image_link'] ?>" alt="Gallery Thumb 1"></a>
+						  <a href="<?php echo $cvalue['image_link'] ?>" data-lightbox="gallery-item"><img class="image_fade" style="object-fit: cover; width: 200px; height: 150px;" src="<?php echo $cvalue['image_link'] ?>" alt="Gallery Thumb 1"></a>
 						<?php endforeach ?>
 				<?php endforeach ?>
 			</div>
