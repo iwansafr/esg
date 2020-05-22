@@ -42,6 +42,19 @@ class Content extends CI_Controller
 			);
 			$this->dbforge->add_column('content',$fields);
 		}
+		if(!$this->db->field_exists('tpl','content'))
+		{
+			$this->load->dbforge();
+			$fields = array(
+        'tpl' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '0',
+                'after' => 'par_id'
+        ),
+			);
+			$this->dbforge->add_column('content',$fields);
+		}
 		$data['tag_name'] = $this->content_model->content_tag();
 		$this->content_model->load();
 		$this->esg->set_esg('extra_js', [base_url('templates/AdminLTE/assets/dist/js/modules/content/script.js')]);

@@ -16,14 +16,6 @@ if(!empty($cat_id))
 	$this->zea->setSelected('cat_ids',$cat_id);
 }
 
-$this->zea->addInput('par_id','dropdown');
-$this->zea->setLabel('par_id','parent');
-if(!empty($id))
-{
-	$this->zea->tableOptions('par_id','content','id','title',' par_id = 0 AND id != '.$id);
-}else{
-	$this->zea->tableOptions('par_id','content','id','title',' par_id = 0');
-}
 
 $this->zea->addInput('title', 'text');
 
@@ -60,6 +52,28 @@ $this->zea->addInput('slug', $slug_type);
 $this->zea->addInput('description','textarea');
 $this->zea->setLabel('description','Meta Description');
 $this->zea->addInput('intro','textarea');
+$this->zea->addInput('par_id','dropdown');
+$this->zea->setLabel('par_id','parent');
+if(!empty($id))
+{
+	$this->zea->tableOptions('par_id','content','id','title',' par_id = 0 AND id != '.$id);
+}else{
+	$this->zea->tableOptions('par_id','content','id','title',' par_id = 0');
+}
+$active_template = $this->esg->get_esg('templates')['public_template'];
+$tpl_options = ['0'=>'None'];
+foreach(glob(FCPATH.'application/modules/home/views/templates/'.$active_template.'/content/detail_*.php') as $file)
+{
+	$file = explode('/',$file);
+	$file = end($file);
+	$file = str_replace('.php', '', $file);
+	$tpl_options[$file] = $file;
+}
+if(!empty($tpl_options))
+{
+	$this->zea->addInput('tpl','dropdown');
+	$this->zea->setOptions('tpl',$tpl_options);
+}
 $this->zea->addInput('source','textarea');
 $this->zea->setAttribute('source',['style'=>'background: black;color:white;','placeholder'=>'<p>your script</p>']);
 $this->zea->startCollapse('keyword', 'meta');
