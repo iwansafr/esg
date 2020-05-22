@@ -47,31 +47,33 @@ if(!empty($content))
 					<?php endforeach ?>
 				</ul>
 				<div class="tab-container">
-					<?php foreach ($content['child'] as $key => $value): ?>
-						<div class="tab-content clearfix" id="tabs-<?php echo $key;?>">
-							<div id="popular-post-list-sidebar">
-								<?php 
-								$child_images = [];
-								if(!empty($value['images']))
-								{
-									$tmp_images = json_decode($value['images']);
-									foreach ($tmp_images as $tkey => $tvalue) 
+					<div data-lightbox="gallery">
+						<?php foreach ($content['child'] as $key => $value): ?>
+							<div class="tab-content clearfix" id="tabs-<?php echo $key;?>">
+								<div id="popular-post-list-sidebar">
+									<?php 
+									$child_images = [];
+									if(!empty($value['images']))
 									{
-										$child_images[] = ['image_link'=>image_module('content/gallery',$value['id'].'/'.$tvalue)];
+										$tmp_images = json_decode($value['images']);
+										foreach ($tmp_images as $tkey => $tvalue) 
+										{
+											$child_images[] = ['image_link'=>image_module('content/gallery',$value['id'].'/'.$tvalue)];
+										}
+									}else{
+										$child_images[] = ['image_link'=>image_module('content',$value)];
 									}
-								}else{
-									$child_images[] = ['image_link'=>image_module('content',$value)];
-								}
-								?>
-								<?php foreach ($child_images as $ckey => $cvalue): ?>
-									<div class="col-md-6">
-										<img src="<?php echo $cvalue['image_link'] ?>" alt="" style="object-fit: cover;height: 250px; width: 100%;">
-									</div>
-								<?php endforeach ?>
-								<?php echo $value['content'] ?>
+									?>
+									<?php foreach ($child_images as $ckey => $cvalue): ?>
+										<div class="col-md-6">
+											<a href="<?php echo $cvalue['image_link'] ?>" data-lightbox="gallery-item"><img class="image_fade" style="object-fit: cover; width: 100%; height: 250px;" src="<?php echo $cvalue['image_link'] ?>" alt="Gallery Thumb 1"></a>
+										</div>
+									<?php endforeach ?>
+									<?php echo $value['content'] ?>
+								</div>
 							</div>
-						</div>
-					<?php endforeach ?>
+						<?php endforeach ?>
+					</div>
 				</div>
 			</div>
     <?php endif ?>
