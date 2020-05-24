@@ -35,6 +35,8 @@ $this->zea->setCollapse('image',TRUE);
 $this->zea->addInput('images','gallery');
 $this->zea->setAccept('images', '.jpg,.jpeg,.png');
 $this->zea->setAttribute('images','multiple');
+$this->zea->addInput('videos','textarea');
+$this->zea->setHelp('videos','pisah link youtube dengan (,) (koma) jika link lebih dari satu');
 $this->zea->addInput('document','uploads');
 $this->zea->setAccept('document', '.doc,.docx,.xls,.xlsx,.pdf,.ppt,.pptx');
 $this->zea->setAttribute('document','multiple');

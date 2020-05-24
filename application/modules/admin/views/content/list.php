@@ -3,26 +3,44 @@
 // $form = new zea();
 $id = $this->input->get('id');
 $is_tag = $this->input->get('is_tag');
+$par_id = @intval($_GET['par_id']);
 $this->zea->init('roll');
 $this->zea->setTable('content');
 $this->zea->search();
 $cat_plus = '';
+$where = '';
+if(!empty($par_id))
+{
+	$where = empty($where) ? ' par_id = '.$par_id : ' AND par_id = '.$par_id;
+	echo back_button(base_url('admin/content/list'));
+}
 if(!empty($id))
 {
-	$this->zea->setWhere("cat_ids LIKE '%,{$id},%'");
+	$this->zea->setWhere("cat_ids LIKE '%,{$id},%' $where");
 	$cat_plus = '?cat_id='.$id;
+}else{
+	$this->zea->setWhere($where);
 }
-
 if(!empty($is_tag))
 {
 	$this->zea->setWhere("tag_ids LIKE '%,{$id},%'");
+}else{
+	$this->zea->setWhere($where);
 }
 $this->zea->setNumbering(TRUE);
 $this->zea->setField(array('title'));
 $this->zea->setHeading('<a href="'.base_url('admin/content/edit'.$cat_plus).'" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a>');
 $this->zea->addInput('id','plaintext');
+$this->zea->setPlainText('id',[
+	base_url('admin/content/list/?par_id={id}')=>'Child Content'
+]);
+$this->zea->setLabel('id','action');
 $this->zea->addInput('image','thumbnail');
 $this->zea->addInput('title','plaintext');
+$this->zea->addInput('par_id','dropdown');
+$this->zea->setLabel('par_id','Parent');
+$this->zea->tableOptions('par_id','content','id','title');
+$this->zea->setAttribute('par_id','disabled');
 $this->zea->addInput('hits','plaintext');
 $this->zea->addInput('slug','link');
 $this->zea->setLabel('slug','add menu');

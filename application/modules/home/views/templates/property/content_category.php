@@ -19,7 +19,7 @@
 	<?php foreach ($home['content_category'] as $key => $value): ?>
 		<div class="oc-item">
 			<a href="#"><img height="200" src="<?php echo image_module('content',$value) ?>" alt="Image 1" style="object-fit: cover;"></a>
-			<div class="overlay">
+			<div>
 				<div class="text-overlay">
 					<!-- <span class="label label-danger">World</span> -->
 					<div class="text-overlay-title">

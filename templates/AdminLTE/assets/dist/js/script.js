@@ -52,6 +52,18 @@ $(document).ready(function(){
 		readURL(this,a);
 	});
 
+	$(document).on('change', 'textarea[name="videos"]', function(){
+		console.log($(this));
+		var a = $(this).val();
+		a = a.split(',');
+		if(a.length>1){
+			for(i = 0 ; i<a.length; i ++){
+				$(this).closest('.form-group').append('<iframe width="560" height="315" src="'+a[i]+'" frameborder="0" allow="accelerometer; autoplay; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			}
+		}
+		
+	});
+
 	// $('img.image').on('click', function(){
 	// 	var a = $(this).attr('src');
 	// 	alert(a);
