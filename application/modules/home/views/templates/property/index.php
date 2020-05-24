@@ -12,6 +12,7 @@
 				<div class="content-wrap">
 					<?php $this->load->view('content_views') ?>
 					<?php $this->load->view('content_category') ?>
+					<?php $this->load->view('content_videos') ?>
 					<?php $this->load->view('content_facilities') ?>
 					<?php $this->load->view('content_location') ?>
 				</div>

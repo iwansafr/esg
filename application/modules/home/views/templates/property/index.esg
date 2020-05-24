@@ -34,6 +34,9 @@
 	{content_category}
 </div>
 <div class="col-md-12">
+	{content_videos}
+</div>
+<div class="col-md-12">
 	<div class="col-md-8">
 		{content_facilities}
 	</div>
