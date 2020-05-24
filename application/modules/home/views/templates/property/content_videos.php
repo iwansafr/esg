@@ -11,6 +11,9 @@
 		</center>
 	<?php endif ?>
 </div>
+<br>
+<br>
+<br>
 <div class="clearfix"></div>
 <div id="oc-images" class="owl-carousel owl-carousel-full news-carousel header-stick bottommargin-lg carousel-widget" data-margin="3" data-loop="true" data-stage-padding="50" data-pagi="false" data-items-xs="1" data-items-lg="<?php echo count($home['content_videos']) ?>">
 	<?php foreach ($home['content_videos'] as $key => $value): ?>
