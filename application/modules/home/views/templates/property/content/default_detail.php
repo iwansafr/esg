@@ -41,9 +41,9 @@ if(!empty($content))
 				</div>
 			</center>
 			<div class="tabs nobottommargin clearfix" id="sidebar-tabs">
-				<ul class="tab-nav clearfix">
+				<ul class="tab-nav clearfix" style="border-bottom: none;">
 					<?php foreach ($content['child'] as $key => $value): ?>
-						<li><a href="#tabs-<?php echo $key;?>"><?php echo $value['title'] ?></a></li>
+						<li style="border-radius: 35%;"><a href="#tabs-<?php echo $key;?>" style="padding: 0 3px;top:0;font-size: 11px;border-radius: 35%;"><?php echo $value['title'] ?></a></li>
 					<?php endforeach ?>
 				</ul>
 				<div class="tab-container">
