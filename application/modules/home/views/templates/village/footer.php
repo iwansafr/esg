@@ -70,5 +70,5 @@
 	?>
 	<br>
 	<hr>
-	<p style="margin: 0;padding: 0;height: 60px;line-height: 45px;">&copy; Copyright <?php echo date('Y') ?> All Right Reserved. <a style="color: #16a085;" href="https://www.dinusa.co.id">PT Media Nusa Perkasa</a></p>
+	<p style="margin: 0;padding: 0;height: 60px;line-height: 45px;">&copy; Copyright <?php echo date('Y') ?> All Right Reserved. <a style="color: #16a085;" href="<?php echo @$site['link'] ?>"><?php echo $site['title'] ?></a></p>
 </div>
