@@ -67,7 +67,7 @@ if(!empty($content))
 									?>
 									<?php foreach ($child_images as $ckey => $cvalue): ?>
 										<div class="col-md-6" style="padding-left: 0;margin-bottom: 10px;">
-											<a href="<?php echo $cvalue['image_link'] ?>" data-lightbox="gallery-item"><img class="image_fade" style="object-fit: cover; width: 100%; height: 250px;" src="<?php echo $cvalue['image_link'] ?>" alt="Gallery Thumb 1"></a>
+											<a href="<?php echo $cvalue['image_link'] ?>" data-lightbox="gallery-item"><img class="image_fade" src="<?php echo $cvalue['image_link'] ?>" alt="Gallery Thumb 1"></a>
 										</div>
 									<?php endforeach ?>
 									<?php echo $value['content'] ?>
