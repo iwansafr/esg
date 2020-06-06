@@ -18,18 +18,7 @@ if(!empty($content))
         <div class="slider-wrap">
           <?php foreach ($images as $key => $value): ?>
             <div class="slide" data-thumb="<?php echo $value['image_link'] ?>">
-              <img src="<?php echo $value['image_link'] ?>">
-              <div class="style-msg2 style-msg-light" style="background-color: #444;">
-								<div class="msgtitle"><i class="icon-pencil2"></i>Just a Custom Color Option:</div>
-								<div class="sb-msg">
-									<ul>
-										<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, adipisci.</li>
-										<li>Placeat, et hic pariatur fugiat autem earum facere necessitatibus fuga.</li>
-										<li>Aliquid, esse, perspiciatis iure rerum laudantium iste minima quas facere!</li>
-										<li>Nam, ab, reiciendis magnam et odio inventore sapiente dolore vel.</li>
-									</ul>
-								</div>
-							</div>
+              <img src="<?php echo $value['image_link'] ?>" style="object-fit: cover; height: 450px;">
 	            <div class="flex-caption slider-caption-bg"><?php echo $content['source'] ?></div>
             </div>
           <?php endforeach ?>
