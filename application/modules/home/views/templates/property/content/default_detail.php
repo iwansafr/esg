@@ -19,7 +19,7 @@ if(!empty($content))
         <div class="slider-wrap">
           <?php foreach ($images as $key => $value): ?>
             <div class="slide" data-thumb="<?php echo $value['image_link'] ?>">
-              <img src="<?php echo $value['image_link'] ?>" style="object-fit: cover; height: 350px;">
+              <img src="<?php echo $value['image_link'] ?>" style="object-fit: cover; height: 450px;">
 	            <div class="flex-caption slider-caption-bg" style="display: block!important;"><?php echo $content['source'] ?></div>
             </div>
           <?php endforeach ?>
