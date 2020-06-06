@@ -12,14 +12,21 @@ if(!empty($content))
 		$images[] = ['image_link'=>image_module('content',$content)];
 	}
 	?>
+	<style type="text/css">
+		@media(max-width: 750px){
+			.img_slide{
+				style="object-fit: cover; height: 450px;"
+			}
+		}
+	</style>
 	<div class="container">
 		<div class="fslider" data-easing="easeInQuad">
       <div class="flexslider">
         <div class="slider-wrap">
           <?php foreach ($images as $key => $value): ?>
             <div class="slide" data-thumb="<?php echo $value['image_link'] ?>">
-              <img src="<?php echo $value['image_link'] ?>" style="object-fit: cover; height: 450px;">
-	            <div class="flex-caption slider-caption-bg"><?php echo $content['source'] ?></div>
+              <img src="<?php echo $value['image_link'] ?>" class="img_slide">
+	            <div class="flex-caption slider-caption-bg" style="display: block!important;bottom: 2px;"><?php echo $content['source'] ?></div>
             </div>
           <?php endforeach ?>
         </div>
