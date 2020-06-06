@@ -41,7 +41,7 @@ if(!empty($content))
           <?php foreach ($images as $key => $value): ?>
             <div class="slide" data-thumb="<?php echo $value['image_link'] ?>">
               <img src="<?php echo $value['image_link'] ?>" class="img_slide">
-	            <div class="flex-caption slider-caption-bg img_caption" style="display: block!important;bottom: 2px;"><?php echo $content['source'] ?></div>
+	            <div class="flex-caption slider-caption-bg img_caption" style="display: block!important;bottom: 5px;"><?php echo $content['source'] ?></div>
             </div>
           <?php endforeach ?>
         </div>
