@@ -11,6 +11,43 @@ class Esg_model extends CI_Model
 	}
 	public function init()
 	{
+		if(!$this->db->field_exists('par_id','content'))
+		{
+			$this->load->dbforge();
+			$fields = array(
+        'par_id' => array(
+                'type' => 'INT',
+                'constraint' => '11',
+                'default' => '0',
+                'after' => 'cat_ids'
+        ),
+			);
+			$this->dbforge->add_column('content',$fields);
+		}
+		if(!$this->db->field_exists('tpl','content'))
+		{
+			$this->load->dbforge();
+			$fields = array(
+        'tpl' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '0',
+                'after' => 'par_id'
+        ),
+			);
+			$this->dbforge->add_column('content',$fields);
+		}
+		if(!$this->db->field_exists('videos','content'))
+		{
+			$this->load->dbforge();
+			$fields = array(
+        'videos' => array(
+                'type' => 'TEXT',
+                'after' => 'images'
+        ),
+			);
+			$this->dbforge->add_column('content',$fields);
+		}
 		$this->navigation();
 		// $this->set_meta();
 		// $this->js();
