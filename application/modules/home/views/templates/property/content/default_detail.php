@@ -15,8 +15,21 @@ if(!empty($content))
 	<style type="text/css">
 		@media(max-width: 750px){
 			.img_slide{
-				style="object-fit: cover; height: 450px;"
+				object-fit: cover; height: 450px;
 			}
+			.img_caption{
+				max-height: 100px;
+			}
+			.img_caption h5{
+				font-size: 10px;
+			}
+			.img_caption p{
+				font-size: 9px;
+			}
+			.img_caption a{
+				font-size: 9px;
+			}
+
 		}
 	</style>
 	<div class="container">
@@ -28,7 +41,7 @@ if(!empty($content))
           <?php foreach ($images as $key => $value): ?>
             <div class="slide" data-thumb="<?php echo $value['image_link'] ?>">
               <img src="<?php echo $value['image_link'] ?>" class="img_slide">
-	            <div class="flex-caption slider-caption-bg" style="display: block!important;bottom: 2px;"><?php echo $content['source'] ?></div>
+	            <div class="flex-caption slider-caption-bg img_caption" style="display: block!important;bottom: 2px;"><?php echo $content['source'] ?></div>
             </div>
           <?php endforeach ?>
         </div>
