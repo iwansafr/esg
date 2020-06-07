@@ -47,7 +47,7 @@ if(!empty($content))
     <?php if (!empty($content['child'])): ?>
     	<center>
 				<div class="fancy-title title-dotted-border">
-					<h1 class="highlight-me">Gallery <?php echo $content['title'] ?></h1>
+					<h1 class="highlight-me"><?php echo strtoupper('GALLERY '.$content['title']) ?></h1>
 				</div>
 			</center>
 			<div data-lightbox="gallery">
