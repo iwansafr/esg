@@ -2169,22 +2169,31 @@ class Zea
 													$config_image_lib['width']          = 750;
 													$config_image_lib['height']         = 500;
 
-													// $this->CI->load->library('image_lib', $config_image_lib);
 													$this->CI->load->library('image_lib');
-													$image_lib = new $this->CI->image_lib();
-													$image_lib->initialize($config_image_lib);
-													if($image_lib->resize())
+
+													$this->CI->image_lib->initialize($config_image_lib);
+													if($this->CI->image_lib->resize())
 													{
-														// pr($image_lib);
 													}
 													if($this->init == 'edit')
 													{
 														$update_file = array($u_value => $file_name);
 														$this->set_data($this->table, $dir_image, $update_file);
 													}else if($this->init == 'param'){
+														$image_array = 
+														[
+															'upload',
+															'image',
+															'file',
+															'uploads',
+															'images',
+															'files',
+															'multifiles',
+															'gallery',
+														];
 														foreach ($data_post as $dp_key => $dp_value)
 														{
-															if($dp_key=='image' || preg_match('~_image~', $dp_key))
+															if(in_array($this->input[$dp_key]['type'], $image_array))
 															{
 																if(!preg_match('~.'.$ext['extension'].'~',$file_name))
 																{
