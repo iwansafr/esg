@@ -2169,11 +2169,13 @@ class Zea
 													$config_image_lib['width']          = 750;
 													$config_image_lib['height']         = 500;
 
-													$this->CI->load->library('image_lib', $config_image_lib);
-
-													if($this->CI->image_lib->resize())
+													// $this->CI->load->library('image_lib', $config_image_lib);
+													$this->CI->load->library('image_lib');
+													$image_lib = new $this->CI->image_lib();
+													$image_lib->initialize($config_image_lib);
+													if($image_lib->resize())
 													{
-														// pr($this->CI->image_lib);
+														// pr($image_lib);
 													}
 													if($this->init == 'edit')
 													{
