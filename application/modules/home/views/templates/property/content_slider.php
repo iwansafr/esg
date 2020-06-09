@@ -1,4 +1,11 @@
 <?php if (!empty($home['content_slider'])): ?>
+	<style type="text/css">
+		@media(max-width: 790px){
+			#slider{
+				height: 500px;
+			}
+		}
+	</style>
 	<section id="slider" class="slider-parallax swiper_wrapper full-screen clearfix" data-autoplay="2000" data-speed="650" data-loop="true">
 		<div class="slider-parallax-inner">
 			<div class="swiper-container swiper-parent">
