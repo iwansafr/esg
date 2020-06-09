@@ -33,8 +33,6 @@ if(!empty($content))
 		}
 	</style>
 	<div class="container">
-		<br>
-		<br>
 		<div class="fslider" data-easing="easeInQuad" data-pause="2000" data-lightbox="gallery">
       <div class="flexslider">
         <div class="slider-wrap">

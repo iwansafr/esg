@@ -7,7 +7,7 @@
 	    z-index: 999;
 		}
 		#content{
-			margin-top: 50px; 
+			margin-top: 120px; 
 		}
 		#slider{
 			margin-top: 100px; 
