@@ -1,10 +1,10 @@
 <?php if (!empty($home['content_slider'])): ?>
-	<section id="slider" class="slider-parallax swiper_wrapper full-screen clearfix" data-autoplay="2000" data-speed="650" data-loop="true">
+	<section id="slider" class="slider-parallax swiper_wrapper full-screen clearfix" data-autoplay="2000" data-speed="650" data-loop="true" style="max-height: 600px;">
 		<div class="slider-parallax-inner">
 			<div class="swiper-container swiper-parent">
 				<div class="swiper-wrapper">
 					<?php foreach ($home['content_slider'] as $key => $value): ?>
-						<div class="swiper-slide dark" style="background-image: url('<?php echo image_module('content', $value);?>');width: 100%!important;height: auto;">
+						<div class="swiper-slide dark" style="background-image: url('<?php echo image_module('content', $value);?>');">
 							<div class="container clearfix">
 								<div class="slider-caption slider-caption-center">
 									<h2 data-caption-animate="fadeInUp" style="text-shadow: 2px 2px #444;"><?php echo $value['title'] ?></h2>
