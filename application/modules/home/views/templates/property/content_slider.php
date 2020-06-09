@@ -1,30 +1,27 @@
 <?php if (!empty($home['content_slider'])): ?>
-	<style type="text/css">
-		@media(max-width: 991px){
-			#slider{
-				max-height: 500px;
-			}
-		}
-	</style>
-	<section id="slider" class="slider-parallax swiper_wrapper full-screen clearfix" data-autoplay="2000" data-speed="650" data-loop="true">
-		<div class="slider-parallax-inner">
-			<div class="swiper-container swiper-parent">
-				<div class="swiper-wrapper">
-					<?php foreach ($home['content_slider'] as $key => $value): ?>
-						<div class="swiper-slide dark" style="background-image: url('<?php echo image_module('content', $value);?>');background-size: cover;">
-							<div class="container clearfix">
-								<div class="slider-caption slider-caption-center">
-									<h2 data-caption-animate="fadeInUp" style="text-shadow: 2px 2px #444;"><?php echo $value['title'] ?></h2>
-									<p data-caption-animate="fadeInUp" data-caption-delay="200" style="text-shadow: 2px 2px #444;"><?php echo $value['description'] ?></p>
-								</div>
+	<section id="slider" class="boxed-slider">
+		<div class="clearfix">
+			<div class="fslider" data-easing="easeInQuad">
+				<div class="flexslider">
+					<div class="slider-wrap">
+						<?php foreach ($home['content_slider'] as $key => $value): ?>
+							<?php $image_slider = image_module('content',$value); ?>
+							<div class="slide" data-thumb="<?php echo $image_slider ?>">
+								<a href="#">
+									<img src="<?php echo $image_slider; ?>" alt="Slide 2">
+									<!-- <h1 style="position: absolute;top: 30%;left: 30%; color: white; text-shadow: 1px black;"><?php echo $value['title'] ?></h1> -->
+										<!-- <div class="slider-caption slider-caption-center" style="position: absolute;top:50%;">
+											<h2 data-caption-animate="fadeInUp" style="text-shadow: 2px 2px #444; color: white;"><?php echo $value['title'] ?></h2>
+											<p data-caption-animate="fadeInUp" data-caption-delay="200" style="text-shadow: 2px 2px #444;color: white;"><?php echo $value['description'] ?></p>
+										</div> -->
+								</a>
 							</div>
-						</div>
-					<?php endforeach ?>
+						<?php endforeach ?>	
+					</div>
 				</div>
-				<div id="slider-arrow-left"><i class="icon-angle-left"></i></div>
-				<div id="slider-arrow-right"><i class="icon-angle-right"></i></div>
-				<div id="slide-number"><div id="slide-number-current"></div><span>/</span><div id="slide-number-total"></div></div>
 			</div>
+
 		</div>
+
 	</section>
 <?php endif ?>
