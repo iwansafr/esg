@@ -2,7 +2,7 @@
 	<style type="text/css">
 		@media(max-width: 991px){
 			#slider{
-				height: 500px;
+				max-height: 500px;
 			}
 		}
 	</style>
@@ -11,7 +11,7 @@
 			<div class="swiper-container swiper-parent">
 				<div class="swiper-wrapper">
 					<?php foreach ($home['content_slider'] as $key => $value): ?>
-						<div class="swiper-slide dark" style="background-image: url('<?php echo image_module('content', $value);?>');background-size: contain;">
+						<div class="swiper-slide dark" style="background-image: url('<?php echo image_module('content', $value);?>');background-size: cover;">
 							<div class="container clearfix">
 								<div class="slider-caption slider-caption-center">
 									<h2 data-caption-animate="fadeInUp" style="text-shadow: 2px 2px #444;"><?php echo $value['title'] ?></h2>
