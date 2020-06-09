@@ -1,6 +1,6 @@
 <?php if (!empty($home['content_slider'])): ?>
 	<style type="text/css">
-		@media(max-width: 790px){
+		@media(max-width: 991px){
 			#slider{
 				height: 500px;
 			}
