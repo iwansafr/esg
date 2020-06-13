@@ -17,69 +17,70 @@ class Zea
 		$this->setUrl();
 	}
 
-	var $api           = '';
-	var $api_server    = false;
-	var $table         = '';
-	var $formName      = 'form_1';
-	var $view          = '';
-	var $init          = '';
-	var $heading       = '';
-	var $edit_status   = true;
-	var $numbering     = FALSE;
-	var $none          = [];
-	var $paramname     = '';
-	var $dir_image     = '';
-	var $where         = '';
-	var $encrypt       = array();
-	var $file_error    = array();
-	var $edit_link     = 'edit?id=';
-	var $limit         = 12;
-	var $id            = 0;
-	var $delete        = false;
-	var $delete_type   = 'submit';
-	var $edit          = false;
-	var $save          = true;
-	var $options       = array();
-	var $required      = array();
-	var $hide          = array();
-	var $data          = array();
-	var $input         = array();
-	var $link          = array();
-	var $extlink       = array();
-	var $label         = array();
-	var $attribute     = array();
-	var $field         = array();
-	var $image         = array();
-	var $type          = array();
-	var $accept        = array();
-	var $checkbox      = array();
-	var $radio         = array();
-	var $orderby       = 'id DESC';
-	var $group_by      = '';
-	var $multiselect   = array();
-	var $elementid     = array();
-	var $value         = array();
-	var $startCollapse = array();
-	var $endCollapse   = array();
-	var $collapse      = array();
-	var $param         = array();
-	var $plaintext     = array();
-	var $help          = array();
-	var $selected      = array();
-	var $money         = array();
-	var $clearget      = array();
-	var $jointable     = array();
-	var $unique        = array();
-	var $unique_msg    = '';
-	var $msg           = array();
-	var $search        = FALSE;
-	var $success       = FALSE;
-	var $datatable     = FALSE;
-	var $darkmode      = FALSE;
-	var $insert_id     = 0;
-	var $url           = '';
-	var $get           = '';
-	var $key           = 'id';
+	var $api                 = '';
+	var $api_server          = false;
+	var $table               = '';
+	var $formName            = 'form_1';
+	var $view                = '';
+	var $init                = '';
+	var $heading             = '';
+	var $edit_status         = true;
+	var $numbering           = FALSE;
+	var $none                = [];
+	var $paramname           = '';
+	var $dir_image           = '';
+	var $where               = '';
+	var $encrypt             = array();
+	var $file_error          = array();
+	var $edit_link           = 'edit?id=';
+	var $limit               = 12;
+	var $id                  = 0;
+	var $delete              = false;
+	var $delete_type         = 'submit';
+	var $edit                = false;
+	var $save                = true;
+	var $options             = array();
+	var $required            = array();
+	var $hide                = array();
+	var $data                = array();
+	var $input               = array();
+	var $link                = array();
+	var $extlink             = array();
+	var $label               = array();
+	var $attribute           = array();
+	var $field               = array();
+	var $image               = array();
+	var $type                = array();
+	var $accept              = array();
+	var $checkbox            = array();
+	var $radio               = array();
+	var $orderby             = 'id DESC';
+	var $group_by            = '';
+	var $multiselect         = array();
+	var $elementid           = array();
+	var $value               = array();
+	var $startCollapse       = array();
+	var $endCollapse         = array();
+	var $collapse            = array();
+	var $param               = array();
+	var $plaintext           = array();
+	var $help                = array();
+	var $selected            = array();
+	var $money               = array();
+	var $clearget            = array();
+	var $jointable           = array();
+	var $unique              = array();
+	var $unique_msg          = '';
+	var $msg                 = array();
+	var $search              = FALSE;
+	var $success             = FALSE;
+	var $datatable           = FALSE;
+	var $darkmode            = FALSE;
+	var $enable_delete_param = TRUE;
+	var $insert_id           = 0;
+	var $url                 = '';
+	var $get                 = '';
+	var $key                 = 'id';
 
 	public function api($url = '')
 	{
@@ -981,6 +982,14 @@ class Zea
 		}
 	}
 
+	public function setEnableDeleteParam($enable_delete_param = true)
+	{
+		if(is_bool($enable_delete_param))
+		{
+			$this->enable_delete_param = $enable_delete_param;
+		}
+	}
+
 	public function setFile($field = '', $type = '')
 	{
 		if(!empty($field))
@@ -1561,6 +1570,17 @@ class Zea
 									'type'    => 'reset',
 									'content' => '<i class="fa fa-undo"></i> reset',
 									'class'   => 'btn btn-warning'));
+
+								if($this->init == 'param' && !empty($this->enable_delete_param))
+								{
+									echo form_button(array(
+										'name'    => 'delete_param',
+										'id'      => 'delete_param',
+										'value'   => 'true',
+										'type'    => 'delete',
+										'content' => '<i class="fa fa-trash"></i> Delete Config',
+										'class'   => 'btn btn-danger'));
+								}
 							}
 							?>
 						</div>
@@ -1963,403 +1983,340 @@ class Zea
 			{
 				$data    = array();
 				$last_id = 0;
-				if(!empty($_POST))
+				
+				foreach ($this->input as $key => $value) 
 				{
+					if($value['type'] == 'static')
+					{
+						if(!empty($this->value[$key]))
+						{
+							$_POST[$value['text']] = $this->value[$key];
+						}else{
+							$_POST[$value['text']] = '';
+						}
+					}
+				}
+				$data_post = $_POST;
+				foreach ($data_post as $key => $value)
+				{
+					if(empty($data_post['del_row']) && ($this->init == 'edit'))
+					{
+						if(is_array($value))
+						{
+							$data_post[$key] = ','.implode(',',$value).',';
+						}
+					}
+				}
+				$this->formName = str_replace('.', '_', $this->formName);
+				if(!empty($data_post[$this->formName]))
+				{
+					unset($data_post[$this->formName]);
+					unset($data_post[$this->CI->security->get_csrf_token_name()]);
+					// if(isset($data_post['password']))
+					// {
+					// 	if(empty($this->encrypt))
+					// 	{
+					// 		$data_post['password'] = $data_post['password'];
+					// 	}else{
+					// 		$data_post['password'] = encrypt($data_post['password']);
+					// 	}
+					// }
+					if(!empty($this->encrypt))
+					{
+						foreach ($this->encrypt as $en_key => $en_value) 
+						{
+							$data_post[$en_value] = encrypt($data_post[$en_value]);
+						}
+					}
+					$post_secure = array();
 					foreach ($this->input as $key => $value) 
 					{
-						if($value['type'] == 'static')
-						{
-							if(!empty($this->value[$key]))
-							{
-								$_POST[$value['text']] = $this->value[$key];
-							}else{
-								$_POST[$value['text']] = '';
-							}
-						}
+						$post_secure[$value['text']] = @$data_post[$value['text']];
 					}
-					$data_post = $_POST;
-					foreach ($data_post as $key => $value)
+					$data_post = $post_secure;
+					if(!empty($this->table))
 					{
-						if(empty($data_post['del_row']) && ($this->init == 'edit'))
-						{
-							if(is_array($value))
-							{
-								$data_post[$key] = ','.implode(',',$value).',';
-							}
-						}
-					}
-					$this->formName = str_replace('.', '_', $this->formName);
-					if(!empty($data_post[$this->formName]))
-					{
-						unset($data_post[$this->formName]);
-						unset($data_post[$this->CI->security->get_csrf_token_name()]);
-						// if(isset($data_post['password']))
-						// {
-						// 	if(empty($this->encrypt))
-						// 	{
-						// 		$data_post['password'] = $data_post['password'];
-						// 	}else{
-						// 		$data_post['password'] = encrypt($data_post['password']);
-						// 	}
-						// }
-						if(!empty($this->encrypt))
-						{
-							foreach ($this->encrypt as $en_key => $en_value) 
-							{
-								$data_post[$en_value] = encrypt($data_post[$en_value]);
-							}
-						}
-						$post_secure = array();
-						foreach ($this->input as $key => $value) 
-						{
-							$post_secure[$value['text']] = @$data_post[$value['text']];
-						}
-						$data_post = $post_secure;
-						if(!empty($this->table))
-						{
-							$data['msg']   = 'Data Failed to Save';
-							$data['alert'] = 'danger';
+						$data['msg']   = 'Data Failed to Save';
+						$data['alert'] = 'danger';
 
-							$upload  = array();
-							$uploads = array();
-							$title   = '';
-							foreach ($this->input as $key => $value)
+						$upload  = array();
+						$uploads = array();
+						$title   = '';
+						foreach ($this->input as $key => $value)
+						{
+							$upload_type = array('upload','image','file');
+							$uploads_type = array('uploads','images','files','gallery','multifiles');
+							if(in_array($value['type'], $upload_type))
 							{
-								$upload_type = array('upload','image','file');
-								$uploads_type = array('uploads','images','files','gallery','multifiles');
-								if(in_array($value['type'], $upload_type))
+								$upload[] = $value['text'];
+							}
+							if(in_array($value['type'], $uploads_type))
+							{
+								$uploads[] = $value['text'];
+							}
+							if($value['text'] != 'csrf_esg')
+							{
+								$data_post[$value['text']] = @$data_post[$value['text']];
+							}
+							if($value['type'] == 'checkbox')
+							{
+								if(empty($data_post[$value['text']]))
 								{
-									$upload[] = $value['text'];
-								}
-								if(in_array($value['type'], $uploads_type))
-								{
-									$uploads[] = $value['text'];
-								}
-								if($value['text'] != 'csrf_esg')
-								{
-									$data_post[$value['text']] = @$data_post[$value['text']];
-								}
-								if($value['type'] == 'checkbox')
-								{
-									if(empty($data_post[$value['text']]))
-									{
-										$data_post[$value['text']] = 0;
-									}
+									$data_post[$value['text']] = 0;
 								}
 							}
+						}
 
-							foreach ($this->input as $key => $value)
+						foreach ($this->input as $key => $value)
+						{
+							if($value['type'] == 'text')
 							{
-								if($value['type'] == 'text')
-								{
-									$title = $value['text'];
-									break;
-								}
+								$title = $value['text'];
+								break;
 							}
-							if(!empty($this->unique))
+						}
+						if(!empty($this->unique))
+						{
+							foreach ($this->unique as $key => $value) 
 							{
-								foreach ($this->unique as $key => $value) 
+								if(empty($this->id))
 								{
-									if(empty($this->id))
+									$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$data_post[$value])->row_array();
+								}else{
+									$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$data_post[$value], $this->id))->row_array();
+								}
+								if(!empty($data))
+								{
+									$this->success = FALSE;
+									if(!empty($this->unique_msg))
 									{
-										$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$data_post[$value])->row_array();
+										$pattern[0] = '~{value}~';
+										$pattern[1]= '~{table}~';
+										$this->unique_msg = $value.' '.preg_replace($pattern, [@$data_post[$value], $this->table], $this->unique_msg);
 									}else{
-										$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$data_post[$value], $this->id))->row_array();
+										$this->unique_msg = $value.' '.@$data_post[$value].' was exist in table '.$this->table;
 									}
-									if(!empty($data))
-									{
-										$this->success = FALSE;
-										if(!empty($this->unique_msg))
-										{
-											$pattern[0] = '~{value}~';
-											$pattern[1]= '~{table}~';
-											$this->unique_msg = $value.' '.preg_replace($pattern, [@$data_post[$value], $this->table], $this->unique_msg);
-										}else{
-											$this->unique_msg = $value.' '.@$data_post[$value].' was exist in table '.$this->table;
-										}
-										$this->msg[$value] = array('msg'=>$this->unique_msg, 'alert' => 'danger',$value=>'has-error');
-									}
+									$this->msg[$value] = array('msg'=>$this->unique_msg, 'alert' => 'danger',$value=>'has-error');
 								}
 							}
-							if($this->success)
+						}
+						if($this->success)
+						{
+							$deleted_images = array();
+							if($this->init == 'edit')
 							{
-								$deleted_images = array();
-								if($this->init == 'edit')
+								if($this->set_data($this->table, $this->id, $data_post))
 								{
-									if($this->set_data($this->table, $this->id, $data_post))
-									{
-										$data['msg']   = 'Data Saved Successfully';
-										$data['alert'] = 'success';
-									}
-								}else if($this->init == 'param')
-								{
-									$data_param = array();
-									if(!empty($data_post))
-									{
-										$data_param['name'] = $this->paramname;
-										$data_param['value'] = json_encode($data_post);
-									}
-									if($this->set_param($this->table, $this->paramname, $data_param))
-									{
-										$data['msg']   = 'Data Saved Successfully';
-										$data['alert'] = 'success';
-									}else{
-										$data['msg']   = 'Data Failed to Saved';
-										$data['alert'] = 'danger';
-									}
+									$data['msg']   = 'Data Saved Successfully';
+									$data['alert'] = 'success';
 								}
-								$last_id = $this->CI->db->insert_id();
-								$this->set_insert_id($last_id);
-								if(!empty($last_id) || !empty($this->id) || !empty($this->paramname))
+							}else if($this->init == 'param')
+							{
+								$data_param = array();
+								if(!empty($data_post))
 								{
-									$post_ori = $data_post;
-									if(!empty($upload))
+									$data_param['name'] = $this->paramname;
+									$data_param['value'] = json_encode($data_post);
+								}
+								if($this->set_param($this->table, $this->paramname, $data_param))
+								{
+									$data['msg']   = 'Data Saved Successfully';
+									$data['alert'] = 'success';
+								}else{
+									$data['msg']   = 'Data Failed to Saved';
+									$data['alert'] = 'danger';
+								}
+							}
+							$last_id = $this->CI->db->insert_id();
+							$this->set_insert_id($last_id);
+							if(!empty($last_id) || !empty($this->id) || !empty($this->paramname))
+							{
+								$post_ori = $data_post;
+								if(!empty($upload))
+								{
+									$i = 0;
+									$dir_image = '';
+									if($this->init == 'edit')
 									{
-										$i = 0;
-										$dir_image = '';
-										if($this->init == 'edit')
-										{
-											$dir_image = !empty($this->id) ? $this->id : $last_id;
-										}else if($this->init == 'param'){
-											$dir_image = !empty($this->dir_image) ? $this->dir_image : $this->paramname;
-										}
-										foreach ($upload as $u_key => $u_value)
-										{
-											$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
-											$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
-											if(!empty($_FILES[$upload[$i]]['name']) && empty($_FILES[$upload[$i]]['error']))
-											{
-												$data_post[$u_value] = !empty($data_post[$title]) ? $u_value.'_'.str_replace(' ','_',$data_post[$title]) : $u_value.'_image';
-												if(!is_dir($dir))
-												{
-													mkdir($dir, 0777,1);
-												}
-												$ext = pathinfo($_FILES[$upload[$i]]['name']);
-												if($this->check_type($ext['extension'],$u_value))
-												{
-													$file_name = $data_post[$u_value].'.'.$ext['extension'];
-													if($this->init == 'edit')
-													{
-														$file_name_exist = $this->get_one($this->table, $u_value);
-													}else if($this->init == 'param')
-													{
-														$data_image      = json_decode($data_param['value'],1);
-														$file_name_exist = $data_image[$u_value];
-													}
-													if(empty($data_post[$u_value]))
-													{
-														foreach(glob($dir.'/'.$u_value.'_*') as $file)
-														{
-															unlink($file);
-														}
-													}else if(empty($file_name_exist))
-													{
-														foreach(glob($dir.'/'.$u_value.'_*') as $file)
-														{
-															unlink($file);
-														}
-													}
-													$file_name = str_replace('/','_',$file_name);
-													copy($_FILES[$upload[$i]]['tmp_name'], $dir.$file_name);
-
-													$config_image_lib['image_library']  = 'gd2';
-													$config_image_lib['source_image']   = $dir.$file_name;
-													// $config_image_lib['create_thumb']   = TRUE;
-													$config_image_lib['maintain_ratio'] = TRUE;
-													$config_image_lib['width']          = 750;
-													$config_image_lib['height']         = 500;
-
-													$this->CI->load->library('image_lib');
-
-													$this->CI->image_lib->initialize($config_image_lib);
-													if($this->CI->image_lib->resize())
-													{
-													}
-													if($this->init == 'edit')
-													{
-														$update_file = array($u_value => $file_name);
-														$this->set_data($this->table, $dir_image, $update_file);
-													}else if($this->init == 'param'){
-														$image_array = 
-														[
-															'upload',
-															'image',
-															'file',
-															'uploads',
-															'images',
-															'files',
-															'multifiles',
-															'gallery',
-														];
-														foreach ($data_post as $dp_key => $dp_value)
-														{
-															if(in_array($this->input[$dp_key]['type'], $image_array))
-															{
-																if(!preg_match('~.'.$ext['extension'].'~',$file_name))
-																{
-																	$file_name = $file_name.'.'.$ext['extension'];
-																}
-																$data_post[$u_value] = $file_name;
-															}
-														}
-														$data_param['value'] = json_encode($data_post);
-														$data_param['name']  = $this->paramname;
-														$this->set_param($this->table, $this->paramname, $data_param);
-													}
-												}
-											}
-											$i++;
-										}
-										if($this->init == 'param')
-										{
-											$tmp_data_param = json_decode($data_param['value'], 1);
-											foreach ($tmp_data_param as $tdpkey => $tdpvalue) 
-											{
-												if(empty($tmp_data_param[$tdpkey]))
-												{
-													$deleted_images[] = $tdpkey;
-												}
-											}
-										}else if($this->init == 'edit')
-										{
-											foreach ($data_post as $tdpkey => $tdpvalue) 
-											{
-												if(empty($data_post[$tdpkey]))
-												{
-													$deleted_images[] = $tdpkey;
-												}
-											}
-										}
-										foreach ($deleted_images as $dikey => $divalue)
-										{
-											foreach(glob($dir.$divalue.'_*') as $file)
-											{
-												unlink($file);
-											}
-										}
+										$dir_image = !empty($this->id) ? $this->id : $last_id;
+									}else if($this->init == 'param'){
+										$dir_image = !empty($this->dir_image) ? $this->dir_image : $this->paramname;
 									}
-									if(!empty($uploads))
+									foreach ($upload as $u_key => $u_value)
 									{
-										$i = 0;
-										$dir_image = '';
-										if($this->init == 'edit')
+										$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
+										$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
+										if(!empty($_FILES[$upload[$i]]['name']) && empty($_FILES[$upload[$i]]['error']))
 										{
-											$dir_image = !empty($this->id) ? $this->id : $last_id;
-										}else if($this->init == 'param'){
-											$dir_image = $this->paramname;
-										}
-										foreach ($uploads as $u_key => $u_value)
-										{
-											$data_post[$u_value] = !empty($data_post[$title]) ? $u_value.'_'.str_replace(' ','_',$data_post[$title]) : 'image';
-											$files_ready     = true;
-											if(!empty($_FILES[$uploads[$i]]['error']))
+											$data_post[$u_value] = !empty($data_post[$title]) ? $u_value.'_'.str_replace(' ','_',$data_post[$title]) : $u_value.'_image';
+											if(!is_dir($dir))
 											{
-												foreach ($_FILES[$uploads[$i]]['error'] as $err_key => $err_value )
-												{
-													if(!empty($err_value))
-													{
-														$files_ready = false;
-													}
-												}
+												mkdir($dir, 0777,1);
 											}
-											$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
-											$dir = FCPATH.'images/'.$module.'/gallery'.'/'.$dir_image.'/';
-											if($files_ready)
+											$ext = pathinfo($_FILES[$upload[$i]]['name']);
+											if($this->check_type($ext['extension'],$u_value))
 											{
-												if(!is_dir($dir))
+												$file_name = $data_post[$u_value].'.'.$ext['extension'];
+												if($this->init == 'edit')
 												{
-													mkdir($dir, 0777,1);
+													$file_name_exist = $this->get_one($this->table, $u_value);
+												}else if($this->init == 'param')
+												{
+													$data_image      = json_decode($data_param['value'],1);
+													$file_name_exist = $data_image[$u_value];
 												}
-												$exts = array();
-												$files_name = array();
-												if(!empty($_FILES[$uploads[$i]]['name']))
+												if(empty($data_post[$u_value]))
 												{
-													foreach ($_FILES[$uploads[$i]]['name'] as $n_key => $n_value)
+													foreach(glob($dir.'/'.$u_value.'_*') as $file)
 													{
-														$exts[$n_key]       = pathinfo($n_value);
-														$files_name[$n_key] = $data_post[$u_value].'_'.$n_key.'_'.time().'.'.$exts[$n_key]['extension'];
+														unlink($file);
+													}
+												}else if(empty($file_name_exist))
+												{
+													foreach(glob($dir.'/'.$u_value.'_*') as $file)
+													{
+														unlink($file);
 													}
 												}
-												$files_upload = array();
-												$j = 0;
-												if(!empty($_FILES[$uploads[$i]]['tmp_name']))
+												$file_name = str_replace('/','_',$file_name);
+												copy($_FILES[$upload[$i]]['tmp_name'], $dir.$file_name);
+
+												$config_image_lib['image_library']  = 'gd2';
+												$config_image_lib['source_image']   = $dir.$file_name;
+												// $config_image_lib['create_thumb']   = TRUE;
+												$config_image_lib['maintain_ratio'] = TRUE;
+												$config_image_lib['width']          = 750;
+												$config_image_lib['height']         = 500;
+
+												$this->CI->load->library('image_lib');
+
+												$this->CI->image_lib->initialize($config_image_lib);
+												if($this->CI->image_lib->resize())
 												{
-													foreach ($_FILES[$uploads[$i]]['tmp_name'] as $n_key => $n_value)
-													{
-														$files_upload[$j]['tmp'] = $n_value;
-														$j++;
-													}
-												}
-												$j = 0;
-												foreach ($files_name as $f_key => $f_value)
-												{
-													$files_upload[$j]['name'] = $f_value;
-													$j++;
-												}
-												if(!empty($files_upload))
-												{
-													$tmp_file_name = array();
-													$file_name = string_to_array($post_ori[$u_value]);
-													if(is_array($file_name))
-													{
-														foreach ($file_name as $flkey => $flvalue) {
-															$tmp_file_name[] = $flvalue;
-														}
-														$file_name = json_encode($tmp_file_name);
-														foreach(glob($dir.'/'.$u_value.'_*') as $file)
-														{
-															$current_file = explode('/',$file);
-															$current_file = end($current_file);
-															if(!in_array($current_file, $tmp_file_name))
-															{
-																unlink($file);
-															}
-														}
-													}
-												}
-												foreach ($files_upload as $fu_key => $fu_value)
-												{
-													copy($fu_value['tmp'], $dir.str_replace('/','_',$fu_value['name']));
-												}
-												if(is_array($files_name))
-												{
-													$file_name = json_encode($files_name);
-												}else{
-													$file_name = string_to_array($files_name);
-													$file_name = json_encode($file_name);
-												}
-												if(!empty($tmp_file_name))
-												{
-													$new_file_name = array_merge($files_name, $tmp_file_name);
-												}
-												if(!empty($new_file_name))
-												{
-													if(is_array($new_file_name))
-													{
-														$file_name = json_encode($new_file_name);
-													}else{
-														$file_name = string_to_array($new_file_name);
-														$file_name = json_encode($file_name);
-													}
 												}
 												if($this->init == 'edit')
 												{
 													$update_file = array($u_value => $file_name);
 													$this->set_data($this->table, $dir_image, $update_file);
-												}else if($this->init == 'param')
-												{
+												}else if($this->init == 'param'){
+													$image_array = 
+													[
+														'upload',
+														'image',
+														'file',
+														'uploads',
+														'images',
+														'files',
+														'multifiles',
+														'gallery',
+													];
 													foreach ($data_post as $dp_key => $dp_value)
 													{
-														if($dp_key=='image')
+														if(in_array($this->input[$dp_key]['type'], $image_array))
 														{
-															$data_post[$dp_key] = $file_name;
+															if(!preg_match('~.'.$ext['extension'].'~',$file_name))
+															{
+																$file_name = $file_name.'.'.$ext['extension'];
+															}
+															$data_post[$u_value] = $file_name;
 														}
 													}
 													$data_param['value'] = json_encode($data_post);
-													$data_param['name']  = $dir_image;
-													// $this->set_param($this->table, $dir_image, $data_param);
+													$data_param['name']  = $this->paramname;
+													$this->set_param($this->table, $this->paramname, $data_param);
 												}
-											}else{
+											}
+										}
+										$i++;
+									}
+									if($this->init == 'param')
+									{
+										$tmp_data_param = json_decode($data_param['value'], 1);
+										foreach ($tmp_data_param as $tdpkey => $tdpvalue) 
+										{
+											if(empty($tmp_data_param[$tdpkey]))
+											{
+												$deleted_images[] = $tdpkey;
+											}
+										}
+									}else if($this->init == 'edit')
+									{
+										foreach ($data_post as $tdpkey => $tdpvalue) 
+										{
+											if(empty($data_post[$tdpkey]))
+											{
+												$deleted_images[] = $tdpkey;
+											}
+										}
+									}
+									foreach ($deleted_images as $dikey => $divalue)
+									{
+										foreach(glob($dir.$divalue.'_*') as $file)
+										{
+											unlink($file);
+										}
+									}
+								}
+								if(!empty($uploads))
+								{
+									$i = 0;
+									$dir_image = '';
+									if($this->init == 'edit')
+									{
+										$dir_image = !empty($this->id) ? $this->id : $last_id;
+									}else if($this->init == 'param'){
+										$dir_image = $this->paramname;
+									}
+									foreach ($uploads as $u_key => $u_value)
+									{
+										$data_post[$u_value] = !empty($data_post[$title]) ? $u_value.'_'.str_replace(' ','_',$data_post[$title]) : 'image';
+										$files_ready     = true;
+										if(!empty($_FILES[$uploads[$i]]['error']))
+										{
+											foreach ($_FILES[$uploads[$i]]['error'] as $err_key => $err_value )
+											{
+												if(!empty($err_value))
+												{
+													$files_ready = false;
+												}
+											}
+										}
+										$module = !empty($this->table) ? 'modules/'.$this->table : 'uploads';
+										$dir = FCPATH.'images/'.$module.'/gallery'.'/'.$dir_image.'/';
+										if($files_ready)
+										{
+											if(!is_dir($dir))
+											{
+												mkdir($dir, 0777,1);
+											}
+											$exts = array();
+											$files_name = array();
+											if(!empty($_FILES[$uploads[$i]]['name']))
+											{
+												foreach ($_FILES[$uploads[$i]]['name'] as $n_key => $n_value)
+												{
+													$exts[$n_key]       = pathinfo($n_value);
+													$files_name[$n_key] = $data_post[$u_value].'_'.$n_key.'_'.time().'.'.$exts[$n_key]['extension'];
+												}
+											}
+											$files_upload = array();
+											$j = 0;
+											if(!empty($_FILES[$uploads[$i]]['tmp_name']))
+											{
+												foreach ($_FILES[$uploads[$i]]['tmp_name'] as $n_key => $n_value)
+												{
+													$files_upload[$j]['tmp'] = $n_value;
+													$j++;
+												}
+											}
+											$j = 0;
+											foreach ($files_name as $f_key => $f_value)
+											{
+												$files_upload[$j]['name'] = $f_value;
+												$j++;
+											}
+											if(!empty($files_upload))
+											{
 												$tmp_file_name = array();
 												$file_name = string_to_array($post_ori[$u_value]);
 												if(is_array($file_name))
@@ -2368,23 +2325,6 @@ class Zea
 														$tmp_file_name[] = $flvalue;
 													}
 													$file_name = json_encode($tmp_file_name);
-													if($this->init == 'edit')
-													{
-														$update_file = array($u_value => $file_name);
-														$this->set_data($this->table, $dir_image, $update_file);
-													}else if($this->init == 'param')
-													{
-														foreach ($data_post as $dp_key => $dp_value)
-														{
-															if($dp_key=='images')
-															{
-																$data_post[$dp_key] = $file_name;
-															}
-														}
-														$data_param['value'] = json_encode($data_post);
-														$data_param['name']  = $dir_image;
-														$this->set_param($this->table, $dir_image, $data_param);
-													}
 													foreach(glob($dir.'/'.$u_value.'_*') as $file)
 													{
 														$current_file = explode('/',$file);
@@ -2394,30 +2334,113 @@ class Zea
 															unlink($file);
 														}
 													}
+												}
+											}
+											foreach ($files_upload as $fu_key => $fu_value)
+											{
+												copy($fu_value['tmp'], $dir.str_replace('/','_',$fu_value['name']));
+											}
+											if(is_array($files_name))
+											{
+												$file_name = json_encode($files_name);
+											}else{
+												$file_name = string_to_array($files_name);
+												$file_name = json_encode($file_name);
+											}
+											if(!empty($tmp_file_name))
+											{
+												$new_file_name = array_merge($files_name, $tmp_file_name);
+											}
+											if(!empty($new_file_name))
+											{
+												if(is_array($new_file_name))
+												{
+													$file_name = json_encode($new_file_name);
 												}else{
-													foreach(glob($dir.'/'.$u_value.'_*') as $file)
+													$file_name = string_to_array($new_file_name);
+													$file_name = json_encode($file_name);
+												}
+											}
+											if($this->init == 'edit')
+											{
+												$update_file = array($u_value => $file_name);
+												$this->set_data($this->table, $dir_image, $update_file);
+											}else if($this->init == 'param')
+											{
+												foreach ($data_post as $dp_key => $dp_value)
+												{
+													if($dp_key=='image')
+													{
+														$data_post[$dp_key] = $file_name;
+													}
+												}
+												$data_param['value'] = json_encode($data_post);
+												$data_param['name']  = $dir_image;
+												// $this->set_param($this->table, $dir_image, $data_param);
+											}
+										}else{
+											$tmp_file_name = array();
+											$file_name = string_to_array($post_ori[$u_value]);
+											if(is_array($file_name))
+											{
+												foreach ($file_name as $flkey => $flvalue) {
+													$tmp_file_name[] = $flvalue;
+												}
+												$file_name = json_encode($tmp_file_name);
+												if($this->init == 'edit')
+												{
+													$update_file = array($u_value => $file_name);
+													$this->set_data($this->table, $dir_image, $update_file);
+												}else if($this->init == 'param')
+												{
+													foreach ($data_post as $dp_key => $dp_value)
+													{
+														if($dp_key=='images')
+														{
+															$data_post[$dp_key] = $file_name;
+														}
+													}
+													$data_param['value'] = json_encode($data_post);
+													$data_param['name']  = $dir_image;
+													$this->set_param($this->table, $dir_image, $data_param);
+												}
+												foreach(glob($dir.'/'.$u_value.'_*') as $file)
+												{
+													$current_file = explode('/',$file);
+													$current_file = end($current_file);
+													if(!in_array($current_file, $tmp_file_name))
 													{
 														unlink($file);
 													}
 												}
+											}else{
+												foreach(glob($dir.'/'.$u_value.'_*') as $file)
+												{
+													unlink($file);
+												}
 											}
-											$i++;
 										}
+										$i++;
 									}
 								}
-							}else{
-								return $this->msg;
 							}
 						}else{
-							$data['msg']   = 'Table Undefined';
-							$data['alert'] = 'danger';
-							$this->msg[] = $data;
+							return $this->msg;
 						}
 					}else{
-						// $data['msg']   = 'Please Press Submit Button to Save';
-						// $data['alert'] = 'warning';
+						$data['msg']   = 'Table Undefined';
+						$data['alert'] = 'danger';
+						$this->msg[] = $data;
 					}
+				}else if(!empty($data_post['delete_param'])){
+					$this->CI->db->delete('config',['name'=>$this->paramname]);
+					$data['msg']   = 'Delete Config Successfully';
+					$data['alert'] = 'success';
+				}else{
+					// $data['msg']   = 'Please Press Submit Button to Save';
+					// $data['alert'] = 'warning';
 				}
+
 				$this->msg[] = $data;
 				return $this->msg;
 			}else if($this->init == 'roll')

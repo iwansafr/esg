@@ -55,6 +55,7 @@ if(is_admin() || is_root())
 		$form->setOptions('admin_template', $template_admin_names);
 	}
 	$form->setFormName('templates');
+	$form->setEnableDeleteParam(false);
 	$form->form();
 }else{
 	msg('you dont have permission to access this section', 'danger');
