@@ -29,6 +29,11 @@
 				background: #1abc9c;
 	    	color: #ffffff;
 			}
+			@media(min-width: 790px){
+				#lcb_main_area{
+					display: none;
+				}
+			}
 			@media(max-width: 790px){
 				.main_buttons{
 					z-index: 99999;
