@@ -1217,13 +1217,13 @@ class Zea
 				$input   = array();
 				$limit   = !empty($this->limit) ? $this->limit : 12;
 				$page    = (@intval($_GET['page']) > 0 ) ? $_GET['page']-1 : @intval($_GET['page']);
-				$sort_by = @$_GET['sort_by'];
-				$keyword = @$_GET['keyword'];
+				$sort_by = !empty($_GET['sort_by']) ? $_GET['sort_by'] : '';
+				$keyword = !empty($_GET['keyword']) ? $_GET['keyword'] : '';
 				$id      = @intval($_GET['id']);
 				$where   = '';
 				$bind    = array();
 				$url_get = '';
-				$get     = @$_GET;
+				$get     = !empty($_GET) ? $_GET : '';
 				
 				foreach ($this->input as $key => $value)
 				{
