@@ -1231,7 +1231,7 @@ class Zea
 				}
 				if(!empty($input))
 				{
-					$input = implode($input,',');
+					$input = implode(',',$input);
 				}
 				$sql = 'SELECT '.$input.' FROM '.$this->table;
 				if(!empty($this->jointable))
