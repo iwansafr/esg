@@ -46,4 +46,8 @@ class Admin extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+	public function test()
+    {
+        $this->load->view('index');
+    }
 }

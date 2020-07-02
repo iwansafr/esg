@@ -118,7 +118,7 @@ class Esg
 
 		if(empty($this->CI->session->userdata(base_url().'_logged_in')) && empty($cookie_username))
 		{
-			$curent_url = base_url($_SERVER['PATH_INFO']);
+			$curent_url = !empty($_SERVER['PATH_INFO']) ? base_url($_SERVER['PATH_INFO']) : '';
 			$curent_url = urlencode($curent_url);
 			redirect(base_url('admin/login?redirect_to='.$curent_url));
 		}else{
