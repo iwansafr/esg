@@ -1383,9 +1383,13 @@ class Zea
 		if(!empty($this->paramname))
 		{
 			$data = array();
-			$data = $this->CI->db->query('SELECT value FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
+			if($this->CI->db->field_exists('value',$this->table))
+			{
+				$data = $this->CI->db->query('SELECT value FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
+			}else{
+				$data = $this->CI->db->query('SELECT param FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
+			}
 			// pr($this->CI->db->last_query());
-			// pr($data);die();
 			return $data;
 		}
 	}
@@ -1414,8 +1418,13 @@ class Zea
 					}else{
 						$this->param = $this->getParam();
 						$name = $this->paramname;
-						$data = $this->param['value'];
-						$data = json_decode($data,1);
+						if(!empty($this->param['value']))
+						{
+							$data = $this->param['value'];
+							$data = json_decode($data,1);
+						}else{
+							$data = [];
+						}
 					}
 					// pr($data);
 				}
