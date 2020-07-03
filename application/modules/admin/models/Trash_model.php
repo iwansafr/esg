@@ -20,9 +20,19 @@ class Trash_model extends CI_Model
 				{
 					$dir = FCPATH.'images/modules/'.$data['table_title'].'/'.$data['table_id'].'/';
 	        $trash_dir = FCPATH.'images/modules/trash/'.$data['table_title'].'/'.$data['table_id'].'/';
-	        if(!is_dir($dir))
+	        if(!is_dir($trash_dir))
 	        {
-	        	mkdir($dir,0777,1);
+	        	$dir = FCPATH.'images/modules/'.$data['table_title'].'/'.$content['name'].'/';
+	        	$trash_dir = FCPATH.'images/modules/trash/'.$data['table_title'].'/'.$content['name'].'/';
+	        	if(!is_dir($dir))
+		        {
+		        	mkdir($dir,0777,1);
+		        }
+	        }else{
+		        if(!is_dir($dir))
+		        {
+		        	mkdir($dir,0777,1);
+		        }
 	        }
 	        foreach(glob($trash_dir.'*') as $file)
 					{

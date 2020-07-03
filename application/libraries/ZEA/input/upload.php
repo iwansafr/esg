@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 if(!empty($field))
 {
-	if(!empty($this->id))
+	if(!empty($this->id) && $this->init == 'edit')
 	{
 		$data_image = $this->CI->db->query('SELECT '.$field.' FROM '.$this->table.' WHERE id = ?',$this->id)->row_array();
 		$data_image = @$data_image[$field];

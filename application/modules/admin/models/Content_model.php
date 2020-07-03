@@ -96,7 +96,7 @@ class Content_model extends CI_Model{
 		      $tmp = $this->db->query('SELECT title FROM content_tag WHERE id = ? LIMIT 1', @intval($value))->row_array();
 		      $tag_name[] = @$tmp['title'];
 		    }
-		    $tag_name = implode($tag_name, ',');
+		    $tag_name = implode(',',$tag_name);
 		  }else{
 		    $tag_name = $_POST['tag_ids'];
 		  }
@@ -134,7 +134,7 @@ class Content_model extends CI_Model{
 		    {
 		      $post['slug'] = slug($this->input->post('title', TRUE));
 		      $check_slug   = $this->db->query('SELECT slug FROM content WHERE slug = ? LIMIT 1',@$post['slug'])->row_array();
-		      $check_slug = $check_slug['slug'];
+		      $check_slug = !empty($check_slug['slug']) ? $check_slug : '';
 		      if($check_slug == $post['slug'])
 		      {
 		        $array_slug   = explode('-', $check_slug);

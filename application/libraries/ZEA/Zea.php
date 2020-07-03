@@ -69,6 +69,7 @@ class Zea
 	var $money               = array();
 	var $clearget            = array();
 	var $jointable           = array();
+	var $edit_join           = [];
 	var $unique              = array();
 	var $unique_msg          = '';
 	var $msg                 = array();
@@ -216,14 +217,11 @@ class Zea
 		    $data[$key] = $value;
 		  }
 		  $param = $this->CI->db->query('SELECT * FROM '.$table.' WHERE name = ?', $name)->row_array();
-		  pr($param);
 		  if(!empty($param))
 		  {
 		    $status = $this->CI->db->update($table, $data, "`name` = '{$name}'");
-		    pr($this->CI->db->last_query());
 		  }else{
 		    $status = $this->CI->db->insert($table, $data);
-		    pr($this->CI->db->last_query());
 		    $last_id = $this->CI->db->insert_id();
 					$this->set_insert_id($last_id);
 		  }
@@ -1099,6 +1097,61 @@ class Zea
 		}
 		return $input;
 	}
+	public function del_to_trash($table ='',$ids = array(), $data = array())
+	{
+		$this->CI->db->where_in('id',$ids);
+		$this->CI->db->delete($table);
+  	if($table == 'trash')
+  	{
+  		foreach ($data as $key => $value) 
+  		{
+  			$trash_dir = FCPATH.'images/modules/trash/'.$value['table_title'].'/'.$value['table_id'].'/';
+  			recursive_rmdir($trash_dir);
+  			$trash_dir = FCPATH.'images/modules/trash/'.$value['table_title'].'/gallery/'.$value['table_id'].'/';
+  			recursive_rmdir($trash_dir);
+  		}
+  	}else{
+    	if(!empty($data))
+    	{
+	    	$new_data = [];
+	    	$val_data = [];
+	    	$i = 0;
+	    	foreach($data as $key => $value)
+	    	{
+	    		$val_data['table_id'] = $value['id'];
+	    		$val_data['user_id'] = @intval($_SESSION[base_url().'_logged_in']['id']);
+	    		$val_data['table_title'] = $table;
+	    		$val_data['table_content'] = json_encode($value);
+	    		$new_data[$i] = $val_data;
+	    		$i++;
+	    	}
+
+	    	$this->CI->db->insert_batch('trash', $new_data);
+	      foreach ($data as $key => $value)
+	      {
+	      	$id = $value['id'];
+	        $dir = FCPATH.'images/modules/'.$table.'/'.$id.'/';
+	        $trash_dir = FCPATH.'images/modules/trash/'.$table.'/'.$id.'/';
+	        if(!is_dir($dir) && !empty($value['name']))
+	        {
+	        	$dir = FCPATH.'images/modules/'.$table.'/'.$value['name'].'/';
+	        	$trash_dir = FCPATH.'images/modules/trash/'.$table.'/'.$value['name'].'/';
+	        }
+	        if(!is_dir($trash_dir))
+	        {
+	        	mkdir($trash_dir,0777,1);
+	        }
+	        foreach(glob($dir.'*') as $file)
+					{
+						$name_file = explode('/', $file);
+						$name_file = end($name_file);
+						@copy($file,$trash_dir.'/'.$name_file);
+					}
+	        recursive_rmdir($dir);
+	      }
+    	}
+  	}
+	}
 	public function del_data($table='',$ids = array())
   {
     if(!empty($ids)&&!empty($table))
@@ -1109,66 +1162,19 @@ class Zea
   			$this->CI->db->where_in('id',$ids);
 	    	$data = $this->CI->db->get($table)->result_array();
     	}
-  		$this->CI->db->where_in('id',$ids);
-  		$this->CI->db->delete($table);
-    	if($table == 'trash')
+    	$this->del_to_trash($table,$ids, $data);
+    	if(!empty($this->jointable['table']))
     	{
+    		$second_ids = [];
     		foreach ($data as $key => $value) 
     		{
-    			$trash_dir = FCPATH.'images/modules/trash/'.$value['table_title'].'/'.$value['table_id'].'/';
-    			recursive_rmdir($trash_dir);
-    			$trash_dir = FCPATH.'images/modules/trash/'.$value['table_title'].'/gallery/'.$value['table_id'].'/';
-    			recursive_rmdir($trash_dir);
+    			$second_ids[] = $value[$this->jointable['table'].'_id'];
     		}
-    	}else{
-	    	if(!empty($data))
-	    	{
-		    	$new_data = [];
-		    	$val_data = [];
-		    	$i = 0;
-		    	foreach($data as $key => $value)
-		    	{
-		    		$val_data['table_id'] = $value['id'];
-		    		$val_data['user_id'] = @intval($_SESSION[base_url().'_logged_in']['id']);
-		    		$val_data['table_title'] = $table;
-		    		$val_data['table_content'] = json_encode($value);
-		    		$new_data[$i] = $val_data;
-		    		$i++;
-		    	}
-
-		    	$this->CI->db->insert_batch('trash', $new_data);
-		      foreach ($data as $key => $value)
-		      {
-		      	$id = $value['id'];
-		        $dir = FCPATH.'images/modules/'.$table.'/'.$id.'/';
-		        $trash_dir = FCPATH.'images/modules/trash/'.$table.'/'.$id.'/';
-		        if(!is_dir($trash_dir))
-		        {
-		        	mkdir($trash_dir,0777,1);
-		        }
-		        foreach(glob($dir.'*') as $file)
-						{
-							$name_file = explode('/', $file);
-							$name_file = end($name_file);
-							@copy($file,$trash_dir.'/'.$name_file);
-						}
-		        recursive_rmdir($dir);
-		        $dir = FCPATH.'images/modules/'.$table.'/gallery'.'/'.$id.'/';
-		        $trash_dir = FCPATH.'images/modules/trash/'.$table.'/gallery/'.$id.'/';
-		        if(!is_dir($trash_dir))
-		        {
-		        	mkdir($trash_dir,0777,1);
-		        }
-		        foreach(glob($dir.'*') as $file)
-						{
-							$name_file = explode('/', $file);
-							$name_file = end($name_file);
-							@copy($file,$trash_dir.'/'.$name_file);
-						}
-		        recursive_rmdir($dir);
-		      }
-	    	}
+    		$this->CI->db->where_in('id',$second_ids);
+	    	$second_data = $this->CI->db->get($this->jointable['table'])->result_array();
+    		$this->del_to_trash($this->jointable['table'],$second_ids, $second_data);
     	}
+  		
     }
   }
 	public function set_data($table = '',$id = 0, $post = array())
@@ -1387,9 +1393,12 @@ class Zea
 	{
 		if(!empty($this->paramname))
 		{
-			$data = array();
 			$data = $this->CI->db->query('SELECT '.$this->param_field.' FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
-			// pr($this->CI->db->last_query());
+			// 
+			if(empty($data) && !empty($this->id))
+			{
+				$data = $this->CI->db->query('SELECT '.$this->param_field.' FROM '.$this->table.' WHERE id = ?', $this->id)->row_array();
+			}
 			return $data;
 		}
 	}
@@ -1431,7 +1440,7 @@ class Zea
 							$data = [];
 						}
 					}
-					// pr($data);
+					// 
 				}
 				$action = !empty($this->view) ? base_url($this->view).'/'.$this->id : '';
 				?>
@@ -2003,6 +2012,37 @@ class Zea
 		}
 	}
 
+	public function editJoin($data)
+	{
+		if(!empty($data) && is_array($data))
+		{
+			if(!empty($data['table']))
+			{
+				$this->editJoin['table'] = $data['table'];
+			}else{
+				msg('Table cant be empty in tablejoin','danger');die();
+			}
+			if(!empty($data['field']))
+			{
+				if(is_array($data['field']))
+				{
+					$this->editJoin['field'] = $data['field'];
+				}else{
+					msg('Field must array in tablejoin','danger');die();
+				}
+			}else{
+				msg('Field cant be empty in tablejoin','danger');die();
+			}
+			if(!empty($data['key']))
+			{
+				$this->editJoin['key'] = $data['key'];
+				$key_id = $this->CI->db->query('SELECT '.$this->editJoin['key'].' FROM '.$this->table.' WHERE id = ?',$this->id)->row_array();
+				$key_id = !empty($key_id[$this->editJoin['key']]) ? $key_id[$this->editJoin['key']] : 0;
+				$this->editJoin['key_id'] = $key_id;
+			}
+		}
+	}
+
 	public function action()
 	{
 		if(!empty($_POST))
@@ -2114,9 +2154,19 @@ class Zea
 							{
 								if(empty($this->id))
 								{
-									$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$data_post[$value])->row_array();
+									if(!empty($this->editJoin['table']))
+									{
+										$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->editJoin['table'].' WHERE '.$value.' = ?', @$data_post[$value])->row_array();
+									}else{
+										$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ?', @$data_post[$value])->row_array();
+									}
 								}else{
-									$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$data_post[$value], $this->id))->row_array();
+									if(!empty($this->editJoin['table']))
+									{
+										$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->editJoin['table'].' WHERE '.$value.' = ? AND id != ?', array(@$data_post[$value], $this->editJoin['key_id']))->row_array();
+									}else{
+										$data = $this->CI->db->query('SELECT '.$value.' FROM '.$this->table.' WHERE '.$value.' = ? AND id != ?', array(@$data_post[$value], $this->id))->row_array();
+									}
 								}
 								if(!empty($data))
 								{
@@ -2136,6 +2186,33 @@ class Zea
 						if($this->success)
 						{
 							$deleted_images = array();
+							if(!empty($this->editJoin['table']) && !empty($this->editJoin['field']))
+							{
+								$data_join_post = [];
+								foreach ($data_post as $dpkey => $dpvalue) 
+								{
+									foreach ($this->editJoin['field'] as $ejkey => $ejvalue) 
+									{
+										if($ejvalue == $dpkey)
+										{
+											$data_join_post[$ejvalue] = $data_post[$dpkey];
+										}
+									}
+								}
+								if(empty($this->editJoin['key_id']))
+								{
+									$this->set_data($this->editJoin['table'],0,$data_join_post);
+								}else{
+									$this->set_data($this->editJoin['table'],$this->editJoin['key_id'],$data_join_post);
+								}
+								if(!empty($this->editJoin['key']))
+								{
+									$last_join_id = $this->insert_id;
+									// $data_post[$this->editJoin['key']] = $last_join_id;
+									
+								}
+							}
+
 							if($this->init == 'edit')
 							{
 								if($this->set_data($this->table, $this->id, $data_post))
@@ -2161,6 +2238,12 @@ class Zea
 								}
 							}
 							$last_id = $this->CI->db->insert_id();
+							
+							
+							if(!empty($last_id) && !empty($last_join_id))
+							{
+								$this->set_data($this->table,$last_id,[$this->editJoin['key']=>$last_join_id]);
+							}
 							$this->set_insert_id($last_id);
 							if(!empty($last_id) || !empty($this->id) || !empty($this->paramname))
 							{
