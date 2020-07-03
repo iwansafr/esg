@@ -81,6 +81,8 @@ class Zea
 	var $url                 = '';
 	var $get                 = '';
 	var $key                 = 'id';
+	var $param_field         = 'value';
+	var $before;
 
 	public function api($url = '')
 	{
@@ -214,11 +216,14 @@ class Zea
 		    $data[$key] = $value;
 		  }
 		  $param = $this->CI->db->query('SELECT * FROM '.$table.' WHERE name = ?', $name)->row_array();
+		  pr($param);
 		  if(!empty($param))
 		  {
 		    $status = $this->CI->db->update($table, $data, "`name` = '{$name}'");
+		    pr($this->CI->db->last_query());
 		  }else{
 		    $status = $this->CI->db->insert($table, $data);
+		    pr($this->CI->db->last_query());
 		    $last_id = $this->CI->db->insert_id();
 					$this->set_insert_id($last_id);
 		  }
@@ -1383,15 +1388,15 @@ class Zea
 		if(!empty($this->paramname))
 		{
 			$data = array();
-			if($this->CI->db->field_exists('value',$this->table))
-			{
-				$data = $this->CI->db->query('SELECT value FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
-			}else{
-				$data = $this->CI->db->query('SELECT param FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
-			}
+			$data = $this->CI->db->query('SELECT '.$this->param_field.' FROM '.$this->table.' WHERE name = ?', $this->paramname)->row_array();
 			// pr($this->CI->db->last_query());
 			return $data;
 		}
+	}
+
+	public function before($func)
+	{
+		$this->func = $func;
 	}
 
 	public function form()
@@ -1414,13 +1419,13 @@ class Zea
 					if(!empty($this->param))
 					{
 						$name = $this->paramname;
-						$data = json_decode($this->param['value'], 1);
+						$data = json_decode($this->param[$this->param_field], 1);
 					}else{
 						$this->param = $this->getParam();
 						$name = $this->paramname;
-						if(!empty($this->param['value']))
+						if(!empty($this->param[$this->param_field]))
 						{
-							$data = $this->param['value'];
+							$data = $this->param[$this->param_field];
 							$data = json_decode($data,1);
 						}else{
 							$data = [];
@@ -1883,9 +1888,24 @@ class Zea
 															}
 															if($this->edit == true)
 															{
+																if(!empty($this->edit_link))
+																{
+																	preg_match_all('~{.*?}~',$this->edit_link,$edit_link_output);
+																	if(!empty($edit_link_output[0][0]))
+																	{
+																		$edit_link_output = $edit_link_output[0][0];
+																		$this->edit_link = str_replace($edit_link_output, '', $this->edit_link);
+																		$edit_link_output = str_replace('{', '', $edit_link_output);
+																		$edit_link_output = str_replace('}', '', $edit_link_output);
+																		$edit_link = $this->edit_link.$dvalue[$edit_link_output];
+																	}else{
+																		$edit_link = $this->edit_link.$dvalue[$this->key];
+																	}
+																}
+																
 																?>
 																<td>
-																	<a href="<?php echo $this->edit_link.$dvalue[$this->key] ?>" class="btn btn-default" title="click to edit" data-toggle="tooltip" data-placement="top"> <span class="fa fa-pencil-alt"></span></a>
+																	<a href="<?php echo $edit_link ?>" class="btn btn-default" title="click to edit" data-toggle="tooltip" data-placement="top"> <span class="fa fa-pencil-alt"></span></a>
 																</td>
 																<?php
 															}
@@ -1988,6 +2008,10 @@ class Zea
 		if(!empty($_POST))
 		{
 			$this->success = TRUE;
+			if(!empty($this->func))
+			{
+				$this->func();
+			}
 			if($this->init == 'edit' || $this->init == 'param')
 			{
 				$data    = array();
@@ -2125,7 +2149,7 @@ class Zea
 								if(!empty($data_post))
 								{
 									$data_param['name'] = $this->paramname;
-									$data_param['value'] = json_encode($data_post);
+									$data_param[$this->param_field] = json_encode($data_post);
 								}
 								if($this->set_param($this->table, $this->paramname, $data_param))
 								{
@@ -2171,7 +2195,7 @@ class Zea
 													$file_name_exist = $this->get_one($this->table, $u_value);
 												}else if($this->init == 'param')
 												{
-													$data_image      = json_decode($data_param['value'],1);
+													$data_image      = json_decode($data_param[$this->param_field],1);
 													$file_name_exist = $data_image[$u_value];
 												}
 												if(empty($data_post[$u_value]))
@@ -2230,7 +2254,7 @@ class Zea
 															$data_post[$u_value] = $file_name;
 														}
 													}
-													$data_param['value'] = json_encode($data_post);
+													$data_param[$this->param_field] = json_encode($data_post);
 													$data_param['name']  = $this->paramname;
 													$this->set_param($this->table, $this->paramname, $data_param);
 												}
@@ -2240,7 +2264,7 @@ class Zea
 									}
 									if($this->init == 'param')
 									{
-										$tmp_data_param = json_decode($data_param['value'], 1);
+										$tmp_data_param = json_decode($data_param[$this->param_field], 1);
 										foreach ($tmp_data_param as $tdpkey => $tdpvalue) 
 										{
 											if(empty($tmp_data_param[$tdpkey]))
@@ -2383,7 +2407,7 @@ class Zea
 														$data_post[$dp_key] = $file_name;
 													}
 												}
-												$data_param['value'] = json_encode($data_post);
+												$data_param[$this->param_field] = json_encode($data_post);
 												$data_param['name']  = $dir_image;
 												// $this->set_param($this->table, $dir_image, $data_param);
 											}
@@ -2409,7 +2433,7 @@ class Zea
 															$data_post[$dp_key] = $file_name;
 														}
 													}
-													$data_param['value'] = json_encode($data_post);
+													$data_param[$this->param_field] = json_encode($data_post);
 													$data_param['name']  = $dir_image;
 													$this->set_param($this->table, $dir_image, $data_param);
 												}
@@ -2587,11 +2611,11 @@ class Zea
 					if(!empty($this->param))
 					{
 						$name = $this->paramname;
-						$data = json_decode($this->param['value'], 1);
+						$data = json_decode($this->param[$this->param_field], 1);
 					}else{
 						$this->param = $this->getParam();
 						$name = $this->paramname;
-						$data = $this->param['value'];
+						$data = $this->param[$this->param_field];
 						$data = json_decode($data,1);
 					}
 				}else{
