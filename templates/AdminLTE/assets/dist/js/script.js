@@ -165,4 +165,41 @@ $(document).ready(function(){
 	$('#summernote').summernote({maximumImageFileSize:524288});	
 	$('.summernote').summernote({maximumImageFileSize:524288});	
 	$('.table-responsive').doubleScroll();
+
 });
+function set_option(select,data)
+{
+	console.log(select);
+	console.log(data);
+	while (select[0].options.length) {
+  	select[0].remove(0);
+  }
+	var selectbox = select[0].options;
+	for(var i = 0, l = data.length; i < l; i++){
+	  var option = data[i];
+	  select[0].options.add( new Option(option.text, option.value, option.selected) );
+	}
+}
+function options(url = '', select = '',title = ''){
+	$.ajax({
+		type:'post',
+		data: {id:_ID,title:title},
+    url: _URL+url,
+    dataType:'json',
+    success:function(result){
+    	if(result.status)
+    	{
+    		data = result.data;
+				var option = data;
+				var tmp = [{'text':'None','value':'0'}];
+				for(var i =0; i< option.length;i++){
+					tmp[i+1] = [];
+					tmp[i+1].text = option[i][title];
+					tmp[i+1].value = option[i].id;
+				}
+				tmp.splice(0,1);
+				set_option(select, tmp);
+    	}
+    }
+  });
+}

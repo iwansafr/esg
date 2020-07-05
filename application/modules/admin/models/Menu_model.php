@@ -126,8 +126,9 @@ class Menu_model extends CI_Model
 			}
 		}
 
-		$data = json_encode($data);
-		return $data;
+		// $data = json_encode($data);
+		// return $data;
+		output_json($data);
 	}
 
 	public function selected_parent()

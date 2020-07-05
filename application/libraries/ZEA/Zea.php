@@ -1137,17 +1137,20 @@ class Zea
 	        	$dir = FCPATH.'images/modules/'.$table.'/'.$value['name'].'/';
 	        	$trash_dir = FCPATH.'images/modules/trash/'.$table.'/'.$value['name'].'/';
 	        }
-	        if(!is_dir($trash_dir))
+	        if(is_dir($dir))
 	        {
-	        	mkdir($trash_dir,0777,1);
+		        if(!is_dir($trash_dir))
+		        {
+		        	mkdir($trash_dir,0777,1);
+		        }
+		        foreach(glob($dir.'*') as $file)
+						{
+							$name_file = explode('/', $file);
+							$name_file = end($name_file);
+							@copy($file,$trash_dir.'/'.$name_file);
+						}
+		        recursive_rmdir($dir);
 	        }
-	        foreach(glob($dir.'*') as $file)
-					{
-						$name_file = explode('/', $file);
-						$name_file = end($name_file);
-						@copy($file,$trash_dir.'/'.$name_file);
-					}
-	        recursive_rmdir($dir);
 	      }
     	}
   	}
@@ -1375,7 +1378,8 @@ class Zea
 					$data['pagination'] = '';
 				}
 			}else if($this->init == 'edit'){
-				$data = $this->CI->db->query('SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1', $this->id)->row_array();
+				$where = !empty($this->where) ? $this->where : '';
+				$data = $this->CI->db->query('SELECT * FROM '.$this->table.' WHERE id = ? '.$where.' LIMIT 1', $this->id)->row_array();
 				$data = @$data;
 			}
 		}else{
@@ -2559,7 +2563,7 @@ class Zea
 
 				$this->msg[] = $data;
 				return $this->msg;
-			}else if($this->init == 'roll')
+			}else if($this->init == 'roll' && (!empty($_POST[$this->formName]) || !empty($_POST['delete_'.$this->formName]) ))
 			{
 				$current_data = $this->getdata();
 				// $current_data = $data;
