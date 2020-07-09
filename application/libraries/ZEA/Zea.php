@@ -2563,7 +2563,7 @@ class Zea
 
 				$this->msg[] = $data;
 				return $this->msg;
-			}else if($this->init == 'roll' && (!empty($_POST[$this->formName]) || !empty($_POST['delete_'.$this->formName]) ))
+			}else if($this->init == 'roll')
 			{
 				$current_data = $this->getdata();
 				// $current_data = $data;
