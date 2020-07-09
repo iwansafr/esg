@@ -1164,8 +1164,8 @@ class Zea
     	{
   			$this->CI->db->where_in('id',$ids);
 	    	$data = $this->CI->db->get($table)->result_array();
+    		$this->del_to_trash($table,$ids, $data);
     	}
-    	$this->del_to_trash($table,$ids, $data);
     	if(!empty($this->jointable['table']))
     	{
     		$second_ids = [];
