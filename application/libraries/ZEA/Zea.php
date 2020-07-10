@@ -1160,7 +1160,6 @@ class Zea
     if(!empty($ids)&&!empty($table))
     {
     	$trash_exist = $this->CI->db->table_exists('trash');
-    	$data = [];
     	if($trash_exist)
     	{
   			$this->CI->db->where_in('id',$ids);
@@ -2176,13 +2175,14 @@ class Zea
 								if(!empty($data))
 								{
 									$this->success = FALSE;
+									$value_label = !empty($this->label[$value]) ? $this->label[$value] : $value;
 									if(!empty($this->unique_msg))
 									{
 										$pattern[0] = '~{value}~';
 										$pattern[1]= '~{table}~';
-										$this->unique_msg = $value.' '.preg_replace($pattern, [@$data_post[$value], $this->table], $this->unique_msg);
+										$this->unique_msg = $value_label.' '.preg_replace($pattern, [@$data_post[$value], $this->table], $this->unique_msg);
 									}else{
-										$this->unique_msg = $value.' '.@$data_post[$value].' was exist in table '.$this->table;
+										$this->unique_msg = $value_label.' '.@$data_post[$value].' was exist in table '.$this->table;
 									}
 									$this->msg[$value] = array('msg'=>$this->unique_msg, 'alert' => 'danger',$value=>'has-error');
 								}
