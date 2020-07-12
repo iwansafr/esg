@@ -2456,10 +2456,10 @@ class Zea
 														}
 													}
 												}
-											}
-											foreach ($files_upload as $fu_key => $fu_value)
-											{
-												copy($fu_value['tmp'], $dir.str_replace('/','_',$fu_value['name']));
+												foreach ($files_upload as $fu_key => $fu_value)
+												{
+													copy($fu_value['tmp'], $dir.str_replace('/','_',$fu_value['name']));
+												}
 											}
 											if(is_array($files_name))
 											{
@@ -2525,7 +2525,14 @@ class Zea
 													$data_param['name']  = $dir_image;
 													$this->set_param($this->table, $dir_image, $data_param);
 												}
-												foreach(glob($dir.'/'.$u_value.'_*') as $file)
+												$separator_dir = substr($dir,-1);
+												$separator_dir = $separator_dir == '/' ? '' : '/';
+												$glob_images = $dir.$separator_dir.$u_value.'_*';
+												if(empty(glob($dir.$separator_dir.$u_value.'_*')))
+												{
+													$glob_images = $dir.$separator_dir.'image_*';
+												}
+												foreach(glob($glob_images) as $file)
 												{
 													$current_file = explode('/',$file);
 													$current_file = end($current_file);
