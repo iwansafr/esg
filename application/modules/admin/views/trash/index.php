@@ -28,6 +28,8 @@ $form->addInput('table_title','plaintext');
 $form->setLabel('table_title','module');
 $form->addInput('table_content','plaintext');
 $form->setLabel('table_content','content');
+$form->addInput('created','plaintext');
+$form->setLabel('created','waktu hapus');
 $form->setUrl('admin/trash/clear_index');
 $form->setDelete(TRUE);
 
