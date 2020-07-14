@@ -19,6 +19,10 @@ class Trash extends CI_Controller
 	{
 		$this->load->view('index');
 	}
+	public function clear_index()
+	{
+		$this->load->view('trash/index');
+	}
 
 	public function restore($id = 0)
 	{

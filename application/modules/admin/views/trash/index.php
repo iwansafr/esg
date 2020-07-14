@@ -5,7 +5,10 @@ $form = new zea();
 $form->init('roll');
 $form->setTable('trash');
 $form->search();
-$form->setWhere('user_id = '.$user['id']);
+if(!is_root())
+{
+	$form->setWhere('user_id = '.$_SESSION[base_url('_logged_in')]['id']);
+}
 $form->setNumbering(true);
 $form->addInput('id','plaintext');
 $form->setLabel('id','action');
@@ -25,7 +28,7 @@ $form->addInput('table_title','plaintext');
 $form->setLabel('table_title','module');
 $form->addInput('table_content','plaintext');
 $form->setLabel('table_content','content');
-
+$form->setUrl('admin/trash/clear_index');
 $form->setDelete(TRUE);
 
 $form->form();
