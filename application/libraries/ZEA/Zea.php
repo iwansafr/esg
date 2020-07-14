@@ -69,6 +69,7 @@ class Zea
 	var $money               = array();
 	var $clearget            = array();
 	var $jointable           = array();
+	var $delete_jointable    = false;
 	var $edit_join           = [];
 	var $unique              = array();
 	var $unique_msg          = '';
@@ -84,6 +85,11 @@ class Zea
 	var $key                 = 'id';
 	var $param_field         = 'value';
 	var $before;
+
+	public function set_delete_jointable($status = true)
+	{
+		$this->delete_jointable = $status;
+	}
 
 	public function api($url = '')
 	{
@@ -1166,7 +1172,7 @@ class Zea
 	    	$data = $this->CI->db->get($table)->result_array();
     	}
     	$this->del_to_trash($table,$ids, $data);
-    	if(!empty($this->jointable['table']))
+    	if(!empty($this->jointable['table']) && !empty($this->delete_jointable))
     	{
     		$second_ids = [];
     		foreach ($data as $key => $value) 
