@@ -2,10 +2,11 @@
 
 $form = new zea();
 
+$is_root = is_root();
 $form->init('roll');
 $form->setTable('trash');
 $form->search();
-if(!is_root())
+if(!$is_root)
 {
 	$form->setWhere('user_id = '.$_SESSION[base_url('_logged_in')]['id']);
 }
@@ -30,6 +31,15 @@ $form->addInput('table_content','plaintext');
 $form->setLabel('table_content','content');
 $form->addInput('created','plaintext');
 $form->setLabel('created','waktu hapus');
+
+if($is_root)
+{
+	$form->addInput('user_id','dropdown');
+	$form->tableOptions('user_id','user','id','username');
+	$form->setAttribute('user_id','disabled');
+	$form->setLabel('user_id','user');
+}
+
 $form->setUrl('admin/trash/clear_index');
 $form->setDelete(TRUE);
 
