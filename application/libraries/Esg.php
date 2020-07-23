@@ -213,7 +213,7 @@ class Esg
 		$failed_login = @intval($this->CI->session->userdata(base_url().'_failed_login'));
 		if($failed_login > 4)
 		{
-			$this->set_esg('msg', array('status'=>'danger','msg'=>'you have failed login 5 time, wait for 30 minute forward and try again'));
+			$this->set_esg('msg', array('status'=>'danger','msg'=>'Mohon Maaf Anda sudah 5x gagal login, silahkan tunggu 30 menit untuk mencoba lagi, atau gunakan browser lainnya'));
 		}else{
 			if(!empty($data))
 			{
@@ -245,13 +245,13 @@ class Esg
 						$this->save_ip($user['id']);
 						redirect($url);
 					}else{
-						$this->set_esg('msg', array('status'=>'danger','msg'=>'wrong password'));
+						$this->set_esg('msg', array('status'=>'danger','msg'=>'Password Salah'));
 						$failed_login++;
 						$this->save_ip(0,0);
 						$this->CI->session->set_userdata(base_url().'_failed_login', $failed_login);
 					}
 				}else{
-					$this->set_esg('msg', array('status'=>'danger','msg'=>'username is not valid'));
+					$this->set_esg('msg', array('status'=>'danger','msg'=>'Username tidak dikenali'));
 					$failed_login++;
 					$this->save_ip(0,0);
 					$this->CI->session->set_userdata(base_url().'_failed_login', $failed_login);
