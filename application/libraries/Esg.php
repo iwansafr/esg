@@ -213,7 +213,7 @@ class Esg
 		$failed_login = @intval($this->CI->session->userdata(base_url().'_failed_login'));
 		if($failed_login > 4)
 		{
-			$this->set_esg('msg', array('status'=>'danger','msg'=>'Mohon Maaf Anda sudah 5x gagal login, silahkan tunggu 30 menit untuk mencoba lagi, atau gunakan browser lainnya'));
+			$this->set_esg('msg', array('status'=>'danger','msg'=>'Mohon Maaf Anda sudah 5x gagal login, silahkan tunggu 30 menit untuk mencoba lagi, atau gunakan browser lainnya, atau <a class="btn btn-sm btn-primary" href="'.base_url('admin/user/notrobot').'">Buktikan Anda Bukan Robot</a>'));
 		}else{
 			if(!empty($data))
 			{

@@ -59,4 +59,8 @@ class User extends CI_Controller
 	{
 		$this->load->view('user/role');
 	}
+	public function notrobot()
+	{
+		$this->load->view('user/notrobot');
+	}
 }
