@@ -174,6 +174,11 @@ class Config extends CI_Controller
 		$this->load->view('index');
 	}
 
+	public function theme()
+	{
+		$this->load->view('index');
+	}
+
 	public function testing()
 	{
 		$this->load->view('index');
