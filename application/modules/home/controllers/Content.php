@@ -13,6 +13,7 @@ class Content extends CI_Controller
 	}
 	public function index()
 	{
+		// testing
 		$this->home_model->home();
 		$this->load->view('index');
 	}
