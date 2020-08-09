@@ -2567,7 +2567,7 @@ class Zea
 						$this->msg[] = $data;
 					}
 				}else if(!empty($data_post['delete_param'])){
-					$this->CI->db->delete('config',['name'=>$this->paramname]);
+					$this->CI->db->delete($this->table,['name'=>$this->paramname]);
 					$data['msg']   = 'Delete Config Successfully';
 					$data['alert'] = 'success';
 				}else{
