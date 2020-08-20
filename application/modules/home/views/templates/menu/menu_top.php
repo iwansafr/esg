@@ -38,16 +38,26 @@ if(!empty($home['menu_top']))
 														      <ul class="dropdown-menu">
 																		<?php foreach ($v3value['child'] as $v4key => $v4value): ?>
 																			<?php if (empty($v4value['child'])): ?>
-																					<li><a tabindex="-1" href="<?php echo menu_link($v4value['link']) ?>"><?php echo $v4value['title'] ?></a></li>
-																				<?php else: ?>
-																					<li class="dropdown-submenu">
-																			      <a class="test" tabindex="-1" href="#"><?php echo $v4value['title'] ?> <span class="caret"></span></a>
-																			      <ul class="dropdown-menu">
-																							<?php foreach ($v4value['child'] as $v5key => $v5value): ?>
-																								
-																							<?php endforeach ?>
-																			      </ul>
-																				<?php endif ?>
+																				<li><a tabindex="-1" href="<?php echo menu_link($v4value['link']) ?>"><?php echo $v4value['title'] ?></a></li>
+																			<?php else: ?>
+																				<li class="dropdown-submenu">
+																		      <a class="test" tabindex="-1" href="#"><?php echo $v4value['title'] ?> <span class="caret"></span></a>
+																		      <ul class="dropdown-menu">
+																						<?php foreach ($v4value['child'] as $v5key => $v5value): ?>
+																							<?php if (empty($v5value['child'])): ?>
+																									<li><a tabindex="-1" href="<?php echo menu_link($v5value['link']) ?>"><?php echo $v5value['title'] ?></a></li>
+																								<?php else: ?>
+																									<li class="dropdown-submenu">
+																							      <a class="test" tabindex="-1" href="#"><?php echo $v5value['title'] ?> <span class="caret"></span></a>
+																							      <ul class="dropdown-menu">
+																											<?php foreach ($v5value['child'] as $v6key => $v6value): ?>
+																																		
+																											<?php endforeach ?>
+																							      </ul>
+																								<?php endif ?>										
+																						<?php endforeach ?>
+																		      </ul>
+																			<?php endif ?>
 																		<?php endforeach ?>
 														      </ul>
 															<?php endif ?>
