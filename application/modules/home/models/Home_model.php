@@ -128,6 +128,40 @@ class Home_model extends CI_Model
 		}
 	}
 
+	public function build_menu($key ='',$value=array())
+	{
+		if(!empty($key) && !empty($value))
+		{
+			$menu = $this->db->query('SELECT * FROM menu WHERE position_id = ? AND publish = 1 ORDER BY sort_order ASC', @intval($value['content']))->result_array();
+			$output = [];
+			foreach ($menu as $key => $value) 
+			{
+				$output['items'][$value['id']] = $value;
+  			$output['parents'][$value['par_id']][] = $value['id'];
+			}
+			$menu = $this->child_menu($output, 0);
+		}
+	}
+
+	private function child_menu($menu = array(),$parent = 0)
+	{
+		$html = "";
+	  if (isset($menu['parents'][$parent]))
+	  {
+		  foreach ($menu['parents'][$parent] as $itemId)
+		  {
+			  if(!isset($menu['parents'][$itemId]))
+			  {
+			 		$html .= '<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">'.$itemId.'</button>';
+			  }
+			  if(isset($menu['parents'][$itemId]))
+			  {
+				  $html .= call_user_func(array('home_model',__FUNCTION__), $menu,$itemId);
+			  }
+		  }
+	  }
+	  return $html;
+	}
 	public function menu($key = '', $data = array())
 	{
 		if(!empty($data['content']))

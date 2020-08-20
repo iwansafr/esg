@@ -1,4 +1,18 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+function menu($data = array(),$parent_id = 0,$output = array())
+{
+	if(!empty($data))
+	{
+		foreach ($data as $key => $value) 
+		{
+			if($value['par_id'] == $parent_id)
+			{
+				$output[$value['id']] = $value;
+				unset($data[$key]);
+			}
+		}
+	}
+}
 function msg($msg = 'alert', $alert = 'default')
 {
 	?>
