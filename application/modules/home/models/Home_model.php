@@ -140,6 +140,7 @@ class Home_model extends CI_Model
   			$output['parents'][$value['par_id']][] = $value['id'];
 			}
 			$menu = $this->child_menu($output, 0);
+			return $menu;
 		}
 	}
 
@@ -152,12 +153,34 @@ class Home_model extends CI_Model
 		  {
 			  if(!isset($menu['parents'][$itemId]))
 			  {
-			 		$html .= '<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">'.$itemId.'</button>';
+			  	if ($parent == 0) {
+	  			$html .= '<a href="'.menu_link($menu['items'][$itemId]['link']).'" class="btn btn-default">'.$menu['items'][$itemId]['title'].'</a>';
+			  	}else{
+			 			$html .= '<li><a tabindex="-1" href="'.menu_link($menu['items'][$itemId]['link']).'" >'.$menu['items'][$itemId]['title'].'</a>';
+			  	}
 			  }
 			  if(isset($menu['parents'][$itemId]))
 			  {
-				  $html .= call_user_func(array('home_model',__FUNCTION__), $menu,$itemId);
-			  }
+			  	if($parent == 0){
+				  	$html .= '
+						<div class="btn-group">
+							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+							'.$menu['items'][$itemId]['title'].'
+						  <span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+				  	';
+					  $html .= call_user_func(array('home_model',__FUNCTION__), $menu,$itemId);
+					  $html .= '</ul></div>';
+			  	}else{
+			  		$html .= '
+						<li class="dropdown-submenu">
+							<a class="test" tabindex="-1" href="#">'.$menu['items'][$itemId]['title'].'<span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+				  	';
+					  $html .= call_user_func(array('home_model',__FUNCTION__), $menu,$itemId);
+					  $html .= '</ul>';
+			  	}
+		  	}
 		  }
 	  }
 	  return $html;
