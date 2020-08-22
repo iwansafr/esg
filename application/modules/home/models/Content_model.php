@@ -152,9 +152,9 @@ class Content_model extends CI_Model
 			$this->zea->addInput('created','plaintext');
 			$data = $this->zea->getData();
 			$data['taxonomy'] = @$taxonomy;
-			pr($data['query']);
+			// pr($data['query']);
 		}
-		$this->meta($data);die();
+		// $this->meta($data);die();
 		$this->esg->set_esg('content', $data);
 	}
 

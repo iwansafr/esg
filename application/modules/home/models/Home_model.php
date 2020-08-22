@@ -164,7 +164,7 @@ class Home_model extends CI_Model
 			  	if($parent == 0){
 				  	$html .= '
 						<div class="btn-group">
-							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+							<button class="btn btn-default dropdown-toggle tooltipbutton" type="button" data-toggle="dropdown" data-html="true" title="'.$menu['items'][$itemId]['title'].'">
 							'.$menu['items'][$itemId]['title'].'
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
