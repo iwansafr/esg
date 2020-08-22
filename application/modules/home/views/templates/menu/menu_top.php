@@ -5,3 +5,5 @@ if(!empty($home['menu_top']))
 		echo $this->home_model->build_menu('menu_top',$block['menu_top']['content']);
 	echo '</div>';
 }
+?>
+<hr>

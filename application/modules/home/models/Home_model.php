@@ -174,7 +174,7 @@ class Home_model extends CI_Model
 			  	}else{
 			  		$html .= '
 						<li class="dropdown-submenu">
-							<a class="test" tabindex="-1" href="#">'.$menu['items'][$itemId]['title'].'<span class="caret"></span></a>
+							<a class="test" tabindex="-1" href="'.menu_link($menu['items'][$itemId]['link']).'">'.$menu['items'][$itemId]['title'].'<span class="caret"></span></a>
 						  <ul class="dropdown-menu">
 				  	';
 					  $html .= call_user_func(array('home_model',__FUNCTION__), $menu,$itemId);
