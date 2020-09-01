@@ -59,9 +59,12 @@ if(!empty($field))
 	}
 
 	// echo form_label($data_value, $data_value);
-	if(!empty($this->input[$ikey]['append']))
-	{
-		$data_value = $data_value.' '.$this->input[$ikey]['append'];
+	if(!empty($ikey))
+	{	
+		if(!empty($this->input[$ikey]['append']))
+		{
+			$data_value = $data_value.' '.$this->input[$ikey]['append'];
+		}
 	}
 	echo $data_value;
 	echo '<br>';
