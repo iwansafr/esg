@@ -32,7 +32,7 @@ $this->zea->setOptions('ppn',[1=>'With PPN',0=>'Without PPN']);
 $this->zea->setLabel('ppn','PPN');
 
 $this->zea->addInput('status','dropdown');
-$this->zea->setOptions('status',['Unpaid','Paid']);
+$this->zea->setOptions('status',['Unpaid','Paid','quotation']);
 $this->zea->setLabel('status','Payment Status');
 
 if(!empty($this->input->get('custom_date')))

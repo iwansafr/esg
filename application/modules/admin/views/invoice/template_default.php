@@ -2,12 +2,13 @@
 $site = $this->esg->get_esg('site')['site'];
 $logo = $this->esg->get_esg('site')['logo'];
 $contact = $this->esg->get_config('contact');
+$title = $data['status'] == 2 ? 'Quotation' : 'Invoice';
 ?>
 <html lang="en"><head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><?php echo @$site['title'] ?> - Invoice #<?php echo @$data['code']; ?></title>
+	<title><?php echo @$site['title'] ?> - <?php echo $title;?> #<?php echo @$data['code']; ?></title>
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo image_module('config/site', @$site['image']); ?>">
 	<link href="<?php echo base_url('templates/AdminLTE/assets/dist/css/modules/config/') ?>all.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('templates/AdminLTE/assets/dist/css/modules/config/') ?>invoice.css" rel="stylesheet">
@@ -18,16 +19,18 @@ $contact = $this->esg->get_config('contact');
 			<div class="row invoice-header">
 				<div class="invoice-col">
 					<p><img src="<?php echo image_module('config/logo', $logo['image']) ?>" class="img-responsive" title="<?php echo @$site['title'] ?>" height="100"></p>
-					<h3>Invoice #<?php echo @$data['code']; ?></h3>
+					<h3><?php echo $title;?> #<?php echo @$data['code']; ?></h3>
 				</div>
 				<?php
 				$style = ($data['status'] == 1) ? 'color : green;' : 'color: red';
 				$color = ($data['status'] == 1) ? 'green' : 'red';
 				$img   = ($data['status'] == 1) ? 'paid.png' : 'unpaid.png';
 				?>
-				<div class="invoice-col " style="margin-top: 2%; padding-left: 140px;">
-					<img src="<?php echo base_url('images/'.$img) ?>" class="img-responsive" style="margin-lef: 100px;transform :rotate(30deg); height: 50px; height: 60px; width: 230px;">
-				</div>
+				<?php if ($data['status'] < 2): ?>
+					<div class="invoice-col " style="margin-top: 2%; padding-left: 140px;">
+						<img src="<?php echo base_url('images/'.$img) ?>" class="img-responsive" style="margin-lef: 100px;transform :rotate(30deg); height: 50px; height: 60px; width: 230px;">
+					</div>
+				<?php endif ?>
 			</div>
 			<hr>
 			<div class="row">
@@ -41,7 +44,7 @@ $contact = $this->esg->get_config('contact');
 					</address>
 				</div>
 				<div class="invoice-col">
-					<strong>Invoiced To</strong>
+					<strong><?php echo $title;?> To</strong>
 					<address class="small-text">
 						<?php echo $data['receiver'] ?>
 					</address>
@@ -55,7 +58,7 @@ $contact = $this->esg->get_config('contact');
 					</span>
 				</div>
 				<div class="invoice-col">
-					<strong>Invoice Date</strong><br>
+					<strong><?php echo $title;?> Date</strong><br>
 					<span class="small-text">
 						<?php echo $data['created'] ?><br><br>
 					</span>
@@ -85,7 +88,7 @@ $contact = $this->esg->get_config('contact');
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title"><strong>Invoice Items</strong></h3>
+				<h3 class="panel-title"><strong><?php echo $title;?> Items</strong></h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
