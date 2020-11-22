@@ -1,5 +1,20 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $id = $this->input->get('id');
+$success_changed_id = false;
+if(!empty($_POST['id']))
+{
+	$exist = $this->db->get_where('content',['id'=>$_POST['id']])->row_array();
+	if(!empty($exist))
+	{
+		msg('id is exist','danger');
+		die();
+	}else{
+		$success_changed_id = true;
+	}
+	// pr($_POST);
+	// $id = $_POST['id'];
+	// redirect(base_url('admin/content/edit/?id='.$id));
+}
 $this->zea->init('edit');
 $this->zea->setTable('content');
 
@@ -16,7 +31,11 @@ if(!empty($cat_id))
 	$this->zea->setSelected('cat_ids',$cat_id);
 }
 
-
+if(is_root())
+{
+	$this->zea->addInput('id','text');
+	$this->zea->setType('id','number');
+}
 $this->zea->addInput('title', 'text');
 
 $this->zea->addInput('author','static');
@@ -104,3 +123,7 @@ $this->zea->addInput('publish','checkbox');
 
 
 $this->zea->form();
+if($success_changed_id)
+{
+	redirect(base_url('admin/content/edit?id='.$_POST['id']));
+}
