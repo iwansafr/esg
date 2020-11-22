@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $id = $this->input->get('id');
 $success_changed_id = false;
-if(!empty($_POST['id']))
+if(!empty($_POST['id']) && $id != $_POST['id'])
 {
 	$exist = $this->db->get_where('content',['id'=>$_POST['id']])->row_array();
 	if(!empty($exist))
