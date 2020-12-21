@@ -317,8 +317,16 @@ class Admin_model extends CI_Model
 				}
 				$meta[$key] = $value;
 			}
-			$this->esg->set_esg('meta', $meta);
 		}
+		if(empty($meta))
+		{
+			$meta = [
+				'title' => 'title app',
+				'description' => 'description app',
+				'keyword' => 'keyword'
+			];
+		}
+		$this->esg->set_esg('meta', $meta);
 	}
 	public function footer()
 	{

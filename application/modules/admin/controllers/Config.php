@@ -181,6 +181,15 @@ class Config extends CI_Controller
 
 	public function testing()
 	{
-		$this->load->view('index');
+		$data = [];
+		for($i=0;$i<100000;$i++){
+			$data =[
+				'judul' => 'ini adalah judul ke '.$i,
+				'deskripsi' => 'ini adalah deskripsi'
+			];
+			$this->db->insert('testing', $data);
+		}
+		pr('ok done');
+		// $this->load->view('index');
 	}
 }
