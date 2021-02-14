@@ -42,7 +42,7 @@
       echo '<h1>'.@$site['logo']['title'].'</h1>';
     }else{
       ?>
-      <img src="<?php echo image_module('config','logo/'.$site['logo']['image']) ?>" height="50">
+      <img src="<?php echo image_module('config','logo/'.@$site['logo']['image']) ?>" height="50">
       <?php
     }
     ?>

@@ -36,7 +36,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; 2019-<?php echo date('Y'); ?> <a href="https://www.mandesa.co.id">mandesa</a>.</strong> All rights
+    <strong>Copyright &copy; 2019-<?php echo date('Y'); ?> <a href="https://www.esoftgreat.com">esoftgreat</a>.</strong> All rights
     reserved.
   </footer>
 

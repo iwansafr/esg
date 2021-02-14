@@ -98,6 +98,27 @@ $(document).ready(function(){
 		$(this).closest('.image').remove();
 		$('input[type="hidden"][value="'+a+'"]').remove();
 	});
+	// $(document).on('submit','form',function(e){
+	// 	var this_link = this.action;
+	// 	var target = this.target;
+	// 	var no_load = $(this).attr('no_load');
+	// 	if($(this).hasClass('load_link') || $(this).hasClass('page-link')){
+	// 		e.preventDefault();
+	// 		$('#loading').removeClass('hidden');
+	// 		$('.content').load(this_link, function(){
+	// 			var formData = new FormData($('form'));
+	// 			console.log(formData);
+	// 			$('#loading').addClass('hidden');
+	// 			$('.select2').select2();
+	// 			$('form').on('submit',function(){
+	// 				$('#loading').removeClass('hidden');
+	// 			});
+	// 		});
+	// 	}
+	// 	else{
+	// 		$('#loading').removeClass('hidden');
+	// 	}
+	// });
 	$(document).on('click','a',function(e){
 		var this_link = this.href;
 		var target = this.target;
@@ -160,7 +181,12 @@ $(document).ready(function(){
 		$('#loading').addClass('hidden');
 	}
 	$('form').on('submit',function(){
-		$('#loading').removeClass('hidden');
+		var no_load = $(this).attr('no_load');
+		if(no_load){
+
+		}else{
+			$('#loading').removeClass('hidden');
+		}
 	});
 	$('#summernote').summernote({maximumImageFileSize:524288});	
 	$('.summernote').summernote({maximumImageFileSize:524288});	

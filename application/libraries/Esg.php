@@ -116,7 +116,7 @@ class Esg
 			$cookie_username = @$_COOKIE[$base_url.'_username'];
 		}
 
-		if(empty($this->CI->session->userdata(base_url().'_logged_in')) && empty($cookie_username))
+		if(empty($this->CI->session->userdata(base_url().'_logged_in')['id']) && empty($cookie_username))
 		{
 			$curent_url = !empty($_SERVER['PATH_INFO']) ? base_url($_SERVER['PATH_INFO']) : '';
 			$curent_url = urlencode($curent_url);

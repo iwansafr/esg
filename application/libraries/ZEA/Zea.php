@@ -435,7 +435,7 @@ class Zea
 					$data = $this->CI->db->get()->result_array();
 					$options    = array();
 					if(empty($this->none[$field])){
-						$options[0] = 'None';
+						$options[''] = 'None';
 					}
 					if(!empty($data))
 					{

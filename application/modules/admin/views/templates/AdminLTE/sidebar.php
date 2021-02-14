@@ -10,7 +10,7 @@
   </div>
   <form action="<?php echo base_url('admin/search');?>" method="get" class="sidebar-form">
     <div class="input-group">
-      <input type="text" name="keyword" class="form-control" id="any_search" placeholder="Search...">
+      <input type="text" name="keyword" class="form-control" id="any_search" placeholder="Search..." required>
           <span class="input-group-btn">
             <button type="submit" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
             </button>
