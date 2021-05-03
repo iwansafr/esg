@@ -1518,6 +1518,10 @@ class Zea
 									{
 										$class = 'has-error';
 									}
+									if($this->success == FALSE && !empty($_POST))
+									{
+										$this->value[$field] = $_POST[$key];
+									}
 									echo '<div class="form-group '.$class.'">';
 									switch($value['type'])
 									{
