@@ -14,7 +14,10 @@ if(!empty($field))
 		}
 		$image    = !empty($data[$field]) ? $name.'/'.$data[$field] : '';
 	}
-	echo form_label(ucfirst($label), $label).' '.@$this->help[$field];
+	if (empty($this->accept[$field])) {
+		$this->accept[$field] = $this->accept_file;
+	}
+	echo form_label(ucfirst($label), $label).' Max Size ('.$this->max_size.' KB)'.' '.$this->accept[$field].' '.@$this->help[$field];
 	if(!empty($image))
 	{
 		?>

@@ -86,6 +86,9 @@ class Zea
 	var $param_field         = 'value';
 	var $before;
 
+	var $max_size = 512;
+	var $accept_file = '.jpg,.png';
+
 	public function set_delete_jointable($status = true)
 	{
 		$this->delete_jointable = $status;
@@ -934,6 +937,13 @@ class Zea
 		}
 	}
 
+	public function set_max_size($max_size =0)
+	{
+		if(!empty($max_size))
+		{
+			$this->max_size = $max_size;
+		}
+	}
 
 	public function setCheckBox($field = '', $option = array())
 	{
@@ -2279,6 +2289,12 @@ class Zea
 										$dir = FCPATH.'images/'.$module.'/'.$dir_image.'/';
 										if(!empty($_FILES[$upload[$i]]['name']) && empty($_FILES[$upload[$i]]['error']))
 										{
+											if($_FILES[$upload[$i]]['size'] > $this->max_size*1000){
+												$this->file_error[$upload[$i]] = 'file uploaded max size is '.$this->max_size.'KB';
+												$this->msg[] = ['msg'=>'file uploaded max size is '.$this->max_size.'KB','alert'=>'danger'];
+												$this->success = null;
+												break;
+											}
 											$data_post[$u_value] = !empty($data_post[$title]) ? $u_value.'_'.str_replace(' ','_',$data_post[$title]) : $u_value.'_image';
 											if(!is_dir($dir))
 											{
@@ -2312,18 +2328,19 @@ class Zea
 												$file_name = str_replace('/','_',$file_name);
 												copy($_FILES[$upload[$i]]['tmp_name'], $dir.$file_name);
 
-												$config_image_lib['image_library']  = 'gd2';
-												$config_image_lib['source_image']   = $dir.$file_name;
-												// $config_image_lib['create_thumb']   = TRUE;
-												$config_image_lib['maintain_ratio'] = TRUE;
-												$config_image_lib['width']          = 750;
-												$config_image_lib['height']         = 500;
+												$config_image_lib['image_library']   = 'gd2';
+												$config_image_lib['source_image']    = $dir.$file_name;
+												// $config_image_lib['create_thumb'] = TRUE;
+												$config_image_lib['maintain_ratio']  = TRUE;
+												$config_image_lib['width']           = 750;
+												$config_image_lib['height']          = 500;
 
 												$this->CI->load->library('image_lib');
 
 												$this->CI->image_lib->initialize($config_image_lib);
 												if($this->CI->image_lib->resize())
 												{
+
 												}
 												if($this->init == 'edit')
 												{
