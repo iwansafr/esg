@@ -121,7 +121,7 @@ class Esg
 			$path_info = !empty($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : @$_SERVER['ORIG_PATH_INFO'];
 			$curent_url = base_url($path_info);
 			$curent_url = urlencode($curent_url);
-			redirect(base_url('admin/login?redirect_to='.$curent_url));
+			header('location: '.base_url('admin/login?redirect_to='.$curent_url));
 		}else{
 			if(!empty($_COOKIE[base_url().'_username']) || !empty($base_url.'_username'))
 			{
@@ -244,7 +244,7 @@ class Esg
 						}
 						$this->CI->session->set_userdata(base_url().'_logged_in', $user);
 						$this->save_ip($user['id']);
-						redirect($url);
+						header('location: '.$url);
 					}else{
 						$this->set_esg('msg', array('status'=>'danger','msg'=>'Password Salah'));
 						$failed_login++;
@@ -301,7 +301,7 @@ class Esg
 							$this->CI->session->set_userdata(base_url().'_logged_in', $user);
 							$this->set_cookie($user);
 							$this->save_ip($user['id']);
-							redirect($url);
+							header('location: '.$url);
 						}
 					}
 				}
