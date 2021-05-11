@@ -314,7 +314,8 @@ class Esg
 	{
 		$this->delete_cookie();
 		$this->CI->session->sess_destroy();
-    redirect(base_url('admin/index'));
+		header('location: '.base_url('admin/index'));
+    // redirect(base_url('admin/index'));
 	}
 
 	public function get_esg($index = '')
