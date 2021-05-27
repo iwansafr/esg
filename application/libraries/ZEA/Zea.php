@@ -437,9 +437,14 @@ class Zea
 					}
 					$data = $this->CI->db->get()->result_array();
 					$options    = array();
-					if(empty($this->none[$field])){
+					if(@$this->none[$field] === 0){
+						$options[$this->none[$field]] = 'None';
+					}else if(empty($this->none[$field])){
 						$options[''] = 'None';
+					}else{
+						$options[$this->none[$field]] = 'None';
 					}
+
 					if(!empty($data))
 					{
 						foreach ($data as $dkey => $dvalue)
@@ -498,6 +503,12 @@ class Zea
 		if(!empty($field))
 		{
 			$this->none[$field] = $none;
+		}
+	}
+
+	public function setNoneValue($field = '', $value = 0){
+		if (!empty($field)) {
+			$this->none[$field] = $value;
 		}
 	}
 
