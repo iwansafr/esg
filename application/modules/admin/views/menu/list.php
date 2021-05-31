@@ -52,7 +52,7 @@ $form->addInput('publish','checkbox');
 
 $form->setDelete(true);
 $form->setEdit(TRUE);
-$form->setEditLink(base_url('admin/menu/edit?p_id='.@intval($_GET['id']).'&id='));
+$form->setEditLink(base_url('admin/menu/edit?p_id='.@intval($_GET['p_id']).'&id='));
 $form->setUrl('admin/menu/clear_list');
 $form->setFormName('menu');
 if(!empty($form->getData()['data']) || empty($_GET['keyword']))
