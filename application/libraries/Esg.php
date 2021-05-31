@@ -103,7 +103,7 @@ class Esg
       }
     }
     $tag_ids = array_unique($tag_ids);
-    $post['tag_ids'] = ','.implode($tag_ids,',').',';
+    $post['tag_ids'] = ','.implode(',',$tag_ids).',';
     return $post['tag_ids'];
   }
 

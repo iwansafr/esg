@@ -1375,6 +1375,7 @@ class Zea
 					$sql .= ' GROUP BY '.$this->group_by;
 				}
 				$num_rows = $this->CI->db->query($sql,$bind)->num_rows();
+				$num_rows_sql = $this->CI->db->last_query();
 
 				if(!empty($sort_by))
 				{
@@ -1398,9 +1399,11 @@ class Zea
 				$data['num_rows'] = $num_rows;
 				if(!$this->datatable)
 				{
+					$data['num_rows_sql'] = $num_rows_sql;
 					$config        = pagination($num_rows,$limit,base_url($this->url.$url_get));
 			    $this->CI->pagination->initialize($config);
 			    $data['pagination'] = $this->CI->pagination->create_links();
+			    $data['url_get'] = $url_get;
 				}else{
 					$data['pagination'] = '';
 				}
