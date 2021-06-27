@@ -1635,7 +1635,7 @@ class Zea
 								if($this->init == 'param' && !empty($this->enable_delete_param))
 								{
 									echo form_button(array(
-										'name'    => 'delete_param',
+										'name'    => 'delete_param_'.$this->formName,
 										'id'      => 'delete_param',
 										'value'   => 'true',
 										'type'    => 'delete',
@@ -2601,8 +2601,18 @@ class Zea
 						$data['alert'] = 'danger';
 						$this->msg[] = $data;
 					}
-				}else if(!empty($data_post['delete_param'])){
-					$this->CI->db->delete($this->table,['name'=>$this->paramname]);
+				}else if(!empty($data_post['delete_param_'.$this->formName])){
+					$current_config = $this->CI->esg->get_config($this->paramname);
+					foreach ($current_config as $cckey => $ccvalue) 
+					{
+						$current_config[$cckey] = '';
+					}
+					$post_config = [];
+					$post_config['value'] = json_encode($current_config);
+					$post_config['name'] = $this->paramname;
+					$this->set_param($this->table, $this->paramname, $post_config);
+					// pr($this->CI->db->last_query());
+					// $this->CI->db->delete($this->table,['name'=>$this->paramname]);
 					$data['msg']   = 'Delete Config Successfully';
 					$data['alert'] = 'success';
 				}else{
