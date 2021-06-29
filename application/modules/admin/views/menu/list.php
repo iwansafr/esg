@@ -51,8 +51,16 @@ $form->addInput('publish','checkbox');
 // $form->setEditLink('position?id=');
 
 $form->setDelete(true);
-$form->setEdit(TRUE);
-$form->setEditLink(base_url('admin/menu/edit?p_id='.@intval($_GET['p_id']).'&id='));
+if(!empty($_GET['p_id'])){
+	$form->setEdit(TRUE);
+	$form->setEditLink(base_url('admin/menu/edit?p_id='.@intval($_GET['p_id']).'&id='));
+}else{
+	$form->setLabel('id','action');
+	$form->setPlaintext('id',[
+		base_url('admin/menu/edit?p_id={par_id}&id={id}') => 'Edit',
+	]);
+	// $form->setEditLink(base_url('admin/menu/edit?p_id='.@intval($_GET['p_id']).'&id='));
+}
 $form->setUrl('admin/menu/clear_list');
 $form->setFormName('menu');
 if(!empty($form->getData()['data']) || empty($_GET['keyword']))
