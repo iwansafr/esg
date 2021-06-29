@@ -18,15 +18,19 @@ if(!empty($navigation['array'][1]))
 }else{
 	$module = 'content';
 }
-if($mod['content'] == 'home/index')
-{
-	$image = image_module('config/site', @$meta['icon']);
+if($mod['content'] == 'content/detail'){
+	$image = image_module($module,$meta);
 }else{
-	if($module == 'content_tag')
-	{
-		$image = image_module($module,$meta['image'], 1);
+	if(!empty($content)){
+		if (!empty($content['taxonomy'])) {
+			if(!empty($content['taxonomy']['image'])){
+				$image = image_module($module, $content['taxonomy']);
+			}else{
+				$image = image_module('config/site', @$meta['icon']);
+			}
+		}
 	}else{
-		$image = image_module($module,$meta);
+		$image = image_module('config/site', @$meta['icon']);
 	}
 }
 ?>
