@@ -352,6 +352,20 @@ function isLink($link = '')
 	}
 	return $is_link;
 }
+function valid_url($url = '')
+{
+	$url = str_replace('http://','',$url);
+	$url = str_replace('https://','',$url);
+	$url = 'http://'.$url;
+	$file_headers = @get_headers($url);
+	if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+	    $exists = false;
+	}
+	else {
+	    $exists = true;
+	}
+	return $exists;
+}
 
 function image_module($module = '', $image = '', $is_uri = '')
 {
