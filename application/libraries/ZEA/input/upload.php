@@ -34,6 +34,11 @@ if(!empty($field))
 						case 'image':
 							
 							break;
+						case 'document':
+							?>
+								<iframe src="<?php echo image_module($this->table, $image); ?>" frameborder="0" width="100%" height="500px;"></iframe>
+							<?php
+							break;
 						case 'audio':
 							?>
 							<audio controls>

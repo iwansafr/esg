@@ -1022,8 +1022,7 @@ class Zea
 
 	public function setFile($field = '', $type = '')
 	{
-		if(!empty($field))
-		{
+		if (!empty($field)) {
 			switch ($type) {
 				case 'video':
 					$this->input[$field]['file'] = $type;
@@ -1032,6 +1031,9 @@ class Zea
 					$this->input[$field]['file'] = $type;
 					break;
 				case 'audio':
+					$this->input[$field]['file'] = $type;
+					break;
+				case 'document':
 					$this->input[$field]['file'] = $type;
 					break;
 				default:
