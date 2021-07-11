@@ -36,7 +36,7 @@ if(!empty($field))
 							break;
 						case 'document':
 							?>
-								<iframe src="<?php echo image_module($this->table, $image); ?>" frameborder="0" width="100%" height="500px;"></iframe>
+								<iframe src="<?php echo image_module($this->table, $image); ?>#toolbar=0&navpanes=0&scrollbar=0" frameborder="0" width="100%" height="500px;"></iframe>
 							<?php
 							break;
 						case 'audio':

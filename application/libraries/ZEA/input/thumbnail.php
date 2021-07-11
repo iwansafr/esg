@@ -30,7 +30,7 @@ if(!empty($field))
 		$dvalue['id'] = !empty($dvalue['id']) ? $dvalue['id'] : time();
 		if($this->init == 'edit' || $this->init == 'param')
 		{
-			echo form_hidden($field,$data_value);
+			// echo form_hidden($field,$data_value);
 		}
 		?>
 		<div class="image">
