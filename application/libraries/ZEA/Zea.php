@@ -1190,6 +1190,13 @@ class Zea
 		        recursive_rmdir($dir);
 	        }
 	      }
+    	}else{
+    		foreach ($ids as $key => $value) {
+	    		$main_dir = FCPATH.'images/modules/'.$table.'/'.$value.'/';
+	  			recursive_rmdir($main_dir);
+	  			$main_dir = FCPATH.'images/modules/'.$table.'/gallery/'.$value.'/';
+	  			recursive_rmdir($main_dir);
+    		}
     	}
   	}
 	}
@@ -1198,6 +1205,7 @@ class Zea
     if(!empty($ids)&&!empty($table))
     {
     	$trash_exist = $this->CI->db->table_exists('trash');
+    	$data = [];
     	if($trash_exist)
     	{
   			$this->CI->db->where_in('id',$ids);
