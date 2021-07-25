@@ -437,12 +437,14 @@ class Zea
 					}
 					$data = $this->CI->db->get()->result_array();
 					$options    = array();
-					if(@$this->none[$field] === 0){
-						$options[$this->none[$field]] = 'None';
-					}else if(empty($this->none[$field])){
-						$options[''] = 'None';
-					}else{
-						$options[$this->none[$field]] = 'None';
+					if(!is_array($this->none)){
+						if(@$this->none[$field] === 0){
+							$options[$this->none[$field]] = 'None';
+						}else if(empty($this->none[$field])){
+							$options[''] = 'None';
+						}else{
+							$options[$this->none[$field]] = 'None';
+						}
 					}
 
 					if(!empty($data))
@@ -502,7 +504,14 @@ class Zea
 	{
 		if(!empty($field))
 		{
-			$this->none[$field] = $none;
+			if(is_array($field))
+			{
+				foreach ($field as $key => $value) {
+					$this->none[$value] = $none;
+				}
+			}else{
+				$this->none[$field] = $none;
+			}
 		}
 	}
 
@@ -2144,7 +2153,9 @@ class Zea
 					$post_secure = array();
 					foreach ($this->input as $key => $value) 
 					{
-						$post_secure[$value['text']] = @$data_post[$value['text']];
+						if($value['type'] != 'plaintext'){
+							$post_secure[$value['text']] = @$data_post[$value['text']];
+						}
 					}
 					$data_post = $post_secure;
 					if(!empty($this->table))
@@ -2169,7 +2180,9 @@ class Zea
 							}
 							if($value['text'] != 'csrf_esg')
 							{
-								$data_post[$value['text']] = @$data_post[$value['text']];
+								if($value['type'] != 'plaintext'){
+									$data_post[$value['text']] = @$data_post[$value['text']];
+								}
 							}
 							if($value['type'] == 'checkbox')
 							{
@@ -2179,7 +2192,6 @@ class Zea
 								}
 							}
 						}
-
 						foreach ($this->input as $key => $value)
 						{
 							if($value['type'] == 'text')
