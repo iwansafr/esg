@@ -37,6 +37,10 @@ if(!empty($field))
 		'type'    => $type,
 		'style' => $darkmodestyle,
 		'value'   => $data_value);
+
+	if(empty($this->attribute[$field]['placeholder'])){
+		$this->attribute[$field]['placeholder'] = $label;
+	}
 	if(!empty($this->attribute[$field]))
 	{
 		$attr = $this->attribute[$field];
