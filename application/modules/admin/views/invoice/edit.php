@@ -25,7 +25,7 @@ $this->zea->setLabel('payment_method','Payment Methode');
 
 $this->zea->addInput('notes','textarea');
 $this->zea->addInput('items','textarea');
-$this->zea->setAttribute('items','placeholder="item 1 = 1000, item 2 = 2000"');
+$this->zea->setAttribute('items',['placeholder'=>"item 1 = 1000, item 2 = 2000"]);
 
 $this->zea->addInput('ppn','dropdown');
 $this->zea->setOptions('ppn',[1=>'With PPN',0=>'Without PPN']);

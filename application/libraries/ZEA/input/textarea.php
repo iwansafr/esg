@@ -28,6 +28,9 @@ if(!empty($field))
 		$array_input['id'] = $this->elementid[$field];
 	}
 
+	if(empty($this->attribute[$field]['placeholder'])){
+		$this->attribute[$field]['placeholder'] = $label;
+	}
 	
 	if(!empty($this->attribute[$field]))
 	{
@@ -43,9 +46,6 @@ if(!empty($field))
 		}
 	}
 
-	if(empty($this->attribute[$field]['placeholder'])){
-		$this->attribute[$field]['placeholder'] = $label;
-	}
 	if(!empty($required))
 	{
 		$array_input[$required] = $required;
