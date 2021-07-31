@@ -437,14 +437,17 @@ class Zea
 					}
 					$data = $this->CI->db->get()->result_array();
 					$options    = array();
-					if(!is_array($this->none)){
-						if(@$this->none[$field] === 0){
-							$options[$this->none[$field]] = 'None';
-						}else if(empty($this->none[$field])){
-							$options[''] = 'None';
-						}else{
-							$options[$this->none[$field]] = 'None';
-						}
+					// if(!is_array($this->none)){
+					// 	if(@$this->none[$field] === 0){
+					// 		$options[$this->none[$field]] = 'None';
+					// 	}else if(empty($this->none[$field])){
+					// 		$options[''] = 'None';
+					// 	}else{
+					// 		$options[$this->none[$field]] = 'None';
+					// 	}
+					// }
+					if(!empty($this->none[$field])){
+						$options[$this->none[$field]] = 'None';
 					}
 
 					if(!empty($data))
