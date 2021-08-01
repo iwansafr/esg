@@ -914,7 +914,7 @@ class Zea
 		}
 	}
 
-	public function setPlaintext($field = '', $text = '')
+	public function setPlaintext($field = '', $text = '', $icon = '')
 	{
 		if(!empty($field) && !empty($text))
 		{
@@ -927,7 +927,7 @@ class Zea
 						$text_link = '';
 						foreach($text AS $text_key => $text_value)
 						{
-							$text_link .= '<li><a href="'.$text_key.'"><i class="fa fa-search"></i>'.$text_value.'</a></li>';
+							$text_link .= '<li><a href="'.$text_key.'"><i class="'.$icon.'"></i>'.$text_value.'</a></li>';
 						}
 						$text_link = 
 						'<div class="dropdown">
