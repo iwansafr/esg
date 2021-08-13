@@ -437,19 +437,16 @@ class Zea
 					}
 					$data = $this->CI->db->get()->result_array();
 					$options    = array();
-					// if(!is_array($this->none)){
-					// 	if(@$this->none[$field] === 0){
-					// 		$options[$this->none[$field]] = 'None';
-					// 	}else if(empty($this->none[$field])){
-					// 		$options[''] = 'None';
-					// 	}else{
-					// 		$options[$this->none[$field]] = 'None';
-					// 	}
+					// if(@$this->none[$field] === 0){
+					// 	$options[$this->none[$field]] = 'None';
+					// }else if(empty($this->none[$field])){
+					// 	$options[''] = 'None';
+					// }else{
+					// 	$options[$this->none[$field]] = 'None';
 					// }
 					if(!empty($this->none[$field])){
 						$options[$this->none[$field]] = 'None';
 					}
-
 					if(!empty($data))
 					{
 						foreach ($data as $dkey => $dvalue)
@@ -507,14 +504,7 @@ class Zea
 	{
 		if(!empty($field))
 		{
-			if(is_array($field))
-			{
-				foreach ($field as $key => $value) {
-					$this->none[$value] = $none;
-				}
-			}else{
-				$this->none[$field] = $none;
-			}
+			$this->none[$field] = $none;
 		}
 	}
 
@@ -914,7 +904,7 @@ class Zea
 		}
 	}
 
-	public function setPlaintext($field = '', $text = '', $icon = '')
+	public function setPlaintext($field = '', $text = '')
 	{
 		if(!empty($field) && !empty($text))
 		{
@@ -927,7 +917,7 @@ class Zea
 						$text_link = '';
 						foreach($text AS $text_key => $text_value)
 						{
-							$text_link .= '<li><a href="'.$text_key.'"><i class="'.$icon.'"></i>'.$text_value.'</a></li>';
+							$text_link .= '<li><a href="'.$text_key.'"><i class="fa fa-search"></i>'.$text_value.'</a></li>';
 						}
 						$text_link = 
 						'<div class="dropdown">
@@ -1193,13 +1183,6 @@ class Zea
 		        recursive_rmdir($dir);
 	        }
 	      }
-    	}else{
-    		foreach ($ids as $key => $value) {
-	    		$main_dir = FCPATH.'images/modules/'.$table.'/'.$value.'/';
-	  			recursive_rmdir($main_dir);
-	  			$main_dir = FCPATH.'images/modules/'.$table.'/gallery/'.$value.'/';
-	  			recursive_rmdir($main_dir);
-    		}
     	}
   	}
 	}
@@ -1208,7 +1191,6 @@ class Zea
     if(!empty($ids)&&!empty($table))
     {
     	$trash_exist = $this->CI->db->table_exists('trash');
-    	$data = [];
     	if($trash_exist)
     	{
   			$this->CI->db->where_in('id',$ids);
@@ -1778,112 +1760,111 @@ class Zea
 									<?php endif ?>
 									<table class="table table-bordered table-hover table-striped <?php echo $this->datatable ? 'esg_data_table' : ''; ?>" table_name="<?php echo $this->table; ?>">
 										<thead>
-											<tr>
+											<?php
+											if(!empty($this->numbering))
+											{
+												echo '<th>No</th>';
+											}
+											$url_get  = '';
+											$sort_by = @$_GET['sort_by'];
+											$keyword = @$_GET['keyword'];
+											$id      = @intval($_GET['id']);
+											$get = @$_GET;
+											if(!empty($keyword) || !empty($this->where))
+											{
+												$url_get .= '?';
+											}else if(!empty($sort_by) || !empty($id))
+											{
+												$url_get .= '?';
+											}
+											if(!empty($get))
+											{
+												$i = 0;
+												foreach ($get as $key => $value)
+												{
+													if($key != 'page')
+													{
+														if($i > 0)
+														{
+															$url_get .= '&';
+														}
+														$url_get .= $key.'='.$value;
+													}
+													$i++;
+												}
+											}
+											$this->url .= $url_get;
+											if($this->hasOrder($this->url))
+											{
+												$this->url = preg_replace('~\&?sort_by([\S]+)~', '', $this->url);
+											}
+											$delimiter_link = $this->hasGet($this->url) ? '&':'?';
+											foreach ($this->input as $key => $value)
+											{
+												if(empty($data))
+												{
+													$this->setData();
+													$data = $this->data;
+												}
+												if($value['type'] == 'order')
+												{
+													$max = $this->get_one($this->table, 'MAX('.$this->orderby['index'].')', 'WHERE '.$this->where);
+												}
+												if(array_key_exists($value['text'], $data[0]))
+												{
+													$field    = !empty($value['text']) ? $value['text'] : '';
+													$label    = !empty($this->label[$field]) ? $this->label[$field] : $field;
+													if($value['type'] == 'checkbox')
+													{
+														?>
+														<th>
+															<div class="checkbox">
+																<label>
+																	<input id="selectAll<?php echo $label;?>" add="<?php echo $label; ?>" class="selectAll" type="checkbox"><?php echo ucwords($label) ?>
+																</label>
+															</div>
+														</th>
+														<?php
+													}else{
+														$label = $value['type'] != 'hidden' ? $label : '';
+														$hidden_class = $value['type'] == 'hidden' ? 'hidden' : '';
+														$type = empty($_GET['type']) || (@$_GET['type'] == 'desc') ? 'asc' : 'desc';
+														$arrow = '';
+														if(@$_GET['sort_by'] == $field)
+														{
+															$arrow = (@$_GET['type'] == 'asc') ? '<i class="fa fa-sort-alpha-asc"></i> ' : '<i class="fa fa-sort-alpha-desc"></i> ';
+														}
+														if(empty($this->hide[$field]))
+														{
+															if(!$this->datatable)
+															{
+																echo '<th class="'.$hidden_class.'"><a class="load_link" href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
+															}else{
+																echo '<th class="'.$hidden_class.'">'.ucwords($label).'</th>';
+															}
+														}
+													}
+												}
+											}
+											if($this->edit == true)
+											{
+												?>
+												<th>EDIT</th>
 												<?php
-												if(!empty($this->numbering))
-												{
-													echo '<th>No</th>';
-												}
-												$url_get  = '';
-												$sort_by = @$_GET['sort_by'];
-												$keyword = @$_GET['keyword'];
-												$id      = @intval($_GET['id']);
-												$get = @$_GET;
-												if(!empty($keyword) || !empty($this->where))
-												{
-													$url_get .= '?';
-												}else if(!empty($sort_by) || !empty($id))
-												{
-													$url_get .= '?';
-												}
-												if(!empty($get))
-												{
-													$i = 0;
-													foreach ($get as $key => $value)
-													{
-														if($key != 'page')
-														{
-															if($i > 0)
-															{
-																$url_get .= '&';
-															}
-															$url_get .= $key.'='.$value;
-														}
-														$i++;
-													}
-												}
-												$this->url .= $url_get;
-												if($this->hasOrder($this->url))
-												{
-													$this->url = preg_replace('~\&?sort_by([\S]+)~', '', $this->url);
-												}
-												$delimiter_link = $this->hasGet($this->url) ? '&':'?';
-												foreach ($this->input as $key => $value)
-												{
-													if(empty($data))
-													{
-														$this->setData();
-														$data = $this->data;
-													}
-													if($value['type'] == 'order')
-													{
-														$max = $this->get_one($this->table, 'MAX('.$this->orderby['index'].')', 'WHERE '.$this->where);
-													}
-													if(array_key_exists($value['text'], $data[0]))
-													{
-														$field    = !empty($value['text']) ? $value['text'] : '';
-														$label    = !empty($this->label[$field]) ? $this->label[$field] : $field;
-														if($value['type'] == 'checkbox')
-														{
-															?>
-															<th>
-																<div class="checkbox">
-																	<label>
-																		<input id="selectAll<?php echo $label;?>" add="<?php echo $label; ?>" class="selectAll" type="checkbox"><?php echo ucwords($label) ?>
-																	</label>
-																</div>
-															</th>
-															<?php
-														}else{
-															$label = $value['type'] != 'hidden' ? $label : '';
-															$type = empty($_GET['type']) || (@$_GET['type'] == 'desc') ? 'asc' : 'desc';
-															$arrow = '';
-															if(@$_GET['sort_by'] == $field)
-															{
-																$arrow = (@$_GET['type'] == 'asc') ? '<i class="fa fa-sort-alpha-asc"></i> ' : '<i class="fa fa-sort-alpha-desc"></i> ';
-															}
-															if(empty($this->hide[$field]))
-															{
-																if(!$this->datatable)
-																{
-																	echo '<th><a class="load_link" href="'.base_url($this->url).$delimiter_link.'sort_by='.$field.'&type='.$type.'">'.$arrow.ucwords($label).'</a></th>';
-																}else{
-																	echo '<th>'.ucwords($label).'</th>';
-																}
-															}
-														}
-													}
-												}
-												if($this->edit == true)
-												{
-													?>
-													<th>EDIT</th>
-													<?php
-												}
-												if($this->delete == true)
-												{
-													?>
-													<th>
-														<div class="checkbox">
-															<label>
-																<input id="selectAllDel" type="checkbox">DELETE
-															</label>
-														</div>
-													</th>
-													<?php
-												}
-											 ?>
-											</tr>
+											}
+											if($this->delete == true)
+											{
+												?>
+												<th>
+													<div class="checkbox">
+														<label>
+															<input id="selectAllDel" type="checkbox">DELETE
+														</label>
+													</div>
+												</th>
+												<?php
+											}
+										 ?>
 										</thead>
 										<tbody>
 											<?php
@@ -1912,8 +1893,9 @@ class Zea
 
 																if(isset($dvalue[$ikey]) && empty($this->hide[$ikey]))
 																{
+																	$hidden_class = $ivalue['type'] == 'hidden' ? 'class="hidden"' : '';
 																	$data_id = (!empty($dvalue[$ivalue['text']]) && ($dvalue[$ivalue['text']] > 0))  ? $ivalue['text'].'="'.$dvalue[$ivalue['text']].'"' : '';
-																	echo '<td '.$data_id.'>';
+																	echo '<td '.$hidden_class.' '.$data_id.'>';
 																		switch ($ivalue['type'])
 																		{
 																			case 'text':
@@ -2005,15 +1987,19 @@ class Zea
 															$tot_col--;
 														}
 													}
+													if($inputvalue['type'] == 'hidden'){
+														$tot_col--;
+													}
 												}
-												foreach ($this->hide as $hide_key => $hide_value) 
-												{
-													$tot_col--;
-												}
+												// foreach ($this->hide as $hide_key => $hide_value) 
+												// {
+												// 	$tot_col--;
+												// }
 												if(!empty($this->numbering))
 												{
 													$tot_col++;
 												}
+
 												if(!$this->datatable)
 												{
 													?>
@@ -2164,9 +2150,7 @@ class Zea
 					$post_secure = array();
 					foreach ($this->input as $key => $value) 
 					{
-						if($value['type'] != 'plaintext'){
-							$post_secure[$value['text']] = @$data_post[$value['text']];
-						}
+						$post_secure[$value['text']] = @$data_post[$value['text']];
 					}
 					$data_post = $post_secure;
 					if(!empty($this->table))
@@ -2191,9 +2175,7 @@ class Zea
 							}
 							if($value['text'] != 'csrf_esg')
 							{
-								if($value['type'] != 'plaintext'){
-									$data_post[$value['text']] = @$data_post[$value['text']];
-								}
+								$data_post[$value['text']] = @$data_post[$value['text']];
 							}
 							if($value['type'] == 'checkbox')
 							{
@@ -2203,6 +2185,7 @@ class Zea
 								}
 							}
 						}
+
 						foreach ($this->input as $key => $value)
 						{
 							if($value['type'] == 'text')
@@ -2377,10 +2360,10 @@ class Zea
 												$this->CI->load->library('image_lib');
 
 												$this->CI->image_lib->initialize($config_image_lib);
-												if($this->CI->image_lib->resize())
-												{
+												// if($this->CI->image_lib->resize())
+												// {
 
-												}
+												// }
 												if($this->init == 'edit')
 												{
 													$update_file = array($u_value => $file_name);
