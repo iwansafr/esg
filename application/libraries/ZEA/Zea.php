@@ -17,6 +17,7 @@ class Zea
 		$this->setUrl();
 	}
 
+	var $caption             = [];
 	var $api                 = '';
 	var $api_server          = false;
 	var $table               = '';
@@ -1044,6 +1045,19 @@ class Zea
 			}
 		}
 	}
+	public function setCaption($field = '', $text = '')
+	{
+		if(!empty($field) && !empty($text))
+		{
+			foreach ($this->input as $key => $value)
+			{
+				if($value['text'] == $field)
+				{
+					$this->caption[$field] = $text;
+				}
+			}
+		}
+	}
 
 	public function setAccept($field = '', $accept = '')
 	{
@@ -1601,6 +1615,9 @@ class Zea
 										case 'hidden':
 											include 'input/hidden.php';
 											break;
+									}
+									if (!empty($this->caption[$field])){
+										echo '<span class="text-muted small">'.$this->caption[$field].'</span>';
 									}
 									echo '</div>';
 									if(!empty($this->endCollapse))
