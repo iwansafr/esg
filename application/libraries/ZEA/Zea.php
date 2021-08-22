@@ -503,7 +503,7 @@ class Zea
 
 	public function removeNone($field = '',$none = true)
 	{
-		if(!empty($field))
+		if(!empty($field) && !empty($this->none))
 		{
 			$this->none[$field] = $none;
 		}
