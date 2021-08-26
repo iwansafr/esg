@@ -2004,7 +2004,7 @@ class Zea
 															$tot_col--;
 														}
 													}
-													if($inputvalue['type'] == 'hidden'){
+													if($inputvalue['type'] == 'hidden' || $inputvalue['type'] == 'static'){
 														$tot_col--;
 													}
 												}
