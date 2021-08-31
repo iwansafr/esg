@@ -1205,6 +1205,7 @@ class Zea
     if(!empty($ids)&&!empty($table))
     {
     	$trash_exist = $this->CI->db->table_exists('trash');
+    	$data = [];
     	if($trash_exist)
     	{
   			$this->CI->db->where_in('id',$ids);
