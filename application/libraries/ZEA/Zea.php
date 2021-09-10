@@ -446,7 +446,7 @@ class Zea
 					// 	$options[$this->none[$field]] = 'None';
 					// }
 					if(!empty($this->none[$field])){
-						$options[$this->none[$field]] = 'None';
+						$options[] = 'None';
 					}
 					if(!empty($data))
 					{
