@@ -11,6 +11,7 @@ $this->zea->addInput('par_id','dropdown');
 $this->zea->setLabel('par_id', 'Parent');
 
 $this->zea->setNoneValue('par_id','None');
+$this->zea->removeNone('par_id',false);
 $this->zea->tableOptions('par_id', 'content_cat','id','title');
 
 $this->zea->addInput('title','text');
