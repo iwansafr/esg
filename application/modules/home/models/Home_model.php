@@ -21,7 +21,7 @@ class Home_model extends CI_Model
 		$this->mod();
 		// $this->home();
 		// $this->js();
-		$this->get_visitor();
+		// $this->get_visitor();
 		$this->account_bank();
 	}
 
