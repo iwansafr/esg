@@ -323,7 +323,7 @@ function output_json($array)
 	exit();
 }
 
-function menu_link($text = '')
+function menu_link($text = '', $is_admin = false)
 {
 	$link = base_url();
 	if(!empty($text))
@@ -334,7 +334,7 @@ function menu_link($text = '')
 		}else if(preg_match('~:~',$text)){
 			$link = $text;
 		}else{
-			$link = base_url($text);
+			$link = !empty($is_admin) ? base_url('admin'.$text) :  base_url($text);
 		}
 	}
 	return $link;
