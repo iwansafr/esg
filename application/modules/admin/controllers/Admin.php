@@ -20,7 +20,10 @@ class Admin extends CI_Controller
 		$tmp_data = [];
 		if($this->db->table_exists('dashboard'))
 		{
-			$tmp_data = $this->db->get_where('dashboard', " role_ids LIKE '%,{$user['user_role_id']},%'")->result_array();
+			if(!empty($user['user_role_id']))
+			{
+				$tmp_data = $this->db->get_where('dashboard', " role_ids LIKE '%,{$user['user_role_id']},%'")->result_array();
+			}
 		}
 		$this->load->view('index',['dashboard'=>$tmp_data]);
 	}
