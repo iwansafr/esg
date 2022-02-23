@@ -21,7 +21,7 @@ $data = $form->getData();
     <table class="table">
       <tr>
         <td>name :</td>
-        <td><?php echo $data['name'] ?></td>
+        <td><?php echo htmlentities($data['name']) ?></td>
       </tr>
       <tr>
         <td>email :</td>
