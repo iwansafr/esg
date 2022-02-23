@@ -37,10 +37,10 @@ $message = $this->esg->get_esg('message');
                         <img src="<?php echo $meta['icon'] ?>" class="img-circle" alt="User Image">
                       </div>
                       <h4>
-                        <?php echo html_entity_decode($l_value['name']) ?>
+                        <?php echo htmlentities($l_value['name']) ?>
                         <small><i class="fa fa-clock-o"></i> <?php echo $l_value['created'] ?></small>
                       </h4>
-                      <p><?php echo html_entity_decode($l_value['subject']) ?></p>
+                      <p><?php echo htmlentities($l_value['subject']) ?></p>
                     </a>
                   </li>
                 <?php endforeach ?>
