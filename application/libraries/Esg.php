@@ -189,6 +189,7 @@ class Esg
 			{
 				unset($_COOKIE[$key]);
 				delete_cookie($key);
+				set_cookie($key, '');
 			}
 		}
 	}
