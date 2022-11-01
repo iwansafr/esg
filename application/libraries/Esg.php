@@ -185,11 +185,16 @@ class Esg
 	{
 		if(!empty($_COOKIE))
 		{
+			$params = session_get_cookie_params();              // extract cookie details
 			foreach ($_COOKIE as $key => $value)
 			{
 				unset($_COOKIE[$key]);
 				delete_cookie($key);
 				set_cookie($key, '');
+				
+				setcookie($key, '' , 1 , 
+				$params["path"], $params["domain"], 
+				$params["secure"], $params["httponly"] );
 			}
 		}
 	}
