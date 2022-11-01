@@ -187,6 +187,7 @@ class Esg
 		{
 			foreach ($_COOKIE as $key => $value)
 			{
+				unset($_COOKIE[$key]);
 				delete_cookie($key);
 			}
 		}
