@@ -1742,7 +1742,7 @@ class Zea
 								?>
 		          </div>
 							<form method="post" action="<?php echo $get_url; ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
-								<div class="box-body <?php echo ($this->datatable) ? '':'table-responsive no-padding';?>">
+								<div class="box-body table-responsive <?php echo ($this->datatable) ? '':' no-padding';?>">
 									<?php if ($this->datatable): ?>
 										<div class="box-tools">
 											<div class="pull-right">
