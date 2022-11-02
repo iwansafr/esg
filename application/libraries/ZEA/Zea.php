@@ -1704,24 +1704,24 @@ class Zea
 									{
 										?>
 											<div class="col-md-2 pull-right">
-					             	<div class="box-tools">
-					             		<form action="" method="get">
-							              <div class="input-group input-group-sm">
-							                <input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>" required>
-							                <?php if (!empty($this->get)): ?>
-							                	<?php foreach ($this->get as $key => $value): ?>
-							                		<?php if ($key != 'page'): ?>
-							                			<input type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
-							                		<?php endif ?>
-							                	<?php endforeach ?>
-							                	
-							                <?php endif ?>
-							                <div class="input-group-btn">
-							                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-							                </div>
-							              </div>
-			              			</form>
-					            	</div>
+												<div class="box-tools">
+													<form action="" method="get">
+													<div class="input-group input-group-sm">
+														<input type="text" name="keyword" class="form-control pull-right" placeholder="Search" value="<?php echo !empty(@$_GET['keyword']) ? $_GET['keyword'] : ''; ?>" required>
+														<?php if (!empty($this->get)): ?>
+															<?php foreach ($this->get as $key => $value): ?>
+																<?php if ($key != 'page'): ?>
+																	<input type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
+																<?php endif ?>
+															<?php endforeach ?>
+															
+														<?php endif ?>
+														<div class="input-group-btn">
+														<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+														</div>
+													</div>
+												</form>
+												</div>
 											</div>
 										<?php
 									}
@@ -1742,7 +1742,7 @@ class Zea
 								?>
 		          </div>
 							<form method="post" action="<?php echo $get_url; ?>" enctype="multipart/form-data" name="<?php echo $this->formName ?>" id="<?php echo $this->formName ?>">
-								<div class="box-body table-responsive no-padding">
+								<div class="box-body <?php echo ($this->datatable) ? '':'table-responsive no-padding';?>">
 									<?php if ($this->datatable): ?>
 										<div class="box-tools">
 											<div class="pull-right">
