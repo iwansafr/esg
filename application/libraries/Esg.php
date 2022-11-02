@@ -192,7 +192,7 @@ class Esg
 				delete_cookie($key);
 				set_cookie($key, '');
 				
-				setcookie($key, '' , 1 , 
+				setcookie($key, '' , 0 , 
 				$params["path"], $params["domain"], 
 				$params["secure"], $params["httponly"] );
 			}
