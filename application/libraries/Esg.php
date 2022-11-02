@@ -265,7 +265,7 @@ class Esg
 					$this->CI->session->set_userdata(base_url().'_failed_login', $failed_login);
 				}
 			}else{
-				if(!empty($_COOKIE))
+				if(!empty($_COOKIE) && !empty($data['remember_me']))
 				{
 					$data = $_COOKIE;
 					$base_url = str_replace('.', '_', base_url());
