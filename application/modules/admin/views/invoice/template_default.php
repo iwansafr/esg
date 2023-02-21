@@ -38,7 +38,7 @@ $title = $data['status'] == 2 ? 'Quotation' : 'Invoice';
 					<strong>Pay To</strong>
 					<address class="small-text">
 						<?php echo $contact['name'] ?><br>
-						Adress : <br>
+						Address : <br>
 						<?php echo $contact['address'] ?><br>
 						Telp : <?php echo $contact['phone'].' / '.$contact['wa'] ?>
 					</address>
