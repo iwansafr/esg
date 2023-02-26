@@ -53,7 +53,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-if(@$_SERVER['SERVER_NAME'] == 'localhost')
+if(@$_SERVER['SERVER_NAME'] != 'localhost')
 {
 	$env = 'development';
 }else{

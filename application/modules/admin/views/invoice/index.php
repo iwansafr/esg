@@ -16,7 +16,7 @@ $this->zea->addInput('items','plaintext');
 $this->zea->addInput('receiver','plaintext');
 $this->zea->addInput('code','plaintext');
 $this->zea->addInput('created','link');
-$this->zea->setLink('created','invoice/detail','id');
+$this->zea->setLink('created','invoice/detail','code');
 $this->zea->setPlaintext('created','<i class="fa fa-eye"></i> Display');
 $this->zea->setLabel('created','detail');
 $this->zea->setAttribute('created','target="_blank"');
