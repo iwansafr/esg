@@ -95,8 +95,8 @@ $title = $data['status'] == 2 ? 'Quotation' : 'Invoice';
 					<table class="table table-condensed">
 						<thead>
 							<tr>
-								<td><strong>Description</strong></td>
-								<td width="25%" class=""><strong>Amount</strong></td>
+								<th><strong>Description</strong></th>
+								<th width="25%" class=""><strong>Amount</strong></th>
 							</tr>
 						</thead>
 						<tbody>
